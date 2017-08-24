@@ -12,6 +12,7 @@ namespace FOGocalypse
         Bitmap wood = FOGocalypse.Properties.Resources.wood;
         Bitmap waterDrop = FOGocalypse.Properties.Resources.waterDrop;
         Bitmap heart = FOGocalypse.Properties.Resources.heart;
+        Bitmap food = FOGocalypse.Properties.Resources.food;
 
         //constructor
         public RenderingEngine()
@@ -62,6 +63,7 @@ namespace FOGocalypse
 
                 g.DrawRectangle(Pens.Black, 10, 90, 200, 30);
                 g.FillRectangle(Brushes.Brown, 11, 91, (200 - Game.player.playerFoodNeed * 2) - 1, 29);
+                g.DrawImage(food, 200 - 30, 93, 25, 25);
 
                 //draw hotbar
                 for (int i = 0; i < Game.numberOfhotBarSlots; i++)

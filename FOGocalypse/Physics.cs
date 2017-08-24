@@ -28,7 +28,7 @@ namespace FOGocalypse
             {
                 if (t.type.Equals(EnumHandler.TileTypes.Wood))
                 {
-                    t.hitbox = new Rectangle(t.x, t.y, Game.tileSize, Game.tileSize);
+                    t.hitbox = new Rectangle(t.x - Game.player.playerX, t.y - Game.player.playerY, Game.tileSize, Game.tileSize);
 
                     if (Game.player.hitbox.IntersectsWith(t.hitbox))
                     {
