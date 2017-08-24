@@ -16,6 +16,8 @@ namespace FOGocalypse
         Bitmap food = FOGocalypse.Properties.Resources.food;
         Bitmap flashlightIcon = FOGocalypse.Properties.Resources.flashlightIcon;
         Bitmap flashlight = FOGocalypse.Properties.Resources.flashlight;
+        Bitmap title1 = FOGocalypse.Properties.Resources.title1;
+        Bitmap title2 = FOGocalypse.Properties.Resources.title2;
 
         //constructor
         public RenderingEngine()
@@ -129,6 +131,8 @@ namespace FOGocalypse
                 else
                 {
                     Cursor.Show();
+                    g.DrawImage(title1, width / 2 - title1.Width / 2, height / 2 - 200, title1.Width, title1.Height);
+                    g.DrawImage(title2, width / 2 - title1.Width / 2, height / 2 + 100, title1.Width, title1.Height);
                 }
             }
             #endregion
