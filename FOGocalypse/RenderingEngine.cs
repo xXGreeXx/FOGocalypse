@@ -49,10 +49,28 @@ namespace FOGocalypse
 
                 player = FOGocalypse.Properties.Resources.player;
 
-                //draw ui elements
+                //draw health/thirst/hunger
                 g.DrawRectangle(Pens.Black, 10, 10, 200, 30);
+                g.FillRectangle(Brushes.Red, 11, 11, (Game.player.playerHealth * 2) - 1, 29);
+
                 g.DrawRectangle(Pens.Black, 10, 50, 200, 30);
+                g.FillRectangle(Brushes.Blue, 11, 51, (200 - Game.player.playerWaterNeed * 2) - 1, 29);
+
                 g.DrawRectangle(Pens.Black, 10, 90, 200, 30);
+                g.FillRectangle(Brushes.Brown, 11, 91, (200 - Game.player.playerFoodNeed * 2) - 1, 29);
+
+                //draw hotbar
+                for (int i = 0; i < Game.numberOfhotBarSlots; i++)
+                {
+                    int x = width / 2 - (60 * Game.numberOfhotBarSlots / 2) + i * 60;
+                    int y = height - 60;
+                    Color c = Color.Brown;
+
+                    if (Game.selectedHotbar - 1 == i) c = Color.White;
+
+                    g.DrawRectangle(new Pen(c, 4), x, y, 50, 50);
+                    
+                }
             }
             #endregion
         }
