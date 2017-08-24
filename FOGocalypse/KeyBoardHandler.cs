@@ -62,6 +62,37 @@ namespace FOGocalypse
                             Game.player.playerXVelocity = 0;
                         }
                         break;
+
+                    case Keys.D1:
+                        if (down)
+                        {
+                            Game.selectedHotbar = 1;
+                        }
+                        break;
+                    case Keys.D2:
+                        if (down)
+                        {
+                            Game.selectedHotbar = 2;
+                        }
+                        break;
+                    case Keys.D3:
+                        if (down)
+                        {
+                            Game.selectedHotbar = 3;
+                        }
+                        break;
+                    case Keys.D4:
+                        if (down)
+                        {
+                            Game.selectedHotbar = 4;
+                        }
+                        break;
+                    case Keys.D5:
+                        if (down)
+                        {
+                            Game.selectedHotbar = 5;
+                        }
+                        break;
                 }
             }
             #endregion
