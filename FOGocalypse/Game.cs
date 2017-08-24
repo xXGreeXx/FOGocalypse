@@ -10,6 +10,7 @@ namespace FOGocalypse
         //define global variables
         RenderingEngine renderer = new RenderingEngine();
         KeyBoardHandler keyHandler = new KeyBoardHandler();
+        MouseHandler mouseHandler = new MouseHandler();
         WorldGenerator generator = new WorldGenerator();
         Physics physicsEngine = new Physics();
         public static List<Tile> worldTiles { get; set; } = new List<Tile>();
@@ -21,6 +22,7 @@ namespace FOGocalypse
         public static int numberOfhotBarSlots { get; set; } = 5;
         public static int selectedHotbar { get; set; } = 1;
         public static EnumHandler.Items[] itemsInHotbar { get; set; }
+        public static Boolean inPauseMenu { get; set; } = false;
 
         //contrsuctor
         public Game()
@@ -71,5 +73,24 @@ namespace FOGocalypse
         {
             keyHandler.ReadKey(e.KeyData, false);
         }
+
+        //mouse down handler
+        private void canvas_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseHandler.RegisterMouseDown(e.X, e.Y, e.Button);
+        }
+
+        //mouse up handler
+        private void canvas_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseHandler.RegisterMouseUp(e.X, e.Y, e.Button);
+        }
+
+        //mouse move handler
+        private void canvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            mouseHandler.RegisterMouseMove(e.X, e.Y);
+        }
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace FOGocalypse
 {
@@ -117,6 +118,17 @@ namespace FOGocalypse
 
                     if (item.Equals(EnumHandler.Items.Flashlight)) g.DrawImage(flashlightIcon, xToDraw, height - 60, 50, 50);
                     index++;
+                }
+
+                //draw cursor
+                if (!Game.inPauseMenu)
+                {
+                    Cursor.Hide();
+                    g.DrawEllipse(Pens.Black, MouseHandler.mouseX - 5, MouseHandler.mouseY - 5, 10, 10);
+                }
+                else
+                {
+                    Cursor.Hide();
                 }
             }
             #endregion

@@ -19,7 +19,6 @@ namespace FOGocalypse
         public List<Tile> GenerateWorld(int sizeOfTile, int sizeOfWorld)
         {
             List<Tile> tilesForWorld = new List<Tile>();
-            Boolean grass = false;
 
             for (int x = 0; x < sizeOfWorld; x++)
             {
