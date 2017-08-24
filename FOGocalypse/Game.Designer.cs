@@ -36,6 +36,9 @@
             // 
             // canvas
             // 
+            this.canvas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.canvas.BackColor = System.Drawing.SystemColors.Control;
             this.canvas.Location = new System.Drawing.Point(-1, -4);
             this.canvas.Name = "canvas";

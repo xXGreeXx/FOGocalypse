@@ -7,6 +7,9 @@ namespace FOGocalypse
     {
         //define global variables
         Bitmap player = FOGocalypse.Properties.Resources.player;
+        Bitmap grass = FOGocalypse.Properties.Resources.grass;
+        Bitmap dirt = FOGocalypse.Properties.Resources.dirt;
+        Bitmap wood = FOGocalypse.Properties.Resources.wood;
 
         //constructor
         public RenderingEngine()
@@ -30,9 +33,9 @@ namespace FOGocalypse
                     {
                         if (y > 0 - Game.tileSize && y < height + Game.tileSize)
                         {
-                            if (t.type.Equals(EnumHandler.TileTypes.Grass)) g.FillRectangle(Brushes.Green, x, y, Game.tileSize, Game.tileSize);
-                            else if (t.type.Equals(EnumHandler.TileTypes.Dirt)) g.FillRectangle(Brushes.Orange, x, y, Game.tileSize, Game.tileSize);
-                            else if (t.type.Equals(EnumHandler.TileTypes.Wood)) g.FillRectangle(Brushes.Brown, x, y, Game.tileSize, Game.tileSize);
+                            if (t.type.Equals(EnumHandler.TileTypes.Grass)) g.DrawImage(grass, x, y, Game.tileSize, Game.tileSize);
+                            else if (t.type.Equals(EnumHandler.TileTypes.Dirt)) g.DrawImage(dirt, x, y, Game.tileSize, Game.tileSize);
+                            else if (t.type.Equals(EnumHandler.TileTypes.Wood)) g.DrawImage(wood, x, y, Game.tileSize, Game.tileSize);
                         }
                     }  
                 }

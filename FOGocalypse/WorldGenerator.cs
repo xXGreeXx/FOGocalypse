@@ -5,6 +5,8 @@ namespace FOGocalypse
 {
     class WorldGenerator
     {
+        Random generator = new Random();
+
         //constructor
         public WorldGenerator()
         {
@@ -22,6 +24,12 @@ namespace FOGocalypse
                 for (int y = 0; y < sizeOfWorld; y++)
                 {
                     EnumHandler.TileTypes type = EnumHandler.TileTypes.Grass;
+                    int number = generator.Next(1, 10);
+
+                    if (number == 9)
+                    {
+                        type = EnumHandler.TileTypes.Dirt;
+                    }
 
                     tilesForWorld.Add(new Tile(x * sizeOfTile, y * sizeOfTile, type));
                 }
