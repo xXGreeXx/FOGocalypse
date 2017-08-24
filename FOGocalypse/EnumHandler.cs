@@ -24,5 +24,11 @@
             MainMenu,
             OptionsMenu
         }
+
+        public enum Items
+        {
+            None,
+            Flashlight
+        }
     }
 }

@@ -13,6 +13,8 @@ namespace FOGocalypse
         Bitmap waterDrop = FOGocalypse.Properties.Resources.waterDrop;
         Bitmap heart = FOGocalypse.Properties.Resources.heart;
         Bitmap food = FOGocalypse.Properties.Resources.food;
+        Bitmap flashlightIcon = FOGocalypse.Properties.Resources.flashlightIcon;
+        Bitmap flashlight = FOGocalypse.Properties.Resources.flashlight;
 
         //constructor
         public RenderingEngine()
@@ -52,6 +54,21 @@ namespace FOGocalypse
 
                 player = FOGocalypse.Properties.Resources.player;
 
+                //draw item player is holding
+                EnumHandler.Items selectedItem = Game.itemsInHotbar[Game.selectedHotbar - 1];
+
+                switch (selectedItem)
+                {
+                    case EnumHandler.Items.Flashlight:
+                        if (Game.player.direction.Equals(EnumHandler.Directions.Up))
+                        {
+                            g.FillRectangle(Brushes.Red, Game.player.playerX + Game.tileSize, Game.player.playerY - 10, 10, 10);
+                        }
+                        break;
+
+
+                }
+
                 //draw health/thirst/hunger
                 g.DrawRectangle(Pens.Black, 10, 10, 200, 30);
                 g.FillRectangle(Brushes.Red, 11, 11, (Game.player.playerHealth * 2) - 1, 29);
@@ -75,7 +92,15 @@ namespace FOGocalypse
                     if (Game.selectedHotbar - 1 == i) c = Color.White;
 
                     g.DrawRectangle(new Pen(c, 4), x, y, 50, 50);
-                    
+                }
+
+                int index = 0;
+                foreach (EnumHandler.Items item in Game.itemsInHotbar)
+                {
+                    int xToDraw = width / 2 - (60 * Game.numberOfhotBarSlots / 2) + index * 60;
+
+                    if (item.Equals(EnumHandler.Items.Flashlight)) g.DrawImage(flashlightIcon, xToDraw, height - 60, 50, 50);
+                    index++;
                 }
             }
             #endregion

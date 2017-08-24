@@ -20,6 +20,7 @@ namespace FOGocalypse
         public static EnumHandler.GameStates state { get; set; } = EnumHandler.GameStates.Game;
         public static int numberOfhotBarSlots { get; set; } = 5;
         public static int selectedHotbar { get; set; } = 1;
+        public static EnumHandler.Items[] itemsInHotbar { get; set; } = new EnumHandler.Items[5];
 
         //contrsuctor
         public Game()
@@ -27,6 +28,13 @@ namespace FOGocalypse
             InitializeComponent();
 
             player = new Player(worldSize / 2 * tileSize, worldSize / 2 * tileSize, EnumHandler.Directions.Left);
+
+            itemsInHotbar[0] = EnumHandler.Items.Flashlight;
+            itemsInHotbar[1] = EnumHandler.Items.None;
+            itemsInHotbar[2] = EnumHandler.Items.None;
+            itemsInHotbar[3] = EnumHandler.Items.None;
+            itemsInHotbar[4] = EnumHandler.Items.None;
+
             worldTiles = generator.GenerateWorld(tileSize, worldSize);
 
             timer.Interval = 1000 / 60;
