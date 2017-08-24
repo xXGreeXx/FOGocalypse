@@ -59,7 +59,11 @@ namespace FOGocalypse
             int height = canvas.Height;
 
             renderer.DrawScreen(width, height, g);
-            physicsEngine.SimulatePhysics();
+
+            if (!inPauseMenu)
+            {
+                physicsEngine.SimulatePhysics();
+            }
         }
 
         //game key down

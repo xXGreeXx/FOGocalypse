@@ -93,6 +93,20 @@ namespace FOGocalypse
                             Game.selectedHotbar = 5;
                         }
                         break;
+
+                    case Keys.Escape:
+                        if (down)
+                        {
+                            if (Game.inPauseMenu)
+                            {
+                                Game.inPauseMenu = false;
+                            }
+                            else
+                            {
+                                Game.inPauseMenu = true;
+                            }
+                        }
+                        break;
                 }
             }
             #endregion

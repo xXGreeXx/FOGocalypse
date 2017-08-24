@@ -128,7 +128,7 @@ namespace FOGocalypse
                 }
                 else
                 {
-                    Cursor.Hide();
+                    Cursor.Show();
                 }
             }
             #endregion
