@@ -14,6 +14,7 @@ namespace FOGocalypse
         public List<Tile> worldtiles { get; set; } = new List<Tile>();
         public static Player player { get; set; }
         public static int playerMoveSpeed { get; set; } = 5;
+        public static int playerSize { get; set; } = 50;
 
         //contrsuctor
         public Game()
