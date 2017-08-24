@@ -12,6 +12,12 @@ namespace FOGocalypse
         public int playerYVelocity { get; set; } = 0;
         public EnumHandler.Directions direction { get; set; }
         public Rectangle hitbox { get; set; }
+        public static int maxPlayerHealth { get; set; } = 100;
+        public static int playerHealth { get; set; } = 100;
+        public static int maxPlayerWaterNeed { get; set; } = 100;
+        public static int playerWaterNeed { get; set; } = 0;
+        public static int maxPlayerFoodNeed { get; set; } = 100;
+        public static int playerFoodNeed { get; set; } = 0;
 
         //constructor
         public Player(int playerX, int playerY, EnumHandler.Directions playerDirection)

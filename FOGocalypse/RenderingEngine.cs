@@ -49,6 +49,10 @@ namespace FOGocalypse
 
                 player = FOGocalypse.Properties.Resources.player;
 
+                //draw ui elements
+                g.DrawRectangle(Pens.Black, 10, 10, 200, 30);
+                g.DrawRectangle(Pens.Black, 10, 50, 200, 30);
+                g.DrawRectangle(Pens.Black, 10, 90, 200, 30);
             }
             #endregion
         }
