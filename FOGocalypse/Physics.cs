@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 
 namespace FOGocalypse
 {
@@ -25,6 +22,22 @@ namespace FOGocalypse
         {
             Game.player.playerX += Game.player.playerXVelocity;
             Game.player.playerY += Game.player.playerYVelocity;
+            Game.player.hitbox = new Rectangle(Game.player.playerX, Game.player.playerY, Game.tileSize, Game.tileSize);
+
+            foreach (Tile t in Game.worldTiles)
+            {
+                if (t.type.Equals(EnumHandler.TileTypes.Wood))
+                {
+                    t.hitbox = new Rectangle(t.x, t.y, Game.tileSize, Game.tileSize);
+
+                    if (Game.player.hitbox.IntersectsWith(t.hitbox))
+                    {
+                        Game.player.playerX -= Game.player.playerXVelocity;
+                        Game.player.playerY -= Game.player.playerYVelocity;
+                        break;
+                    }
+                }
+            }
         }
     }
 }

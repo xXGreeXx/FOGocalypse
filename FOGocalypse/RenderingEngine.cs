@@ -10,6 +10,8 @@ namespace FOGocalypse
         Bitmap grass = FOGocalypse.Properties.Resources.grass;
         Bitmap dirt = FOGocalypse.Properties.Resources.dirt;
         Bitmap wood = FOGocalypse.Properties.Resources.wood;
+        Bitmap waterDrop = FOGocalypse.Properties.Resources.waterDrop;
+        Bitmap heart = FOGocalypse.Properties.Resources.heart;
 
         //constructor
         public RenderingEngine()
@@ -52,9 +54,11 @@ namespace FOGocalypse
                 //draw health/thirst/hunger
                 g.DrawRectangle(Pens.Black, 10, 10, 200, 30);
                 g.FillRectangle(Brushes.Red, 11, 11, (Game.player.playerHealth * 2) - 1, 29);
+                g.DrawImage(heart, 200 - 25, 11, 25, 25);
 
                 g.DrawRectangle(Pens.Black, 10, 50, 200, 30);
                 g.FillRectangle(Brushes.Blue, 11, 51, (200 - Game.player.playerWaterNeed * 2) - 1, 29);
+                g.DrawImage(waterDrop, 200 - 30, 51, 25, 25);
 
                 g.DrawRectangle(Pens.Black, 10, 90, 200, 30);
                 g.FillRectangle(Brushes.Brown, 11, 91, (200 - Game.player.playerFoodNeed * 2) - 1, 29);
