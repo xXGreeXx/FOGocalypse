@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-
 namespace FOGocalypse
 {
     public class KeyBoardHandler
@@ -20,6 +19,7 @@ namespace FOGocalypse
                     if (down)
                     {
                         Game.player.playerYVelocity = -Game.playerMoveSpeed;
+                        Game.player.playerDirection = EnumHandler.Directions.Up;
                     }
                     else
                     {
@@ -30,6 +30,7 @@ namespace FOGocalypse
                     if (down)
                     {
                         Game.player.playerYVelocity = Game.playerMoveSpeed;
+                        Game.player.playerDirection = EnumHandler.Directions.Down;
                     }
                     else
                     {
@@ -40,6 +41,7 @@ namespace FOGocalypse
                     if (down)
                     {
                         Game.player.playerXVelocity = -Game.playerMoveSpeed;
+                        Game.player.playerDirection = EnumHandler.Directions.Left;
                     }
                     else
                     {
@@ -50,6 +52,7 @@ namespace FOGocalypse
                     if (down)
                     {
                         Game.player.playerXVelocity = Game.playerMoveSpeed;
+                        Game.player.playerDirection = EnumHandler.Directions.Right;
                     }
                     else
                     {
