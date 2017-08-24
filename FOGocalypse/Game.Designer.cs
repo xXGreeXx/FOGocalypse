@@ -29,10 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.canvas = new System.Windows.Forms.PictureBox();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.canvas = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.SuspendLayout();
+            // 
+            // timer
+            // 
+            this.timer.Interval = 16;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // canvas
             // 
@@ -46,11 +51,6 @@
             this.canvas.TabIndex = 0;
             this.canvas.TabStop = false;
             this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
-            // 
-            // timer
-            // 
-            this.timer.Interval = 16;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // Game
             // 

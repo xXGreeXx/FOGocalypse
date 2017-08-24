@@ -62,11 +62,27 @@ namespace FOGocalypse
                     case EnumHandler.Items.Flashlight:
                         if (Game.player.direction.Equals(EnumHandler.Directions.Up))
                         {
-                            g.FillRectangle(Brushes.Red, Game.player.playerX + Game.tileSize, Game.player.playerY - 10, 10, 10);
+                            g.DrawImage(flashlight, width / 2 - player.Height / 2 + Game.tileSize - 10, height / 2 - player.Height / 2 - 10, 10, 10);
+                        }
+                        if (Game.player.direction.Equals(EnumHandler.Directions.Down))
+                        {
+                            flashlight.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                            g.DrawImage(flashlight, width / 2 - player.Height / 2 + Game.tileSize - 10, height / 2, 10, 10);
+                            flashlight.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                        }
+                        if (Game.player.direction.Equals(EnumHandler.Directions.Left))
+                        {
+                            flashlight.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                            g.DrawImage(flashlight, width / 2 - player.Height / 2 - 10, height / 2 - player.Height / 2, 10, 10);
+                            flashlight.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                        }
+                        if (Game.player.direction.Equals(EnumHandler.Directions.Right))
+                        {
+                            flashlight.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                            g.DrawImage(flashlight, width / 2 - player.Height / 2 + Game.tileSize, height / 2 - player.Height / 2, 10, 10);
+                            flashlight.RotateFlip(RotateFlipType.Rotate270FlipNone);
                         }
                         break;
-
-
                 }
 
                 //draw health/thirst/hunger

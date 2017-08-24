@@ -32,8 +32,8 @@ namespace FOGocalypse
 
                     if (Game.player.hitbox.IntersectsWith(t.hitbox))
                     {
-                        Game.player.playerX -= Game.player.playerXVelocity;
-                        Game.player.playerY -= Game.player.playerYVelocity;
+                        //Game.player.playerX -= Game.player.playerXVelocity;
+                        //Game.player.playerY -= Game.player.playerYVelocity;
                         break;
                     }
                 }

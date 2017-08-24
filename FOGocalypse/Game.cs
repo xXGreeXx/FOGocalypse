@@ -20,7 +20,7 @@ namespace FOGocalypse
         public static EnumHandler.GameStates state { get; set; } = EnumHandler.GameStates.Game;
         public static int numberOfhotBarSlots { get; set; } = 5;
         public static int selectedHotbar { get; set; } = 1;
-        public static EnumHandler.Items[] itemsInHotbar { get; set; } = new EnumHandler.Items[5];
+        public static EnumHandler.Items[] itemsInHotbar { get; set; }
 
         //contrsuctor
         public Game()
@@ -29,6 +29,7 @@ namespace FOGocalypse
 
             player = new Player(worldSize / 2 * tileSize, worldSize / 2 * tileSize, EnumHandler.Directions.Left);
 
+            itemsInHotbar = new EnumHandler.Items[numberOfhotBarSlots];
             itemsInHotbar[0] = EnumHandler.Items.Flashlight;
             itemsInHotbar[1] = EnumHandler.Items.None;
             itemsInHotbar[2] = EnumHandler.Items.None;
