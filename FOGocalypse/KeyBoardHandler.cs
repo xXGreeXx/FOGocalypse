@@ -19,7 +19,7 @@ namespace FOGocalypse
                     if (down)
                     {
                         Game.player.playerYVelocity = -Game.playerMoveSpeed;
-                        Game.player.playerDirection = EnumHandler.Directions.Up;
+                        Game.player.direction = EnumHandler.Directions.Up;
                     }
                     else
                     {
@@ -30,7 +30,7 @@ namespace FOGocalypse
                     if (down)
                     {
                         Game.player.playerYVelocity = Game.playerMoveSpeed;
-                        Game.player.playerDirection = EnumHandler.Directions.Down;
+                        Game.player.direction = EnumHandler.Directions.Down;
                     }
                     else
                     {
@@ -41,7 +41,7 @@ namespace FOGocalypse
                     if (down)
                     {
                         Game.player.playerXVelocity = -Game.playerMoveSpeed;
-                        Game.player.playerDirection = EnumHandler.Directions.Left;
+                        Game.player.direction = EnumHandler.Directions.Left;
                     }
                     else
                     {
@@ -52,7 +52,7 @@ namespace FOGocalypse
                     if (down)
                     {
                         Game.player.playerXVelocity = Game.playerMoveSpeed;
-                        Game.player.playerDirection = EnumHandler.Directions.Right;
+                        Game.player.direction = EnumHandler.Directions.Right;
                     }
                     else
                     {

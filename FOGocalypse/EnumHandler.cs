@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FOGocalypse
+﻿namespace FOGocalypse
 {
     public class EnumHandler
     {
@@ -22,6 +16,13 @@ namespace FOGocalypse
             Right,
             Down,
             Left
+        }
+
+        public enum GameStates
+        {
+            Game,
+            MainMenu,
+            OptionsMenu
         }
     }
 }

@@ -10,11 +10,14 @@ namespace FOGocalypse
         //define global variables
         RenderingEngine renderer = new RenderingEngine();
         KeyBoardHandler keyHandler = new KeyBoardHandler();
+        WorldGenerator generator = new WorldGenerator();
         Physics physicsEngine = new Physics();
-        public List<Tile> worldtiles { get; set; } = new List<Tile>();
+        public static List<Tile> worldTiles { get; set; } = new List<Tile>();
         public static Player player { get; set; }
         public static int playerMoveSpeed { get; set; } = 5;
-        public static int playerSize { get; set; } = 50;
+        public static int tileSize { get; set; } = 50;
+        public static int worldSize { get; set; } = 256;
+        public static EnumHandler.GameStates state { get; set; } = EnumHandler.GameStates.Game;
 
         //contrsuctor
         public Game()
@@ -22,6 +25,7 @@ namespace FOGocalypse
             InitializeComponent();
 
             player = new Player(0, 0, EnumHandler.Directions.Left);
+            worldTiles = generator.GenerateWorld(tileSize, worldSize);
 
             timer.Interval = 1000 / 60;
             timer.Start();

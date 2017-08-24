@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 
 namespace FOGocalypse
 {
@@ -12,6 +9,7 @@ namespace FOGocalypse
         public int x { get; set; }
         public int y { get; set; }
         public EnumHandler.TileTypes type { get; set; }
+        public Rectangle hitbox { get; set; }
 
         //constructor
         public Tile(int x, int y, EnumHandler.TileTypes type)
@@ -19,6 +17,7 @@ namespace FOGocalypse
             this.x = x;
             this.y = y;
             this.type = type;
+            this.hitbox = new Rectangle(x, y, Game.tileSize, Game.tileSize);
         }
     }
 }
