@@ -45,6 +45,11 @@ namespace FOGocalypse
             itemsInHotbar[4] = EnumHandler.Items.None;
 
             itemsInInventory = new EnumHandler.Items[25];
+            for (int i = 0; i < itemsInInventory.Length; i++)
+            {
+                itemsInInventory[i] = EnumHandler.Items.None;
+            }
+
 
             worldTiles = generator.GenerateWorld(tileSize, worldSize);
 

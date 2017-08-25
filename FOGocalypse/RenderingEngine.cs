@@ -216,6 +216,12 @@ namespace FOGocalypse
                             }
                         }
                     }
+
+                    //draw held item
+                    if (!MouseHandler.itemHeldByMouse.Equals(EnumHandler.Items.None))
+                    {
+                        drawItem(MouseHandler.mouseX - 25, MouseHandler.mouseY - 25, MouseHandler.itemHeldByMouse, g);
+                    }
                 }
                 #endregion
 
