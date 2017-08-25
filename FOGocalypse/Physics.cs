@@ -24,6 +24,8 @@ namespace FOGocalypse
                 simulatePlayerPhysics();
             }
             simulatePlayerNeeds();
+            simulateZombies();
+            spawnZombie();
         }
 
         //player physics
@@ -189,10 +191,9 @@ namespace FOGocalypse
         private void spawnZombie()
         {
             cycle++;
-            if (cycle >= 20)
+            if (cycle >= 10)
             {
-                int chance = generator.Next(1, 10);
-
+                int chance = generator.Next(1, 5);
                 if (chance == Game.zombieSpawnChance / 10)
                 {
                     int x = generator.Next(Game.player.playerX - (20 * Game.tileSize), Game.player.playerX + (20 * Game.tileSize));

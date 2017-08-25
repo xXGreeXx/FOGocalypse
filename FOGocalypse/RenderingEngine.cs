@@ -34,6 +34,7 @@ namespace FOGocalypse
         public RenderingEngine()
         {
             player.RotateFlip(RotateFlipType.RotateNoneFlipX);
+            zombie.RotateFlip(RotateFlipType.RotateNoneFlipX);
         }
 
         //draw screen
@@ -124,7 +125,10 @@ namespace FOGocalypse
                 #region DrawZombies
                 foreach (Zombie z in Game.zombies)
                 {
-
+                    float zombieAngle = (float)((Math.Atan2((double)z.lookingToward.X - z.x, (double)z.lookingToward.Y - z.y)) * (180 / Math.PI));
+                    int newX = z.x - Game.player.playerX;
+                    int newY = z.y - Game.player.playerY;
+                    g.DrawImage(RotateImage(zombie, zombieAngle), newX, newY, Game.tileSize, Game.tileSize);
                 }
                 #endregion
 

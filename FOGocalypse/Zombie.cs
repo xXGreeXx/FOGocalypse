@@ -22,7 +22,37 @@ namespace FOGocalypse
         //simulate AI
         public void SimulateAI()
         {
+            int newX = x - Game.player.playerX;
+            int newY = y - Game.player.playerY;
+            int positionOfPlayerX = Game.canvasWidth / 2 - Game.tileSize / 2;
+            int positionOfPlayerY = Game.canvasHeight / 2 - Game.tileSize / 2;
+            int viewDistance = Game.zombieViewDistance * Game.tileSize;
 
+            if (newX >= positionOfPlayerX - viewDistance && newX < positionOfPlayerX + viewDistance)
+            {
+                if (newY >= positionOfPlayerY - viewDistance && newY < positionOfPlayerY + viewDistance)
+                {
+                    lookingToward = new Point(positionOfPlayerX, positionOfPlayerY);
+
+                    if (positionOfPlayerX < newX)
+                    {
+                        x -= Game.zombieMoveSpeed;
+                    }
+                    else if (positionOfPlayerX > newX)
+                    {
+                        x += Game.zombieMoveSpeed;
+                    }
+
+                    if (positionOfPlayerY < newY)
+                    {
+                        y -= Game.zombieMoveSpeed;
+                    }
+                    else if (positionOfPlayerY > newY)
+                    {
+                        y += Game.zombieMoveSpeed;
+                    }
+                }
+            }
         }
     }
 }
