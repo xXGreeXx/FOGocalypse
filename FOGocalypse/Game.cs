@@ -23,6 +23,7 @@ namespace FOGocalypse
         public static int numberOfhotBarSlots { get; set; } = 5;
         public static int selectedHotbar { get; set; } = 1;
         public static EnumHandler.Items[] itemsInHotbar { get; set; }
+        public static EnumHandler.Items[] itemsInInventory { get; set; }
         public static Boolean inPauseMenu { get; set; } = false;
         public static Boolean inInventory { get; set; } = false;
         public static int playerViewDistance { get; set; } = 5;
@@ -42,6 +43,8 @@ namespace FOGocalypse
             itemsInHotbar[2] = EnumHandler.Items.None;
             itemsInHotbar[3] = EnumHandler.Items.None;
             itemsInHotbar[4] = EnumHandler.Items.None;
+
+            itemsInInventory = new EnumHandler.Items[25];
 
             worldTiles = generator.GenerateWorld(tileSize, worldSize);
 

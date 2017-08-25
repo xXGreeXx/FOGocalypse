@@ -139,21 +139,8 @@ namespace FOGocalypse
                 {
                     int xToDraw = width / 2 - (60 * Game.numberOfhotBarSlots / 2) + index * 60;
 
-                    switch (item)
-                    {
-                        case EnumHandler.Items.Flashlight:
-                            g.DrawImage(flashlightIcon, xToDraw, height - 60, 50, 50);
-                            break;
-                        case EnumHandler.Items.Waterbottle:
-                            g.DrawImage(waterBottleIcon, xToDraw, height - 60, 50, 50);
-                            break;
-                        case EnumHandler.Items.Knife:
-                            g.DrawImage(knifeIcon, xToDraw, height - 60, 50, 50);
-                            break;
-                        case EnumHandler.Items.Peanutbutter:
-                            g.DrawImage(peanutButterIcon, xToDraw, height - 60, 50, 50);
-                            break;
-                    }
+                    drawItem(xToDraw, height - 60, item, g);
+
                     index++;
                 }
 
@@ -192,6 +179,7 @@ namespace FOGocalypse
                 #region Inventory
                 if (Game.inInventory)
                 {
+                    //draw slots
                     g.FillRectangle(Brushes.DarkGray, width / 2 - 150, height / 2 - 150, 300, 300);
                     g.FillRectangle(Brushes.LightGray, width / 2 + 150, height / 2 - 150, 178, 178);
 
@@ -208,6 +196,24 @@ namespace FOGocalypse
                         for (int y = height / 2 - 150; y < height / 2 + 10; y += 60)
                         {
                             g.DrawRectangle(new Pen(Color.Orange, 4), x + 4, y + 4, 50, 50);
+                        }
+                    }
+
+                    //draw items in inventory
+                    int xOfItemToDraw = width / 2 - 145;
+                    int yOfItemToDraw = height / 2 - 145;
+                    foreach (EnumHandler.Items itemInInventory in Game.itemsInInventory)
+                    {
+                        if (!itemInInventory.Equals(EnumHandler.Items.None))
+                        {
+                            drawItem(xOfItemToDraw, yOfItemToDraw, itemInInventory, g);
+
+                            xOfItemToDraw += 60;
+                            if (xOfItemToDraw >= width / 2 + 145)
+                            {
+                                xOfItemToDraw = width / 2 - 145;
+                                yOfItemToDraw += 60;
+                            }
                         }
                     }
                 }
@@ -271,6 +277,27 @@ namespace FOGocalypse
                         g.DrawImage(fog, x, y, Game.tileSize, Game.tileSize);
                     }
                 }
+            }
+        }
+
+        //draw item
+        private void drawItem(int x, int y, EnumHandler.Items itemType, Graphics g)
+        {
+
+            switch (itemType)
+            {
+                case EnumHandler.Items.Flashlight:
+                    g.DrawImage(flashlightIcon, x, y, 50, 50);
+                    break;
+                case EnumHandler.Items.Waterbottle:
+                    g.DrawImage(waterBottleIcon, x, y, 50, 50);
+                    break;
+                case EnumHandler.Items.Knife:
+                    g.DrawImage(knifeIcon, x, y, 50, 50);
+                    break;
+                case EnumHandler.Items.Peanutbutter:
+                    g.DrawImage(peanutButterIcon, x, y, 50, 50);
+                    break;
             }
         }
 
