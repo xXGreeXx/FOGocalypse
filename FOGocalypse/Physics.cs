@@ -17,7 +17,10 @@ namespace FOGocalypse
         //simulate physics
         public void SimulatePhysics(int width, int height)
         {
-            simulatePlayerPhysics(width, height);
+            if (!Game.inInventory)
+            {
+                simulatePlayerPhysics(width, height);
+            }
             simulatePlayerNeeds();
         }
 

@@ -130,6 +130,29 @@ namespace FOGocalypse
                         }
                         break;
 
+                    case Keys.Q:
+                        EnumHandler.Items item = Game.itemsInHotbar[Game.selectedHotbar - 1];
+                        if (!item.Equals(EnumHandler.Items.None))
+                        {
+                            Game.itemsInWorld.Add(new Item(Game.player.playerX + Game.canvasWidth / 2, Game.player.playerY + Game.canvasHeight / 2, item));
+                            Game.itemsInHotbar[Game.selectedHotbar - 1] = EnumHandler.Items.None;
+                        }
+                        break;
+
+                    case Keys.E:
+                        if (down)
+                        {
+                            if (Game.inInventory)
+                            {
+                                Game.inInventory = false;
+                            }
+                            else
+                            {
+                                Game.inInventory = true;
+                            }
+                        }
+                        break;
+
                     case Keys.Escape:
                         if (down)
                         {
