@@ -32,7 +32,33 @@ namespace FOGocalypse
             if (Game.state.Equals(EnumHandler.GameStates.Game))
             {
                 #region Items
+                if (!Game.inInventory && !Game.inPauseMenu)
+                {
+                    EnumHandler.Items selectedItem = Game.itemsInHotbar[Game.selectedHotbar - 1];
 
+                    switch (selectedItem)
+                    {
+                        case EnumHandler.Items.Waterbottle:
+                            if (button.Equals(MouseButtons.Left))
+                            {
+                                Game.player.playerWaterNeed -= 50;
+                                Game.itemsInHotbar[Game.selectedHotbar - 1] = EnumHandler.Items.None;
+                            }
+                            if (button.Equals(MouseButtons.Right))
+                            {
+                                Game.itemsInHotbar[Game.selectedHotbar - 1] = EnumHandler.Items.None;
+                            }
+                            break;
+                        case EnumHandler.Items.Peanutbutter:
+                            if (button.Equals(MouseButtons.Left))
+                            {
+                                Game.player.playerFoodNeed -= 10;
+                                Game.player.playerWaterNeed += 15;
+                                Game.itemsInHotbar[Game.selectedHotbar - 1] = EnumHandler.Items.None;
+                            }
+                            break;
+                    }
+                }
                 #endregion
 
                 #region Iventory/Hotbar
