@@ -204,16 +204,13 @@ namespace FOGocalypse
                     int yOfItemToDraw = height / 2 - 145;
                     foreach (EnumHandler.Items itemInInventory in Game.itemsInInventory)
                     {
-                        if (!itemInInventory.Equals(EnumHandler.Items.None))
-                        {
-                            drawItem(xOfItemToDraw, yOfItemToDraw, itemInInventory, g);
+                        drawItem(xOfItemToDraw, yOfItemToDraw, itemInInventory, g);
 
-                            xOfItemToDraw += 60;
-                            if (xOfItemToDraw >= width / 2 + 145)
-                            {
-                                xOfItemToDraw = width / 2 - 145;
-                                yOfItemToDraw += 60;
-                            }
+                        xOfItemToDraw += 60;
+                        if (xOfItemToDraw >= width / 2 + 145)
+                        {
+                            xOfItemToDraw = width / 2 - 145;
+                            yOfItemToDraw += 60;
                         }
                     }
 

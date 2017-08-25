@@ -67,11 +67,12 @@ namespace FOGocalypse
             #region Iventory
             if (Game.inInventory)
             {
+                Boolean foundSlot = false;
+
+                int xOfItem = Game.canvasWidth / 2 - 145;
+                int yOfItem = Game.canvasHeight / 2 - 145;
                 for (int i = 0; i < Game.itemsInInventory.Length; i++)
                 {
-                    int xOfItem = Game.canvasWidth / 2 - 145;
-                    int yOfItem = Game.canvasHeight / 2 - 145;
-
                     if (x >= xOfItem && x <= xOfItem + 50)
                     {
                         if (y >= yOfItem && y <= yOfItem + 50)
@@ -81,6 +82,7 @@ namespace FOGocalypse
                                 Game.itemsInInventory[i] = itemHeldByMouse;
                                 Game.itemsInHotbar[indexOfItem] = EnumHandler.Items.None;
                                 itemHeldByMouse = EnumHandler.Items.None;
+                                foundSlot = true;
                             }
                         }
                     }
@@ -91,6 +93,11 @@ namespace FOGocalypse
                         xOfItem = Game.canvasWidth / 2 - 145;
                         yOfItem += 60;
                     }
+                }
+
+                if (!foundSlot)
+                {
+                    itemHeldByMouse = EnumHandler.Items.None;
                 }
             }
             #endregion
