@@ -5,6 +5,9 @@ namespace FOGocalypse
 {
     public class Physics
     {
+        int waterCycle = 0;
+        int hungerCycle = 0;
+
         //constrcutor
         public Physics()
         {
@@ -15,6 +18,7 @@ namespace FOGocalypse
         public void SimulatePhysics(int width, int height)
         {
             simulatePlayerPhysics(width, height);
+            simulatePlayerNeeds();
         }
 
         //player physics
@@ -142,6 +146,24 @@ namespace FOGocalypse
                         break;
                     }
                 }
+            }
+        }
+
+        //player hunger thirst mechanics
+        private void simulatePlayerNeeds()
+        {
+            waterCycle++;
+            if (waterCycle >= 50 - (Game.player.playerXVelocity + Game.player.playerYVelocity + Game.player.playerWaterNeed))
+            {
+                Game.player.playerWaterNeed++;
+                waterCycle = 0;
+            }
+
+            hungerCycle++;
+            if (hungerCycle >= 100 - (Game.player.playerXVelocity + Game.player.playerYVelocity))
+            {
+                Game.player.playerFoodNeed++;
+                hungerCycle = 0;
             }
         }
     }

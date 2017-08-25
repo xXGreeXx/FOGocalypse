@@ -51,6 +51,30 @@ namespace FOGocalypse
                     }  
                 }
 
+                //draw items in the world
+                foreach (Item i in Game.itemsInWorld)
+                {
+                    int newX = i.x - Game.player.playerX;
+                    int newY = i.y - Game.player.playerY;
+
+                    if (newX >= width / 2 - player.Width / 2 - 80 && newX <= width / 2 - player.Width / 2 + 80)
+                    {
+                        if (newY >= height / 2 - player.Height / 2 - 80 && newY <= height / 2 - player.Height / 2 + 80)
+                        {
+                            Font f = new Font(FontFamily.GenericSansSerif, 6, FontStyle.Bold);
+                            g.FillRectangle(Brushes.Gray, newX, newY - 15, 70, 20);
+                            g.DrawString(i.type.ToString() + "\n Press <f> to equip", f, Brushes.Black, newX, newY - 15);
+                        }
+                    }
+
+                    switch (i.type)
+                    {
+                        case EnumHandler.Items.Waterbottle:
+                            g.DrawImage(waterBottle, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
+                            break;
+                    }
+                }
+
                 //draw player
                 int positionX = width / 2 - player.Width / 2;
                 int positionY = height / 2 - player.Height / 2;
@@ -87,20 +111,6 @@ namespace FOGocalypse
                             flashlight.RotateFlip(RotateFlipType.Rotate270FlipNone);
                         }
                         break;
-                }
-
-                //draw items in the world
-                foreach (Item i in Game.itemsInWorld)
-                {
-                    int newX = i.x - Game.player.playerX;
-                    int newY = i.y - Game.player.playerY;
-
-                    switch (i.type)
-                    {
-                        case EnumHandler.Items.Waterbottle:
-                            g.DrawImage(waterBottle, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 10, 10);
-                            break;
-                    }
                 }
 
                 //draw fog
