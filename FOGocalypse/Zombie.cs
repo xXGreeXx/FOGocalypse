@@ -38,7 +38,7 @@ namespace FOGocalypse
                     {
                         x -= Game.zombieMoveSpeed;
                     }
-                    else if (positionOfPlayerX > newX)
+                    if (positionOfPlayerX > newX)
                     {
                         x += Game.zombieMoveSpeed;
                     }
@@ -47,7 +47,7 @@ namespace FOGocalypse
                     {
                         y -= Game.zombieMoveSpeed;
                     }
-                    else if (positionOfPlayerY > newY)
+                    if (positionOfPlayerY > newY)
                     {
                         y += Game.zombieMoveSpeed;
                     }

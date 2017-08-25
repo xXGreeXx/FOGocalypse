@@ -125,9 +125,10 @@ namespace FOGocalypse
                 #region DrawZombies
                 foreach (Zombie z in Game.zombies)
                 {
-                    float zombieAngle = (float)((Math.Atan2((double)z.lookingToward.X - z.x, (double)z.lookingToward.Y - z.y)) * (180 / Math.PI));
                     int newX = z.x - Game.player.playerX;
                     int newY = z.y - Game.player.playerY;
+                    float zombieAngle = (float)((Math.Atan2((double)z.lookingToward.Y - newY, (double)z.lookingToward.X - newX)) * (180 / Math.PI));
+
                     g.DrawImage(RotateImage(zombie, zombieAngle), newX, newY, Game.tileSize, Game.tileSize);
                 }
                 #endregion
