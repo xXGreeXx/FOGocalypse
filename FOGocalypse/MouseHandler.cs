@@ -21,8 +21,11 @@ namespace FOGocalypse
         //mouse moved
         public void RegisterMouseMove(int x, int y)
         {
-            mouseX = x;
-            mouseY = y;
+            if (!Game.inPauseMenu)
+            {
+                mouseX = x;
+                mouseY = y;
+            }
         }
 
         //mouse down
@@ -58,6 +61,9 @@ namespace FOGocalypse
                             }
                             break;
                     }
+
+                    if (Game.player.playerWaterNeed < 0) Game.player.playerWaterNeed = 0;
+                    if (Game.player.playerFoodNeed < 0) Game.player.playerFoodNeed = 0;
                 }
                 #endregion
 

@@ -266,7 +266,7 @@ namespace FOGocalypse
                 #endregion
 
 
-                //draw cursor
+                //draw cursor/pause menu
                 if (!Game.inPauseMenu)
                 {
                     Cursor.Hide();
@@ -282,6 +282,7 @@ namespace FOGocalypse
 
                     g.DrawString("Return To Game", font, Brushes.Black, width / 2 - g.MeasureString("Return To Game", font).Width / 2, height / 2 - 100);
                     g.DrawString("Return To Menu", font, Brushes.Black, width / 2 - g.MeasureString("Return To Menu", font).Width / 2, height / 2 - 75);
+                    g.DrawString("Exit To Desktop", font, Brushes.Black, width / 2 - g.MeasureString("Exit To Desktop", font).Width / 2, height / 2 + 50);
 
                 }
             }
