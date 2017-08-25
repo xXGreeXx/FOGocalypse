@@ -25,6 +25,7 @@ namespace FOGocalypse
         Bitmap title1 = FOGocalypse.Properties.Resources.title1;
         Bitmap title2 = FOGocalypse.Properties.Resources.title2;
         Bitmap fog = FOGocalypse.Properties.Resources.fog;
+        float fogFrame = 0.0F;
 
         //constructor
         public RenderingEngine()
@@ -47,10 +48,11 @@ namespace FOGocalypse
                 {
                     int x = t.x - Game.player.playerX;
                     int y = t.y - Game.player.playerY;
+                    int distance = Game.playerViewDistance * Game.tileSize;
 
-                    if (x > 0 - Game.tileSize && x < width + Game.tileSize)
+                    if (x > width / 2 - player.Width / 2 - distance && x < width / 2 - player.Width / 2 + distance)
                     {
-                        if (y > 0 - Game.tileSize && y < height + Game.tileSize)
+                        if (y > height / 2 - player.Height / 2 - distance && y < height / 2 - player.Height / 2 + distance)
                         {
                             if (t.type.Equals(EnumHandler.TileTypes.Grass)) g.DrawImage(grass, x, y, Game.tileSize, Game.tileSize);
                             else if (t.type.Equals(EnumHandler.TileTypes.Dirt)) g.DrawImage(dirt, x, y, Game.tileSize, Game.tileSize);
@@ -64,30 +66,37 @@ namespace FOGocalypse
                 {
                     int newX = i.x - Game.player.playerX;
                     int newY = i.y - Game.player.playerY;
+                    int distance = Game.playerViewDistance * Game.tileSize;
 
-                    if (newX >= width / 2 - player.Width / 2 - 80 && newX <= width / 2 - player.Width / 2 + 80)
+                    if (newX > width / 2 - player.Width / 2 - distance && newX < width / 2 - player.Width / 2 + distance)
                     {
-                        if (newY >= height / 2 - player.Height / 2 - 80 && newY <= height / 2 - player.Height / 2 + 80)
+                        if (newY > height / 2 - player.Height / 2 - distance && newY < height / 2 - player.Height / 2 + distance)
                         {
-                            g.FillRectangle(Brushes.Gray, newX, newY - 15, 70, 20);
-                            g.DrawString(i.type.ToString() + "\n Press <f> to equip", f, Brushes.Black, newX, newY - 15);
-                        }
-                    }
+                            if (newX >= width / 2 - player.Width / 2 - 80 && newX <= width / 2 - player.Width / 2 + 80)
+                            {
+                                if (newY >= height / 2 - player.Height / 2 - 80 && newY <= height / 2 - player.Height / 2 + 80)
+                                {
+                                    g.FillRectangle(Brushes.Gray, newX, newY - 15, 70, 20);
+                                    g.DrawString(i.type.ToString() + "\n Press <f> to equip", f, Brushes.Black, newX, newY - 15);
+                                }
+                            }
 
-                    switch (i.type)
-                    {
-                        case EnumHandler.Items.Flashlight:
-                            g.DrawImage(flashlight, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
-                            break;
-                        case EnumHandler.Items.Waterbottle:
-                            g.DrawImage(waterBottle, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
-                            break;
-                        case EnumHandler.Items.Knife:
-                            g.DrawImage(knife, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
-                            break;
-                        case EnumHandler.Items.Peanutbutter:
-                            g.DrawImage(peanutButter, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
-                            break;
+                            switch (i.type)
+                            {
+                                case EnumHandler.Items.Flashlight:
+                                    g.DrawImage(flashlight, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
+                                    break;
+                                case EnumHandler.Items.Waterbottle:
+                                    g.DrawImage(waterBottle, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
+                                    break;
+                                case EnumHandler.Items.Knife:
+                                    g.DrawImage(knife, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
+                                    break;
+                                case EnumHandler.Items.Peanutbutter:
+                                    g.DrawImage(peanutButter, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
+                                    break;
+                            }
+                        }
                     }
                 }
                 #endregion
@@ -104,7 +113,7 @@ namespace FOGocalypse
                 EnumHandler.Items selectedItem = Game.itemsInHotbar[Game.selectedHotbar - 1];
 
                 //draw fog
-                //fogGenerator(width, height, g);
+                fogGenerator(width, height, g);
 
                 //draw health/thirst/hunger
                 g.DrawRectangle(Pens.Black, 10, 10, 200, 30);
@@ -245,42 +254,55 @@ namespace FOGocalypse
             #endregion
         }
 
-
         //fog generator
         //TODO\\
         private void fogGenerator(int width, int height, Graphics g)
         {
-            int cycle = 2;
+            int maxCycle = 4;
+            int cycle = maxCycle;
+            int distance = Game.playerViewDistance;
 
-            for (int x = 0; x < width; x += Game.tileSize)
+            foreach (Tile t in Game.worldTiles)
             {
-                for (int y = 0; y < height; y += Game.tileSize)
+                int newX = t.x - Game.player.playerX;
+                int newY = t.y - Game.player.playerY;
+                if (newX > 0 - Game.tileSize && newX < width)
                 {
-                    Boolean pass = true;
-
-                    if (x >= (width / 2 - player.Width / 2) - (((Game.playerViewDistance / 2F) - cycle) * Game.tileSize) && x <= (width / 2 - player.Width / 2) + (((Game.playerViewDistance / 2F) - cycle) * Game.tileSize))
+                    if (newY > 0 - Game.tileSize && newY < height)
                     {
-                        if (y >= (height / 2 - player.Height / 2) - ((Game.playerViewDistance / 2F) * Game.tileSize) && y <= (height / 2 - player.Height / 2) + ((Game.playerViewDistance / 2F) * Game.tileSize))
+                        Boolean pass = true;
+                        int newDistance = distance * Game.tileSize;
+
+                        if (newX >= width / 2 - player.Width / 2 - newDistance && newX <= width / 2 - player.Width / 2 + newDistance)
                         {
-                            if (cycle <= 2)
+                            if (newY >= height / 2 - player.Height / 2 - newDistance && newY <= height / 2 - player.Height / 2 + newDistance)
                             {
-                                cycle++;
+                                pass = false;
                             }
-                            else if (cycle >= 6)
-                            {
-                                cycle--;
-                            }
-
-                            pass = false;
                         }
-                    }
 
-                    if (pass)
-                    {
-                        g.DrawImage(fog, x, y, Game.tileSize, Game.tileSize);
+                        if (pass)
+                        {
+                            g.DrawImage(fog, newX, newY, 25, 25);
+                        }
                     }
                 }
             }
+
+           // fogAnimator();
+        }
+
+        //animate fog
+        private void fogAnimator()
+        {
+            fogFrame += 0.1F;
+
+            if (fogFrame >= fog.GetFrameCount(new System.Drawing.Imaging.FrameDimension(fog.FrameDimensionsList[0])) - 1)
+            {
+                fogFrame = 0.0F;
+            }
+            System.Drawing.Imaging.FrameDimension dim = new System.Drawing.Imaging.FrameDimension(fog.FrameDimensionsList[0]);
+            fog.SelectActiveFrame(dim, Convert.ToInt32(fogFrame));
         }
 
         //draw item
