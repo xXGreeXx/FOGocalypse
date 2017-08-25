@@ -16,6 +16,8 @@ namespace FOGocalypse
         Bitmap food = FOGocalypse.Properties.Resources.food;
         Bitmap flashlightIcon = FOGocalypse.Properties.Resources.flashlightIcon;
         Bitmap flashlight = FOGocalypse.Properties.Resources.flashlight;
+        Bitmap waterBottleIcon = FOGocalypse.Properties.Resources.waterBottleIcon;
+        Bitmap waterBottle = FOGocalypse.Properties.Resources.waterBottle;
         Bitmap title1 = FOGocalypse.Properties.Resources.title1;
         Bitmap title2 = FOGocalypse.Properties.Resources.title2;
         Bitmap fog = FOGocalypse.Properties.Resources.fog;
@@ -50,7 +52,6 @@ namespace FOGocalypse
                 }
 
                 //draw player
-
                 int positionX = width / 2 - player.Width / 2;
                 int positionY = height / 2 - player.Height / 2;
                 float angle = (float)((Math.Atan2((double)MouseHandler.mouseY - positionY, (double)MouseHandler.mouseX - positionX)) * (180/Math.PI));
@@ -86,6 +87,20 @@ namespace FOGocalypse
                             flashlight.RotateFlip(RotateFlipType.Rotate270FlipNone);
                         }
                         break;
+                }
+
+                //draw items in the world
+                foreach (Item i in Game.itemsInWorld)
+                {
+                    int newX = i.x - Game.player.playerX;
+                    int newY = i.y - Game.player.playerY;
+
+                    switch (i.type)
+                    {
+                        case EnumHandler.Items.Waterbottle:
+                            g.DrawImage(waterBottle, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 10, 10);
+                            break;
+                    }
                 }
 
                 //draw fog

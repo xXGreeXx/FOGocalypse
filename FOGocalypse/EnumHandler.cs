@@ -28,7 +28,8 @@
         public enum Items
         {
             None,
-            Flashlight
+            Flashlight,
+            Waterbottle
         }
     }
 }

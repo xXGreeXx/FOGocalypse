@@ -53,6 +53,7 @@
     <Compile Include="Game.Designer.cs">
       <DependentUpon>Game.cs</DependentUpon>
     </Compile>
+    <Compile Include="Item.cs" />
     <Compile Include="KeyBoardHandler.cs" />
     <Compile Include="MouseHandler.cs" />
     <Compile Include="Physics.cs" />
@@ -126,6 +127,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\fog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\waterBottle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\waterBottleIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

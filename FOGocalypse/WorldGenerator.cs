@@ -72,6 +72,7 @@ namespace FOGocalypse
             EnumHandler.TileTypes type = EnumHandler.TileTypes.Wood;
             int number = generator.Next(10, 16);
             int door = generator.Next(1, number);
+            int water = generator.Next(1, 3);
 
             for (int i = 0; i < 10; i++)
             {
@@ -89,6 +90,11 @@ namespace FOGocalypse
 
                 if (i == door) continue;
                 tilesOfHouse.Add(new Tile((x - 10) * Game.tileSize, (y - i) * Game.tileSize, type));
+            }
+
+            if (water == 2)
+            {
+                Game.itemsInWorld.Add(new Item((x - 1) * Game.tileSize, (y - 1) * Game.tileSize, EnumHandler.Items.Waterbottle));
             }
 
             return tilesOfHouse;
