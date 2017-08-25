@@ -53,6 +53,29 @@ namespace FOGocalypse
                             }
                         }
                     }
+
+                    int xOfItem2 = Game.canvasWidth / 2 - 145;
+                    int yOfItem2 = Game.canvasHeight / 2 - 145;
+                    for (int i = 0; i < Game.itemsInInventory.Length; i++)
+                    {
+                        if (x >= xOfItem2 && x <= xOfItem2 + 50)
+                        {
+                            if (y >= yOfItem2 && y <= yOfItem2 + 50)
+                            {
+                                itemHeldByMouse = Game.itemsInInventory[i];
+                                Game.itemsInInventory[i] = EnumHandler.Items.None;
+                            }
+                        }
+
+                        xOfItem2 += 60;
+                        if (xOfItem2 >= Game.canvasWidth / 2 + 145)
+                        {
+                            xOfItem2 = Game.canvasWidth / 2 - 145;
+                            yOfItem2 += 60;
+                        }
+                    }
+
+
                 }
                 #endregion
             }
@@ -63,45 +86,62 @@ namespace FOGocalypse
         public void RegisterMouseUp(int x, int y, MouseButtons button)
         {
             #region Game
-
-            #region Iventory
             if (Game.inInventory)
             {
-                Boolean foundSlot = false;
-
-                int xOfItem = Game.canvasWidth / 2 - 145;
-                int yOfItem = Game.canvasHeight / 2 - 145;
-                for (int i = 0; i < Game.itemsInInventory.Length; i++)
+                #region Iventory/Hotbar
+                if (Game.inInventory)
                 {
-                    if (x >= xOfItem && x <= xOfItem + 50)
+                    Boolean foundSlot = false;
+
+                    for (int i = 0; i < Game.itemsInHotbar.Length; i++)
                     {
-                        if (y >= yOfItem && y <= yOfItem + 50)
+                        int xOfItem = Game.canvasWidth / 2 - (60 * Game.numberOfhotBarSlots / 2) + i * 60;
+                        int yOfItem = Game.canvasHeight - 60;
+
+                        if (x >= xOfItem && x <= xOfItem + 50)
                         {
-                            if (!itemHeldByMouse.Equals(EnumHandler.Items.None))
+                            if (y >= yOfItem && y <= yOfItem + 50)
                             {
-                                Game.itemsInInventory[i] = itemHeldByMouse;
-                                Game.itemsInHotbar[indexOfItem] = EnumHandler.Items.None;
+                                Game.itemsInHotbar[i] = itemHeldByMouse;
                                 itemHeldByMouse = EnumHandler.Items.None;
                                 foundSlot = true;
                             }
                         }
                     }
 
-                    xOfItem += 60;
-                    if (xOfItem >= Game.canvasWidth / 2 + 145)
+                    int xOfItem2 = Game.canvasWidth / 2 - 145;
+                    int yOfItem2 = Game.canvasHeight / 2 - 145;
+                    for (int i = 0; i < Game.itemsInInventory.Length; i++)
                     {
-                        xOfItem = Game.canvasWidth / 2 - 145;
-                        yOfItem += 60;
+                        if (x >= xOfItem2 && x <= xOfItem2 + 50)
+                        {
+                            if (y >= yOfItem2 && y <= yOfItem2 + 50)
+                            {
+                                if (!itemHeldByMouse.Equals(EnumHandler.Items.None))
+                                {
+                                    Game.itemsInInventory[i] = itemHeldByMouse;
+                                    Game.itemsInHotbar[indexOfItem] = EnumHandler.Items.None;
+                                    itemHeldByMouse = EnumHandler.Items.None;
+                                    foundSlot = true;
+                                }
+                            }
+                        }
+
+                        xOfItem2 += 60;
+                        if (xOfItem2 >= Game.canvasWidth / 2 + 145)
+                        {
+                            xOfItem2 = Game.canvasWidth / 2 - 145;
+                            yOfItem2 += 60;
+                        }
+                    }
+
+                    if (!foundSlot)
+                    {
+                        itemHeldByMouse = EnumHandler.Items.None;
                     }
                 }
-
-                if (!foundSlot)
-                {
-                    itemHeldByMouse = EnumHandler.Items.None;
-                }
+                #endregion/Hotbar
             }
-            #endregion
-
             #endregion
         }
     }
