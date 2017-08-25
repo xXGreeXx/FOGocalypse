@@ -18,6 +18,8 @@ namespace FOGocalypse
         Bitmap flashlight = FOGocalypse.Properties.Resources.flashlight;
         Bitmap waterBottleIcon = FOGocalypse.Properties.Resources.waterBottleIcon;
         Bitmap waterBottle = FOGocalypse.Properties.Resources.waterBottle;
+        Bitmap knifeIcon = FOGocalypse.Properties.Resources.knifeIcon;
+        Bitmap knife = FOGocalypse.Properties.Resources.knife;
         Bitmap title1 = FOGocalypse.Properties.Resources.title1;
         Bitmap title2 = FOGocalypse.Properties.Resources.title2;
         Bitmap fog = FOGocalypse.Properties.Resources.fog;
@@ -71,6 +73,9 @@ namespace FOGocalypse
                     {
                         case EnumHandler.Items.Waterbottle:
                             g.DrawImage(waterBottle, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
+                            break;
+                        case EnumHandler.Items.Knife:
+                            g.DrawImage(knife, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
                             break;
                     }
                 }
@@ -148,6 +153,7 @@ namespace FOGocalypse
 
                     if (item.Equals(EnumHandler.Items.Flashlight)) g.DrawImage(flashlightIcon, xToDraw, height - 60, 50, 50);
                     if (item.Equals(EnumHandler.Items.Waterbottle)) g.DrawImage(waterBottleIcon, xToDraw, height - 60, 50, 50);
+                    if (item.Equals(EnumHandler.Items.Knife)) g.DrawImage(knifeIcon, xToDraw, height - 60, 50, 50);
 
                     index++;
                 }

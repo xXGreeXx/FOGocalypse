@@ -29,7 +29,8 @@
         {
             None,
             Flashlight,
-            Waterbottle
+            Waterbottle,
+            Knife
         }
     }
 }
