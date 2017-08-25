@@ -31,7 +31,8 @@
             Flashlight,
             Waterbottle,
             Knife,
-            Peanutbutter
+            Peanutbutter,
+            Bread
         }
     }
 }

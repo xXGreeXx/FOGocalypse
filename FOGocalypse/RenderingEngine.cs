@@ -22,6 +22,8 @@ namespace FOGocalypse
         Bitmap knife = FOGocalypse.Properties.Resources.knife;
         Bitmap peanutButterIcon = FOGocalypse.Properties.Resources.peanutButterIcon;
         Bitmap peanutButter = FOGocalypse.Properties.Resources.peanutButter;
+        Bitmap breadIcon = FOGocalypse.Properties.Resources.breadIcon;
+        Bitmap bread = FOGocalypse.Properties.Resources.bread;
         Bitmap title1 = FOGocalypse.Properties.Resources.title1;
         Bitmap title2 = FOGocalypse.Properties.Resources.title2;
         Bitmap fog = FOGocalypse.Properties.Resources.fog;
@@ -94,6 +96,9 @@ namespace FOGocalypse
                                     break;
                                 case EnumHandler.Items.Peanutbutter:
                                     g.DrawImage(peanutButter, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
+                                    break;
+                                case EnumHandler.Items.Bread:
+                                    g.DrawImage(bread, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
                                     break;
                             }
                         }
@@ -321,6 +326,9 @@ namespace FOGocalypse
                     break;
                 case EnumHandler.Items.Peanutbutter:
                     g.DrawImage(peanutButterIcon, x, y, 50, 50);
+                    break;
+                case EnumHandler.Items.Bread:
+                    g.DrawImage(breadIcon, x, y, 50, 50);
                     break;
             }
         }

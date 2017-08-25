@@ -107,6 +107,8 @@ namespace FOGocalypse
                 Game.itemsInWorld.Add(new Item((x - 1) * Game.tileSize, (y - 2) * Game.tileSize, EnumHandler.Items.Peanutbutter));
             }
 
+            Game.itemsInWorld.Add(new Item((x - 2) * Game.tileSize, (y - 2) * Game.tileSize, EnumHandler.Items.Bread));
+
             return tilesOfHouse;
         }
     }
