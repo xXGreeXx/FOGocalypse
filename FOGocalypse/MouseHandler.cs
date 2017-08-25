@@ -60,6 +60,14 @@ namespace FOGocalypse
                                 Game.itemsInHotbar[Game.selectedHotbar - 1] = EnumHandler.Items.None;
                             }
                             break;
+                        case EnumHandler.Items.Bread:
+                            if (button.Equals(MouseButtons.Left))
+                            {
+                                Game.player.playerFoodNeed -= 10;
+                                Game.player.playerWaterNeed += 25;
+                                Game.itemsInHotbar[Game.selectedHotbar - 1] = EnumHandler.Items.None;
+                            }
+                            break;
                     }
 
                     if (Game.player.playerWaterNeed < 0) Game.player.playerWaterNeed = 0;

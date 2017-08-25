@@ -21,6 +21,7 @@ namespace FOGocalypse
         public static int tileSize { get; set; } = 25;
         public static int worldSize { get; set; } = 256;
         public static EnumHandler.GameStates state { get; set; } = EnumHandler.GameStates.Game;
+        public static String hover { get; set; } = "";
         public static int numberOfhotBarSlots { get; set; } = 5;
         public static int selectedHotbar { get; set; } = 1;
         public static EnumHandler.Items[] itemsInHotbar { get; set; }
