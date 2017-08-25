@@ -8,6 +8,7 @@ namespace FOGocalypse
     {
         //define global variables
         Bitmap player = FOGocalypse.Properties.Resources.player;
+        Bitmap zombie = FOGocalypse.Properties.Resources.zombie;
         Bitmap grass = FOGocalypse.Properties.Resources.grass;
         Bitmap dirt = FOGocalypse.Properties.Resources.dirt;
         Bitmap wood = FOGocalypse.Properties.Resources.wood;
@@ -64,6 +65,8 @@ namespace FOGocalypse
                 }
 
                 //draw items in the world
+                Boolean tooltipDrawn = false;
+
                 foreach (Item i in Game.itemsInWorld)
                 {
                     int newX = i.x - Game.player.playerX;
@@ -74,12 +77,13 @@ namespace FOGocalypse
                     {
                         if (newY > height / 2 - player.Height / 2 - distance && newY < height / 2 - player.Height / 2 + distance)
                         {
-                            if (newX >= width / 2 - player.Width / 2 - 80 && newX <= width / 2 - player.Width / 2 + 80)
+                            if (newX >= width / 2 - player.Width / 2 - 80 && newX <= width / 2 - player.Width / 2 + 80 && !tooltipDrawn)
                             {
                                 if (newY >= height / 2 - player.Height / 2 - 80 && newY <= height / 2 - player.Height / 2 + 80)
                                 {
                                     g.FillRectangle(Brushes.Gray, newX, newY - 15, 70, 20);
                                     g.DrawString(i.type.ToString() + "\n Press <f> to equip", f, Brushes.Black, newX, newY - 15);
+                                    tooltipDrawn = true;
                                 }
                             }
 
@@ -116,6 +120,13 @@ namespace FOGocalypse
                 //draw item player is holding
                 //TODO\\
                 EnumHandler.Items selectedItem = Game.itemsInHotbar[Game.selectedHotbar - 1];
+
+                #region DrawZombies
+                foreach (Zombie z in Game.zombies)
+                {
+
+                }
+                #endregion
 
                 //draw fog
                 fogGenerator(width, height, g);
@@ -184,6 +195,10 @@ namespace FOGocalypse
                     case EnumHandler.Items.Peanutbutter:
                         g.DrawString("Left click, eat(10 food, 15 thirst)", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 115);
                         g.DrawString("Right click, ranged throw", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 100);
+                        break;
+                    case EnumHandler.Items.Bread:
+                        g.DrawString("Left click, eat(25 food, 15 thirst)", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 115);
+                        g.DrawString("Right click, melee swing", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 100);
                         break;
                 }
 

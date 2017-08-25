@@ -119,7 +119,7 @@ namespace FOGocalypse
                                             {
                                                 Game.itemsInHotbar[indexOfHotbarSlot] = i.type;
                                                 Game.itemsInWorld.RemoveAt(index);
-                                                break;
+                                                return;
                                             }
 
                                             indexOfHotbarSlot++;

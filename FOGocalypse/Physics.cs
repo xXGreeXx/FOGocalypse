@@ -7,6 +7,8 @@ namespace FOGocalypse
     {
         int waterCycle = 0;
         int hungerCycle = 0;
+        Random generator = new Random();
+        int cycle = 0;
 
         //constrcutor
         public Physics()
@@ -171,6 +173,35 @@ namespace FOGocalypse
             {
                 Game.player.playerFoodNeed++;
                 hungerCycle = 0;
+            }
+        }
+
+        //simulate zombie physics
+        private void simulateZombies()
+        {
+            foreach (Zombie z in Game.zombies)
+            {
+                z.SimulateAI();
+            }
+        }
+
+        //spawn zombies
+        private void spawnZombie()
+        {
+            cycle++;
+            if (cycle >= 20)
+            {
+                int chance = generator.Next(1, 10);
+
+                if (chance == Game.zombieSpawnChance / 10)
+                {
+                    int x = generator.Next(Game.player.playerX - (20 * Game.tileSize), Game.player.playerX + (20 * Game.tileSize));
+                    int y = generator.Next(Game.player.playerY - (20 * Game.tileSize), Game.player.playerY + (20 * Game.tileSize));
+
+                    Game.zombies.Add(new Zombie(x, y));
+                }
+
+                cycle = 0;
             }
         }
     }

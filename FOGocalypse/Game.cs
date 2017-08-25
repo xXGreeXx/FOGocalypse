@@ -15,6 +15,7 @@ namespace FOGocalypse
         Physics physicsEngine = new Physics();
         public static List<Tile> worldTiles { get; set; } = new List<Tile>();
         public static List<Item> itemsInWorld { get; set; } = new List<Item>();
+        public static List<Zombie> zombies { get; set; } = new List<Zombie>();
         public static Player player { get; set; }
         public static int playerMoveSpeed { get; set; } = 5;
         public static int tileSize { get; set; } = 25;
@@ -27,6 +28,9 @@ namespace FOGocalypse
         public static Boolean inPauseMenu { get; set; } = false;
         public static Boolean inInventory { get; set; } = false;
         public static int playerViewDistance { get; set; } = 5;
+        public static int zombieViewDistance { get; set; } = 8;
+        public static int zombieHearDistance { get; set; } = 4;
+        public static int zombieSpawnChance { get; set; } = 10;
         public static int canvasWidth { get; set; }
         public static int canvasHeight { get; set; }
 
