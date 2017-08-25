@@ -63,7 +63,7 @@ namespace FOGocalypse
 
             if (!inPauseMenu)
             {
-                physicsEngine.SimulatePhysics();
+                physicsEngine.SimulatePhysics(width, height);
             }
         }
 
