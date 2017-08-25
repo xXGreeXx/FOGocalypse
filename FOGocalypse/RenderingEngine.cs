@@ -18,11 +18,12 @@ namespace FOGocalypse
         Bitmap flashlight = FOGocalypse.Properties.Resources.flashlight;
         Bitmap title1 = FOGocalypse.Properties.Resources.title1;
         Bitmap title2 = FOGocalypse.Properties.Resources.title2;
+        Bitmap fog = FOGocalypse.Properties.Resources.fog;
 
         //constructor
         public RenderingEngine()
         {
-
+            player.RotateFlip(RotateFlipType.RotateNoneFlipX);
         }
 
         //draw screen
@@ -49,13 +50,12 @@ namespace FOGocalypse
                 }
 
                 //draw player
-                if (Game.player.direction.Equals(EnumHandler.Directions.Right)) { player.RotateFlip(RotateFlipType.RotateNoneFlipX); }
-                else if (Game.player.direction.Equals(EnumHandler.Directions.Up)) { player.RotateFlip(RotateFlipType.Rotate90FlipNone); }
-                else if (Game.player.direction.Equals(EnumHandler.Directions.Down)) { player.RotateFlip(RotateFlipType.Rotate270FlipNone); }
 
-                g.DrawImage(player, width / 2 - player.Width / 2, height / 2 - player.Height / 2, Game.tileSize, Game.tileSize);
-
-                player = FOGocalypse.Properties.Resources.player;
+                int positionX = width / 2 - player.Width / 2;
+                int positionY = height / 2 - player.Height / 2;
+                float angle = (float)((Math.Atan2((double)MouseHandler.mouseY - positionY, (double)MouseHandler.mouseX - positionX)) * (180/Math.PI));
+                
+                g.DrawImage(RotateImage(player, angle), width / 2 - player.Width / 2, height / 2 - player.Height / 2, Game.tileSize, Game.tileSize);
 
                 //draw item player is holding
                 EnumHandler.Items selectedItem = Game.itemsInHotbar[Game.selectedHotbar - 1];
@@ -87,6 +87,9 @@ namespace FOGocalypse
                         }
                         break;
                 }
+
+                //draw fog
+                //fogGenerator(width, height, g);
 
                 //draw health/thirst/hunger
                 g.DrawRectangle(Pens.Black, 10, 10, 200, 30);
@@ -133,9 +136,68 @@ namespace FOGocalypse
                     Cursor.Show();
                     g.DrawImage(title1, width / 2 - title1.Width / 2, height / 2 - 200, title1.Width, title1.Height);
                     g.DrawImage(title2, width / 2 - title1.Width / 2, height / 2 + 100, title1.Width, title1.Height);
+
+                    Font font = new Font(FontFamily.GenericSansSerif, 15, FontStyle.Bold);
+
+                    g.DrawString("Return To Game", font, Brushes.Black, width / 2 - g.MeasureString("Return To Game", font).Width / 2, height / 2 - 100);
+                    g.DrawString("Return To Menu", font, Brushes.Black, width / 2 - g.MeasureString("Return To Menu", font).Width / 2, height / 2 - 75);
+
                 }
             }
             #endregion
+        }
+
+
+        //fog generator
+        //TODO\\
+        private void fogGenerator(int width, int height, Graphics g)
+        {
+            int cycle = 2;
+
+            for (int x = 0; x < width; x += Game.tileSize)
+            {
+                for (int y = 0; y < height; y += Game.tileSize)
+                {
+                    Boolean pass = true;
+
+                    if (x >= (width / 2 - player.Width / 2) - (((Game.playerViewDistance / 2F) - cycle) * Game.tileSize) && x <= (width / 2 - player.Width / 2) + (((Game.playerViewDistance / 2F) - cycle) * Game.tileSize))
+                    {
+                        if (y >= (height / 2 - player.Height / 2) - ((Game.playerViewDistance / 2F) * Game.tileSize) && y <= (height / 2 - player.Height / 2) + ((Game.playerViewDistance / 2F) * Game.tileSize))
+                        {
+                            if (cycle <= 2)
+                            {
+                                cycle++;
+                            }
+                            else if (cycle >= 6)
+                            {
+                                cycle--;
+                            }
+
+                            pass = false;
+                        }
+                    }
+
+                    if (pass)
+                    {
+                        g.DrawImage(fog, x, y, Game.tileSize, Game.tileSize);
+                    }
+                }
+            }
+        }
+
+        //rotate image
+        private static Bitmap RotateImage(Image image, float angle)
+        {
+            PointF offset = new PointF((float)image.Width / 2, (float)image.Height / 2);
+            Bitmap rotatedBmp = new Bitmap(image.Width, image.Height);
+            rotatedBmp.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+            Graphics g = Graphics.FromImage(rotatedBmp);
+            g.TranslateTransform(offset.X, offset.Y);
+            g.RotateTransform(angle);
+            g.TranslateTransform(-offset.X, -offset.Y);
+            g.DrawImage(image, new PointF(0, 0));
+
+            return rotatedBmp;
         }
     }
 }

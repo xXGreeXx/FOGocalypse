@@ -23,6 +23,7 @@ namespace FOGocalypse
         public static int selectedHotbar { get; set; } = 1;
         public static EnumHandler.Items[] itemsInHotbar { get; set; }
         public static Boolean inPauseMenu { get; set; } = false;
+        public static int playerViewDistance { get; set; } = 5;
 
         //contrsuctor
         public Game()
