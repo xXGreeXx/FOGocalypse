@@ -19,18 +19,19 @@ namespace FOGocalypse
         {
             if (!Game.inInventory)
             {
-                simulatePlayerPhysics(width, height);
+                simulatePlayerPhysics();
             }
             simulatePlayerNeeds();
         }
 
         //player physics
-        private void simulatePlayerPhysics(int width, int height)
+        private void simulatePlayerPhysics()
         {
             //player movement
             Point mousePosition = new Point(MouseHandler.mouseX, MouseHandler.mouseY);
-            Point playerPosition = new Point(width / 2 - FOGocalypse.Properties.Resources.player.Width / 2, height / 2 - FOGocalypse.Properties.Resources.player.Height / 2);
+            Point playerPosition = new Point(Game.canvasWidth / 2 - FOGocalypse.Properties.Resources.player.Width / 2, Game.canvasHeight / 2 - FOGocalypse.Properties.Resources.player.Height / 2);
             String keyPressed = "";
+            Point oldPosition = new Point(Game.player.playerX, Game.player.playerY);
 
             if (Game.player.playerXVelocity == Game.playerMoveSpeed) keyPressed = "D";
             else if (Game.player.playerYVelocity == Game.playerMoveSpeed) keyPressed = "S";
@@ -134,18 +135,21 @@ namespace FOGocalypse
 
             //handle collsions
             //TODO\\
-            Game.player.hitbox = new Rectangle(Game.player.playerX, Game.player.playerY, Game.tileSize, Game.tileSize);
+            Game.player.hitbox = new Rectangle(playerPosition.X, playerPosition.Y, Game.tileSize, Game.tileSize);
 
             foreach (Tile t in Game.worldTiles)
             {
                 if (t.type.Equals(EnumHandler.TileTypes.Wood))
                 {
-                    t.hitbox = new Rectangle(t.x - Game.player.playerX, t.y - Game.player.playerY, Game.tileSize, Game.tileSize);
+                    int newX = t.x - Game.player.playerX;
+                    int newY = t.y - Game.player.playerY;
+
+                    t.hitbox = new Rectangle(newX, newY, Game.tileSize, Game.tileSize);
 
                     if (Game.player.hitbox.IntersectsWith(t.hitbox))
                     {
-                        //Game.player.playerX -= Game.player.playerXVelocity;
-                        //Game.player.playerY -= Game.player.playerYVelocity;
+                        Game.player.playerX = oldPosition.X;
+                        Game.player.playerY = oldPosition.Y;
                         break;
                     }
                 }
@@ -156,7 +160,7 @@ namespace FOGocalypse
         private void simulatePlayerNeeds()
         {
             waterCycle++;
-            if (waterCycle >= 50 - (Game.player.playerXVelocity + Game.player.playerYVelocity + Game.player.playerWaterNeed))
+            if (waterCycle >= 50 - (Game.player.playerXVelocity + Game.player.playerYVelocity))
             {
                 Game.player.playerWaterNeed++;
                 waterCycle = 0;

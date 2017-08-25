@@ -56,6 +56,9 @@ namespace FOGocalypse
             timer.Interval = 1000 / 60;
             timer.Start();
             this.KeyPreview = true;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MinimizeBox = false;
+            this.MaximizeBox = false;
         }
 
         //update handler

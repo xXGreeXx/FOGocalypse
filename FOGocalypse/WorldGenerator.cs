@@ -90,7 +90,7 @@ namespace FOGocalypse
             {
                 tilesOfHouse.Add(new Tile(x * Game.tileSize, (y - i) * Game.tileSize, type));
 
-                if (i == door) continue;
+                if (i == door || i == door + 1) continue;
                 tilesOfHouse.Add(new Tile((x - 10) * Game.tileSize, (y - i) * Game.tileSize, type));
             }
 

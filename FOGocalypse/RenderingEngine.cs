@@ -255,7 +255,6 @@ namespace FOGocalypse
         }
 
         //fog generator
-        //TODO\\
         private void fogGenerator(int width, int height, Graphics g)
         {
             int maxCycle = 4;
@@ -289,7 +288,7 @@ namespace FOGocalypse
                 }
             }
 
-           // fogAnimator();
+           //fogAnimator();
         }
 
         //animate fog
