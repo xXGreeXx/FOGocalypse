@@ -36,6 +36,9 @@ namespace FOGocalypse
             #region Game
             if (Game.state.Equals(EnumHandler.GameStates.Game))
             {
+                Font f = new Font(FontFamily.GenericSansSerif, 6, FontStyle.Bold);
+                Font f2 = new Font(FontFamily.GenericSansSerif, 9, FontStyle.Bold);
+
                 //draw tiles
                 foreach (Tile t in Game.worldTiles)
                 {
@@ -63,7 +66,6 @@ namespace FOGocalypse
                     {
                         if (newY >= height / 2 - player.Height / 2 - 80 && newY <= height / 2 - player.Height / 2 + 80)
                         {
-                            Font f = new Font(FontFamily.GenericSansSerif, 6, FontStyle.Bold);
                             g.FillRectangle(Brushes.Gray, newX, newY - 15, 70, 20);
                             g.DrawString(i.type.ToString() + "\n Press <f> to equip", f, Brushes.Black, newX, newY - 15);
                         }
@@ -146,16 +148,50 @@ namespace FOGocalypse
                     g.DrawRectangle(new Pen(c, 4), x, y, 50, 50);
                 }
 
+                //draw hotbar items
                 int index = 0;
                 foreach (EnumHandler.Items item in Game.itemsInHotbar)
                 {
                     int xToDraw = width / 2 - (60 * Game.numberOfhotBarSlots / 2) + index * 60;
 
-                    if (item.Equals(EnumHandler.Items.Flashlight)) g.DrawImage(flashlightIcon, xToDraw, height - 60, 50, 50);
-                    if (item.Equals(EnumHandler.Items.Waterbottle)) g.DrawImage(waterBottleIcon, xToDraw, height - 60, 50, 50);
-                    if (item.Equals(EnumHandler.Items.Knife)) g.DrawImage(knifeIcon, xToDraw, height - 60, 50, 50);
-
+                    switch (item)
+                    {
+                        case EnumHandler.Items.Flashlight:
+                            g.DrawImage(flashlightIcon, xToDraw, height - 60, 50, 50);
+                            break;
+                        case EnumHandler.Items.Waterbottle:
+                            g.DrawImage(waterBottleIcon, xToDraw, height - 60, 50, 50);
+                            break;
+                        case EnumHandler.Items.Knife:
+                            g.DrawImage(knifeIcon, xToDraw, height - 60, 50, 50);
+                            break;
+                    }
                     index++;
+                }
+
+                //draw hotbar tooltips
+                EnumHandler.Items selectedItemInHotbar = Game.itemsInHotbar[Game.selectedHotbar - 1];
+
+                if (!selectedItemInHotbar.Equals(EnumHandler.Items.None))
+                {
+                    g.FillRectangle(Brushes.Gray, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 115, 300, 50);
+                    g.DrawString("Press <q> to drop", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 85);
+                }
+
+                switch (selectedItemInHotbar)
+                {
+                    case EnumHandler.Items.Flashlight:
+                        g.DrawString("Left click, toggle on/off", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 115);
+                        g.DrawString("Right click, melee swing", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 100);
+                        break;
+                    case EnumHandler.Items.Waterbottle:
+                        g.DrawString("Left click, drink", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 115);
+                        g.DrawString("Right click, pour on ground", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 100);
+                        break;
+                    case EnumHandler.Items.Knife:
+                        g.DrawString("Left click, melee stab", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 115);
+                        g.DrawString("Right click, melee swing", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 100);
+                        break;
                 }
 
                 //draw cursor
