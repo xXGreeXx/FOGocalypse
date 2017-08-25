@@ -42,11 +42,11 @@ namespace FOGocalypse
                             if (button.Equals(MouseButtons.Left))
                             {
                                 Game.player.playerWaterNeed -= 50;
-                                Game.itemsInHotbar[Game.selectedHotbar - 1] = EnumHandler.Items.None;
+                                Game.itemsInHotbar[Game.selectedHotbar - 1] = EnumHandler.Items.Emptybottle;
                             }
                             if (button.Equals(MouseButtons.Right))
                             {
-                                Game.itemsInHotbar[Game.selectedHotbar - 1] = EnumHandler.Items.None;
+                                Game.itemsInHotbar[Game.selectedHotbar - 1] = EnumHandler.Items.Emptybottle;
                             }
                             break;
                         case EnumHandler.Items.Peanutbutter:

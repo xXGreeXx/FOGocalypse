@@ -19,6 +19,8 @@ namespace FOGocalypse
         Bitmap flashlight = FOGocalypse.Properties.Resources.flashlight;
         Bitmap waterBottleIcon = FOGocalypse.Properties.Resources.waterBottleIcon;
         Bitmap waterBottle = FOGocalypse.Properties.Resources.waterBottle;
+        Bitmap emptyBottleIcon = FOGocalypse.Properties.Resources.emptyBottleIcon;
+        Bitmap emptyBottle = FOGocalypse.Properties.Resources.emptyBottle;
         Bitmap knifeIcon = FOGocalypse.Properties.Resources.knifeIcon;
         Bitmap knife = FOGocalypse.Properties.Resources.knife;
         Bitmap peanutButterIcon = FOGocalypse.Properties.Resources.peanutButterIcon;
@@ -104,6 +106,9 @@ namespace FOGocalypse
                                     break;
                                 case EnumHandler.Items.Bread:
                                     g.DrawImage(bread, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
+                                    break;
+                                case EnumHandler.Items.Emptybottle:
+                                    g.DrawImage(emptyBottle, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
                                     break;
                             }
                         }
@@ -204,6 +209,10 @@ namespace FOGocalypse
                     case EnumHandler.Items.Bread:
                         g.DrawString("Left click, eat(25 food, 15 thirst)", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 115);
                         g.DrawString("Right click, melee swing", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 100);
+                        break;
+                    case EnumHandler.Items.Emptybottle:
+                        g.DrawString("Left click, melee swing", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 115);
+                        g.DrawString("Right click, ranged throw", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 100);
                         break;
                 }
 
@@ -349,6 +358,9 @@ namespace FOGocalypse
                     break;
                 case EnumHandler.Items.Bread:
                     g.DrawImage(breadIcon, x, y, 50, 50);
+                    break;
+                case EnumHandler.Items.Emptybottle:
+                    g.DrawImage(emptyBottleIcon, x, y, 50, 50);
                     break;
             }
         }

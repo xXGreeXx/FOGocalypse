@@ -103,6 +103,26 @@ namespace FOGocalypse.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap emptyBottle {
+            get {
+                object obj = ResourceManager.GetObject("emptyBottle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap emptyBottleIcon {
+            get {
+                object obj = ResourceManager.GetObject("emptyBottleIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap flashlight {
             get {
                 object obj = ResourceManager.GetObject("flashlight", resourceCulture);

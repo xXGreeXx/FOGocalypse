@@ -30,6 +30,7 @@
             None,
             Flashlight,
             Waterbottle,
+            Emptybottle,
             Knife,
             Peanutbutter,
             Bread
