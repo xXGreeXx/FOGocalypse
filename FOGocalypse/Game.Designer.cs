@@ -71,9 +71,8 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox canvas;
         private System.Windows.Forms.Timer timer;
+        public System.Windows.Forms.PictureBox canvas;
     }
 }
 

@@ -147,6 +147,8 @@ namespace FOGocalypse
                     int xToDraw = width / 2 - (60 * Game.numberOfhotBarSlots / 2) + index * 60;
 
                     if (item.Equals(EnumHandler.Items.Flashlight)) g.DrawImage(flashlightIcon, xToDraw, height - 60, 50, 50);
+                    if (item.Equals(EnumHandler.Items.Waterbottle)) g.DrawImage(waterBottleIcon, xToDraw, height - 60, 50, 50);
+
                     index++;
                 }
 

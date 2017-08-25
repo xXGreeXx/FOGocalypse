@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Drawing;
+
 namespace FOGocalypse
 {
     public class KeyBoardHandler
     {
+        Bitmap player = FOGocalypse.Properties.Resources.player;
+
         //constructor
         public KeyBoardHandler()
         {
@@ -91,6 +95,38 @@ namespace FOGocalypse
                         if (down)
                         {
                             Game.selectedHotbar = 5;
+                        }
+                        break;
+
+                    case Keys.F:
+                        if (down)
+                        {
+                            for (int index = 0; index < Game.itemsInWorld.Count; index++)
+                            {
+                                Item i = Game.itemsInWorld[index];
+
+                                int newX = i.x - Game.player.playerX;
+                                int newY = i.y - Game.player.playerY;
+
+                                if (newX >= Game.canvasWidth / 2 - player.Width / 2 - 80 && newX <= Game.canvasWidth / 2 - player.Width / 2 + 80)
+                                {
+                                    if (newY >= Game.canvasHeight / 2 - player.Height / 2 - 80 && newY <= Game.canvasHeight / 2 - player.Height / 2 + 80)
+                                    {
+                                        int indexOfHotbarSlot = 0;
+                                        foreach (EnumHandler.Items itemInHotbar in Game.itemsInHotbar)
+                                        {
+                                            if (itemInHotbar.Equals(EnumHandler.Items.None))
+                                            {
+                                                Game.itemsInHotbar[indexOfHotbarSlot] = i.type;
+                                                Game.itemsInWorld.RemoveAt(index);
+                                                break;
+                                            }
+
+                                            indexOfHotbarSlot++;
+                                        }
+                                    }
+                                }
+                            }
                         }
                         break;
 

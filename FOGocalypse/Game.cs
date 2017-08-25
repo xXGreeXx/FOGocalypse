@@ -25,6 +25,8 @@ namespace FOGocalypse
         public static EnumHandler.Items[] itemsInHotbar { get; set; }
         public static Boolean inPauseMenu { get; set; } = false;
         public static int playerViewDistance { get; set; } = 5;
+        public static int canvasWidth { get; set; }
+        public static int canvasHeight { get; set; }
 
         //contrsuctor
         public Game()
@@ -59,6 +61,9 @@ namespace FOGocalypse
             Graphics g = e.Graphics;
             int width = canvas.Width;
             int height = canvas.Height;
+
+            canvasWidth = canvas.Width;
+            canvasHeight = canvas.Height;
 
             renderer.DrawScreen(width, height, g);
 
