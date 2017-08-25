@@ -20,6 +20,8 @@ namespace FOGocalypse
         Bitmap waterBottle = FOGocalypse.Properties.Resources.waterBottle;
         Bitmap knifeIcon = FOGocalypse.Properties.Resources.knifeIcon;
         Bitmap knife = FOGocalypse.Properties.Resources.knife;
+        Bitmap peanutButterIcon = FOGocalypse.Properties.Resources.peanutButterIcon;
+        Bitmap peanutButter = FOGocalypse.Properties.Resources.peanutButter;
         Bitmap title1 = FOGocalypse.Properties.Resources.title1;
         Bitmap title2 = FOGocalypse.Properties.Resources.title2;
         Bitmap fog = FOGocalypse.Properties.Resources.fog;
@@ -79,6 +81,9 @@ namespace FOGocalypse
                         case EnumHandler.Items.Knife:
                             g.DrawImage(knife, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
                             break;
+                        case EnumHandler.Items.Peanutbutter:
+                            g.DrawImage(peanutButter, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
+                            break;
                     }
                 }
 
@@ -90,6 +95,7 @@ namespace FOGocalypse
                 g.DrawImage(RotateImage(player, angle), width / 2 - player.Width / 2, height / 2 - player.Height / 2, Game.tileSize, Game.tileSize);
 
                 //draw item player is holding
+                //TODO\\
                 EnumHandler.Items selectedItem = Game.itemsInHotbar[Game.selectedHotbar - 1];
 
                 switch (selectedItem)
@@ -165,6 +171,9 @@ namespace FOGocalypse
                         case EnumHandler.Items.Knife:
                             g.DrawImage(knifeIcon, xToDraw, height - 60, 50, 50);
                             break;
+                        case EnumHandler.Items.Peanutbutter:
+                            g.DrawImage(peanutButterIcon, xToDraw, height - 60, 50, 50);
+                            break;
                     }
                     index++;
                 }
@@ -185,12 +194,16 @@ namespace FOGocalypse
                         g.DrawString("Right click, melee swing", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 100);
                         break;
                     case EnumHandler.Items.Waterbottle:
-                        g.DrawString("Left click, drink", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 115);
+                        g.DrawString("Left click, drink(50 water)", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 115);
                         g.DrawString("Right click, pour on ground", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 100);
                         break;
                     case EnumHandler.Items.Knife:
                         g.DrawString("Left click, melee stab", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 115);
                         g.DrawString("Right click, melee swing", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 100);
+                        break;
+                    case EnumHandler.Items.Peanutbutter:
+                        g.DrawString("Left click, eat(10 food, 15 thirst)", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 115);
+                        g.DrawString("Right click, ranged throw", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 100);
                         break;
                 }
 

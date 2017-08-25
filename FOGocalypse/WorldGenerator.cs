@@ -74,6 +74,7 @@ namespace FOGocalypse
             int door = generator.Next(1, number);
             int water = generator.Next(1, 3);
             int knife = generator.Next(2, 5);
+            int peanutButter = generator.Next(1, 3);
 
             for (int i = 0; i < 10; i++)
             {
@@ -100,6 +101,10 @@ namespace FOGocalypse
             if (knife == 2)
             {
                 Game.itemsInWorld.Add(new Item((x - 2) * Game.tileSize, (y - 1) * Game.tileSize, EnumHandler.Items.Knife));
+            }
+            if (peanutButter == 2)
+            {
+                Game.itemsInWorld.Add(new Item((x - 1) * Game.tileSize, (y - 2) * Game.tileSize, EnumHandler.Items.Peanutbutter));
             }
 
             return tilesOfHouse;
