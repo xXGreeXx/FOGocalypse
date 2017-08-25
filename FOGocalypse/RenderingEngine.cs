@@ -41,6 +41,7 @@ namespace FOGocalypse
                 Font f = new Font(FontFamily.GenericSansSerif, 6, FontStyle.Bold);
                 Font f2 = new Font(FontFamily.GenericSansSerif, 9, FontStyle.Bold);
 
+                #region Tiles/Items in the world
                 //draw tiles
                 foreach (Tile t in Game.worldTiles)
                 {
@@ -89,6 +90,7 @@ namespace FOGocalypse
                             break;
                     }
                 }
+                #endregion
 
                 //draw player
                 int positionX = width / 2 - player.Width / 2;
@@ -117,6 +119,8 @@ namespace FOGocalypse
                 g.FillRectangle(Brushes.Brown, 11, 91, (200 - Game.player.playerFoodNeed * 2) - 1, 29);
                 g.DrawImage(food, 200 - 30, 93, 25, 25);
 
+
+                #region Hotbar
                 //draw hotbar
                 for (int i = 0; i < Game.numberOfhotBarSlots; i++)
                 {
@@ -181,6 +185,34 @@ namespace FOGocalypse
                         g.DrawString("Right click, ranged throw", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 100);
                         break;
                 }
+
+                #endregion
+
+
+                #region Inventory
+                if (Game.inInventory)
+                {
+                    g.FillRectangle(Brushes.DarkGray, width / 2 - 150, height / 2 - 150, 300, 300);
+                    g.FillRectangle(Brushes.LightGray, width / 2 + 150, height / 2 - 150, 178, 178);
+
+                    for (int x = width / 2 - 150; x <width / 2 + 150; x += 60)
+                    {
+                        for (int y = height / 2 - 150; y < height / 2 + 150; y += 60)
+                        {
+                            g.DrawRectangle(new Pen(Color.Brown, 4), x + 4, y + 4, 50, 50);
+                        }
+                    }
+
+                    for (int x = width / 2 + 150; x < width / 2 + 300; x += 60)
+                    {
+                        for (int y = height / 2 - 150; y < height / 2 + 10; y += 60)
+                        {
+                            g.DrawRectangle(new Pen(Color.Orange, 4), x + 4, y + 4, 50, 50);
+                        }
+                    }
+                }
+                #endregion
+
 
                 //draw cursor
                 if (!Game.inPauseMenu)
