@@ -49,7 +49,41 @@ namespace FOGocalypse
             #region MainMenu
             if (Game.state.Equals(EnumHandler.GameStates.MainMenu))
             {
-                g.DrawImage(fogBackground, 0, 0, width, height);
+                Font f = new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold);
+                int baseOfText = 200;
+
+                g.DrawImage(fogBackground, 0, 0, width, height - 250);
+                g.FillRectangle(Brushes.DarkGray, 0, height - 250, width, 250);
+                g.DrawImage(title1, width / 2 - title1.Width / 2, 0, title1.Width, title1.Height);
+                g.DrawImage(title2, width / 2 - title2.Width / 2, title1.Height, title2.Width, title2.Height);
+
+                g.DrawString("Play", f, Brushes.Black, width / 2 - g.MeasureString("Play", f).Width / 2, baseOfText);
+                g.DrawString("Options", f, Brushes.Black, width / 2 - g.MeasureString("Options", f).Width / 2, baseOfText + 75);
+                g.DrawString("Quit", f, Brushes.Black, width / 2 - g.MeasureString("Quit", f).Width / 2, baseOfText + 225);
+
+                if (MouseHandler.mouseX >= width / 2 - g.MeasureString("Play", f).Width / 2 && MouseHandler.mouseX <= width / 2 + g.MeasureString("Play", f).Width / 2)
+                {
+                    if (MouseHandler.mouseY >= baseOfText && MouseHandler.mouseY <= baseOfText + g.MeasureString("Play", f).Height)
+                    {
+                        g.DrawString("Play", f, Brushes.White, width / 2 - g.MeasureString("Play", f).Width / 2, baseOfText);
+                    }
+                }
+
+                if (MouseHandler.mouseX >= width / 2 - g.MeasureString("Options", f).Width / 2 && MouseHandler.mouseX <= width / 2 + g.MeasureString("Options", f).Width / 2)
+                {
+                    if (MouseHandler.mouseY >= baseOfText + 75 && MouseHandler.mouseY <= baseOfText + 75 + g.MeasureString("Options", f).Height)
+                    {
+                        g.DrawString("Options", f, Brushes.White, width / 2 - g.MeasureString("Options", f).Width / 2, baseOfText + 75);
+                    }
+                }
+
+                if (MouseHandler.mouseX >= width / 2 - g.MeasureString("Quit", f).Width / 2 && MouseHandler.mouseX <= width / 2 + g.MeasureString("Quit", f).Width / 2)
+                {
+                    if (MouseHandler.mouseY >= baseOfText + 225 && MouseHandler.mouseY <= baseOfText + 225 + g.MeasureString("Quit", f).Height)
+                    {
+                        g.DrawString("Quit", f, Brushes.White, width / 2 - g.MeasureString("Quit", f).Width / 2, baseOfText + 225);
+                    }
+                }
             }
             
             #endregion

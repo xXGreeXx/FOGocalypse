@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace FOGocalypse
 {
-    class MouseHandler
+    public class MouseHandler
     {
         //define global variabels
         public static int mouseX { get; set; }
@@ -31,6 +31,39 @@ namespace FOGocalypse
         //mouse down
         public void RegisterMouseDown(int x, int y, MouseButtons button)
         {
+            #region MainMenu
+            if (Game.state.Equals(EnumHandler.GameStates.MainMenu))
+            {
+                Graphics g = Graphics.FromImage(FOGocalypse.Properties.Resources.player);
+                Font f = new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold);
+                int baseOfText = 200;
+
+                if (mouseX >= Game.canvasWidth / 2 - g.MeasureString("Play", f).Width / 2 && mouseX <= Game.canvasWidth / 2 + g.MeasureString("Play", f).Width / 2)
+                {
+                    if (mouseY >= baseOfText && MouseHandler.mouseY <= baseOfText + g.MeasureString("Play", f).Height)
+                    {
+                        Game.state = EnumHandler.GameStates.Game;
+                    }
+                }
+
+                if (mouseX >= Game.canvasWidth / 2 - g.MeasureString("Options", f).Width / 2 && MouseHandler.mouseX <= Game.canvasWidth / 2 + g.MeasureString("Options", f).Width / 2)
+                {
+                    if (mouseY >= baseOfText + 75 && MouseHandler.mouseY <= baseOfText + 75 + g.MeasureString("Options", f).Height)
+                    {
+                        Game.state = EnumHandler.GameStates.OptionsMenu;
+                    }
+                }
+
+                if (mouseX >= Game.canvasWidth / 2 - g.MeasureString("Quit", f).Width / 2 && MouseHandler.mouseX <= Game.canvasWidth / 2 + g.MeasureString("Quit", f).Width / 2)
+                {
+                    if (mouseY >= baseOfText + 225 && MouseHandler.mouseY <= baseOfText + 225 + g.MeasureString("Quit", f).Height)
+                    {
+                        Application.Exit();
+                    }
+                }
+            }
+            #endregion
+
             #region Game
             if (Game.state.Equals(EnumHandler.GameStates.Game))
             {
