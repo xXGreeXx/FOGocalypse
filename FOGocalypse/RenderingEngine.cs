@@ -503,6 +503,7 @@ namespace FOGocalypse
             int maxCycle = 4;
             int cycle = maxCycle;
             int distance = Game.playerViewDistance;
+            Boolean swapCycle = false;
 
             foreach (Tile t in Game.worldTiles)
             {
