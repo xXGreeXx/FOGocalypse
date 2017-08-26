@@ -91,12 +91,39 @@ namespace FOGocalypse
             #region OptionsMenu
             if (Game.state.Equals(EnumHandler.GameStates.OptionsMenu))
             {
+                Font f = new Font(FontFamily.GenericSansSerif, 20, FontStyle.Bold);
+                Font fSmall = new Font(FontFamily.GenericSansSerif, 15, FontStyle.Bold);
+
                 g.DrawImage(fogBackground, 0, 0, width, height - 250);
                 g.FillRectangle(Brushes.DarkGray, 0, height - 250, width, 250);
                 g.DrawImage(title1, width / 2 - title1.Width / 2, 0, title1.Width, title1.Height);
                 g.DrawImage(title2, width / 2 - title2.Width / 2, title1.Height, title2.Width, title2.Height);
 
                 g.FillRectangle(Brushes.Brown, width / 2 - 250, height / 2 - 250, 500, 500);
+
+                //resolution
+                g.DrawString("Resolution: ", f, Brushes.Black, width / 2 - 250, height / 2 - 250);
+                g.FillRectangle(Brushes.Gray, width / 2 - 250 + g.MeasureString("Resolution: ", f).Width, height / 2 - 250, 110, 30);
+                g.FillRectangle(Brushes.Gray, width / 2 - 250 + g.MeasureString("Resolution: ", f).Width + 110, height / 2 - 250, 110, 30);
+                g.FillRectangle(Brushes.Gray, width / 2 - 250 + g.MeasureString("Resolution: ", f).Width + 220, height / 2 - 250, 110, 30);
+
+                if (Game.resolution.Equals("1240x1440")) g.FillRectangle(Brushes.LightGray, width / 2 - 250 + g.MeasureString("Resolution: ", f).Width, height / 2 - 250, 110, 30);
+                if (Game.resolution.Equals("1920x1080")) g.FillRectangle(Brushes.LightGray, width / 2 - 250 + g.MeasureString("Resolution: ", f).Width + 110, height / 2 - 250, 110, 30);
+                if (Game.resolution.Equals("fullscreen")) g.FillRectangle(Brushes.LightGray, width / 2 - 250 + g.MeasureString("Resolution: ", f).Width + 220, height / 2 - 250, 110, 30);
+
+                g.DrawString("1240x1440", fSmall, Brushes.Black, width / 2 - 250 + g.MeasureString("Resolution: ", f).Width, height / 2 - 247);
+                g.DrawString("1920x1080", fSmall, Brushes.Black, width / 2 - 140 + g.MeasureString("Resolution: ", f).Width, height / 2 - 247);
+                g.DrawString("Fullscreen", fSmall, Brushes.Black, width / 2 - 30 + g.MeasureString("Resolution: ", f).Width, height / 2 - 247);
+
+                //framerate
+                g.DrawString("Framerate: ", f, Brushes.Black, width / 2 - 250, height / 2 - 200);
+                g.FillRectangle(Brushes.Gray, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width, height / 2 - 200, 110, 30);
+                g.FillRectangle(Brushes.Gray, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width + 110, height / 2 - 200, 110, 30);
+                g.FillRectangle(Brushes.Gray, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width + 220, height / 2 - 200, 110, 30);
+
+                g.DrawString("30/FPS", fSmall, Brushes.Black, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width, height / 2 - 197);
+                g.DrawString("60/FPS", fSmall, Brushes.Black, width / 2 - 140 + g.MeasureString("Framerate: ", f).Width, height / 2 - 197);
+                g.DrawString("120/FPS", fSmall, Brushes.Black, width / 2 - 30 + g.MeasureString("Framerate: ", f).Width, height / 2 - 197);
             }
             #endregion
 
@@ -448,6 +475,12 @@ namespace FOGocalypse
             g.DrawImage(image, new PointF(0, 0));
 
             return rotatedBmp;
+        }
+        
+        //change framerate
+        public void ChangeFramerate()
+        {
+
         }
     }
 }

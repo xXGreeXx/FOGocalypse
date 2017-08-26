@@ -64,6 +64,31 @@ namespace FOGocalypse
             }
             #endregion
 
+            #region OptionsMenu
+            if (Game.state.Equals(EnumHandler.GameStates.OptionsMenu))
+            {
+                Graphics g = Graphics.FromImage(FOGocalypse.Properties.Resources.player);
+                Font f = new Font(FontFamily.GenericSansSerif, 20, FontStyle.Bold);
+                float widthOffset = 40 + g.MeasureString("Resolution: ", f).Width;
+
+                if (y >= Game.canvasHeight / 2 - 250 && y <= Game.canvasHeight / 2 - 220)
+                {
+                    if (x >= Game.canvasWidth / 2 - 250 + widthOffset && x <= Game.canvasWidth / 2 - 140 + widthOffset)
+                    {
+                        Game.resolution = "1240x1440";
+                    }
+                    if (x >= Game.canvasWidth / 2 - 140 + widthOffset && x <= Game.canvasWidth / 2 - 30 + widthOffset)
+                    {
+                        Game.resolution = "1920x1080";
+                    }
+                    if (x >= Game.canvasWidth / 2 - 30 + widthOffset && x <= Game.canvasWidth / 2 + 80 + widthOffset)
+                    {
+                        Game.resolution = "fullscreen";
+                    }
+                }
+            }
+            #endregion
+
             #region Game
             if (Game.state.Equals(EnumHandler.GameStates.Game))
             {

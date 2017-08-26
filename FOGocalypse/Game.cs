@@ -35,6 +35,9 @@ namespace FOGocalypse
         public static int canvasWidth { get; set; }
         public static int canvasHeight { get; set; }
 
+        public static int frameRate { get; set; } = 60;
+        public static String resolution { get; set; } = "1240x1440";
+
         //contrsuctor
         public Game()
         {
