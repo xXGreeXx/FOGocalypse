@@ -11,6 +11,7 @@ namespace FOGocalypse
         public static int mouseY { get; set; }
         public static EnumHandler.Items itemHeldByMouse { get; set; }
         private int indexOfItem { get; set; }
+        private Boolean fromHotbar { get; set; } = false;
 
         //constructor
         public MouseHandler()
@@ -204,7 +205,7 @@ namespace FOGocalypse
                             {
                                 itemHeldByMouse = Game.itemsInHotbar[i];
                                 indexOfItem = i;
-                                Game.itemsInHotbar[i] = EnumHandler.Items.None;
+                                fromHotbar = true;
                                 return;
                             }
                         }
@@ -219,7 +220,8 @@ namespace FOGocalypse
                             if (y >= yOfItem2 && y <= yOfItem2 + 50)
                             {
                                 itemHeldByMouse = Game.itemsInInventory[i];
-                                Game.itemsInInventory[i] = EnumHandler.Items.None;
+                                indexOfItem = i;
+                                fromHotbar = false;
                             }
                         }
 
@@ -258,9 +260,20 @@ namespace FOGocalypse
                         {
                             if (y >= yOfItem && y <= yOfItem + 50)
                             {
-                                Game.itemsInHotbar[i] = itemHeldByMouse;
-                                itemHeldByMouse = EnumHandler.Items.None;
-                                foundSlot = true;
+                                if (Game.itemsInHotbar[i].Equals(EnumHandler.Items.None))
+                                {
+                                    Game.itemsInHotbar[i] = itemHeldByMouse;
+                                    itemHeldByMouse = EnumHandler.Items.None;
+                                    foundSlot = true;
+                                    if (fromHotbar)
+                                    {
+                                        Game.itemsInHotbar[indexOfItem] = EnumHandler.Items.None;
+                                    }
+                                    else
+                                    {
+                                        Game.itemsInInventory[indexOfItem] = EnumHandler.Items.None;
+                                    }
+                                }
                             }
                         }
                     }
@@ -275,10 +288,20 @@ namespace FOGocalypse
                             {
                                 if (!itemHeldByMouse.Equals(EnumHandler.Items.None))
                                 {
-                                    Game.itemsInInventory[i] = itemHeldByMouse;
-                                    Game.itemsInHotbar[indexOfItem] = EnumHandler.Items.None;
-                                    itemHeldByMouse = EnumHandler.Items.None;
-                                    foundSlot = true;
+                                    if (Game.itemsInInventory[i].Equals(EnumHandler.Items.None))
+                                    {
+                                        Game.itemsInInventory[i] = itemHeldByMouse;
+                                        itemHeldByMouse = EnumHandler.Items.None;
+                                        foundSlot = true;
+                                        if (fromHotbar)
+                                        {
+                                            Game.itemsInHotbar[indexOfItem] = EnumHandler.Items.None;
+                                        }
+                                        else
+                                        {
+                                            Game.itemsInInventory[indexOfItem] = EnumHandler.Items.None;
+                                        }
+                                    }
                                 }
                             }
                         }
