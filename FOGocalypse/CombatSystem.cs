@@ -28,7 +28,31 @@ namespace FOGocalypse
                 {
                     if (zombieY >= playerPositionY - 60 && zombieY <= playerPositionY + 60 + Game.tileSize)
                     {
+                        int directionToPushZombieBackX = 0;
+                        int directionToPushZombieBackY = 0;
+
+                        if (MouseHandler.mouseX < zombieX)
+                        {
+                            directionToPushZombieBackX = damage * 2;
+                        }
+                        if (MouseHandler.mouseX > zombieX)
+                        {
+                            directionToPushZombieBackX = -damage * 2;
+                        }
+
+                        if (MouseHandler.mouseY < zombieY)
+                        {
+                            directionToPushZombieBackY = damage * 2;
+                        }
+                        if (MouseHandler.mouseY > zombieY)
+                        {
+                            directionToPushZombieBackY = -damage * 2;
+                        }
+
                         Game.zombies[index].health -= damage;
+                        Game.zombies[index].x -= directionToPushZombieBackX;
+                        Game.zombies[index].y -= directionToPushZombieBackY;
+                        Game.particleGenerator.CreateBloodEffect(zombieX - directionToPushZombieBackX, zombieY - directionToPushZombieBackX, 10);
                     }
                 }
             }

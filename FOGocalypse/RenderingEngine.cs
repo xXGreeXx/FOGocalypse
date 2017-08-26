@@ -284,6 +284,16 @@ namespace FOGocalypse
                 //draw fog
                 fogGenerator(width, height, g);
 
+                #region Particles
+                //blood particles
+                foreach (Particle p in Game.bloodParticles)
+                {
+                    g.FillRectangle(new SolidBrush(p.color), p.x, p.y, p.size, p.size);
+                }
+                #endregion
+
+
+                #region PlayerNeeds
                 //draw health/thirst/hunger
                 g.DrawRectangle(Pens.Black, 10, 10, 200, 30);
                 g.FillRectangle(Brushes.Red, 11, 11, (Game.player.playerHealth * 2) - 1, 29);
@@ -306,6 +316,8 @@ namespace FOGocalypse
                 {
                     g.DrawImage(warningIcon, 220, 90, 25, 25);
                 }
+                #endregion
+
 
                 #region Hotbar
                 //draw hotbar
@@ -430,7 +442,7 @@ namespace FOGocalypse
                         String message = "You wake up, unsure of your surroundings, you can hardly see throught the thick fog. \nThere is a faint sound in the distance, it sounds like the groaning of the undead";
 
                         g.FillRectangle(new SolidBrush(Color.FromArgb(screenFade, Color.Black)), 0, 0, width, height);
-                        g.DrawString(message, f2, new SolidBrush(Color.FromArgb(screenFade, Color.White)), width / 2 - g.MeasureString(message, f).Width / 2, height / 2 - 50);
+                        g.DrawString(message, f2, new SolidBrush(Color.FromArgb(screenFade, Color.White)), width / 2 - g.MeasureString(message, f).Width / 2 - 50, height / 2 - 50);
 
                         screenFade -= 3;
                     }

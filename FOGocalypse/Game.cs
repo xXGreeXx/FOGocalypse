@@ -14,6 +14,8 @@ namespace FOGocalypse
         WorldGenerator generator = new WorldGenerator();
         Physics physicsEngine = new Physics();
         public static CombatSystem combatSystem { get; } = new CombatSystem();
+        public static ParticleGenerator particleGenerator { get; } = new ParticleGenerator();
+
         public static List<Tile> worldTiles { get; set; } = new List<Tile>();
         public static List<Item> itemsInWorld { get; set; } = new List<Item>();
         public static List<Zombie> zombies { get; set; } = new List<Zombie>();
@@ -35,9 +37,10 @@ namespace FOGocalypse
         public static int zombieMoveSpeed { get; set; } = 4;
         public static int zombieSpawnChance { get; set; } = 10;
         public static int itemRarity { get; set; } = 60;
+        public static List<Particle> bloodParticles { get; set; } = new List<Particle>();
+
         public static int canvasWidth { get; set; }
         public static int canvasHeight { get; set; }
-
         public static int frameRate { get; set; } = 60;
         public static String resolution { get; set; } = "1240x1440";
 

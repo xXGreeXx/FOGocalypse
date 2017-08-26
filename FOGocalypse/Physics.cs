@@ -27,6 +27,7 @@ namespace FOGocalypse
                     simulatePlayerPhysics();
                 }
                 simulatePlayerNeeds();
+                simulateParticles();
                 simulateZombies();
                 spawnZombie();
             }
@@ -189,6 +190,32 @@ namespace FOGocalypse
                 {
                     Game.player.playerHealth -= 5;
                 }
+            }
+        }
+
+        //simulate particles
+        private void simulateParticles()
+        {
+            List<int> particlesToRemove = new List<int>();
+
+            for (int index = 0; index < Game.bloodParticles.Count; index++)
+            {
+                Game.bloodParticles[index].x += generator.Next(-4, 5);
+                Game.bloodParticles[index].y += generator.Next(-4, 5);
+
+                if (Game.bloodParticles[index].size < 0)
+                {
+                    particlesToRemove.Add(index);
+                }
+                Game.bloodParticles[index].size--;
+            }
+
+            particlesToRemove.Sort();
+            particlesToRemove.Reverse();
+
+            foreach (int index in particlesToRemove)
+            {
+                Game.bloodParticles.RemoveAt(index);
             }
         }
 

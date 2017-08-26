@@ -58,6 +58,8 @@
     <Compile Include="Item.cs" />
     <Compile Include="KeyBoardHandler.cs" />
     <Compile Include="MouseHandler.cs" />
+    <Compile Include="Particle.cs" />
+    <Compile Include="ParticleGenerator.cs" />
     <Compile Include="Physics.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
