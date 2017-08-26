@@ -117,7 +117,8 @@ namespace FOGocalypse
                     if (MouseHandler.mouseY >= Game.canvasHeight / 2 + 200 && MouseHandler.mouseY <= Game.canvasHeight / 2 + 200 + g.MeasureString("Begin!", f).Height)
                     {
                         Game.worldTiles = new WorldGenerator().GenerateWorld(Game.tileSize, Game.worldSize);
-                        Game.state = EnumHandler.GameStates.Game;   
+                        Game.state = EnumHandler.GameStates.Game;
+                        Game.inStartScreen = true;   
                     }
                 }
             }

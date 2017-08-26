@@ -27,6 +27,7 @@ namespace FOGocalypse
         public static EnumHandler.Items[] itemsInInventory { get; set; }
         public static Boolean inPauseMenu { get; set; } = false;
         public static Boolean inInventory { get; set; } = false;
+        public static Boolean inStartScreen { get; set; } = false;
         public static int playerViewDistance { get; set; } = 5;
         public static int zombieViewDistance { get; set; } = 3;
         public static int zombieHearDistance { get; set; } = 2;

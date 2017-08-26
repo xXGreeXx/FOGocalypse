@@ -37,6 +37,10 @@ namespace FOGocalypse
         Bitmap downArrow = FOGocalypse.Properties.Resources.downArrow;
 
         float fogFrame = 0.0F;
+        int screenFade = 255;
+        int positionOfDistort = 0;
+        float cycleOfDistort = 0;
+        Boolean swap = false;
 
         //constructor
         public RenderingEngine()
@@ -85,8 +89,9 @@ namespace FOGocalypse
                         g.DrawString("Quit", f, Brushes.White, width / 2 - g.MeasureString("Quit", f).Width / 2, baseOfText + 225);
                     }
                 }
-            }
 
+                animateMenuBackground();
+            }
             #endregion
 
             #region OptionsMenu
@@ -128,6 +133,8 @@ namespace FOGocalypse
                 g.DrawString("30/FPS", fSmall, Brushes.Black, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width, height / 2 - 197);
                 g.DrawString("60/FPS", fSmall, Brushes.Black, width / 2 - 140 + g.MeasureString("Framerate: ", f).Width, height / 2 - 197);
                 g.DrawString("120/FPS", fSmall, Brushes.Black, width / 2 - 30 + g.MeasureString("Framerate: ", f).Width, height / 2 - 197);
+
+                animateMenuBackground();
             }
             #endregion
 
@@ -169,6 +176,7 @@ namespace FOGocalypse
                 g.DrawImage(upArrow, width / 2 - 100, height / 2 - 140, 20, 20);
                 g.DrawImage(downArrow, width / 2 - 100, height / 2 - 115, 20, 20);
 
+                animateMenuBackground();
             }
             #endregion
 
@@ -404,6 +412,25 @@ namespace FOGocalypse
                 #endregion
 
 
+                #region StartingScreen
+                if (Game.inStartScreen)
+                {
+                    if (screenFade >= 3)
+                    {
+                        String message = "You wake up, unsure of your surroundings, fog sourrounds you. \nThere is a faint sound in the distance, it sounds like the groaning of the undead";
+
+                        g.FillRectangle(new SolidBrush(Color.FromArgb(screenFade, Color.Black)), 0, 0, width, height);
+                        g.DrawString(message, f2, new SolidBrush(Color.FromArgb(screenFade, Color.White)), width / 2 - g.MeasureString(message, f).Width / 2, height / 2 - 50);
+
+                        screenFade -= 3;
+                    }
+                    else
+                    {
+                        Game.inStartScreen = false;
+                    }
+                }
+                #endregion
+
                 //draw cursor/pause menu
                 if (!Game.inPauseMenu)
                 {
@@ -505,6 +532,12 @@ namespace FOGocalypse
                     g.DrawImage(pistolIcon, x, y, 50, 50);
                     break;
             }
+        }
+
+        //background animation
+        private void animateMenuBackground()
+        {
+            
         }
 
         //rotate image
