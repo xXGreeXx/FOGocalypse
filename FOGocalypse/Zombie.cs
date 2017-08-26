@@ -20,13 +20,14 @@ namespace FOGocalypse
         }
 
         //simulate AI
-        public void SimulateAI()
+        public Boolean SimulateAI()
         {
             int newX = x - Game.player.playerX;
             int newY = y - Game.player.playerY;
             int positionOfPlayerX = Game.canvasWidth / 2 - Game.tileSize / 2;
             int positionOfPlayerY = Game.canvasHeight / 2 - Game.tileSize / 2;
             int viewDistance = Game.zombieViewDistance * Game.tileSize;
+            Boolean needsRemoved = false;
 
             if (newX >= positionOfPlayerX - viewDistance && newX < positionOfPlayerX + viewDistance)
             {
@@ -53,6 +54,17 @@ namespace FOGocalypse
                     }
                 }
             }
+
+            if (newX <= -50 || newX >= Game.canvasWidth + 50)
+            {
+                needsRemoved = true;
+            }
+            if (newY <= -50 || newY >= Game.canvasHeight + 50)
+            {
+                needsRemoved = true;
+            }
+
+            return needsRemoved;
         }
     }
 }

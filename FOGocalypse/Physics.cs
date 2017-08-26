@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Collections.Generic;
 
 namespace FOGocalypse
 {
@@ -17,15 +18,18 @@ namespace FOGocalypse
         }
 
         //simulate physics
-        public void SimulatePhysics(int width, int height)
+        public void SimulatePhysics()
         {
-            if (!Game.inInventory)
+            if (Game.state.Equals(EnumHandler.GameStates.Game))
             {
-                simulatePlayerPhysics();
+                if (!Game.inInventory)
+                {
+                    simulatePlayerPhysics();
+                }
+                simulatePlayerNeeds();
+                simulateZombies();
+                spawnZombie();
             }
-            simulatePlayerNeeds();
-            simulateZombies();
-            spawnZombie();
         }
 
         //player physics
@@ -181,9 +185,24 @@ namespace FOGocalypse
         //simulate zombie physics
         private void simulateZombies()
         {
-            foreach (Zombie z in Game.zombies)
+            List<int> zombiesToRemove = new List<int>();
+
+            for (int index = 0; index < Game.zombies.Count; index++)
             {
-                z.SimulateAI();
+                Boolean needsRemoved = Game.zombies[index].SimulateAI();
+
+                if (needsRemoved)
+                {
+                    zombiesToRemove.Add(index);
+                }
+            }
+
+            zombiesToRemove.Sort();
+            zombiesToRemove.Reverse();
+
+            foreach (int index in zombiesToRemove)
+            {
+                Game.zombies.RemoveAt(index);
             }
         }
 

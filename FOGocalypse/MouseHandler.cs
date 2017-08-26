@@ -31,10 +31,11 @@ namespace FOGocalypse
         //mouse down
         public void RegisterMouseDown(int x, int y, MouseButtons button)
         {
+            Graphics g = Graphics.FromImage(FOGocalypse.Properties.Resources.player);
+
             #region MainMenu
             if (Game.state.Equals(EnumHandler.GameStates.MainMenu))
             {
-                Graphics g = Graphics.FromImage(FOGocalypse.Properties.Resources.player);
                 Font f = new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold);
                 int baseOfText = 200;
 
@@ -67,7 +68,6 @@ namespace FOGocalypse
             #region OptionsMenu
             if (Game.state.Equals(EnumHandler.GameStates.OptionsMenu))
             {
-                Graphics g = Graphics.FromImage(FOGocalypse.Properties.Resources.player);
                 Font f = new Font(FontFamily.GenericSansSerif, 20, FontStyle.Bold);
                 float widthOffset = 40 + g.MeasureString("Resolution: ", f).Width;
 
@@ -101,6 +101,23 @@ namespace FOGocalypse
                     if (x >= Game.canvasWidth / 2 - 30 + widthOffset && x <= Game.canvasWidth / 2 + 80 + widthOffset)
                     {
                         Game.frameRate = 120;
+                    }
+                }
+            }
+            #endregion
+
+            #region GameSettingsMenu
+            if (Game.state.Equals(EnumHandler.GameStates.GameSettingsMenu))
+            {
+                Font f = new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold);
+                Font fSmall = new Font(FontFamily.GenericSansSerif, 20, FontStyle.Bold);
+
+                if (MouseHandler.mouseX >= Game.canvasWidth / 2 + 75 - g.MeasureString("Begin!", f).Width && MouseHandler.mouseX <= Game.canvasWidth / 2 - 75 + g.MeasureString("Begin!", f).Width)
+                {
+                    if (MouseHandler.mouseY >= Game.canvasHeight / 2 + 200 && MouseHandler.mouseY <= Game.canvasHeight / 2 + 200 + g.MeasureString("Begin!", f).Height)
+                    {
+                        Game.worldTiles = new WorldGenerator().GenerateWorld(Game.tileSize, Game.worldSize);
+                        Game.state = EnumHandler.GameStates.Game;   
                     }
                 }
             }

@@ -143,6 +143,13 @@ namespace FOGocalypse
                 g.FillRectangle(Brushes.Brown, width / 2 - 200, height / 2 - 250, 400, 500);
 
                 g.DrawString("Begin!", f, Brushes.Black, width / 2 + 75 - g.MeasureString("Begin!", f).Width, height / 2 + 200);
+                if (MouseHandler.mouseX >= width / 2 + 75 - g.MeasureString("Begin!", f).Width && MouseHandler.mouseX <= width / 2 - 75 + g.MeasureString("Begin!", f).Width)
+                {
+                    if (MouseHandler.mouseY >= height / 2 + 200 && MouseHandler.mouseY <= height / 2 + 200 + g.MeasureString("Begin!", f).Height)
+                    {
+                        g.DrawString("Begin!", f, Brushes.White, width / 2 + 75 - g.MeasureString("Begin!", f).Width, height / 2 + 200);
+                    }
+                }
 
                 //world size
                 g.DrawString("World Size", fSmall, Brushes.Black, width / 2 - 200, height / 2 - 250);

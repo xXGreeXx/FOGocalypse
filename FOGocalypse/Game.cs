@@ -94,7 +94,7 @@ namespace FOGocalypse
 
             if (!inPauseMenu)
             {
-                physicsEngine.SimulatePhysics(width, height);
+                physicsEngine.SimulatePhysics();
             }
         }
 
