@@ -30,6 +30,8 @@ namespace FOGocalypse
         Bitmap title1 = FOGocalypse.Properties.Resources.title1;
         Bitmap title2 = FOGocalypse.Properties.Resources.title2;
         Bitmap fog = FOGocalypse.Properties.Resources.fog;
+        Bitmap fogBackground = FOGocalypse.Properties.Resources.fogBackground;
+
         float fogFrame = 0.0F;
 
         //constructor
@@ -42,6 +44,14 @@ namespace FOGocalypse
         //draw screen
         public void DrawScreen(int width, int height, Graphics g)
         {
+            #region MainMenu
+            if (Game.state.Equals(EnumHandler.GameStates.MainMenu))
+            {
+                g.DrawImage(fogBackground, 0, 0, width, height);
+            }
+            
+            #endregion
+
             #region Game
             if (Game.state.Equals(EnumHandler.GameStates.Game))
             {
