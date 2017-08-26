@@ -172,13 +172,23 @@ namespace FOGocalypse
             {
                 Game.player.playerWaterNeed++;
                 waterCycle = 0;
+
+                if (Game.player.playerWaterNeed >= 100)
+                {
+                    Game.player.playerHealth -= 5;
+                }
             }
 
             hungerCycle++;
-            if (hungerCycle >= 100 - (Game.player.playerXVelocity + Game.player.playerYVelocity))
+            if (hungerCycle >= 80 - (Game.player.playerXVelocity + Game.player.playerYVelocity))
             {
                 Game.player.playerFoodNeed++;
                 hungerCycle = 0;
+
+                if (Game.player.playerFoodNeed >= 100)
+                {
+                    Game.player.playerHealth -= 5;
+                }
             }
         }
 

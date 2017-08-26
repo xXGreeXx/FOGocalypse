@@ -15,6 +15,7 @@ namespace FOGocalypse
         Bitmap waterDrop = FOGocalypse.Properties.Resources.waterDrop;
         Bitmap heart = FOGocalypse.Properties.Resources.heart;
         Bitmap food = FOGocalypse.Properties.Resources.food;
+        Bitmap warningIcon = FOGocalypse.Properties.Resources.warningIcon;
         Bitmap flashlightIcon = FOGocalypse.Properties.Resources.flashlightIcon;
         Bitmap flashlight = FOGocalypse.Properties.Resources.flashlight;
         Bitmap waterBottleIcon = FOGocalypse.Properties.Resources.waterBottleIcon;
@@ -296,6 +297,15 @@ namespace FOGocalypse
                 g.FillRectangle(Brushes.Brown, 11, 91, (200 - Game.player.playerFoodNeed * 2) - 1, 29);
                 g.DrawImage(food, 200 - 30, 93, 25, 25);
 
+                //draw thirst/hunger low notification
+                if (Game.player.playerWaterNeed >= 70)
+                {
+                    g.DrawImage(warningIcon, 220, 50, 25, 25);
+                }
+                if (Game.player.playerFoodNeed >= 70)
+                {
+                    g.DrawImage(warningIcon, 220, 90, 25, 25);
+                }
 
                 #region Hotbar
                 //draw hotbar
