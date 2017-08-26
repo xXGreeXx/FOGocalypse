@@ -142,6 +142,7 @@ namespace FOGocalypse
                 //TODO\\
                 EnumHandler.Items selectedItem = Game.itemsInHotbar[Game.selectedHotbar - 1];
 
+
                 #region DrawZombies
                 foreach (Zombie z in Game.zombies)
                 {
