@@ -134,6 +134,12 @@ namespace FOGocalypse
 
                     switch (selectedItem)
                     {
+                        case EnumHandler.Items.Flashlight:
+                            if (button.Equals(MouseButtons.Right))
+                            {
+                                Game.combatSystem.SwingItem(10);
+                            }
+                            break;
                         case EnumHandler.Items.Waterbottle:
                             if (button.Equals(MouseButtons.Left))
                             {

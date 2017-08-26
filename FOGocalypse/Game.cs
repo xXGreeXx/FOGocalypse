@@ -13,6 +13,7 @@ namespace FOGocalypse
         MouseHandler mouseHandler = new MouseHandler();
         WorldGenerator generator = new WorldGenerator();
         Physics physicsEngine = new Physics();
+        public static CombatSystem combatSystem { get; } = new CombatSystem();
         public static List<Tile> worldTiles { get; set; } = new List<Tile>();
         public static List<Item> itemsInWorld { get; set; } = new List<Item>();
         public static List<Zombie> zombies { get; set; } = new List<Zombie>();

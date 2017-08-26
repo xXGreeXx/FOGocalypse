@@ -64,6 +64,11 @@ namespace FOGocalypse
                 needsRemoved = true;
             }
 
+            if (health <= 0)
+            {
+                needsRemoved = true;
+            }
+
             return needsRemoved;
         }
     }

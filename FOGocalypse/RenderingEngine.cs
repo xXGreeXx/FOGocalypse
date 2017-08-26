@@ -427,7 +427,7 @@ namespace FOGocalypse
                 {
                     if (screenFade >= 3)
                     {
-                        String message = "You wake up, unsure of your surroundings, fog sourrounds you. \nThere is a faint sound in the distance, it sounds like the groaning of the undead";
+                        String message = "You wake up, unsure of your surroundings, you can hardly see throught the thick fog. \nThere is a faint sound in the distance, it sounds like the groaning of the undead";
 
                         g.FillRectangle(new SolidBrush(Color.FromArgb(screenFade, Color.Black)), 0, 0, width, height);
                         g.DrawString(message, f2, new SolidBrush(Color.FromArgb(screenFade, Color.White)), width / 2 - g.MeasureString(message, f).Width / 2, height / 2 - 50);
