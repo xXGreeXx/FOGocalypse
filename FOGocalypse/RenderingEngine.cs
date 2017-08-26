@@ -27,6 +27,8 @@ namespace FOGocalypse
         Bitmap peanutButter = FOGocalypse.Properties.Resources.peanutButter;
         Bitmap breadIcon = FOGocalypse.Properties.Resources.breadIcon;
         Bitmap bread = FOGocalypse.Properties.Resources.bread;
+        Bitmap pistolIcon = FOGocalypse.Properties.Resources.pistolIcon;
+        Bitmap pistol = FOGocalypse.Properties.Resources.pistol;
         Bitmap title1 = FOGocalypse.Properties.Resources.title1;
         Bitmap title2 = FOGocalypse.Properties.Resources.title2;
         Bitmap fog = FOGocalypse.Properties.Resources.fog;
@@ -119,6 +121,9 @@ namespace FOGocalypse
                                     break;
                                 case EnumHandler.Items.Emptybottle:
                                     g.DrawImage(emptyBottle, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
+                                    break;
+                                case EnumHandler.Items.Pistol:
+                                    g.DrawImage(pistol, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
                                     break;
                             }
                         }
@@ -223,6 +228,10 @@ namespace FOGocalypse
                     case EnumHandler.Items.Emptybottle:
                         g.DrawString("Left click, melee swing", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 115);
                         g.DrawString("Right click, ranged throw", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 100);
+                        break;
+                    case EnumHandler.Items.Pistol:
+                        g.DrawString("Left click, ranged shoot", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 115);
+                        g.DrawString("Right click, reload", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 100);
                         break;
                 }
 
@@ -372,6 +381,9 @@ namespace FOGocalypse
                     break;
                 case EnumHandler.Items.Emptybottle:
                     g.DrawImage(emptyBottleIcon, x, y, 50, 50);
+                    break;
+                case EnumHandler.Items.Pistol:
+                    g.DrawImage(pistolIcon, x, y, 50, 50);
                     break;
             }
         }

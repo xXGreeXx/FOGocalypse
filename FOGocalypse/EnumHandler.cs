@@ -33,7 +33,8 @@
             Emptybottle,
             Knife,
             Peanutbutter,
-            Bread
+            Bread,
+            Pistol
         }
     }
 }

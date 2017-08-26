@@ -108,6 +108,7 @@ namespace FOGocalypse
             }
 
             Game.itemsInWorld.Add(new Item((x - 2) * Game.tileSize, (y - 2) * Game.tileSize, EnumHandler.Items.Bread));
+            Game.itemsInWorld.Add(new Item((x - 2) * Game.tileSize, (y - 3) * Game.tileSize, EnumHandler.Items.Pistol));
 
             return tilesOfHouse;
         }
