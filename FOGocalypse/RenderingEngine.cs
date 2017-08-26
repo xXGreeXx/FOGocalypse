@@ -369,7 +369,7 @@ namespace FOGocalypse
 
                 if (!selectedItemInHotbar.Equals(EnumHandler.Items.None))
                 {
-                    g.FillRectangle(Brushes.Gray, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 115, 300, 50);
+                    g.FillRectangle(Brushes.White, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 115, 300, 50);
                     g.DrawString("Press <q> to drop", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 85);
                 }
 

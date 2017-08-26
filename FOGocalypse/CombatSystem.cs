@@ -63,7 +63,22 @@ namespace FOGocalypse
         //stab with item
         public void StabWithItem(int damage)
         {
+            for (int index = 0; index < Game.zombies.Count; index++)
+            {
+                int zombieX = Game.zombies[index].x - Game.player.playerX;
+                int zombieY = Game.zombies[index].y - Game.player.playerY;
+                int playerPositionX = Game.canvasWidth / 2 - Game.tileSize / 2;
+                int playerPositionY = Game.canvasHeight / 2 - Game.tileSize / 2;
 
+                if (zombieX >= playerPositionX - 60 && zombieX <= playerPositionX + 60 + Game.tileSize)
+                {
+                    if (zombieY >= playerPositionY - 60 && zombieY <= playerPositionY + 60 + Game.tileSize)
+                    {
+                        Game.zombies[index].health -= damage;
+                        Game.particleGenerator.CreateBloodEffect(zombieX , zombieY, 10);
+                    }
+                }
+            }
         }
 
         //throw item
@@ -75,7 +90,20 @@ namespace FOGocalypse
         //fire item
         public void FireItem(int damage, Point destination)
         {
+            for (int index = 0; index < Game.zombies.Count; index++)
+            {
+                int zombieX = Game.zombies[index].x - Game.player.playerX;
+                int zombieY = Game.zombies[index].y - Game.player.playerY;
 
+                if (zombieX >= destination.X - 30 && zombieX <= destination.X + 30)
+                {
+                    if (zombieY >= destination.Y - 30 && zombieY <= destination.Y + 30)
+                    {
+                        Game.zombies[index].health -= damage;
+                        Game.particleGenerator.CreateBloodEffect(zombieX, zombieY, damage / 2);
+                    }
+                }
+            }
         }
     }
 }
