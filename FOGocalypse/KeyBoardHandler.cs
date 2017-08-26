@@ -169,6 +169,18 @@ namespace FOGocalypse
                 }
             }
             #endregion
+
+            #region OptionsMenu
+            if (Game.state.Equals(EnumHandler.GameStates.OptionsMenu))
+            {
+                switch (key)
+                {
+                    case Keys.Escape:
+                        Game.state = EnumHandler.GameStates.MainMenu;
+                        break;
+                }
+            }
+            #endregion
         }
     }
 }

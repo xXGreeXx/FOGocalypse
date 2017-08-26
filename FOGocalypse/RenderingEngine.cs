@@ -85,7 +85,19 @@ namespace FOGocalypse
                     }
                 }
             }
-            
+
+            #endregion
+
+            #region OptionsMenu
+            if (Game.state.Equals(EnumHandler.GameStates.OptionsMenu))
+            {
+                g.DrawImage(fogBackground, 0, 0, width, height - 250);
+                g.FillRectangle(Brushes.DarkGray, 0, height - 250, width, 250);
+                g.DrawImage(title1, width / 2 - title1.Width / 2, 0, title1.Width, title1.Height);
+                g.DrawImage(title2, width / 2 - title2.Width / 2, title1.Height, title2.Width, title2.Height);
+
+                g.FillRectangle(Brushes.Brown, width / 2 - 250, height / 2 - 250, 500, 500);
+            }
             #endregion
 
             #region Game
