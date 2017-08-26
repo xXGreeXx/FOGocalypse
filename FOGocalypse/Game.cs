@@ -37,6 +37,10 @@ namespace FOGocalypse
         public static int zombieMoveSpeed { get; set; } = 4;
         public static int zombieSpawnChance { get; set; } = 10;
         public static int itemRarity { get; set; } = 60;
+        public static int time = 800;
+        public static int day = 0;
+        public static int month = 0;
+        public static int year = 0;
         public static List<Particle> bloodParticles { get; set; } = new List<Particle>();
 
         public static int canvasWidth { get; set; }
@@ -64,11 +68,14 @@ namespace FOGocalypse
                 itemsInInventory[i] = EnumHandler.Items.None;
             }
 
-
-            //worldTiles = generator.GenerateWorld(tileSize, worldSize);
+            day = DateTime.Now.Day;
+            month = DateTime.Now.Month;
+            year = DateTime.Now.Year;
 
             timer.Interval = 1000 / 60;
             timer.Start();
+            timer2.Interval = 60000;
+            timer2.Start();
             this.KeyPreview = true;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MinimizeBox = false;
@@ -131,6 +138,15 @@ namespace FOGocalypse
         private void canvas_MouseMove(object sender, MouseEventArgs e)
         {
             mouseHandler.RegisterMouseMove(e.X, e.Y);
+        }
+
+        //update the date and time
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (state.Equals(EnumHandler.GameStates.Game))
+            {
+                time += 100;
+            }
         }
     }
 }

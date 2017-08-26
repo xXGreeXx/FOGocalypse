@@ -316,6 +316,10 @@ namespace FOGocalypse
                 {
                     g.DrawImage(warningIcon, 220, 90, 25, 25);
                 }
+
+                Font timeFont = new Font(FontFamily.GenericSansSerif, 20, FontStyle.Bold);
+                String add = Game.time < 1000 ? "0" : "";
+                g.DrawString(add + Game.time.ToString() + ": " + Game.day + "/"  + Game.month + "/" + Game.year, timeFont, Brushes.Black, 0, 130);
                 #endregion
 
 
