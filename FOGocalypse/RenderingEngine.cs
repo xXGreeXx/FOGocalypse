@@ -121,6 +121,10 @@ namespace FOGocalypse
                 g.FillRectangle(Brushes.Gray, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width + 110, height / 2 - 200, 110, 30);
                 g.FillRectangle(Brushes.Gray, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width + 220, height / 2 - 200, 110, 30);
 
+                if (Game.frameRate == 30) g.FillRectangle(Brushes.LightGray, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width, height / 2 - 200, 110, 30);
+                if (Game.frameRate == 60) g.FillRectangle(Brushes.LightGray, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width + 110, height / 2 - 200, 110, 30);
+                if (Game.frameRate == 120) g.FillRectangle(Brushes.LightGray, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width + 220, height / 2 - 200, 110, 30);
+
                 g.DrawString("30/FPS", fSmall, Brushes.Black, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width, height / 2 - 197);
                 g.DrawString("60/FPS", fSmall, Brushes.Black, width / 2 - 140 + g.MeasureString("Framerate: ", f).Width, height / 2 - 197);
                 g.DrawString("120/FPS", fSmall, Brushes.Black, width / 2 - 30 + g.MeasureString("Framerate: ", f).Width, height / 2 - 197);
@@ -475,12 +479,6 @@ namespace FOGocalypse
             g.DrawImage(image, new PointF(0, 0));
 
             return rotatedBmp;
-        }
-        
-        //change framerate
-        public void ChangeFramerate()
-        {
-
         }
     }
 }

@@ -86,6 +86,23 @@ namespace FOGocalypse
                         Game.resolution = "fullscreen";
                     }
                 }
+
+                widthOffset = 40 + g.MeasureString("Framerate: ", f).Width;
+                if (y >= Game.canvasHeight / 2 - 200 && y <= Game.canvasHeight / 2 - 170)
+                {
+                    if (x >= Game.canvasWidth / 2 - 250 + widthOffset && x <= Game.canvasWidth / 2 - 140 + widthOffset)
+                    {
+                        Game.frameRate = 30;
+                    }
+                    if (x >= Game.canvasWidth / 2 - 140 + widthOffset && x <= Game.canvasWidth / 2 - 30 + widthOffset)
+                    {
+                        Game.frameRate = 60;
+                    }
+                    if (x >= Game.canvasWidth / 2 - 30 + widthOffset && x <= Game.canvasWidth / 2 + 80 + widthOffset)
+                    {
+                        Game.frameRate = 120;
+                    }
+                }
             }
             #endregion
 
@@ -147,6 +164,7 @@ namespace FOGocalypse
                             {
                                 itemHeldByMouse = Game.itemsInHotbar[i];
                                 indexOfItem = i;
+                                Game.itemsInHotbar[i] = EnumHandler.Items.None;
                                 return;
                             }
                         }

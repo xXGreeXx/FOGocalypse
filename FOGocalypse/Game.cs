@@ -72,6 +72,10 @@ namespace FOGocalypse
         //update handler
         private void timer_Tick(object sender, EventArgs e)
         {
+            //change framerate
+            timer.Interval = 1000 / frameRate;
+
+            //update canvas
             canvas.Refresh();
         }
 
