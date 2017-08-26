@@ -149,9 +149,6 @@
     <None Include="Resources\peanutButterIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\fog.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\bread.png" />
   </ItemGroup>
   <ItemGroup>

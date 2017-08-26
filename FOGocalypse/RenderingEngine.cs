@@ -32,7 +32,6 @@ namespace FOGocalypse
         Bitmap pistol = FOGocalypse.Properties.Resources.pistol;
         Bitmap title1 = FOGocalypse.Properties.Resources.title1;
         Bitmap title2 = FOGocalypse.Properties.Resources.title2;
-        Bitmap fog = FOGocalypse.Properties.Resources.fog;
         Bitmap fogBackground = FOGocalypse.Properties.Resources.fogBackground;
         Bitmap upArrow = FOGocalypse.Properties.Resources.upArrow;
         Bitmap downArrow = FOGocalypse.Properties.Resources.downArrow;
@@ -43,6 +42,7 @@ namespace FOGocalypse
         int positionOfDistort = 0;
         float cycleOfDistort = 0;
         Boolean swap = false;
+        Random r = new Random();
 
         //constructor
         public RenderingEngine()
@@ -526,26 +526,11 @@ namespace FOGocalypse
 
                         if (pass)
                         {
-                            g.DrawImage(fog, newX, newY, 25, 25);
+                            g.FillRectangle(new SolidBrush(Color.FromArgb(r.Next(220, 255), Color.Gray)), newX, newY, 25, 25);
                         }
                     }
                 }
             }
-
-           //fogAnimator();
-        }
-
-        //animate fog
-        private void fogAnimator()
-        {
-            fogFrame += 0.1F;
-
-            if (fogFrame >= fog.GetFrameCount(new System.Drawing.Imaging.FrameDimension(fog.FrameDimensionsList[0])) - 1)
-            {
-                fogFrame = 0.0F;
-            }
-            System.Drawing.Imaging.FrameDimension dim = new System.Drawing.Imaging.FrameDimension(fog.FrameDimensionsList[0]);
-            fog.SelectActiveFrame(dim, Convert.ToInt32(fogFrame));
         }
 
         //draw item
