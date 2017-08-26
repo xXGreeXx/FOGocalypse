@@ -33,6 +33,8 @@ namespace FOGocalypse
         Bitmap title2 = FOGocalypse.Properties.Resources.title2;
         Bitmap fog = FOGocalypse.Properties.Resources.fog;
         Bitmap fogBackground = FOGocalypse.Properties.Resources.fogBackground;
+        Bitmap upArrow = FOGocalypse.Properties.Resources.upArrow;
+        Bitmap downArrow = FOGocalypse.Properties.Resources.downArrow;
 
         float fogFrame = 0.0F;
 
@@ -52,8 +54,7 @@ namespace FOGocalypse
                 Font f = new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold);
                 int baseOfText = 200;
 
-                g.DrawImage(fogBackground, 0, 0, width, height - 250);
-                g.FillRectangle(Brushes.DarkGray, 0, height - 250, width, 250);
+                g.DrawImage(fogBackground, 0, 0, width, height);
                 g.DrawImage(title1, width / 2 - title1.Width / 2, 0, title1.Width, title1.Height);
                 g.DrawImage(title2, width / 2 - title2.Width / 2, title1.Height, title2.Width, title2.Height);
 
@@ -94,8 +95,7 @@ namespace FOGocalypse
                 Font f = new Font(FontFamily.GenericSansSerif, 20, FontStyle.Bold);
                 Font fSmall = new Font(FontFamily.GenericSansSerif, 15, FontStyle.Bold);
 
-                g.DrawImage(fogBackground, 0, 0, width, height - 250);
-                g.FillRectangle(Brushes.DarkGray, 0, height - 250, width, 250);
+                g.DrawImage(fogBackground, 0, 0, width, height);
                 g.DrawImage(title1, width / 2 - title1.Width / 2, 0, title1.Width, title1.Height);
                 g.DrawImage(title2, width / 2 - title2.Width / 2, title1.Height, title2.Width, title2.Height);
 
@@ -128,6 +128,40 @@ namespace FOGocalypse
                 g.DrawString("30/FPS", fSmall, Brushes.Black, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width, height / 2 - 197);
                 g.DrawString("60/FPS", fSmall, Brushes.Black, width / 2 - 140 + g.MeasureString("Framerate: ", f).Width, height / 2 - 197);
                 g.DrawString("120/FPS", fSmall, Brushes.Black, width / 2 - 30 + g.MeasureString("Framerate: ", f).Width, height / 2 - 197);
+            }
+            #endregion
+
+            #region GameSettingsMenu
+            if (Game.state.Equals(EnumHandler.GameStates.GameSettingsMenu))
+            {
+                Font f = new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold);
+                Font fSmall = new Font(FontFamily.GenericSansSerif, 20, FontStyle.Bold);
+
+                g.DrawImage(fogBackground, 0, 0, width, height);
+                g.DrawImage(title1, width / 2 - title1.Width / 2, 0, title1.Width, title1.Height);
+                g.DrawImage(title2, width / 2 - title2.Width / 2, title1.Height, title2.Width, title2.Height);
+                g.FillRectangle(Brushes.Brown, width / 2 - 200, height / 2 - 250, 400, 500);
+
+                g.DrawString("Begin!", f, Brushes.Black, width / 2 + 75 - g.MeasureString("Begin!", f).Width, height / 2 + 200);
+
+                //world size
+                g.DrawString("World Size", fSmall, Brushes.Black, width / 2 - 200, height / 2 - 250);
+                g.DrawString(Game.worldSize.ToString(), fSmall, Brushes.Black, width / 2 - 200, height / 2 - 213);
+                g.DrawImage(upArrow, width / 2 - 100, height / 2 - 220, 20, 20);
+                g.DrawImage(downArrow, width / 2 - 100, height / 2 - 195, 20, 20);
+
+                //zombie sight
+                g.DrawString("Zombie Vision", fSmall, Brushes.Black, width / 2, height / 2 - 250);
+                g.DrawString(Game.zombieViewDistance.ToString() + "tiles", fSmall, Brushes.Black, width / 2, height / 2 - 213);
+                g.DrawImage(upArrow, width / 2 + 100, height / 2 - 220, 20, 20);
+                g.DrawImage(downArrow, width / 2 + 100, height / 2 - 195, 20, 20);
+
+                //item rarity
+                g.DrawString("Item Rarity", fSmall, Brushes.Black, width / 2 - 200, height / 2 - 170);
+                g.DrawString(Game.itemRarity.ToString() + "%", fSmall, Brushes.Black, width / 2 - 200, height / 2 - 133);
+                g.DrawImage(upArrow, width / 2 - 100, height / 2 - 140, 20, 20);
+                g.DrawImage(downArrow, width / 2 - 100, height / 2 - 115, 20, 20);
+
             }
             #endregion
 

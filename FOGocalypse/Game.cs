@@ -32,6 +32,7 @@ namespace FOGocalypse
         public static int zombieHearDistance { get; set; } = 2;
         public static int zombieMoveSpeed { get; set; } = 4;
         public static int zombieSpawnChance { get; set; } = 10;
+        public static int itemRarity { get; set; } = 60;
         public static int canvasWidth { get; set; }
         public static int canvasHeight { get; set; }
 
@@ -59,7 +60,7 @@ namespace FOGocalypse
             }
 
 
-            worldTiles = generator.GenerateWorld(tileSize, worldSize);
+            //worldTiles = generator.GenerateWorld(tileSize, worldSize);
 
             timer.Interval = 1000 / 60;
             timer.Start();

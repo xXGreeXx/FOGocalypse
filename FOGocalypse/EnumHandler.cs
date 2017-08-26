@@ -21,6 +21,7 @@
         public enum GameStates
         {
             Game,
+            GameSettingsMenu,
             MainMenu,
             OptionsMenu
         }

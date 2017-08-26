@@ -42,7 +42,7 @@ namespace FOGocalypse
                 {
                     if (mouseY >= baseOfText && MouseHandler.mouseY <= baseOfText + g.MeasureString("Play", f).Height)
                     {
-                        Game.state = EnumHandler.GameStates.Game;
+                        Game.state = EnumHandler.GameStates.GameSettingsMenu;
                     }
                 }
 
