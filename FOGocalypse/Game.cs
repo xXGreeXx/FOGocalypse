@@ -41,6 +41,7 @@ namespace FOGocalypse
         public static int day = 0;
         public static int month = 0;
         public static int year = 0;
+        public static int attackEffect = -1;
         public static List<Particle> bloodParticles { get; set; } = new List<Particle>();
 
         public static int canvasWidth { get; set; }
@@ -57,8 +58,8 @@ namespace FOGocalypse
 
             itemsInHotbar = new EnumHandler.Items[numberOfhotBarSlots];
             itemsInHotbar[0] = EnumHandler.Items.Flashlight;
-            itemsInHotbar[1] = EnumHandler.Items.None;
-            itemsInHotbar[2] = EnumHandler.Items.None;
+            itemsInHotbar[1] = EnumHandler.Items.Knife;
+            itemsInHotbar[2] = EnumHandler.Items.Waterbottle;
             itemsInHotbar[3] = EnumHandler.Items.None;
             itemsInHotbar[4] = EnumHandler.Items.None;
 

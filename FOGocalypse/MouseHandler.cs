@@ -167,6 +167,13 @@ namespace FOGocalypse
                                 Game.itemsInHotbar[Game.selectedHotbar - 1] = EnumHandler.Items.None;
                             }
                             break;
+
+                        case EnumHandler.Items.Knife:
+                            if (button.Equals(MouseButtons.Right))
+                            {
+                                Game.combatSystem.SwingItem(25);
+                            }
+                            break;
                     }
 
                     if (Game.player.playerWaterNeed < 0) Game.player.playerWaterNeed = 0;

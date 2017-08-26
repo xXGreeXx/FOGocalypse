@@ -33,20 +33,20 @@ namespace FOGocalypse
 
                         if (MouseHandler.mouseX < zombieX)
                         {
-                            directionToPushZombieBackX = damage * 2;
+                            directionToPushZombieBackX = damage;
                         }
                         if (MouseHandler.mouseX > zombieX)
                         {
-                            directionToPushZombieBackX = -damage * 2;
+                            directionToPushZombieBackX = -damage;
                         }
 
                         if (MouseHandler.mouseY < zombieY)
                         {
-                            directionToPushZombieBackY = damage * 2;
+                            directionToPushZombieBackY = damage;
                         }
                         if (MouseHandler.mouseY > zombieY)
                         {
-                            directionToPushZombieBackY = -damage * 2;
+                            directionToPushZombieBackY = -damage;
                         }
 
                         Game.zombies[index].health -= damage;
@@ -56,6 +56,8 @@ namespace FOGocalypse
                     }
                 }
             }
+
+            Game.attackEffect = 1;
         }
 
         //stab with item

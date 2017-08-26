@@ -36,6 +36,7 @@ namespace FOGocalypse
         Bitmap fogBackground = FOGocalypse.Properties.Resources.fogBackground;
         Bitmap upArrow = FOGocalypse.Properties.Resources.upArrow;
         Bitmap downArrow = FOGocalypse.Properties.Resources.downArrow;
+        Bitmap attackWave = FOGocalypse.Properties.Resources.attackWave;
 
         float fogFrame = 0.0F;
         int screenFade = 255;
@@ -289,6 +290,22 @@ namespace FOGocalypse
                 foreach (Particle p in Game.bloodParticles)
                 {
                     g.FillRectangle(new SolidBrush(p.color), p.x, p.y, p.size, p.size);
+                }
+
+                //attack wave
+                //TODO\\
+                if (Game.attackEffect != -1)
+                {
+                    Game.attackEffect++;
+
+                    if (Game.attackEffect < 5)
+                    {
+                       // g.DrawImage(attackWave, positionX, positionY, 20 + (Game.attackEffect * 8), 10 + (Game.attackEffect * 8));
+                    }
+                    else
+                    {
+                        Game.attackEffect = -1;
+                    }
                 }
                 #endregion
 
