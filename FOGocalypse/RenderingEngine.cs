@@ -242,6 +242,33 @@ namespace FOGocalypse
                 }
                 #endregion
 
+                #region Draw Furniture
+                foreach (Furniture furniture in Game.furnitureInWorld)
+                {
+                    int newX = furniture.x - Game.player.playerX;
+                    int newY = furniture.y - Game.player.playerY;
+                    int distance = Game.playerViewDistance * Game.tileSize;
+
+                    if (newX > width / 2 - player.Width / 2 - distance && newX < width / 2 - player.Width / 2 + distance)
+                    {
+                        if (newY > height / 2 - player.Height / 2 - distance && newY < height / 2 - player.Height / 2 + distance)
+                        {
+                            switch (furniture.type)
+                            {
+                                case EnumHandler.FurnitureTypes.Couch:
+                                    if (furniture.rotation == 90)
+                                    {
+                                        couch.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                                        g.DrawImage(couch, newX, newY, couch.Width, couch.Height);
+                                        couch.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                                    }
+                                    break;
+                            }
+                        }
+                    }
+                }
+                #endregion
+
                 //draw player
                 int positionX = width / 2 - player.Width / 2;
                 int positionY = height / 2 - player.Height / 2;

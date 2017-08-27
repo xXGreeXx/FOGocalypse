@@ -19,6 +19,7 @@ namespace FOGocalypse
         public static List<Tile> worldTiles { get; set; } = new List<Tile>();
         public static List<Item> itemsInWorld { get; set; } = new List<Item>();
         public static List<Zombie> zombies { get; set; } = new List<Zombie>();
+        public static List<Furniture> furnitureInWorld { get; set; } = new List<Furniture>();
         public static Player player { get; set; }
         public static int playerMoveSpeed { get; set; } = 5;
         public static int tileSize { get; set; } = 25;

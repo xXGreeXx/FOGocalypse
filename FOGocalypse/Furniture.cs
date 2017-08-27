@@ -3,19 +3,21 @@ using System.Drawing;
 
 namespace FOGocalypse
 {
-    class Furniture
+    public class Furniture
     {
         //define global variables
         public int x { get; set; }
         public int y { get; set; }
         public EnumHandler.FurnitureTypes type { get; set; }
+        public int rotation { get; set; }
 
         //constructor
-        public Furniture(int x, int y, EnumHandler.FurnitureTypes type)
+        public Furniture(int x, int y, EnumHandler.FurnitureTypes type, int rotation)
         {
             this.x = x;
             this.y = y;
             this.type = type;
+            this.rotation = rotation;
         }
     }
 }
