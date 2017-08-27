@@ -40,11 +40,34 @@ namespace FOGocalypse
             Point mousePosition = new Point(MouseHandler.mouseX, MouseHandler.mouseY);
             Point playerPosition = new Point(Game.canvasWidth / 2 - FOGocalypse.Properties.Resources.player.Width / 2, Game.canvasHeight / 2 - FOGocalypse.Properties.Resources.player.Height / 2);
             Point oldPosition = new Point(Game.player.playerX, Game.player.playerY);
+
             float angle = (float)((Math.Atan2((double)MouseHandler.mouseY - playerPosition.Y, (double)MouseHandler.mouseX - playerPosition.X)));
             float directionX = (float)Math.Cos(angle);
             float directionY = (float)Math.Sin(angle);
-            int velocityX = Game.playerMoveSpeed;
-            int velocityY = Game.playerMoveSpeed;
+
+            int velocityX = 0;
+            int velocityY = 0;
+
+            if (KeyBoardHandler.lastKeyPressed.Equals("W"))
+            {
+                velocityX = Game.playerMoveSpeed;
+                velocityY = Game.playerMoveSpeed;
+            }
+            if (KeyBoardHandler.lastKeyPressed.Equals("S"))
+            {
+                velocityX = -Game.playerMoveSpeed;
+                velocityY = -Game.playerMoveSpeed;
+            }
+            if (KeyBoardHandler.lastKeyPressed.Equals("A"))
+            {
+                velocityX = -Game.playerMoveSpeed;
+                velocityY = Game.playerMoveSpeed;
+            }
+            if (KeyBoardHandler.lastKeyPressed.Equals("D"))
+            {
+                velocityX = Game.playerMoveSpeed;
+                velocityY = -Game.playerMoveSpeed;
+            }
 
             Game.player.playerX += (int)(directionX * velocityX);
             Game.player.playerY += (int)(directionY * velocityY);

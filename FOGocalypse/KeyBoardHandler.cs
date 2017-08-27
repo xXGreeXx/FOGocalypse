@@ -7,6 +7,7 @@ namespace FOGocalypse
     public class KeyBoardHandler
     {
         Bitmap player = FOGocalypse.Properties.Resources.player;
+        public static String lastKeyPressed { get; set; } = "";
 
         //constructor
         public KeyBoardHandler()
@@ -20,6 +21,18 @@ namespace FOGocalypse
             #region Game
             if (Game.state.Equals(EnumHandler.GameStates.Game) && !Game.inLossScreen && !Game.inPauseMenu && !Game.inStartScreen)
             {
+                if (down && lastKeyPressed == "")
+                {
+                    lastKeyPressed = key.ToString();
+                }
+                else
+                {
+                    if (key.ToString().Equals(lastKeyPressed))
+                    {
+                        lastKeyPressed = "";
+                    }
+                }
+
                 switch (key)
                 {
                     case Keys.W:
