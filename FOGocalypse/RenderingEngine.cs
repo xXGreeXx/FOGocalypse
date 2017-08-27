@@ -488,6 +488,7 @@ namespace FOGocalypse
                 }
                 #endregion
 
+
                 #region lossScreen
                 if (Game.inLossScreen)
                 {
@@ -508,6 +509,8 @@ namespace FOGocalypse
                 }
                 #endregion
 
+
+                #region PauseMenu
                 //draw cursor/pause menu
                 if (!Game.inPauseMenu)
                 {
@@ -526,7 +529,23 @@ namespace FOGocalypse
                     g.DrawString("Return To Menu", font, Brushes.Black, width / 2 - g.MeasureString("Return To Menu", font).Width / 2, height / 2 - 75);
                     g.DrawString("Exit To Desktop", font, Brushes.Black, width / 2 - g.MeasureString("Exit To Desktop", font).Width / 2, height / 2 + 50);
 
+                    if (MouseHandler.mouseX >= width / 2 - g.MeasureString("Exit To Desktop", font).Width / 2 && MouseHandler.mouseX <= width / 2 + g.MeasureString("Exit To Dekstop", font).Width)
+                    {
+                        if (MouseHandler.mouseY >= height / 2 - 100 && MouseHandler.mouseY <= height / 2 - 100 + g.MeasureString("Return To Game", font).Height)
+                        {
+                            g.DrawString("Return To Game", font, Brushes.White, width / 2 - g.MeasureString("Return To Game", font).Width / 2, height / 2 - 100);
+                        }
+                        if (MouseHandler.mouseY >= height / 2 - 75 && MouseHandler.mouseY <= height / 2 - 75 + g.MeasureString("Return To Menu", font).Height)
+                        {
+                            g.DrawString("Return To Menu", font, Brushes.White, width / 2 - g.MeasureString("Return To Menu", font).Width / 2, height / 2 - 75);
+                        }
+                        if (MouseHandler.mouseY >= height / 2 + 50 && MouseHandler.mouseY <= height / 2 + 50 + g.MeasureString("Exit To Desktop", font).Height)
+                        {
+                            g.DrawString("Exit To Desktop", font, Brushes.White, width / 2 - g.MeasureString("Exit To Desktop", font).Width / 2, height / 2 + 50);
+                        }
+                    }
                 }
+                #endregion
             }
             #endregion
         }

@@ -82,6 +82,14 @@ namespace FOGocalypse
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MinimizeBox = false;
             this.MaximizeBox = false;
+
+            Application.ApplicationExit += GameExitHandler;
+        }
+
+        //game exiting handler
+        private void GameExitHandler(object sender, EventArgs e)
+        {
+            
         }
 
         //update handler

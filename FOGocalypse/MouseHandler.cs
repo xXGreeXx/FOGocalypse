@@ -23,7 +23,7 @@ namespace FOGocalypse
         //mouse moved
         public void RegisterMouseMove(int x, int y)
         {
-            if (!Game.inPauseMenu && !Game.inLossScreen)
+            if (!Game.inLossScreen)
             {
                 mouseX = x;
                 mouseY = y;
@@ -34,6 +34,8 @@ namespace FOGocalypse
         public void RegisterMouseDown(int x, int y, MouseButtons button)
         {
             Graphics g = Graphics.FromImage(FOGocalypse.Properties.Resources.player);
+            int width = Game.canvasWidth;
+            int height = Game.canvasHeight;
 
             #region MainMenu
             if (Game.state.Equals(EnumHandler.GameStates.MainMenu))
@@ -260,6 +262,29 @@ namespace FOGocalypse
                     }
 
 
+                }
+                #endregion
+
+                #region PauseMenu
+                if (Game.inPauseMenu)
+                {
+                    Font font = new Font(FontFamily.GenericSansSerif, 15, FontStyle.Bold);
+
+                    if (MouseHandler.mouseX >= width / 2 - g.MeasureString("Exit To Desktop", font).Width / 2 && MouseHandler.mouseX <= width / 2 + g.MeasureString("Exit To Desktop", font).Width)
+                    {
+                        if (MouseHandler.mouseY >= height / 2 - 100 && MouseHandler.mouseY <= height / 2 - 100 + g.MeasureString("Return To Game", font).Height)
+                        {
+                            Game.inPauseMenu = false;
+                        }
+                        if (MouseHandler.mouseY >= height / 2 - 75 && MouseHandler.mouseY <= height / 2 - 75 + g.MeasureString("Return To Menu", font).Height)
+                        {
+                            Game.state = EnumHandler.GameStates.MainMenu;
+                        }
+                        if (MouseHandler.mouseY >= height / 2 + 50 && MouseHandler.mouseY <= height / 2 + 50 + g.MeasureString("Exit To Desktop", font).Height)
+                        {
+                            Application.Exit();
+                        }
+                    }
                 }
                 #endregion
             }

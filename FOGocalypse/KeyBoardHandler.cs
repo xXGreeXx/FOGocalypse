@@ -19,7 +19,7 @@ namespace FOGocalypse
         public void ReadKey(Keys key, Boolean down)
         {
             #region Game
-            if (Game.state.Equals(EnumHandler.GameStates.Game) && !Game.inLossScreen && !Game.inPauseMenu && !Game.inStartScreen)
+            if (Game.state.Equals(EnumHandler.GameStates.Game) && !Game.inLossScreen && !Game.inStartScreen)
             {
                 if (down && (key.Equals(Keys.W) || key.Equals(Keys.S) || key.Equals(Keys.A) || key.Equals(Keys.D)))
                 {
