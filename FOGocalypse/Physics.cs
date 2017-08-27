@@ -121,6 +121,14 @@ namespace FOGocalypse
                 {
                     Game.player.playerHealth -= 5;
                 }
+
+                if (Game.player.playerFoodNeed < 20 && Game.player.playerWaterNeed < 30)
+                {
+                    if (Game.player.playerHealth < Game.player.maxPlayerHealth)
+                    {
+                        Game.player.playerHealth += 5;
+                    }
+                }
             }
 
             if (Game.player.playerHealth <= 0)

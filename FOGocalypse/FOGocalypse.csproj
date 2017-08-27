@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="CombatSystem.cs" />
     <Compile Include="EnumHandler.cs" />
+    <Compile Include="Furniture.cs" />
     <Compile Include="Game.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,6 +190,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\pistolAmmoIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\couch.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

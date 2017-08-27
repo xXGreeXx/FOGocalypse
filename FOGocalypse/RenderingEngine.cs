@@ -38,6 +38,7 @@ namespace FOGocalypse
         Bitmap upArrow = FOGocalypse.Properties.Resources.upArrow;
         Bitmap downArrow = FOGocalypse.Properties.Resources.downArrow;
         Bitmap attackWave = FOGocalypse.Properties.Resources.attackWave;
+        Bitmap couch = FOGocalypse.Properties.Resources.couch;
 
         float fogFrame = 0.0F;
         int screenFade = 255;

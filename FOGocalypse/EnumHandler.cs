@@ -38,5 +38,10 @@
             Pistol,
             PistolAmmo
         }
+
+        public enum FurnitureTypes
+        {
+            Couch
+        }
     }
 }
