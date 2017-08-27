@@ -232,33 +232,10 @@ namespace FOGocalypse
                                 }
                             }
 
-                            switch (i.type)
-                            {
-                                case EnumHandler.Items.Flashlight:
-                                    g.DrawImage(flashlight, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
-                                    break;
-                                case EnumHandler.Items.Waterbottle:
-                                    g.DrawImage(waterBottle, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
-                                    break;
-                                case EnumHandler.Items.Knife:
-                                    g.DrawImage(knife, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
-                                    break;
-                                case EnumHandler.Items.Peanutbutter:
-                                    g.DrawImage(peanutButter, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
-                                    break;
-                                case EnumHandler.Items.Bread:
-                                    g.DrawImage(bread, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
-                                    break;
-                                case EnumHandler.Items.Emptybottle:
-                                    g.DrawImage(emptyBottle, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
-                                    break;
-                                case EnumHandler.Items.Pistol:
-                                    g.DrawImage(pistol, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
-                                    break;
-                                case EnumHandler.Items.PistolAmmo:
-                                    g.DrawImage(pistolAmmo, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
-                                    break;
-                            }
+                            int xOfItem = newX + Game.tileSize / 2;
+                            int yOfItem = newY + Game.tileSize / 2;
+
+                            drawItemInWorld(xOfItem, yOfItem, i.type, g);
                         }
                     }
                 }
@@ -270,10 +247,14 @@ namespace FOGocalypse
                 float angle = (float)((Math.Atan2((double)MouseHandler.mouseY - positionY, (double)MouseHandler.mouseX - positionX)) * (180/Math.PI));
                 
                 g.DrawImage(RotateImage(player, angle), width / 2 - player.Width / 2, height / 2 - player.Height / 2, Game.tileSize, Game.tileSize);
+
                 //draw item player is holding
                 //TODO\\
                 EnumHandler.Items selectedItem = Game.itemsInHotbar[Game.selectedHotbar - 1];
+                float directionX = (float)(Math.Cos(angle) * Math.PI * 2);
+                float directionY = (float)(Math.Sin(angle) * Math.PI * 2);
 
+                //drawItemInWorld(positionX + directionX, positionY + directionY, selectedItem, g);
 
                 #region DrawZombies
                 foreach (Zombie z in Game.zombies)
@@ -373,7 +354,7 @@ namespace FOGocalypse
                 {
                     int xToDraw = width / 2 - (60 * Game.numberOfhotBarSlots / 2) + index * 60;
 
-                    drawItem(xToDraw, height - 60, item, g);
+                    drawItemInHotbar(xToDraw, height - 60, item, g);
 
                     index++;
                 }
@@ -450,7 +431,7 @@ namespace FOGocalypse
                     int yOfItemToDraw = height / 2 - 145;
                     foreach (EnumHandler.Items itemInInventory in Game.itemsInInventory)
                     {
-                        drawItem(xOfItemToDraw, yOfItemToDraw, itemInInventory, g);
+                        drawItemInHotbar(xOfItemToDraw, yOfItemToDraw, itemInInventory, g);
 
                         xOfItemToDraw += 60;
                         if (xOfItemToDraw >= width / 2 + 145)
@@ -463,7 +444,7 @@ namespace FOGocalypse
                     //draw held item
                     if (!MouseHandler.itemHeldByMouse.Equals(EnumHandler.Items.None))
                     {
-                        drawItem(MouseHandler.mouseX - 25, MouseHandler.mouseY - 25, MouseHandler.itemHeldByMouse, g);
+                        drawItemInHotbar(MouseHandler.mouseX - 25, MouseHandler.mouseY - 25, MouseHandler.itemHeldByMouse, g);
                     }
                 }
                 #endregion
@@ -585,8 +566,8 @@ namespace FOGocalypse
             }
         }
 
-        //draw item
-        private void drawItem(int x, int y, EnumHandler.Items itemType, Graphics g)
+        //draw item in Hotbar
+        private void drawItemInHotbar(int x, int y, EnumHandler.Items itemType, Graphics g)
         {
 
             switch (itemType)
@@ -614,6 +595,38 @@ namespace FOGocalypse
                     break;
                 case EnumHandler.Items.PistolAmmo:
                     g.DrawImage(pistolAmmoIcon, x, y, 50, 50);
+                    break;
+            }
+        }
+
+        //draw item in world
+        private void drawItemInWorld(float x, float y, EnumHandler.Items itemType, Graphics g)
+        {
+            switch (itemType)
+            {
+                case EnumHandler.Items.Flashlight:
+                    g.DrawImage(flashlight, x, y, 15, 15);
+                    break;
+                case EnumHandler.Items.Waterbottle:
+                    g.DrawImage(waterBottle, x, y, 15, 15);
+                    break;
+                case EnumHandler.Items.Knife:
+                    g.DrawImage(knife, x, y, 15, 15);
+                    break;
+                case EnumHandler.Items.Peanutbutter:
+                    g.DrawImage(peanutButter, x, y, 15, 15);
+                    break;
+                case EnumHandler.Items.Bread:
+                    g.DrawImage(bread, x, y, 15, 15);
+                    break;
+                case EnumHandler.Items.Emptybottle:
+                    g.DrawImage(emptyBottle, x, y, 15, 15);
+                    break;
+                case EnumHandler.Items.Pistol:
+                    g.DrawImage(pistol, x, y, 15, 15);
+                    break;
+                case EnumHandler.Items.PistolAmmo:
+                    g.DrawImage(pistolAmmo, x, y, 15, 15);
                     break;
             }
         }
