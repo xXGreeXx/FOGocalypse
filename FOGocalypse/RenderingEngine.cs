@@ -474,15 +474,35 @@ namespace FOGocalypse
                 }
                 #endregion
 
+                #region lossScreen
+                if (Game.inLossScreen)
+                {
+                    if (screenFade <= 252)
+                    {
+                        String message = "You fall to the ground, darkness sourrounds you";
+
+                        g.FillRectangle(new SolidBrush(Color.FromArgb(screenFade, Color.Black)), 0, 0, width, height);
+                        g.DrawString(message, f2, new SolidBrush(Color.FromArgb(screenFade, Color.White)), width / 2 - g.MeasureString(message, f).Width / 2 - 50, height / 2 - 50);
+
+                        screenFade += 3;
+                    }
+                    else
+                    {
+                        Game.state = EnumHandler.GameStates.MainMenu;
+                        Game.inLossScreen = false;
+                    }
+                }
+                #endregion
+
                 //draw cursor/pause menu
                 if (!Game.inPauseMenu)
                 {
-                    Cursor.Hide();
-                    g.DrawEllipse(Pens.Black, MouseHandler.mouseX - 5, MouseHandler.mouseY - 5, 10, 10);
+                    //Cursor.Hide();
+                    //g.DrawEllipse(Pens.Black, MouseHandler.mouseX - 5, MouseHandler.mouseY - 5, 10, 10);
                 }
                 else
                 {
-                    Cursor.Show();
+                    //Cursor.Show();
                     g.DrawImage(title1, width / 2 - title1.Width / 2, height / 2 - 200, title1.Width, title1.Height);
                     g.DrawImage(title2, width / 2 - title1.Width / 2, height / 2 + 100, title1.Width, title1.Height);
 

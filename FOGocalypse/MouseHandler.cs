@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace FOGocalypse
@@ -22,7 +23,7 @@ namespace FOGocalypse
         //mouse moved
         public void RegisterMouseMove(int x, int y)
         {
-            if (!Game.inPauseMenu)
+            if (!Game.inPauseMenu && !Game.inLossScreen)
             {
                 mouseX = x;
                 mouseY = y;
@@ -117,6 +118,31 @@ namespace FOGocalypse
                 {
                     if (MouseHandler.mouseY >= Game.canvasHeight / 2 + 200 && MouseHandler.mouseY <= Game.canvasHeight / 2 + 200 + g.MeasureString("Begin!", f).Height)
                     {
+                        Game.player = new Player(Game.worldSize / 2 * Game.tileSize, Game.worldSize / 2 * Game.tileSize, EnumHandler.Directions.Left);
+
+                        Game.itemsInHotbar[0] = EnumHandler.Items.Flashlight;
+                        Game.itemsInHotbar[1] = EnumHandler.Items.Knife;
+                        Game.itemsInHotbar[2] = EnumHandler.Items.Waterbottle;
+                        Game.itemsInHotbar[3] = EnumHandler.Items.None;
+                        Game.itemsInHotbar[4] = EnumHandler.Items.None;
+
+                        for (int i = 0; i < Game.itemsInInventory.Length; i++)
+                        {
+                            Game.itemsInInventory[i] = EnumHandler.Items.None;
+                        }
+
+                        Game.zombies = new List<Zombie>();
+                        Game.selectedHotbar = 1;
+                        Game.inPauseMenu = false;
+                        Game.inInventory = false;
+                        Game.inStartScreen = false;
+                        Game.inLossScreen = false;
+
+                        Game.time = 800;
+                        Game.day = DateTime.Now.Day;
+                        Game.month = DateTime.Now.Month;
+                        Game.year = DateTime.Now.Year;
+
                         Game.worldTiles = new WorldGenerator().GenerateWorld(Game.tileSize, Game.worldSize);
                         Game.state = EnumHandler.GameStates.Game;
                         Game.inStartScreen = true;   

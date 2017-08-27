@@ -31,6 +31,7 @@ namespace FOGocalypse
         public static Boolean inPauseMenu { get; set; } = false;
         public static Boolean inInventory { get; set; } = false;
         public static Boolean inStartScreen { get; set; } = false;
+        public static Boolean inLossScreen { get; set; } = false;
         public static int playerViewDistance { get; set; } = 5;
         public static int zombieViewDistance { get; set; } = 3;
         public static int zombieHearDistance { get; set; } = 2;
@@ -105,7 +106,7 @@ namespace FOGocalypse
 
             renderer.DrawScreen(width, height, g);
 
-            if (!inPauseMenu)
+            if (!inPauseMenu && !inLossScreen)
             {
                 physicsEngine.SimulatePhysics();
             }

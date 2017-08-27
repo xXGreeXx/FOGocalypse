@@ -22,6 +22,8 @@ namespace FOGocalypse
         //simulate AI
         public Boolean SimulateAI()
         {
+            int width = Game.canvasWidth;
+            int height = Game.canvasHeight;
             int newX = x - Game.player.playerX;
             int newY = y - Game.player.playerY;
             int positionOfPlayerX = Game.canvasWidth / 2 - Game.tileSize / 2;
@@ -67,6 +69,32 @@ namespace FOGocalypse
             if (health <= 0)
             {
                 needsRemoved = true;
+            }
+
+            if (newX >= positionOfPlayerX - Game.tileSize / 2 && newX <= positionOfPlayerX + Game.tileSize /2)
+            {
+                if (newY >= positionOfPlayerY - Game.tileSize / 2 && newY <= positionOfPlayerY + Game.tileSize / 2)
+                {
+                    Game.player.playerHealth -= 10;
+
+                    if (x < width / 2)
+                    {
+                        x -= 20;
+                    }
+                    else if (x > width / 2)
+                    {
+                        x += 20;
+                    }
+
+                    if (y < height / 2)
+                    {
+                        y -= 20;
+                    }
+                    else if (y > height / 2)
+                    {
+                        y += 20;
+                    }
+                }
             }
 
             return needsRemoved;

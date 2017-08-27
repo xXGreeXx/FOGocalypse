@@ -18,7 +18,7 @@ namespace FOGocalypse
         public void ReadKey(Keys key, Boolean down)
         {
             #region Game
-            if (Game.state.Equals(EnumHandler.GameStates.Game))
+            if (Game.state.Equals(EnumHandler.GameStates.Game) && !Game.inLossScreen && !Game.inPauseMenu)
             {
                 switch (key)
                 {

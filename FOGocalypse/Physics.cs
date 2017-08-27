@@ -98,6 +98,11 @@ namespace FOGocalypse
                     Game.player.playerHealth -= 5;
                 }
             }
+
+            if (Game.player.playerHealth <= 0)
+            {
+                Game.inLossScreen = true;
+            }
         }
 
         //simulate particles
