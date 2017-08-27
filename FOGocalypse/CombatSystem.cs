@@ -52,7 +52,7 @@ namespace FOGocalypse
                         Game.zombies[index].health -= damage;
                         Game.zombies[index].x -= directionToPushZombieBackX;
                         Game.zombies[index].y -= directionToPushZombieBackY;
-                        Game.particleGenerator.CreateBloodEffect(zombieX - directionToPushZombieBackX, zombieY - directionToPushZombieBackX, 10);
+                        Game.particleGenerator.CreateBloodEffect(Game.zombies[index].x - directionToPushZombieBackX, Game.zombies[index].y - directionToPushZombieBackX, 10);
                     }
                 }
             }
@@ -75,7 +75,7 @@ namespace FOGocalypse
                     if (zombieY >= playerPositionY - 60 && zombieY <= playerPositionY + 60 + Game.tileSize)
                     {
                         Game.zombies[index].health -= damage;
-                        Game.particleGenerator.CreateBloodEffect(zombieX , zombieY, 10);
+                        Game.particleGenerator.CreateBloodEffect(Game.zombies[index].x, Game.zombies[index].y, 10);
                     }
                 }
             }
@@ -100,7 +100,7 @@ namespace FOGocalypse
                     if (zombieY >= destination.Y - 30 && zombieY <= destination.Y + 30)
                     {
                         Game.zombies[index].health -= damage;
-                        Game.particleGenerator.CreateBloodEffect(zombieX, zombieY, damage / 2);
+                        Game.particleGenerator.CreateBloodEffect(Game.zombies[index].x, Game.zombies[index].y, damage / 2);
                     }
                 }
             }

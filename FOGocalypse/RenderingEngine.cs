@@ -270,7 +270,6 @@ namespace FOGocalypse
                 float angle = (float)((Math.Atan2((double)MouseHandler.mouseY - positionY, (double)MouseHandler.mouseX - positionX)) * (180/Math.PI));
                 
                 g.DrawImage(RotateImage(player, angle), width / 2 - player.Width / 2, height / 2 - player.Height / 2, Game.tileSize, Game.tileSize);
-
                 //draw item player is holding
                 //TODO\\
                 EnumHandler.Items selectedItem = Game.itemsInHotbar[Game.selectedHotbar - 1];
@@ -282,8 +281,15 @@ namespace FOGocalypse
                     int newX = z.x - Game.player.playerX;
                     int newY = z.y - Game.player.playerY;
                     float zombieAngle = (float)((Math.Atan2((double)z.lookingToward.Y - newY, (double)z.lookingToward.X - newX)) * (180 / Math.PI));
+                    int distance = Game.playerViewDistance * Game.tileSize;
 
-                    g.DrawImage(RotateImage(zombie, zombieAngle), newX, newY, Game.tileSize, Game.tileSize);
+                    if (newX > width / 2 - player.Width / 2 - distance && newX < width / 2 - player.Width / 2 + distance)
+                    {
+                        if (newY > height / 2 - player.Height / 2 - distance && newY < height / 2 - player.Height / 2 + distance)
+                        {
+                            g.DrawImage(RotateImage(zombie, zombieAngle), newX, newY, Game.tileSize, Game.tileSize);
+                        }
+                    }
                 }
                 #endregion
 
@@ -294,7 +300,10 @@ namespace FOGocalypse
                 //blood particles
                 foreach (Particle p in Game.bloodParticles)
                 {
-                    g.FillRectangle(new SolidBrush(p.color), p.x, p.y, p.size, p.size);
+                    int newX = p.x - Game.player.playerX;
+                    int newY = p.y - Game.player.playerY;
+
+                    g.FillRectangle(new SolidBrush(p.color), newX, newY, p.size, p.size);
                 }
 
                 //attack wave

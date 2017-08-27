@@ -85,8 +85,8 @@ namespace FOGocalypse
                     int playerX = Game.canvasWidth / 2 - Game.tileSize / 2;
                     int playerY = Game.canvasHeight / 2 - Game.tileSize / 2;
 
-                    Rectangle topHitbox = new Rectangle(newX, newY, Game.tileSize, 20);
-                    Rectangle bottomHitbox = new Rectangle(newX, newY + Game.tileSize, Game.tileSize, 20);
+                    Rectangle topHitbox = new Rectangle(newX, newY + 5, Game.tileSize, 10);
+                    Rectangle bottomHitbox = new Rectangle(newX, newY + Game.tileSize - 5, Game.tileSize, 10);
                     Rectangle leftHitbox = new Rectangle(newX, newY, 20, Game.tileSize);
                     Rectangle rightHitbox = new Rectangle(newX + Game.tileSize - 10, newY, 10, Game.tileSize);
 
