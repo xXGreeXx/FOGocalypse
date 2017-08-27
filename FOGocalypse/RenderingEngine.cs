@@ -30,6 +30,8 @@ namespace FOGocalypse
         Bitmap bread = FOGocalypse.Properties.Resources.bread;
         Bitmap pistolIcon = FOGocalypse.Properties.Resources.pistolIcon;
         Bitmap pistol = FOGocalypse.Properties.Resources.pistol;
+        Bitmap pistolAmmo = FOGocalypse.Properties.Resources.pistolAmmo;
+        Bitmap pistolAmmoIcon = FOGocalypse.Properties.Resources.pistolAmmoIcon;
         Bitmap title1 = FOGocalypse.Properties.Resources.title1;
         Bitmap title2 = FOGocalypse.Properties.Resources.title2;
         Bitmap fogBackground = FOGocalypse.Properties.Resources.fogBackground;
@@ -252,6 +254,9 @@ namespace FOGocalypse
                                     break;
                                 case EnumHandler.Items.Pistol:
                                     g.DrawImage(pistol, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
+                                    break;
+                                case EnumHandler.Items.PistolAmmo:
+                                    g.DrawImage(pistolAmmo, newX + Game.tileSize / 2, newY + Game.tileSize / 2, 15, 15);
                                     break;
                             }
                         }
@@ -523,7 +528,6 @@ namespace FOGocalypse
             int maxCycle = 4;
             int cycle = maxCycle;
             int distance = Game.playerViewDistance;
-            Boolean swapCycle = false;
 
             foreach (Tile t in Game.worldTiles)
             {
@@ -579,6 +583,9 @@ namespace FOGocalypse
                     break;
                 case EnumHandler.Items.Pistol:
                     g.DrawImage(pistolIcon, x, y, 50, 50);
+                    break;
+                case EnumHandler.Items.PistolAmmo:
+                    g.DrawImage(pistolAmmoIcon, x, y, 50, 50);
                     break;
             }
         }

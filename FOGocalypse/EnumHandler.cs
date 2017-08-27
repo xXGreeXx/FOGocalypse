@@ -35,7 +35,8 @@
             Knife,
             Peanutbutter,
             Bread,
-            Pistol
+            Pistol,
+            PistolAmmo
         }
     }
 }

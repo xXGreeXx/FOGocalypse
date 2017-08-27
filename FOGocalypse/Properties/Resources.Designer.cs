@@ -253,6 +253,26 @@ namespace FOGocalypse.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pistolAmmo {
+            get {
+                object obj = ResourceManager.GetObject("pistolAmmo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pistolAmmoIcon {
+            get {
+                object obj = ResourceManager.GetObject("pistolAmmoIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pistolIcon {
             get {
                 object obj = ResourceManager.GetObject("pistolIcon", resourceCulture);
