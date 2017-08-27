@@ -82,15 +82,16 @@ namespace FOGocalypse
                 {
                     int newX = t.x - Game.player.playerX;
                     int newY = t.y - Game.player.playerY;
+                    int playerX = Game.canvasWidth / 2 - Game.tileSize / 2;
+                    int playerY = Game.canvasHeight / 2 - Game.tileSize / 2;
 
-                    t.hitbox = new Rectangle(newX, newY, Game.tileSize, Game.tileSize);
+                    Rectangle topHitbox = new Rectangle(newX, newY, Game.tileSize, 20);
+                    Rectangle bottomHitbox = new Rectangle(newX, newY + Game.tileSize, Game.tileSize, 20);
+                    Rectangle leftHitbox = new Rectangle(newX, newY, 20, Game.tileSize);
+                    Rectangle rightHitbox = new Rectangle(newX + Game.tileSize - 10, newY, 10, Game.tileSize);
 
-                    if (Game.player.hitbox.IntersectsWith(t.hitbox))
-                    {
-                        Game.player.playerX = oldPosition.X;
-                        Game.player.playerY = oldPosition.Y;
-                        break;
-                    }
+                    if (Game.player.hitbox.IntersectsWith(topHitbox) || Game.player.hitbox.IntersectsWith(bottomHitbox)) Game.player.playerY = oldPosition.Y;
+                    if (Game.player.hitbox.IntersectsWith(leftHitbox) || Game.player.hitbox.IntersectsWith(rightHitbox)) Game.player.playerX = oldPosition.X;
                 }
             }
         }
