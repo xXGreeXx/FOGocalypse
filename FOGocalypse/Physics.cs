@@ -39,108 +39,15 @@ namespace FOGocalypse
             //player movement
             Point mousePosition = new Point(MouseHandler.mouseX, MouseHandler.mouseY);
             Point playerPosition = new Point(Game.canvasWidth / 2 - FOGocalypse.Properties.Resources.player.Width / 2, Game.canvasHeight / 2 - FOGocalypse.Properties.Resources.player.Height / 2);
-            String keyPressed = "";
             Point oldPosition = new Point(Game.player.playerX, Game.player.playerY);
+            float angle = (float)((Math.Atan2((double)MouseHandler.mouseY - playerPosition.Y, (double)MouseHandler.mouseX - playerPosition.X)));
+            float directionX = (float)Math.Cos(angle);
+            float directionY = (float)Math.Sin(angle);
+            int velocityX = Game.playerMoveSpeed;
+            int velocityY = Game.playerMoveSpeed;
 
-            if (Game.player.playerXVelocity == Game.playerMoveSpeed) keyPressed = "D";
-            else if (Game.player.playerYVelocity == Game.playerMoveSpeed) keyPressed = "S";
-            else if (Game.player.playerXVelocity == -Game.playerMoveSpeed) keyPressed = "A";
-            else if (Game.player.playerYVelocity == -Game.playerMoveSpeed) keyPressed = "W";
-
-            if (mousePosition.X < playerPosition.X && mousePosition.Y < playerPosition.Y)
-            {
-                switch (keyPressed)
-                {
-                    case "D":
-                        Game.player.playerX += Game.playerMoveSpeed;
-                        Game.player.playerY -= Game.playerMoveSpeed;
-                        break;
-                    case "S":
-                        Game.player.playerX += Game.playerMoveSpeed;
-                        Game.player.playerY += Game.playerMoveSpeed;
-                        break;
-                    case "A":
-                        Game.player.playerX -= Game.playerMoveSpeed;
-                        Game.player.playerY += Game.playerMoveSpeed;
-                        break;
-                    case "W":
-                        Game.player.playerX -= Game.playerMoveSpeed;
-                        Game.player.playerY -= Game.playerMoveSpeed;
-                        break;
-                }
-            }
-
-
-            if (mousePosition.X > playerPosition.X && mousePosition.Y < playerPosition.Y)
-            {
-                switch (keyPressed)
-                {
-                    case "D":
-                        Game.player.playerX += Game.playerMoveSpeed;
-                        Game.player.playerY += Game.playerMoveSpeed;
-                        break;
-                    case "S":
-                        Game.player.playerX -= Game.playerMoveSpeed;
-                        Game.player.playerY += Game.playerMoveSpeed;
-                        break;
-                    case "A":
-                        Game.player.playerX -= Game.playerMoveSpeed;
-                        Game.player.playerY -= Game.playerMoveSpeed;
-                        break;
-                    case "W":
-                        Game.player.playerX += Game.playerMoveSpeed;
-                        Game.player.playerY -= Game.playerMoveSpeed;
-                        break;
-                }
-            }
-
-
-            if (mousePosition.X < playerPosition.X && mousePosition.Y > playerPosition.Y)
-            {
-                switch (keyPressed)
-                {
-                    case "D":
-                        Game.player.playerX += Game.playerMoveSpeed;
-                        Game.player.playerY += Game.playerMoveSpeed;
-                        break;
-                    case "S":
-                        Game.player.playerX += Game.playerMoveSpeed;
-                        Game.player.playerY -= Game.playerMoveSpeed;
-                        break;
-                    case "A":
-                        Game.player.playerX -= Game.playerMoveSpeed;
-                        Game.player.playerY -= Game.playerMoveSpeed;
-                        break;
-                    case "W":
-                        Game.player.playerX -= Game.playerMoveSpeed;
-                        Game.player.playerY += Game.playerMoveSpeed;
-                        break;
-                }
-            }
-
-
-            if (mousePosition.X > playerPosition.X && mousePosition.Y > playerPosition.Y)
-            {
-                switch (keyPressed)
-                {
-                    case "D":
-                        Game.player.playerX += Game.playerMoveSpeed;
-                        Game.player.playerY -= Game.playerMoveSpeed;
-                        break;
-                    case "S":
-                        Game.player.playerX -= Game.playerMoveSpeed;
-                        Game.player.playerY -= Game.playerMoveSpeed;
-                        break;
-                    case "A":
-                        Game.player.playerX -= Game.playerMoveSpeed;
-                        Game.player.playerY += Game.playerMoveSpeed;
-                        break;
-                    case "W":
-                        Game.player.playerX += Game.playerMoveSpeed;
-                        Game.player.playerY += Game.playerMoveSpeed;
-                        break;
-                }
-            }
+            Game.player.playerX += (int)(directionX * velocityX);
+            Game.player.playerY += (int)(directionY * velocityY);
 
             //handle collsions
             //TODO\\
