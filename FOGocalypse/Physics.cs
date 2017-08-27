@@ -60,13 +60,13 @@ namespace FOGocalypse
             }
             if (KeyBoardHandler.lastKeyPressed.Equals("A"))
             {
-                velocityX = -Game.playerMoveSpeed;
-                velocityY = Game.playerMoveSpeed;
+                velocityX = Game.playerMoveSpeed;
+                velocityY = -Game.playerMoveSpeed;
             }
             if (KeyBoardHandler.lastKeyPressed.Equals("D"))
             {
-                velocityX = Game.playerMoveSpeed;
-                velocityY = -Game.playerMoveSpeed;
+                velocityX = -Game.playerMoveSpeed;
+                velocityY = Game.playerMoveSpeed;
             }
 
             Game.player.playerX += (int)(directionX * velocityX);

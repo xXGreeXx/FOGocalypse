@@ -21,16 +21,13 @@ namespace FOGocalypse
             #region Game
             if (Game.state.Equals(EnumHandler.GameStates.Game) && !Game.inLossScreen && !Game.inPauseMenu && !Game.inStartScreen)
             {
-                if (down && lastKeyPressed == "")
+                if (down && (key.Equals(Keys.W) || key.Equals(Keys.S) || key.Equals(Keys.A) || key.Equals(Keys.D)))
                 {
                     lastKeyPressed = key.ToString();
                 }
-                else
+                else if (!down && key.ToString().Equals(lastKeyPressed))
                 {
-                    if (key.ToString().Equals(lastKeyPressed))
-                    {
-                        lastKeyPressed = "";
-                    }
+                    lastKeyPressed = "";
                 }
 
                 switch (key)
