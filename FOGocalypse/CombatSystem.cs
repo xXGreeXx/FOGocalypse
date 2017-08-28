@@ -33,31 +33,29 @@ namespace FOGocalypse
 
                         if (MouseHandler.mouseX < zombieX)
                         {
-                            directionToPushZombieBackX = damage;
+                            directionToPushZombieBackX = damage / 2;
                         }
                         if (MouseHandler.mouseX > zombieX)
                         {
-                            directionToPushZombieBackX = -damage;
+                            directionToPushZombieBackX = -damage / 2;
                         }
 
                         if (MouseHandler.mouseY < zombieY)
                         {
-                            directionToPushZombieBackY = damage;
+                            directionToPushZombieBackY = damage / 2;
                         }
                         if (MouseHandler.mouseY > zombieY)
                         {
-                            directionToPushZombieBackY = -damage;
+                            directionToPushZombieBackY = -damage / 2;
                         }
 
                         Game.zombies[index].health -= damage;
                         Game.zombies[index].x -= directionToPushZombieBackX;
                         Game.zombies[index].y -= directionToPushZombieBackY;
-                        Game.particleGenerator.CreateBloodEffect(Game.zombies[index].x - directionToPushZombieBackX, Game.zombies[index].y - directionToPushZombieBackX, 10, Color.DarkRed, 8);
+                        Game.particleGenerator.CreateBloodEffect(Game.zombies[index].x, Game.zombies[index].y, 10, Color.DarkRed, 8);
                     }
                 }
             }
-
-            Game.attackEffect = 1;
         }
 
         //stab with item

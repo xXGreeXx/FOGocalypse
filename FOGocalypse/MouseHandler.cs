@@ -272,6 +272,10 @@ namespace FOGocalypse
                                 Game.player.playerWaterNeed += 25;
                                 Game.itemsInHotbar[Game.selectedHotbar - 1] = new Item(0, 0, EnumHandler.Items.None);
                             }
+                            if (button.Equals(MouseButtons.Right))
+                            {
+                                Game.combatSystem.SwingItem(5);
+                            }
                             break;
                         case EnumHandler.Items.Pistol:
                             if (button.Equals(MouseButtons.Left))
@@ -308,7 +312,7 @@ namespace FOGocalypse
                         case EnumHandler.Items.Knife:
                             if (button.Equals(MouseButtons.Left))
                             {
-                                Game.combatSystem.SwingItem(35);
+                                Game.combatSystem.StabWithItem(35);
                             }
                             if (button.Equals(MouseButtons.Right))
                             {

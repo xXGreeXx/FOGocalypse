@@ -46,7 +46,6 @@ namespace FOGocalypse
         public static int day = 0;
         public static int month = 0;
         public static int year = 0;
-        public static int attackEffect = -1;
         public static List<Particle> bloodParticles { get; set; } = new List<Particle>();
 
         public static int canvasWidth { get; set; }
