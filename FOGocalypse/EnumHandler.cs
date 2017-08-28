@@ -44,7 +44,9 @@
         {
             Couch,
             Table,
-            Chair
+            Chair,
+            Bed,
+            SmallTable
         }
     }
 }

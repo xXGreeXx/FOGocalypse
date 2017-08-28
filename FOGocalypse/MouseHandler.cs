@@ -334,7 +334,7 @@ namespace FOGocalypse
                         {
                             if (y >= yOfItem && y <= yOfItem + 50)
                             {
-                                itemHeldByMouse = new Item(0, 0, Game.itemsInHotbar[i].type);
+                                itemHeldByMouse = Game.itemsInHotbar[i];
                                 indexOfItem = i;
                                 fromHotbar = true;
                                 return;

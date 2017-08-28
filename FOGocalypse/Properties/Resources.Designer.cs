@@ -73,6 +73,16 @@ namespace FOGocalypse.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bed {
+            get {
+                object obj = ResourceManager.GetObject("bed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap bread {
             get {
                 object obj = ResourceManager.GetObject("bread", resourceCulture);
@@ -326,6 +336,16 @@ namespace FOGocalypse.Properties {
         internal static System.Drawing.Bitmap player {
             get {
                 object obj = ResourceManager.GetObject("player", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap smallTable {
+            get {
+                object obj = ResourceManager.GetObject("smallTable", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

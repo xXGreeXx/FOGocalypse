@@ -127,7 +127,7 @@ namespace FOGocalypse
                                         {
                                             if (itemInHotbar.type.Equals(EnumHandler.Items.None))
                                             {
-                                                Game.itemsInHotbar[indexOfHotbarSlot] = new Item(0, 0, i.type);
+                                                Game.itemsInHotbar[indexOfHotbarSlot] = i;
                                                 Game.itemsInWorld.RemoveAt(index);
                                                 return;
                                             }

@@ -42,6 +42,8 @@ namespace FOGocalypse
         Bitmap couch = FOGocalypse.Properties.Resources.couch;
         Bitmap table = FOGocalypse.Properties.Resources.table;
         Bitmap chair = FOGocalypse.Properties.Resources.chair;
+        Bitmap bed = FOGocalypse.Properties.Resources.bed;
+        Bitmap smallTable = FOGocalypse.Properties.Resources.smallTable;
 
         Bitmap gameSettingsBackground = FOGocalypse.Properties.Resources.gameSettingsBackground;
 
@@ -260,6 +262,12 @@ namespace FOGocalypse
                                     break;
                                 case EnumHandler.FurnitureTypes.Chair:
                                     g.DrawImage(chair, newX, newY, chair.Width, chair.Height);
+                                    break;
+                                case EnumHandler.FurnitureTypes.Bed:
+                                    g.DrawImage(bed, newX, newY, bed.Width / 2, bed.Height / 2);
+                                    break;
+                                case EnumHandler.FurnitureTypes.SmallTable:
+                                    g.DrawImage(smallTable, newX, newY, smallTable.Width / 2, smallTable.Height / 2);
                                     break;
                             }
                         }

@@ -15,7 +15,7 @@ namespace FOGocalypse
         }
 
         //create blood particles
-        public void CreateBloodEffect(int x, int y, int amount)
+        public void CreateBloodEffect(int x, int y, int amount, Color c)
         {
             int total = r.Next(1, 5) + amount;
 
@@ -24,7 +24,7 @@ namespace FOGocalypse
                 for (int yOffset = 0; yOffset <= total; yOffset++)
                 {
                     int number = r.Next(1, 10);
-                    Game.bloodParticles.Add(new Particle(x - xOffset + number, y - yOffset + number, Color.Red, number));
+                    Game.bloodParticles.Add(new Particle(x - xOffset + number, y - yOffset + number, c, number));
                 }
             }
         }
