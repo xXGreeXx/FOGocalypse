@@ -10,7 +10,7 @@ namespace FOGocalypse
         //define global variabels
         public static int mouseX { get; set; }
         public static int mouseY { get; set; }
-        public static EnumHandler.Items itemHeldByMouse { get; set; }
+        public static Item itemHeldByMouse { get; set; } = new Item(0, 0, EnumHandler.Items.None);
         private int indexOfItem { get; set; }
         private Boolean fromHotbar { get; set; } = false;
 
@@ -193,15 +193,15 @@ namespace FOGocalypse
                     {
                         Game.player = new Player(Game.worldSize / 2 * Game.tileSize, Game.worldSize / 2 * Game.tileSize, EnumHandler.Directions.Left);
 
-                        Game.itemsInHotbar[0] = EnumHandler.Items.Flashlight;
-                        Game.itemsInHotbar[1] = EnumHandler.Items.Knife;
-                        Game.itemsInHotbar[2] = EnumHandler.Items.Waterbottle;
-                        Game.itemsInHotbar[3] = EnumHandler.Items.None;
-                        Game.itemsInHotbar[4] = EnumHandler.Items.None;
+                        Game.itemsInHotbar[0] = new Item(0, 0, EnumHandler.Items.Flashlight);
+                        Game.itemsInHotbar[1] = new Item(0, 0, EnumHandler.Items.Knife);
+                        Game.itemsInHotbar[2] = new Item(0, 0, EnumHandler.Items.Waterbottle);
+                        Game.itemsInHotbar[3] = new Item(0, 0, EnumHandler.Items.None);
+                        Game.itemsInHotbar[4] = new Item(0, 0, EnumHandler.Items.None);
 
                         for (int i = 0; i < Game.itemsInInventory.Length; i++)
                         {
-                            Game.itemsInInventory[i] = EnumHandler.Items.None;
+                            Game.itemsInInventory[i] = new Item(0, 0, EnumHandler.Items.None);
                         }
 
                         Game.zombies = new List<Zombie>();
@@ -230,7 +230,7 @@ namespace FOGocalypse
                 #region Items
                 if (!Game.inInventory && !Game.inPauseMenu)
                 {
-                    EnumHandler.Items selectedItem = Game.itemsInHotbar[Game.selectedHotbar - 1];
+                    EnumHandler.Items selectedItem = Game.itemsInHotbar[Game.selectedHotbar - 1].type;
 
                     switch (selectedItem)
                     {
@@ -244,11 +244,11 @@ namespace FOGocalypse
                             if (button.Equals(MouseButtons.Left))
                             {
                                 Game.player.playerWaterNeed -= 50;
-                                Game.itemsInHotbar[Game.selectedHotbar - 1] = EnumHandler.Items.Emptybottle;
+                                Game.itemsInHotbar[Game.selectedHotbar - 1] = new Item(0, 0, EnumHandler.Items.Emptybottle);
                             }
                             if (button.Equals(MouseButtons.Right))
                             {
-                                Game.itemsInHotbar[Game.selectedHotbar - 1] = EnumHandler.Items.Emptybottle;
+                                Game.itemsInHotbar[Game.selectedHotbar - 1] = new Item(0, 0, EnumHandler.Items.Emptybottle);
                             }
                             break;
                         case EnumHandler.Items.Peanutbutter:
@@ -256,7 +256,7 @@ namespace FOGocalypse
                             {
                                 Game.player.playerFoodNeed -= 10;
                                 Game.player.playerWaterNeed += 15;
-                                Game.itemsInHotbar[Game.selectedHotbar - 1] = EnumHandler.Items.None;
+                                Game.itemsInHotbar[Game.selectedHotbar - 1] = new Item(0, 0, EnumHandler.Items.None);
                             }
                             break;
                         case EnumHandler.Items.Bread:
@@ -264,7 +264,7 @@ namespace FOGocalypse
                             {
                                 Game.player.playerFoodNeed -= 10;
                                 Game.player.playerWaterNeed += 25;
-                                Game.itemsInHotbar[Game.selectedHotbar - 1] = EnumHandler.Items.None;
+                                Game.itemsInHotbar[Game.selectedHotbar - 1] = new Item(0, 0, EnumHandler.Items.None);
                             }
                             break;
                         case EnumHandler.Items.Pistol:
@@ -302,7 +302,7 @@ namespace FOGocalypse
                         {
                             if (y >= yOfItem && y <= yOfItem + 50)
                             {
-                                itemHeldByMouse = Game.itemsInHotbar[i];
+                                itemHeldByMouse = new Item(0, 0, Game.itemsInHotbar[i].type);
                                 indexOfItem = i;
                                 fromHotbar = true;
                                 return;
@@ -385,15 +385,15 @@ namespace FOGocalypse
                                 if (Game.itemsInHotbar[i].Equals(EnumHandler.Items.None))
                                 {
                                     Game.itemsInHotbar[i] = itemHeldByMouse;
-                                    itemHeldByMouse = EnumHandler.Items.None;
+                                    itemHeldByMouse = new Item(0, 0, EnumHandler.Items.None);
                                     foundSlot = true;
                                     if (fromHotbar)
                                     {
-                                        Game.itemsInHotbar[indexOfItem] = EnumHandler.Items.None;
+                                        Game.itemsInHotbar[indexOfItem] = new Item(0, 0, EnumHandler.Items.None);
                                     }
                                     else
                                     {
-                                        Game.itemsInInventory[indexOfItem] = EnumHandler.Items.None;
+                                        Game.itemsInInventory[indexOfItem] = new Item(0, 0, EnumHandler.Items.None);
                                     }
                                 }
                             }
@@ -413,15 +413,15 @@ namespace FOGocalypse
                                     if (Game.itemsInInventory[i].Equals(EnumHandler.Items.None))
                                     {
                                         Game.itemsInInventory[i] = itemHeldByMouse;
-                                        itemHeldByMouse = EnumHandler.Items.None;
+                                        itemHeldByMouse = new Item(0, 0, EnumHandler.Items.None);
                                         foundSlot = true;
                                         if (fromHotbar)
                                         {
-                                            Game.itemsInHotbar[indexOfItem] = EnumHandler.Items.None;
+                                            Game.itemsInHotbar[indexOfItem] = new Item(0, 0, EnumHandler.Items.None);
                                         }
                                         else
                                         {
-                                            Game.itemsInInventory[indexOfItem] = EnumHandler.Items.None;
+                                            Game.itemsInInventory[indexOfItem] = new Item(0, 0, EnumHandler.Items.None);
                                         }
                                     }
                                 }
@@ -438,7 +438,7 @@ namespace FOGocalypse
 
                     if (!foundSlot)
                     {
-                        itemHeldByMouse = EnumHandler.Items.None;
+                        itemHeldByMouse = new Item(0, 0, EnumHandler.Items.None);
                     }
                 }
                 #endregion/Hotbar

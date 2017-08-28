@@ -123,11 +123,11 @@ namespace FOGocalypse
                                     if (newY >= Game.canvasHeight / 2 - player.Height / 2 - 80 && newY <= Game.canvasHeight / 2 - player.Height / 2 + 80)
                                     {
                                         int indexOfHotbarSlot = 0;
-                                        foreach (EnumHandler.Items itemInHotbar in Game.itemsInHotbar)
+                                        foreach (Item itemInHotbar in Game.itemsInHotbar)
                                         {
-                                            if (itemInHotbar.Equals(EnumHandler.Items.None))
+                                            if (itemInHotbar.type.Equals(EnumHandler.Items.None))
                                             {
-                                                Game.itemsInHotbar[indexOfHotbarSlot] = i.type;
+                                                Game.itemsInHotbar[indexOfHotbarSlot] = new Item(0, 0, i.type);
                                                 Game.itemsInWorld.RemoveAt(index);
                                                 return;
                                             }
@@ -141,11 +141,14 @@ namespace FOGocalypse
                         break;
 
                     case Keys.Q:
-                        EnumHandler.Items item = Game.itemsInHotbar[Game.selectedHotbar - 1];
-                        if (!item.Equals(EnumHandler.Items.None))
+                        Item item = Game.itemsInHotbar[Game.selectedHotbar - 1];
+                        if (!item.type.Equals(EnumHandler.Items.None))
                         {
-                            Game.itemsInWorld.Add(new Item(Game.player.playerX + Game.canvasWidth / 2, Game.player.playerY + Game.canvasHeight / 2, item));
-                            Game.itemsInHotbar[Game.selectedHotbar - 1] = EnumHandler.Items.None;
+                            item.x = Game.player.playerX + Game.canvasWidth / 2;
+                            item.y = Game.player.playerY + Game.canvasHeight / 2;
+
+                            Game.itemsInWorld.Add(item);
+                            Game.itemsInHotbar[Game.selectedHotbar - 1] = new Item(0, 0, EnumHandler.Items.None);
                         }
                         break;
 

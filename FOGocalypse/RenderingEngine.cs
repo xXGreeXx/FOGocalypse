@@ -310,7 +310,7 @@ namespace FOGocalypse
 
                 #region ItemHeld
                 //TODO\\
-                EnumHandler.Items selectedItem = Game.itemsInHotbar[Game.selectedHotbar - 1];
+                EnumHandler.Items selectedItem = Game.itemsInHotbar[Game.selectedHotbar - 1].type;
 
                 angle /= (float)(180 / Math.PI);
 
@@ -333,9 +333,7 @@ namespace FOGocalypse
                     swap = false;
                 }
 
-                Console.WriteLine(angleOfItem);
-
-                g.DrawImage(RotateImage(flashlight, angleOfItem), positionX + rotationX + 5, positionY + rotationY + 5, 15, 15);
+                //g.DrawImage(RotateImage(flashlight, angleOfItem), positionX + rotationX + 5, positionY + rotationY + 5, 15, 15);
                 #endregion
 
                 #region DrawZombies
@@ -435,17 +433,17 @@ namespace FOGocalypse
 
                 //draw hotbar items
                 int index = 0;
-                foreach (EnumHandler.Items item in Game.itemsInHotbar)
+                foreach (Item item in Game.itemsInHotbar)
                 {
                     int xToDraw = width / 2 - (60 * Game.numberOfhotBarSlots / 2) + index * 60;
 
-                    drawItemInHotbar(xToDraw, height - 60, item, g);
+                    drawItemInHotbar(xToDraw, height - 60, item.type, g);
 
                     index++;
                 }
 
                 //draw hotbar tooltips
-                EnumHandler.Items selectedItemInHotbar = Game.itemsInHotbar[Game.selectedHotbar - 1];
+                EnumHandler.Items selectedItemInHotbar = Game.itemsInHotbar[Game.selectedHotbar - 1].type;
 
                 if (!selectedItemInHotbar.Equals(EnumHandler.Items.None))
                 {
@@ -514,9 +512,9 @@ namespace FOGocalypse
                     //draw items in inventory
                     int xOfItemToDraw = width / 2 - 145;
                     int yOfItemToDraw = height / 2 - 145;
-                    foreach (EnumHandler.Items itemInInventory in Game.itemsInInventory)
+                    foreach (Item itemInInventory in Game.itemsInInventory)
                     {
-                        drawItemInHotbar(xOfItemToDraw, yOfItemToDraw, itemInInventory, g);
+                        drawItemInHotbar(xOfItemToDraw, yOfItemToDraw, itemInInventory.type, g);
 
                         xOfItemToDraw += 60;
                         if (xOfItemToDraw >= width / 2 + 145)
@@ -527,9 +525,9 @@ namespace FOGocalypse
                     }
 
                     //draw held item
-                    if (!MouseHandler.itemHeldByMouse.Equals(EnumHandler.Items.None))
+                    if (!MouseHandler.itemHeldByMouse.type.Equals(EnumHandler.Items.None))
                     {
-                        drawItemInHotbar(MouseHandler.mouseX - 25, MouseHandler.mouseY - 25, MouseHandler.itemHeldByMouse, g);
+                        drawItemInHotbar(MouseHandler.mouseX - 25, MouseHandler.mouseY - 25, MouseHandler.itemHeldByMouse.type, g);
                     }
                 }
                 #endregion

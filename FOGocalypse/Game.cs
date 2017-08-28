@@ -20,6 +20,10 @@ namespace FOGocalypse
         public static List<Item> itemsInWorld { get; set; } = new List<Item>();
         public static List<Zombie> zombies { get; set; } = new List<Zombie>();
         public static List<Furniture> furnitureInWorld { get; set; } = new List<Furniture>();
+
+        public static Item[] itemsInHotbar { get; set; }
+        public static Item[] itemsInInventory { get; set; }
+
         public static Player player { get; set; }
         public static int playerMoveSpeed { get; set; } = 5;
         public static int tileSize { get; set; } = 25;
@@ -27,8 +31,7 @@ namespace FOGocalypse
         public static EnumHandler.GameStates state { get; set; } = EnumHandler.GameStates.MainMenu;
         public static int numberOfhotBarSlots { get; set; } = 5;
         public static int selectedHotbar { get; set; } = 1;
-        public static EnumHandler.Items[] itemsInHotbar { get; set; }
-        public static EnumHandler.Items[] itemsInInventory { get; set; }
+
         public static Boolean inPauseMenu { get; set; } = false;
         public static Boolean inInventory { get; set; } = false;
         public static Boolean inStartScreen { get; set; } = false;
@@ -63,17 +66,17 @@ namespace FOGocalypse
 
             player = new Player(worldSize / 2 * tileSize, worldSize / 2 * tileSize, EnumHandler.Directions.Left);
 
-            itemsInHotbar = new EnumHandler.Items[numberOfhotBarSlots];
-            itemsInHotbar[0] = EnumHandler.Items.Flashlight;
-            itemsInHotbar[1] = EnumHandler.Items.Knife;
-            itemsInHotbar[2] = EnumHandler.Items.Waterbottle;
-            itemsInHotbar[3] = EnumHandler.Items.None;
-            itemsInHotbar[4] = EnumHandler.Items.None;
+            itemsInHotbar = new Item[numberOfhotBarSlots];
+            itemsInHotbar[0] = new Item(0, 0, EnumHandler.Items.Flashlight);
+            itemsInHotbar[1] = new Item(0, 0, EnumHandler.Items.Knife);
+            itemsInHotbar[2] = new Item(0, 0, EnumHandler.Items.Waterbottle);
+            itemsInHotbar[3] = new Item(0, 0, EnumHandler.Items.None);
+            itemsInHotbar[4] = new Item(0, 0, EnumHandler.Items.None);
 
-            itemsInInventory = new EnumHandler.Items[25];
+            itemsInInventory = new Item[25];
             for (int i = 0; i < itemsInInventory.Length; i++)
             {
-                itemsInInventory[i] = EnumHandler.Items.None;
+                itemsInInventory[i] = new Item(0, 0, EnumHandler.Items.None);
             }
 
             day = DateTime.Now.Day;
