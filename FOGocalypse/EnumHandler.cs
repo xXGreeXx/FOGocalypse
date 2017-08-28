@@ -41,7 +41,8 @@
 
         public enum FurnitureTypes
         {
-            Couch
+            Couch,
+            Table
         }
     }
 }
