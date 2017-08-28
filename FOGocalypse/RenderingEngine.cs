@@ -416,6 +416,7 @@ namespace FOGocalypse
 
                 Font timeFont = new Font(FontFamily.GenericSansSerif, 20, FontStyle.Bold);
                 String add = Game.time < 1000 ? "0" : "";
+                add += Game.time == 0 ? "00" : "";
                 g.DrawString(add + Game.time.ToString() + ": " + Game.day + "/"  + Game.month + "/" + Game.year, timeFont, Brushes.Black, 0, 130);
                 #endregion
 

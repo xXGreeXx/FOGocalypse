@@ -171,6 +171,25 @@ namespace FOGocalypse
             if (state.Equals(EnumHandler.GameStates.Game))
             {
                 time += 100;
+
+                if (time == 2500)
+                {
+                    time = 0;
+                    if (day >= 30)
+                    {
+                        day = 0;
+
+                        if (month > 12)
+                        {
+                            year++;
+                            month = 0;
+                        }
+
+                        month++;
+                    }
+
+                    day++;
+                }
             }
         }
 
