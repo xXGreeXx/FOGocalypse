@@ -71,7 +71,7 @@ namespace FOGocalypse
             List<Tile> tilesOfHouse = new List<Tile>();
             EnumHandler.TileTypes type = EnumHandler.TileTypes.Wood;
             int number = generator.Next(10, 16);
-            int door = generator.Next(2, number - 1);
+            int door = generator.Next(2, number - 4);
             int water = generator.Next(1, 3);
             int knife = generator.Next(2, 5);
             int peanutButter = generator.Next(1, 3);

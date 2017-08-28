@@ -321,7 +321,7 @@ namespace FOGocalypse
 
                 if (swap)
                 {
-                    angleOfItem = 77 + (float)((rotationY) * Math.PI);
+                    angleOfItem = 75 + (float)((rotationY) * Math.PI);
                 }
 
                 if ((rotationX * Math.PI) > 76)
@@ -333,7 +333,9 @@ namespace FOGocalypse
                     swap = false;
                 }
 
-                //g.DrawImage(RotateImage(flashlight, angleOfItem), positionX + rotationX + 5, positionY + rotationY + 5, 15, 15);
+                Console.WriteLine(angleOfItem);
+
+                g.DrawImage(RotateImage(flashlight, angleOfItem), positionX + rotationX + 5, positionY + rotationY + 5, 15, 15);
                 #endregion
 
                 #region DrawZombies
