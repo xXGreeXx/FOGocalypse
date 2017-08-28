@@ -143,6 +143,48 @@ namespace FOGocalypse
                     }
                 }
 
+                //zombie sight arrows
+                if (x >= width / 2 + 100 && x <= width / 2 + 120)
+                {
+                    if (y >= height / 2 - 220 && y <= height / 2 - 200)
+                    {
+                        if(Game.zombieViewDistance < 9) Game.zombieViewDistance++;
+                    }
+
+                    if (y >= height / 2 - 195 && y <= height / 2 - 175)
+                    {
+                        if(Game.zombieViewDistance > 1) Game.zombieViewDistance--;
+                    }
+                }
+
+                //item rarity
+                if (x >= width / 2 - 100 && x <= width / 2 - 80)
+                {
+                    if (y >= height / 2 - 140 && y <= height / 2 - 120)
+                    {
+                        if (Game.itemRarity < 100) Game.itemRarity += 10;
+                    }
+
+                    if (y >= height / 2 - 115 && y <= height / 2 - 95)
+                    {
+                        if (Game.itemRarity > 10) Game.itemRarity -= 10;
+                    }
+                }
+
+                //zombie rarity
+                if (x >= width / 2 + 100 && x <= width / 2 + 120)
+                {
+                    if (y >= height / 2 - 140 && y <= height / 2 - 120)
+                    {
+                        if (Game.zombieSpawnChance < 100) Game.zombieSpawnChance += 10;
+                    }
+
+                    if (y >= height / 2 - 115 && y <= height / 2 - 95)
+                    {
+                        if (Game.zombieSpawnChance > 10) Game.zombieSpawnChance -= 10;
+                    }
+                }
+
 
                 //begin game
                 if (MouseHandler.mouseX >= Game.canvasWidth / 2 + 75 - g.MeasureString("Begin!", f).Width && MouseHandler.mouseX <= Game.canvasWidth / 2 - 75 + g.MeasureString("Begin!", f).Width)
