@@ -53,7 +53,7 @@ namespace FOGocalypse
         public static Boolean fogOn { get; set; } = true;
         public static String shadowQuality { get; set; } = "high";
 
-        public static int FPS { get; set; } = 0;
+        public static int FPS { get; set; } = 1;
         private int lastFPS = 0;
 
         //contrsuctor

@@ -298,17 +298,37 @@ namespace FOGocalypse
                 //draw player
                 int positionX = width / 2 - player.Width / 2;
                 int positionY = height / 2 - player.Height / 2;
-                float angle = (float)((Math.Atan2((double)MouseHandler.mouseY - positionY, (double)MouseHandler.mouseX - positionX)) * (180/Math.PI));
+                float angle = (float)((Math.Atan2((double)MouseHandler.mouseY - positionY, (double)MouseHandler.mouseX - positionX)) * (180 / Math.PI));
                 
                 g.DrawImage(RotateImage(player, angle), width / 2 - player.Width / 2, height / 2 - player.Height / 2, Game.tileSize, Game.tileSize);
 
-                //draw item player is holding
+                #region ItemHeld
                 //TODO\\
                 EnumHandler.Items selectedItem = Game.itemsInHotbar[Game.selectedHotbar - 1];
-                float directionX = (float)(Math.Cos(angle) * Math.PI * 2);
-                float directionY = (float)(Math.Sin(angle) * Math.PI * 2);
 
-                //drawItemInWorld(positionX + directionX, positionY + directionY, selectedItem, g);
+                angle /= (float)(180 / Math.PI);
+
+                float rotationX = (float)(Math.Cos(angle) * Game.tileSize);
+                float rotationY = (float)(Math.Sin(angle) * Game.tileSize);
+
+                float angleOfItem = (float)(rotationX * Math.PI);
+
+                if (swap)
+                {
+                    angleOfItem = 77 + (float)((rotationY) * Math.PI);
+                }
+
+                if ((rotationX * Math.PI) > 76)
+                {
+                    swap = true;
+                }
+                if ((rotationY * Math.PI) > 76)
+                {
+                    swap = false;
+                }
+
+                //g.DrawImage(RotateImage(flashlight, angleOfItem), positionX + rotationX + 5, positionY + rotationY + 5, 15, 15);
+                #endregion
 
                 #region DrawZombies
                 foreach (Zombie z in Game.zombies)
