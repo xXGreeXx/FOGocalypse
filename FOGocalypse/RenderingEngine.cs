@@ -40,6 +40,7 @@ namespace FOGocalypse
         Bitmap attackWave = FOGocalypse.Properties.Resources.attackWave;
         Bitmap couch = FOGocalypse.Properties.Resources.couch;
         Bitmap table = FOGocalypse.Properties.Resources.table;
+        Bitmap chair = FOGocalypse.Properties.Resources.chair;
 
         Bitmap gameSettingsBackground = FOGocalypse.Properties.Resources.gameSettingsBackground;
 
@@ -238,9 +239,9 @@ namespace FOGocalypse
                     int newY = furniture.y - Game.player.playerY;
                     int distance = Game.playerViewDistance * Game.tileSize;
 
-                    if (newX > width / 2 - player.Width / 2 - distance - 100 && newX < width / 2 - player.Width / 2 + distance)
+                    if (newX > width / 2 - player.Width / 2 - distance - 75 && newX < width / 2 - player.Width / 2 + distance)
                     {
-                        if (newY > height / 2 - player.Height / 2 - distance - 100 && newY < height / 2 - player.Height / 2 + distance)
+                        if (newY > height / 2 - player.Height / 2 - distance - 50 && newY < height / 2 - player.Height / 2 + distance)
                         {
                             switch (furniture.type)
                             {
@@ -254,6 +255,9 @@ namespace FOGocalypse
                                     break;
                                 case EnumHandler.FurnitureTypes.Table:
                                     g.DrawImage(table, newX, newY, table.Width, table.Height);
+                                    break;
+                                case EnumHandler.FurnitureTypes.Chair:
+                                    g.DrawImage(chair, newX, newY, chair.Width, chair.Height);
                                     break;
                             }
                         }

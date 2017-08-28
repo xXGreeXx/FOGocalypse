@@ -111,7 +111,8 @@ namespace FOGocalypse
             Game.itemsInWorld.Add(new Item((x - 2) * Game.tileSize, (y - 3) * Game.tileSize, EnumHandler.Items.Pistol));
             Game.itemsInWorld.Add(new Item((x - 3) * Game.tileSize, (y - 3) * Game.tileSize, EnumHandler.Items.PistolAmmo));
             Game.furnitureInWorld.Add(new Furniture((x - 2) * Game.tileSize, (y - 9) * Game.tileSize, EnumHandler.FurnitureTypes.Couch, 90));
-            Game.furnitureInWorld.Add(new Furniture((x - 9) * Game.tileSize, (y - number + 1) * Game.tileSize, EnumHandler.FurnitureTypes.Table, 90));
+            Game.furnitureInWorld.Add(new Furniture((x - 9) * Game.tileSize, (y - number + 1) * Game.tileSize, EnumHandler.FurnitureTypes.Table, 0));
+            Game.furnitureInWorld.Add(new Furniture((x - 8) * Game.tileSize, (y - number + 3) * Game.tileSize, EnumHandler.FurnitureTypes.Chair, 0));
 
             return tilesOfHouse;
         }
