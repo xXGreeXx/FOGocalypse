@@ -317,7 +317,6 @@ namespace FOGocalypse
                 g.DrawImage(RotateImage(player, angle), width / 2 - player.Width / 2, height / 2 - player.Height / 2, Game.tileSize, Game.tileSize);
 
                 #region ItemHeld
-                //TODO\\
                 EnumHandler.Items selectedItem = Game.itemsInHotbar[Game.selectedHotbar - 1].type;
 
                 angle /= (float)(180 / Math.PI);
@@ -325,23 +324,35 @@ namespace FOGocalypse
                 float rotationX = (float)(Math.Cos(angle) * Game.tileSize);
                 float rotationY = (float)(Math.Sin(angle) * Game.tileSize);
 
-                float angleOfItem = (float)(rotationX * Math.PI);
+                float angleOfItem = (float)((Math.Atan2((double)MouseHandler.mouseY - positionY + rotationX + 5, (double)MouseHandler.mouseX - positionX + rotationY + 5)) * (180 / Math.PI));
 
-                if (swap)
+                switch (selectedItem)
                 {
-                    angleOfItem = 75 + (float)((rotationY) * Math.PI);
+                    case EnumHandler.Items.Flashlight:
+                        g.DrawImage(RotateImage(flashlight, angleOfItem + 90), positionX + rotationX + 5, positionY + rotationY + 5, 15, 15);
+                        break;
+                    case EnumHandler.Items.Knife:
+                        g.DrawImage(RotateImage(knife, angleOfItem + 90), positionX + rotationX + 5, positionY + rotationY + 5, 15, 15);
+                        break;
+                    case EnumHandler.Items.Waterbottle:
+                        g.DrawImage(RotateImage(waterBottle, angleOfItem + 90), positionX + rotationX + 5, positionY + rotationY + 5, 15, 15);
+                        break;
+                    case EnumHandler.Items.Emptybottle:
+                        g.DrawImage(RotateImage(emptyBottle, angleOfItem + 90), positionX + rotationX + 5, positionY + rotationY + 5, 15, 15);
+                        break;
+                    case EnumHandler.Items.Pistol:
+                        g.DrawImage(RotateImage(pistol, angleOfItem + 90), positionX + rotationX + 5, positionY + rotationY + 5, 15, 15);
+                        break;
+                    case EnumHandler.Items.PistolAmmo:
+                        g.DrawImage(RotateImage(pistolAmmo, angleOfItem + 90), positionX + rotationX + 5, positionY + rotationY + 5, 15, 15);
+                        break;
+                    case EnumHandler.Items.Bread:
+                        g.DrawImage(RotateImage(bread, angleOfItem + 90), positionX + rotationX + 5, positionY + rotationY + 5, 15, 15);
+                        break;
+                    case EnumHandler.Items.Peanutbutter:
+                        g.DrawImage(RotateImage(peanutButter, angleOfItem + 90), positionX + rotationX + 5, positionY + rotationY + 5, 15, 15);
+                        break;
                 }
-
-                if ((rotationX * Math.PI) > 76)
-                {
-                    swap = true;
-                }
-                if ((rotationY * Math.PI) > 76)
-                {
-                    swap = false;
-                }
-
-                //g.DrawImage(RotateImage(flashlight, angleOfItem), positionX + rotationX + 5, positionY + rotationY + 5, 15, 15);
                 #endregion
 
                 #region DrawZombies
