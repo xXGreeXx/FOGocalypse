@@ -116,6 +116,22 @@ namespace FOGocalypse
                 Font f = new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold);
                 Font fSmall = new Font(FontFamily.GenericSansSerif, 20, FontStyle.Bold);
 
+                //world size arrows
+                if (x >= width / 2 - 100 && x <= width / 2 - 80)
+                {
+                    if (y >= height / 2- 220 && y <= height / 2 - 200)
+                    {
+                        Game.worldSize *= 2;
+                    }
+
+                    if (y >= height / 2 - 195 && y <= height / 2 - 175)
+                    {
+                        Game.worldSize /= 2;
+                    }
+                }
+
+
+                //begin game
                 if (MouseHandler.mouseX >= Game.canvasWidth / 2 + 75 - g.MeasureString("Begin!", f).Width && MouseHandler.mouseX <= Game.canvasWidth / 2 - 75 + g.MeasureString("Begin!", f).Width)
                 {
                     if (MouseHandler.mouseY >= Game.canvasHeight / 2 + 200 && MouseHandler.mouseY <= Game.canvasHeight / 2 + 200 + g.MeasureString("Begin!", f).Height)

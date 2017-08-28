@@ -184,7 +184,7 @@ namespace FOGocalypse
                 g.DrawImage(upArrow, width / 2 - 100, height / 2 - 140, 20, 20);
                 g.DrawImage(downArrow, width / 2 - 100, height / 2 - 115, 20, 20);
 
-                //item rarity
+                //zombie rarity
                 g.DrawString("Zombie Rarity", fSmall, Brushes.Black, width / 2, height / 2 - 170);
                 g.DrawString(Game.zombieSpawnChance.ToString() + "%", fSmall, Brushes.Black, width / 2, height / 2 - 133);
                 g.DrawImage(upArrow, width / 2 + 100, height / 2 - 140, 20, 20);
