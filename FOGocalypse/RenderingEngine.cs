@@ -572,6 +572,9 @@ namespace FOGocalypse
                 #endregion
             }
             #endregion
+
+            g.DrawString(Game.FPS.ToString() + "fps", new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold), Brushes.Black, width - 150, 0);
+
         }
 
         //fog generator

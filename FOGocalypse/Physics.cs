@@ -47,26 +47,27 @@ namespace FOGocalypse
 
             int velocityX = 0;
             int velocityY = 0;
+            int playerMoveSpeed = (int)((Game.playerMoveSpeed / 15F) * Game.FPS);
 
             if (KeyBoardHandler.lastKeyPressed.Equals("W"))
             {
-                velocityX = Game.playerMoveSpeed;
-                velocityY = Game.playerMoveSpeed;
+                velocityX = playerMoveSpeed;
+                velocityY = playerMoveSpeed;
             }
             if (KeyBoardHandler.lastKeyPressed.Equals("S"))
             {
-                velocityX = -Game.playerMoveSpeed;
-                velocityY = -Game.playerMoveSpeed;
+                velocityX = -playerMoveSpeed;
+                velocityY = -playerMoveSpeed;
             }
             if (KeyBoardHandler.lastKeyPressed.Equals("A"))
             {
-                velocityX = Game.playerMoveSpeed;
-                velocityY = -Game.playerMoveSpeed;
+                velocityX = playerMoveSpeed;
+                velocityY = -playerMoveSpeed;
             }
             if (KeyBoardHandler.lastKeyPressed.Equals("D"))
             {
-                velocityX = -Game.playerMoveSpeed;
-                velocityY = Game.playerMoveSpeed;
+                velocityX = -playerMoveSpeed;
+                velocityY = playerMoveSpeed;
             }
 
             Game.player.playerX += (int)(directionX * velocityX);

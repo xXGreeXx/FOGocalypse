@@ -51,6 +51,9 @@ namespace FOGocalypse
         public static int frameRate { get; set; } = 60;
         public static String resolution { get; set; } = "1240x1440";
 
+        public static int FPS { get; set; } = 0;
+        private int lastFPS = 0;
+
         //contrsuctor
         public Game()
         {
@@ -75,10 +78,14 @@ namespace FOGocalypse
             month = DateTime.Now.Month;
             year = DateTime.Now.Year;
 
-            timer.Interval = 1000 / 60;
+            timer.Interval = 1;
             timer.Start();
             timer2.Interval = 60000;
             timer2.Start();
+
+            fpsTracker.Interval = 1000;
+            fpsTracker.Start();
+
             this.KeyPreview = true;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MinimizeBox = false;
@@ -96,11 +103,13 @@ namespace FOGocalypse
         //update handler
         private void timer_Tick(object sender, EventArgs e)
         {
-            //change framerate
-            timer.Interval = 1000 / frameRate;
+            if (lastFPS < frameRate)
+            {
+                lastFPS++;
 
-            //update canvas
-            canvas.Refresh();
+                //update canvas
+                canvas.Refresh();
+            }
         }
 
         //refresh handler
@@ -158,6 +167,13 @@ namespace FOGocalypse
             {
                 time += 100;
             }
+        }
+
+        //fps tracker tick
+        private void fpsTracker_Tick(object sender, EventArgs e)
+        {
+            FPS = lastFPS;
+            lastFPS = 0;
         }
     }
 }

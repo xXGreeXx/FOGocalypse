@@ -32,6 +32,7 @@
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.canvas = new System.Windows.Forms.PictureBox();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.fpsTracker = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,6 +62,10 @@
             this.timer2.Interval = 1000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // fpsTracker
+            // 
+            this.fpsTracker.Tick += new System.EventHandler(this.fpsTracker_Tick);
+            // 
             // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -80,6 +85,7 @@
         private System.Windows.Forms.Timer timer;
         public System.Windows.Forms.PictureBox canvas;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Timer fpsTracker;
     }
 }
 
