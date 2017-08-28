@@ -183,9 +183,6 @@
     <None Include="Resources\warningIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\attackWave.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\pistolAmmo.png" />
   </ItemGroup>
   <ItemGroup>

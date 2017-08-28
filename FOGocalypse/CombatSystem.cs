@@ -52,7 +52,7 @@ namespace FOGocalypse
                         Game.zombies[index].health -= damage;
                         Game.zombies[index].x -= directionToPushZombieBackX;
                         Game.zombies[index].y -= directionToPushZombieBackY;
-                        Game.particleGenerator.CreateBloodEffect(Game.zombies[index].x - directionToPushZombieBackX, Game.zombies[index].y - directionToPushZombieBackX, 10, Color.DarkRed);
+                        Game.particleGenerator.CreateBloodEffect(Game.zombies[index].x - directionToPushZombieBackX, Game.zombies[index].y - directionToPushZombieBackX, 10, Color.DarkRed, 8);
                     }
                 }
             }
@@ -75,7 +75,7 @@ namespace FOGocalypse
                     if (zombieY >= playerPositionY - 60 && zombieY <= playerPositionY + 60 + Game.tileSize)
                     {
                         Game.zombies[index].health -= damage;
-                        Game.particleGenerator.CreateBloodEffect(Game.zombies[index].x, Game.zombies[index].y, 10, Color.DarkRed);
+                        Game.particleGenerator.CreateBloodEffect(Game.zombies[index].x, Game.zombies[index].y, 10, Color.DarkRed, 8);
                     }
                 }
             }
@@ -102,7 +102,7 @@ namespace FOGocalypse
                     if (zombieY >= destination.Y - 30 && zombieY <= destination.Y + 30)
                     {
                         Game.zombies[index].health -= damage;
-                        Game.particleGenerator.CreateBloodEffect(Game.zombies[index].x, Game.zombies[index].y, damage / 2, Color.DarkRed);
+                        Game.particleGenerator.CreateBloodEffect(Game.zombies[index].x, Game.zombies[index].y, damage / 2, Color.DarkRed, 8);
                         hit = true;
                         break;
                     }
@@ -111,10 +111,10 @@ namespace FOGocalypse
 
             if (!hit)
             {
-                Game.particleGenerator.CreateBloodEffect(destination.X + Game.player.playerX, destination.Y + Game.player.playerY, 1, Color.Brown);
+                Game.particleGenerator.CreateBloodEffect(destination.X + Game.player.playerX, destination.Y + Game.player.playerY, 1, Color.Brown, 6);
             }
 
-            Game.particleGenerator.CreateBloodEffect(Game.canvasWidth / 2 - Game.tileSize / 2 + Game.player.playerX, Game.canvasHeight / 2 - Game.tileSize / 2 + Game.player.playerY, 2, Color.Yellow);
+            Game.particleGenerator.CreateBloodEffect(Game.canvasWidth / 2 - Game.tileSize / 2 + Game.player.playerX, Game.canvasHeight / 2 - Game.tileSize / 2 + Game.player.playerY, 2, Color.Yellow, 4);
         }
     }
 }

@@ -38,7 +38,6 @@ namespace FOGocalypse
         Bitmap fogBackground = FOGocalypse.Properties.Resources.fogBackground;
         Bitmap upArrow = FOGocalypse.Properties.Resources.upArrow;
         Bitmap downArrow = FOGocalypse.Properties.Resources.downArrow;
-        Bitmap attackWave = FOGocalypse.Properties.Resources.attackWave;
         Bitmap couch = FOGocalypse.Properties.Resources.couch;
         Bitmap table = FOGocalypse.Properties.Resources.table;
         Bitmap chair = FOGocalypse.Properties.Resources.chair;
@@ -387,22 +386,6 @@ namespace FOGocalypse
                     int newY = p.y - Game.player.playerY;
 
                     g.FillRectangle(new SolidBrush(p.color), newX, newY, p.size, p.size);
-                }
-
-                //attack wave
-                //TODO\\
-                if (Game.attackEffect != -1)
-                {
-                    Game.attackEffect++;
-
-                    if (Game.attackEffect < 5)
-                    {
-                       // g.DrawImage(attackWave, positionX, positionY, 20 + (Game.attackEffect * 8), 10 + (Game.attackEffect * 8));
-                    }
-                    else
-                    {
-                        Game.attackEffect = -1;
-                    }
                 }
                 #endregion
 
