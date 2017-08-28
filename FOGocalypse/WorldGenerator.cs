@@ -50,8 +50,42 @@ namespace FOGocalypse
 
                             foreach (Tile t in generateHouse(x, y))
                             {
+                                Tile tileToRemove = new Tile(t.x, t.y, type);
+
                                 tilesForWorld.Add(t);
                             }
+
+                            //add items
+                            int water = generator.Next(1, 3);
+                            int knife = generator.Next(2, 5);
+                            int peanutButter = generator.Next(1, 3);
+
+
+                            if (water == 2)
+                            {
+                                Game.itemsInWorld.Add(new Item((x - 8) * Game.tileSize, (y - number + 1) * Game.tileSize, EnumHandler.Items.Waterbottle));
+                            }
+                            if (knife == 2)
+                            {
+                                Game.itemsInWorld.Add(new Item((x - 2) * Game.tileSize, (y - 1) * Game.tileSize, EnumHandler.Items.Knife));
+                            }
+                            if (peanutButter == 2)
+                            {
+                                Game.itemsInWorld.Add(new Item((x - 9) * Game.tileSize, (y - number + 2) * Game.tileSize, EnumHandler.Items.Peanutbutter));
+                            }
+
+                            Game.itemsInWorld.Add(new Item((x - 9) * Game.tileSize, (y - number + 1) * Game.tileSize, EnumHandler.Items.Bread));
+
+                            Item pistolItem = new Item((x - 8) * Game.tileSize, (y - 1) * Game.tileSize, EnumHandler.Items.Pistol);
+                            pistolItem.ammo = generator.Next(0, 5);
+                            Game.itemsInWorld.Add(pistolItem);
+
+                            Game.itemsInWorld.Add(new Item((x - 3) * Game.tileSize, (y - 3) * Game.tileSize, EnumHandler.Items.PistolAmmo));
+                            Game.furnitureInWorld.Add(new Furniture((x - 2) * Game.tileSize, (y - 9) * Game.tileSize, EnumHandler.FurnitureTypes.Couch, 90));
+                            Game.furnitureInWorld.Add(new Furniture((x - 9) * Game.tileSize, (y - number + 1) * Game.tileSize, EnumHandler.FurnitureTypes.Table, 0));
+                            Game.furnitureInWorld.Add(new Furniture((x - 8) * Game.tileSize, (y - number + 3) * Game.tileSize, EnumHandler.FurnitureTypes.Chair, 0));
+                            Game.furnitureInWorld.Add(new Furniture((x - 9) * Game.tileSize, (y - 2) * Game.tileSize, EnumHandler.FurnitureTypes.Bed, 0));
+                            Game.furnitureInWorld.Add(new Furniture((x - 8) * Game.tileSize, (y - 1) * Game.tileSize, EnumHandler.FurnitureTypes.SmallTable, 0));
                         }
                     }
                     else
@@ -72,9 +106,6 @@ namespace FOGocalypse
             EnumHandler.TileTypes type = EnumHandler.TileTypes.Wood;
             int number = generator.Next(10, 16);
             int door = generator.Next(2, number - 4);
-            int water = generator.Next(1, 3);
-            int knife = generator.Next(2, 5);
-            int peanutButter = generator.Next(1, 3);
 
             for (int i = 0; i < 10; i++)
             {
@@ -101,32 +132,6 @@ namespace FOGocalypse
                     tilesOfHouse.Add(new Tile((x - xOfBlock) * Game.tileSize, (y - yOfBlock) * Game.tileSize, EnumHandler.TileTypes.Carpet));
                 }
             }
-
-            if (water == 2)
-            {
-                Game.itemsInWorld.Add(new Item((x - 8) * Game.tileSize, (y - number + 1) * Game.tileSize, EnumHandler.Items.Waterbottle));
-            }
-            if (knife == 2)
-            {
-                Game.itemsInWorld.Add(new Item((x - 2) * Game.tileSize, (y - 1) * Game.tileSize, EnumHandler.Items.Knife));
-            }
-            if (peanutButter == 2)
-            {
-                Game.itemsInWorld.Add(new Item((x - 9) * Game.tileSize, (y - number + 2) * Game.tileSize, EnumHandler.Items.Peanutbutter));
-            }
-
-            Game.itemsInWorld.Add(new Item((x - 9) * Game.tileSize, (y - number + 1) * Game.tileSize, EnumHandler.Items.Bread));
-
-            Item pistolItem = new Item((x - 2) * Game.tileSize, (y - 3) * Game.tileSize, EnumHandler.Items.Pistol);
-            pistolItem.ammo = generator.Next(0, 5);
-            Game.itemsInWorld.Add(pistolItem);
-
-            Game.itemsInWorld.Add(new Item((x - 3) * Game.tileSize, (y - 3) * Game.tileSize, EnumHandler.Items.PistolAmmo));
-            Game.furnitureInWorld.Add(new Furniture((x - 2) * Game.tileSize, (y - 9) * Game.tileSize, EnumHandler.FurnitureTypes.Couch, 90));
-            Game.furnitureInWorld.Add(new Furniture((x - 9) * Game.tileSize, (y - number + 1) * Game.tileSize, EnumHandler.FurnitureTypes.Table, 0));
-            Game.furnitureInWorld.Add(new Furniture((x - 8) * Game.tileSize, (y - number + 3) * Game.tileSize, EnumHandler.FurnitureTypes.Chair, 0));
-            Game.furnitureInWorld.Add(new Furniture((x - 9) * Game.tileSize, (y - 2) * Game.tileSize, EnumHandler.FurnitureTypes.Bed, 0));
-            Game.furnitureInWorld.Add(new Furniture((x - 8) * Game.tileSize, (y - 1) * Game.tileSize, EnumHandler.FurnitureTypes.SmallTable, 0));
 
             return tilesOfHouse;
         }
