@@ -479,7 +479,7 @@ namespace FOGocalypse
                         break;
                     case EnumHandler.Items.Pistol:
                         g.DrawString("Left click, ranged shoot", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 115);
-                        g.DrawString("Right click, reload", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 100);
+                        g.DrawString("Right click, reload, <" + Game.itemsInHotbar[Game.selectedHotbar - 1].ammo.ToString() + "shots>", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 100);
                         break;
                 }
 

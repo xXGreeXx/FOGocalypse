@@ -270,7 +270,33 @@ namespace FOGocalypse
                         case EnumHandler.Items.Pistol:
                             if (button.Equals(MouseButtons.Left))
                             {
-                                Game.combatSystem.FireItem(50, new Point(MouseHandler.mouseX, MouseHandler.mouseY));
+                                if (Game.itemsInHotbar[Game.selectedHotbar - 1].ammo > 0)
+                                {
+                                    Game.combatSystem.FireItem(50, new Point(MouseHandler.mouseX, MouseHandler.mouseY));
+                                    Game.itemsInHotbar[Game.selectedHotbar - 1].ammo--;
+                                }
+                            }
+                            if (button.Equals(MouseButtons.Right))
+                            {
+                                Boolean hasAmmo = false;
+
+                                int index = 0;
+                                foreach (Item item in Game.itemsInHotbar)
+                                {
+                                    if (item.type.Equals(EnumHandler.Items.PistolAmmo))
+                                    {
+                                        hasAmmo = true;
+                                        Game.itemsInHotbar[index] = new Item(0, 0, EnumHandler.Items.None);
+                                        break;
+                                    }
+
+                                    index++;
+                                }
+
+                                if (hasAmmo)
+                                {
+                                    Game.itemsInHotbar[Game.selectedHotbar - 1].ammo = 6;
+                                }
                             }
                             break;
                         case EnumHandler.Items.Knife:

@@ -8,6 +8,7 @@ namespace FOGocalypse
         public int x { get; set; }
         public int y { get; set; }
         public EnumHandler.Items type { get; set; }
+        public int ammo { get; set; }
 
         //constructor
         public Item(int x, int y, EnumHandler.Items type)
@@ -15,6 +16,7 @@ namespace FOGocalypse
             this.x = x;
             this.y = y;
             this.type = type;
+            this.ammo = 0;
         }
     }
 }

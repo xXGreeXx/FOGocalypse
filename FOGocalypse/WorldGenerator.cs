@@ -116,7 +116,11 @@ namespace FOGocalypse
             }
 
             Game.itemsInWorld.Add(new Item((x - 9) * Game.tileSize, (y - number + 1) * Game.tileSize, EnumHandler.Items.Bread));
-            Game.itemsInWorld.Add(new Item((x - 2) * Game.tileSize, (y - 3) * Game.tileSize, EnumHandler.Items.Pistol));
+
+            Item pistolItem = new Item((x - 2) * Game.tileSize, (y - 3) * Game.tileSize, EnumHandler.Items.Pistol);
+            pistolItem.ammo = generator.Next(0, 5);
+            Game.itemsInWorld.Add(pistolItem);
+
             Game.itemsInWorld.Add(new Item((x - 3) * Game.tileSize, (y - 3) * Game.tileSize, EnumHandler.Items.PistolAmmo));
             Game.furnitureInWorld.Add(new Furniture((x - 2) * Game.tileSize, (y - 9) * Game.tileSize, EnumHandler.FurnitureTypes.Couch, 90));
             Game.furnitureInWorld.Add(new Furniture((x - 9) * Game.tileSize, (y - number + 1) * Game.tileSize, EnumHandler.FurnitureTypes.Table, 0));
