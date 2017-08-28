@@ -50,7 +50,7 @@ namespace FOGocalypse
         public static int canvasHeight { get; set; }
         public static int frameRate { get; set; } = 60;
         public static String resolution { get; set; } = "1240x1440";
-        public static Boolean fogOn { get; set; } = false;
+        public static Boolean fogOn { get; set; } = true;
         public static String shadowQuality { get; set; } = "high";
 
         public static int FPS { get; set; } = 0;
