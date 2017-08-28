@@ -382,7 +382,7 @@ namespace FOGocalypse
                         {
                             if (y >= yOfItem && y <= yOfItem + 50)
                             {
-                                if (Game.itemsInHotbar[i].Equals(EnumHandler.Items.None))
+                                if (Game.itemsInHotbar[i].type.Equals(EnumHandler.Items.None))
                                 {
                                     Game.itemsInHotbar[i] = itemHeldByMouse;
                                     itemHeldByMouse = new Item(0, 0, EnumHandler.Items.None);
@@ -410,7 +410,7 @@ namespace FOGocalypse
                             {
                                 if (!itemHeldByMouse.Equals(EnumHandler.Items.None))
                                 {
-                                    if (Game.itemsInInventory[i].Equals(EnumHandler.Items.None))
+                                    if (Game.itemsInInventory[i].type.Equals(EnumHandler.Items.None))
                                     {
                                         Game.itemsInInventory[i] = itemHeldByMouse;
                                         itemHeldByMouse = new Item(0, 0, EnumHandler.Items.None);
