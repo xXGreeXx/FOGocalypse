@@ -134,12 +134,18 @@ namespace FOGocalypse
                 {
                     if (y >= height / 2- 220 && y <= height / 2 - 200)
                     {
-                        Game.worldSize *= 2;
+                        if (Game.worldSize < 4096)
+                        {
+                            Game.worldSize *= 2;
+                        }
                     }
 
                     if (y >= height / 2 - 195 && y <= height / 2 - 175)
                     {
-                        Game.worldSize /= 2;
+                        if (Game.worldSize > 1)
+                        {
+                            Game.worldSize /= 2;
+                        }
                     }
                 }
 
