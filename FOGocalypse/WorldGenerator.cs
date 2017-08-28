@@ -71,7 +71,7 @@ namespace FOGocalypse
             List<Tile> tilesOfHouse = new List<Tile>();
             EnumHandler.TileTypes type = EnumHandler.TileTypes.Wood;
             int number = generator.Next(10, 16);
-            int door = generator.Next(1, number);
+            int door = generator.Next(2, number - 1);
             int water = generator.Next(1, 3);
             int knife = generator.Next(2, 5);
             int peanutButter = generator.Next(1, 3);
@@ -92,6 +92,14 @@ namespace FOGocalypse
 
                 if (i == door || i == door + 1) continue;
                 tilesOfHouse.Add(new Tile((x - 10) * Game.tileSize, (y - i) * Game.tileSize, type));
+            }
+
+            for (int xOfBlock = 9; xOfBlock > 0; xOfBlock--)
+            {
+                for (int yOfBlock = number - 1; yOfBlock > 0; yOfBlock--)
+                {
+                    tilesOfHouse.Add(new Tile((x - xOfBlock) * Game.tileSize, (y - yOfBlock) * Game.tileSize, EnumHandler.TileTypes.Carpet));
+                }
             }
 
             if (water == 2)

@@ -7,7 +7,8 @@
             Grass,
             Dirt,
             Stone,
-            Wood
+            Wood,
+            Carpet
         }
 
         public enum Directions

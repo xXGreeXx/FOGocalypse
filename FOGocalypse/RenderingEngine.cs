@@ -12,6 +12,7 @@ namespace FOGocalypse
         Bitmap grass = FOGocalypse.Properties.Resources.grass;
         Bitmap dirt = FOGocalypse.Properties.Resources.dirt;
         Bitmap wood = FOGocalypse.Properties.Resources.wood;
+        Bitmap carpet = FOGocalypse.Properties.Resources.carpet;
         Bitmap waterDrop = FOGocalypse.Properties.Resources.waterDrop;
         Bitmap heart = FOGocalypse.Properties.Resources.heart;
         Bitmap food = FOGocalypse.Properties.Resources.food;
@@ -227,6 +228,7 @@ namespace FOGocalypse
                             if (t.type.Equals(EnumHandler.TileTypes.Grass)) g.DrawImage(grass, x, y, Game.tileSize, Game.tileSize);
                             else if (t.type.Equals(EnumHandler.TileTypes.Dirt)) g.DrawImage(dirt, x, y, Game.tileSize, Game.tileSize);
                             else if (t.type.Equals(EnumHandler.TileTypes.Wood)) g.DrawImage(wood, x, y, Game.tileSize, Game.tileSize);
+                            else if (t.type.Equals(EnumHandler.TileTypes.Carpet)) g.DrawImage(carpet, x, y, Game.tileSize, Game.tileSize);
                         }
                     }
                 }
