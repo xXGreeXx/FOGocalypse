@@ -142,6 +142,17 @@ namespace FOGocalypse
                 g.DrawString("60/FPS", fSmall, Brushes.Black, width / 2 - 140 + g.MeasureString("Framerate: ", f).Width, height / 2 - 197);
                 g.DrawString("120/FPS", fSmall, Brushes.Black, width / 2 - 30 + g.MeasureString("Framerate: ", f).Width, height / 2 - 197);
 
+                //fog
+                g.DrawString("Fog: ", f, Brushes.Black, width / 2 - 250, height / 2 - 150);
+                g.FillRectangle(Brushes.Gray, width / 2 - 200 + g.MeasureString("Fog: ", f).Width, height / 2 - 150, 110, 30);
+                g.FillRectangle(Brushes.Gray, width / 2 - 190 + g.MeasureString("Fog: ", f).Width + 110, height / 2 - 150, 110, 30);
+
+                if (Game.fogOn) g.FillRectangle(Brushes.LightGray, width / 2 - 200 + g.MeasureString("Fog: ", f).Width, height / 2 - 150, 110, 30);
+                else g.FillRectangle(Brushes.LightGray, width / 2 - 190 + g.MeasureString("Fog: ", f).Width + 110, height / 2 - 150, 110, 30);
+
+                g.DrawString("On", fSmall, Brushes.Black, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width, height / 2 - 147);
+                g.DrawString("Off", fSmall, Brushes.Black, width / 2 - 140 + g.MeasureString("Framerate: ", f).Width, height / 2 - 147);
+
                 animateMenuBackground();
             }
             #endregion
@@ -318,7 +329,10 @@ namespace FOGocalypse
                 #endregion
 
                 //draw fog
-                fogGenerator(width, height, g);
+                if (Game.fogOn)
+                {
+                    fogGenerator(width, height, g);
+                }
 
                 #region Particles
                 //blood particles

@@ -107,6 +107,19 @@ namespace FOGocalypse
                         Game.frameRate = 120;
                     }
                 }
+
+                widthOffset = 40 + g.MeasureString("Fog: ", f).Width;
+                if (y >= Game.canvasHeight / 2 - 150 && y <= Game.canvasHeight / 2 - 120)
+                {
+                    if (x >= Game.canvasWidth / 2 - 200 + widthOffset && x <= Game.canvasWidth / 2 - 90 + widthOffset)
+                    {
+                        Game.fogOn = true;
+                    }
+                    if (x >= Game.canvasWidth / 2 - 190 + widthOffset + 110 && x <= Game.canvasWidth / 2 - 80 + widthOffset + 110)
+                    {
+                        Game.fogOn = false;
+                    }
+                }
             }
             #endregion
 
