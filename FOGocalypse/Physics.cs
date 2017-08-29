@@ -73,8 +73,7 @@ namespace FOGocalypse
             Game.player.playerX += (int)(directionX * velocityX);
             Game.player.playerY += (int)(directionY * velocityY);
 
-            //handle collsions
-            //TODO\\
+            //handle block collsions
             Game.player.hitbox = new Rectangle(playerPosition.X, playerPosition.Y, Game.tileSize, Game.tileSize);
 
             foreach (Tile t in Game.worldTiles)
@@ -90,6 +89,40 @@ namespace FOGocalypse
                     Rectangle bottomHitbox = new Rectangle(newX, newY + Game.tileSize - 5, Game.tileSize, 10);
                     Rectangle leftHitbox = new Rectangle(newX, newY, 20, Game.tileSize);
                     Rectangle rightHitbox = new Rectangle(newX + Game.tileSize - 10, newY, 10, Game.tileSize);
+
+                    if (Game.player.hitbox.IntersectsWith(topHitbox) || Game.player.hitbox.IntersectsWith(bottomHitbox)) Game.player.playerY = oldPosition.Y;
+                    if (Game.player.hitbox.IntersectsWith(leftHitbox) || Game.player.hitbox.IntersectsWith(rightHitbox)) Game.player.playerX = oldPosition.X;
+                }
+            }
+
+            //handle furniture collisions
+            foreach (Furniture f in Game.furnitureInWorld)
+            {
+                int newX = f.x - Game.player.playerX;
+                int newY = f.y - Game.player.playerY;
+                int playerX = Game.canvasWidth / 2 - Game.tileSize / 2;
+                int playerY = Game.canvasHeight / 2 - Game.tileSize / 2;
+
+                if (f.type.Equals(EnumHandler.FurnitureTypes.Couch))
+                {
+                    if (f.rotation == 90)
+                    {
+                        Rectangle topHitbox = new Rectangle(newX, newY + 5, 50, 10);
+                        Rectangle bottomHitbox = new Rectangle(newX, newY + 100 - 5, 50, 10);
+                        Rectangle leftHitbox = new Rectangle(newX, newY, 20, 100);
+                        Rectangle rightHitbox = new Rectangle(newX + 50 - 10, newY, 10, 100);
+
+                        if (Game.player.hitbox.IntersectsWith(topHitbox) || Game.player.hitbox.IntersectsWith(bottomHitbox)) Game.player.playerY = oldPosition.Y;
+                        if (Game.player.hitbox.IntersectsWith(leftHitbox) || Game.player.hitbox.IntersectsWith(rightHitbox)) Game.player.playerX = oldPosition.X;
+                    }
+                }
+
+                if (f.type.Equals(EnumHandler.FurnitureTypes.Table))
+                {
+                    Rectangle topHitbox = new Rectangle(newX, newY + 5, 100, 10);
+                    Rectangle bottomHitbox = new Rectangle(newX, newY + 50 - 5, 100, 10);
+                    Rectangle leftHitbox = new Rectangle(newX, newY, 20, 50);
+                    Rectangle rightHitbox = new Rectangle(newX + 100 - 10, newY, 10, 50);
 
                     if (Game.player.hitbox.IntersectsWith(topHitbox) || Game.player.hitbox.IntersectsWith(bottomHitbox)) Game.player.playerY = oldPosition.Y;
                     if (Game.player.hitbox.IntersectsWith(leftHitbox) || Game.player.hitbox.IntersectsWith(rightHitbox)) Game.player.playerX = oldPosition.X;
