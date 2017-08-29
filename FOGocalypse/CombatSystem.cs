@@ -60,7 +60,8 @@ namespace FOGocalypse
                     }
                 }
 
-                Game.attackSpeedLimit = 1000;
+                Game.attackSpeedLimit = 700;
+                canAttack = false;
             }
         }
 
@@ -86,7 +87,8 @@ namespace FOGocalypse
                     }
                 }
 
-                Game.attackSpeedLimit = 900;
+                Game.attackSpeedLimit = 600;
+                canAttack = false;
             }
         }
 
