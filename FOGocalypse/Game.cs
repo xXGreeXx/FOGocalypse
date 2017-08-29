@@ -39,7 +39,7 @@ namespace FOGocalypse
         public static int playerViewDistance { get; set; } = 5;
         public static int zombieViewDistance { get; set; } = 3;
         public static int zombieHearDistance { get; set; } = 2;
-        public static int zombieMoveSpeed { get; set; } = 4;
+        public static int zombieMoveSpeed { get; set; } = 2;
         public static int zombieSpawnChance { get; set; } = 10;
         public static int itemRarity { get; set; } = 60;
         public static int time = 800;

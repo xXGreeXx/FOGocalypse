@@ -197,6 +197,7 @@ namespace FOGocalypse
                 {
                     if (MouseHandler.mouseY >= Game.canvasHeight / 2 + 200 && MouseHandler.mouseY <= Game.canvasHeight / 2 + 200 + g.MeasureString("Begin!", f).Height)
                     {
+
                         Game.player = new Player(Game.worldSize / 2 * Game.tileSize, Game.worldSize / 2 * Game.tileSize, EnumHandler.Directions.Left);
 
                         Game.itemsInHotbar[0] = new Item(0, 0, EnumHandler.Items.Flashlight);
@@ -211,6 +212,8 @@ namespace FOGocalypse
                         }
 
                         Game.zombies = new List<Zombie>();
+                        Game.itemsInWorld = new List<Item>();
+                        Game.furnitureInWorld = new List<Furniture>();
                         Game.selectedHotbar = 1;
                         Game.inPauseMenu = false;
                         Game.inInventory = false;
