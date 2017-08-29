@@ -230,6 +230,18 @@ namespace FOGocalypse
                             else if (t.type.Equals(EnumHandler.TileTypes.Dirt)) g.DrawImage(dirt, x, y, Game.tileSize, Game.tileSize);
                             else if (t.type.Equals(EnumHandler.TileTypes.Wood)) g.DrawImage(wood, x, y, Game.tileSize, Game.tileSize);
                             else if (t.type.Equals(EnumHandler.TileTypes.Carpet)) g.DrawImage(carpet, x, y, Game.tileSize, Game.tileSize);
+
+                            if (!t.roofed)
+                            {
+                                int timeFromNormal = Game.time;
+                                if (Game.time > 1200)
+                                {
+                                    timeFromNormal = 1200 - (Game.time - 1200);
+                                }
+
+                                int alphaForShadow = 200 - (timeFromNormal / 10);
+                                g.FillRectangle(new SolidBrush(Color.FromArgb(alphaForShadow, Color.Black)), x, y, Game.tileSize, Game.tileSize);
+                            }
                         }
                     }
                 }
@@ -417,7 +429,7 @@ namespace FOGocalypse
                 Font timeFont = new Font(FontFamily.GenericSansSerif, 20, FontStyle.Bold);
                 String add = Game.time < 1000 ? "0" : "";
                 add += Game.time == 0 ? "00" : "";
-                g.DrawString(add + Game.time.ToString() + ": " + Game.day + "/"  + Game.month + "/" + Game.year, timeFont, Brushes.Black, 0, 130);
+                g.DrawString(add + Game.time.ToString() + ": " + Game.month + "/"  + Game.day + "/" + Game.year, timeFont, Brushes.Black, 0, 130);
                 #endregion
 
 

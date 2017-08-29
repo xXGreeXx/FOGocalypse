@@ -129,7 +129,11 @@ namespace FOGocalypse
             {
                 for (int yOfBlock = number - 1; yOfBlock > 0; yOfBlock--)
                 {
-                    tilesOfHouse.Add(new Tile((x - xOfBlock) * Game.tileSize, (y - yOfBlock) * Game.tileSize, EnumHandler.TileTypes.Carpet));
+                    Tile tileToAdd = new Tile((x - xOfBlock) * Game.tileSize, (y - yOfBlock) * Game.tileSize, EnumHandler.TileTypes.Carpet);
+
+                    tileToAdd.roofed = true;
+
+                    tilesOfHouse.Add(tileToAdd);
                 }
             }
 
