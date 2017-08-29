@@ -46,6 +46,7 @@ namespace FOGocalypse
         public static int day = 0;
         public static int month = 0;
         public static int year = 0;
+        public static EnumHandler.WeatherType weather = EnumHandler.WeatherType.Sunny;
         public static List<Particle> bloodParticles { get; set; } = new List<Particle>();
 
         public static int canvasWidth { get; set; }
@@ -59,6 +60,7 @@ namespace FOGocalypse
         private int lastFPS = 0;
         private int physicsCycle = 0;
         public static int attackSpeedLimit { get; set; } = 0;
+        Random r = new Random();
 
         //contrsuctor
         public Game()
@@ -181,6 +183,8 @@ namespace FOGocalypse
         //update the date and time
         private void timer2_Tick(object sender, EventArgs e)
         {
+            EnumHandler.WeatherType[] typesOfWeather = { EnumHandler.WeatherType.Rainy, EnumHandler.WeatherType.Sunny , EnumHandler.WeatherType.Cloudy };
+
             if (state.Equals(EnumHandler.GameStates.Game))
             {
                 time += 100;
@@ -202,6 +206,8 @@ namespace FOGocalypse
                     }
 
                     day++;
+
+                    weather = typesOfWeather[r.Next(0, 3)];
                 }
             }
         }

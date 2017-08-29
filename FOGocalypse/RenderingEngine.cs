@@ -231,6 +231,7 @@ namespace FOGocalypse
                             else if (t.type.Equals(EnumHandler.TileTypes.Carpet)) g.DrawImage(carpet, x, y, Game.tileSize, Game.tileSize);
                             else if (t.type.Equals(EnumHandler.TileTypes.Stone)) g.DrawImage(stone, x, y, Game.tileSize, Game.tileSize);
 
+                            //tile shading
                             if (!t.roofed)
                             {
                                 int timeFromNormal = Game.time;
@@ -240,6 +241,17 @@ namespace FOGocalypse
                                 }
 
                                 int alphaForShadow = 200 - (timeFromNormal / 10);
+
+                                if (Game.weather.Equals(EnumHandler.WeatherType.Cloudy))
+                                {
+                                    alphaForShadow = 180 - (timeFromNormal / 10);
+                                }
+
+                                else if (Game.weather.Equals(EnumHandler.WeatherType.Rainy))
+                                {
+                                    alphaForShadow = 160;
+                                }
+
                                 g.FillRectangle(new SolidBrush(Color.FromArgb(alphaForShadow, Color.Black)), x, y, Game.tileSize, Game.tileSize);
                             }
                         }
@@ -439,6 +451,8 @@ namespace FOGocalypse
                 String add = Game.time < 1000 ? "0" : "";
                 add += Game.time == 0 ? "00" : "";
                 g.DrawString(add + Game.time.ToString() + ": " + Game.month + "/"  + Game.day + "/" + Game.year, timeFont, Brushes.Black, 0, 130);
+
+                g.DrawString("Weather: " + Game.weather, new Font(FontFamily.GenericSansSerif, 15, FontStyle.Bold), Brushes.Black, 0, 160);
                 #endregion
 
 

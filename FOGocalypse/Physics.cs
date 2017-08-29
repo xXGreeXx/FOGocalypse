@@ -8,6 +8,7 @@ namespace FOGocalypse
     {
         int waterCycle = 0;
         int hungerCycle = 0;
+        int rainCycle = 0;
         Random generator = new Random();
         int cycle = 0;
 
@@ -30,6 +31,7 @@ namespace FOGocalypse
                 simulateParticles();
                 simulateZombies();
                 spawnZombie();
+                simulateRain();
             }
         }
 
@@ -194,6 +196,27 @@ namespace FOGocalypse
             foreach (int index in particlesToRemove)
             {
                 Game.bloodParticles.RemoveAt(index);
+            }
+        }
+
+        //simulate rain
+        private void simulateRain()
+        {
+            int width = Game.canvasWidth;
+            int height = Game.canvasHeight;
+
+            if (Game.weather.Equals(EnumHandler.WeatherType.Rainy))
+            {
+                if (rainCycle >= 3)
+                {
+                    for (int i = 0; i < generator.Next(5, 80); i++)
+                    {
+                        Game.particleGenerator.CreateBloodEffect(generator.Next(width / 2 - 100, width / 2 + 100) + Game.player.playerX, generator.Next(height / 2 - 100, height / 2 + 100) + Game.player.playerY, -3, Color.Blue, 4);
+                    }
+
+                    rainCycle = 0;
+                }
+                rainCycle++;
             }
         }
 
