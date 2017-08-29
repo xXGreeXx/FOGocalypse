@@ -227,7 +227,7 @@ namespace FOGocalypse
             cycle++;
             if (cycle >= 10)
             {
-                int chance = generator.Next(1, 10 - (Game.zombieSpawnChance / 10));
+                int chance = generator.Next(1, 10 - (9 - (Game.zombieSpawnChance / 10)));
                 if (chance == 1)
                 {
                     int x = generator.Next(Game.player.playerX - (20 * Game.tileSize), Game.player.playerX + (20 * Game.tileSize));
