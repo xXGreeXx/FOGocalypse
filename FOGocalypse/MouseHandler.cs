@@ -299,7 +299,6 @@ namespace FOGocalypse
                                     if (item.type.Equals(EnumHandler.Items.PistolAmmo))
                                     {
                                         hasAmmo = true;
-                                        Game.itemsInHotbar[index] = new Item(0, 0, EnumHandler.Items.None);
                                         break;
                                     }
 
@@ -308,7 +307,16 @@ namespace FOGocalypse
 
                                 if (hasAmmo)
                                 {
-                                    Game.itemsInHotbar[Game.selectedHotbar - 1].ammo = 6;
+                                    while (Game.itemsInHotbar[Game.selectedHotbar - 1].ammo < 6 && Game.itemsInHotbar[index].ammo > 0)
+                                    {
+                                        Game.itemsInHotbar[Game.selectedHotbar - 1].ammo++;
+                                        Game.itemsInHotbar[index].ammo--;
+                                    }
+
+                                    if (Game.itemsInHotbar[index].ammo == 0)
+                                    {
+                                        Game.itemsInHotbar[index] = new Item(0, 0, EnumHandler.Items.None);
+                                    }
                                 }
                             }
                             break;
