@@ -76,7 +76,7 @@ namespace FOGocalypse
 
                             if (water == 2)
                             {
-                                Game.itemsInWorld.Add(new Item((x - 8) * Game.tileSize, (y - number - 1) * Game.tileSize, EnumHandler.Items.Waterbottle));
+                                Game.itemsInWorld.Add(new Item((x - 8) * Game.tileSize, (y - number + 1) * Game.tileSize, EnumHandler.Items.Waterbottle));
                             }
                             if (knife == 2)
                             {
@@ -84,10 +84,10 @@ namespace FOGocalypse
                             }
                             if (peanutButter == 2)
                             {
-                                Game.itemsInWorld.Add(new Item((x - 9) * Game.tileSize, (y - number) * Game.tileSize, EnumHandler.Items.Peanutbutter));
+                                Game.itemsInWorld.Add(new Item((x - 9) * Game.tileSize, (y - number + 2) * Game.tileSize, EnumHandler.Items.Peanutbutter));
                             }
 
-                            Game.itemsInWorld.Add(new Item((x - 9) * Game.tileSize, (y - number - 1) * Game.tileSize, EnumHandler.Items.Bread));
+                            Game.itemsInWorld.Add(new Item((x - 9) * Game.tileSize, (y - number + 1) * Game.tileSize, EnumHandler.Items.Bread));
 
                             Item pistolItem = new Item((x - 8) * Game.tileSize, (y - 1) * Game.tileSize, EnumHandler.Items.Pistol);
                             pistolItem.ammo = generator.Next(0, 5);
@@ -98,8 +98,8 @@ namespace FOGocalypse
                             Game.itemsInWorld.Add(ammoItem);
 
                             Game.furnitureInWorld.Add(new Furniture((x - 2) * Game.tileSize, (y - 9) * Game.tileSize, EnumHandler.FurnitureTypes.Couch, 90));
-                            Game.furnitureInWorld.Add(new Furniture((x - 9) * Game.tileSize, (y - number) * Game.tileSize, EnumHandler.FurnitureTypes.Table, 0));
-                            Game.furnitureInWorld.Add(new Furniture((x - 8) * Game.tileSize, (y - number + 2) * Game.tileSize, EnumHandler.FurnitureTypes.Chair, 0));
+                            Game.furnitureInWorld.Add(new Furniture((x - 9) * Game.tileSize, (y - number + 1) * Game.tileSize, EnumHandler.FurnitureTypes.Table, 0));
+                            Game.furnitureInWorld.Add(new Furniture((x - 8) * Game.tileSize, (y - number + 3) * Game.tileSize, EnumHandler.FurnitureTypes.Chair, 0));
                             Game.furnitureInWorld.Add(new Furniture((x - 9) * Game.tileSize, (y - 2) * Game.tileSize, EnumHandler.FurnitureTypes.Bed, 0));
                             Game.furnitureInWorld.Add(new Furniture((x - 8) * Game.tileSize, (y - 1) * Game.tileSize, EnumHandler.FurnitureTypes.SmallTable, 0));
                             #endregion
@@ -129,7 +129,7 @@ namespace FOGocalypse
 
                             if (water == 2)
                             {
-                                Game.itemsInWorld.Add(new Item((x - 8 - 15) * Game.tileSize, (y - number - 1) * Game.tileSize, EnumHandler.Items.Waterbottle));
+                                Game.itemsInWorld.Add(new Item((x - 8 - 15) * Game.tileSize, (y - number + 1) * Game.tileSize, EnumHandler.Items.Waterbottle));
                             }
                             if (knife == 2)
                             {
@@ -137,10 +137,10 @@ namespace FOGocalypse
                             }
                             if (peanutButter == 2)
                             {
-                                Game.itemsInWorld.Add(new Item((x - 9 - 15) * Game.tileSize, (y - number) * Game.tileSize, EnumHandler.Items.Peanutbutter));
+                                Game.itemsInWorld.Add(new Item((x - 9 - 15) * Game.tileSize, (y - number + 2) * Game.tileSize, EnumHandler.Items.Peanutbutter));
                             }
 
-                            Game.itemsInWorld.Add(new Item((x - 9 - 15) * Game.tileSize, (y - number - 1) * Game.tileSize, EnumHandler.Items.Bread));
+                            Game.itemsInWorld.Add(new Item((x - 9 - 15) * Game.tileSize, (y - number + 1) * Game.tileSize, EnumHandler.Items.Bread));
 
                             pistolItem = new Item((x - 8 - 15) * Game.tileSize, (y - 1) * Game.tileSize, EnumHandler.Items.Pistol);
                             pistolItem.ammo = generator.Next(0, 5);
@@ -151,8 +151,8 @@ namespace FOGocalypse
                             Game.itemsInWorld.Add(ammoItem);
 
                             Game.furnitureInWorld.Add(new Furniture((x - 2 - 15) * Game.tileSize, (y - 9) * Game.tileSize, EnumHandler.FurnitureTypes.Couch, 90));
-                            Game.furnitureInWorld.Add(new Furniture((x - 9 - 15) * Game.tileSize, (y - number) * Game.tileSize, EnumHandler.FurnitureTypes.Table, 0));
-                            Game.furnitureInWorld.Add(new Furniture((x - 8 - 15) * Game.tileSize, (y - number + 2) * Game.tileSize, EnumHandler.FurnitureTypes.Chair, 0));
+                            Game.furnitureInWorld.Add(new Furniture((x - 9 - 15) * Game.tileSize, (y - number + 1) * Game.tileSize, EnumHandler.FurnitureTypes.Table, 0));
+                            Game.furnitureInWorld.Add(new Furniture((x - 8 - 15) * Game.tileSize, (y - number + 3) * Game.tileSize, EnumHandler.FurnitureTypes.Chair, 0));
                             Game.furnitureInWorld.Add(new Furniture((x - 9 - 15) * Game.tileSize, (y - 2) * Game.tileSize, EnumHandler.FurnitureTypes.Bed, 0));
                             Game.furnitureInWorld.Add(new Furniture((x - 8 - 15) * Game.tileSize, (y - 1) * Game.tileSize, EnumHandler.FurnitureTypes.SmallTable, 0));
 
