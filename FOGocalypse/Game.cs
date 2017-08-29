@@ -57,6 +57,7 @@ namespace FOGocalypse
 
         public static int FPS { get; set; } = 1;
         private int lastFPS = 0;
+        private int physicsCycle = 0;
 
         //contrsuctor
         public Game()
@@ -130,7 +131,13 @@ namespace FOGocalypse
 
             if (!inPauseMenu && !inLossScreen)
             {
-                physicsEngine.SimulatePhysics();
+                physicsCycle++;
+
+                if (physicsCycle >= Math.Floor(FPS / 20F))
+                {
+                    physicsEngine.SimulatePhysics();
+                    physicsCycle = 0;
+                }
             }
         }
 
