@@ -47,11 +47,9 @@ namespace FOGocalypse
 
         Bitmap gameSettingsBackground = FOGocalypse.Properties.Resources.gameSettingsBackground;
 
-        float fogFrame = 0.0F;
         int screenFade = 255;
-        int positionOfDistort = 0;
-        float cycleOfDistort = 0;
-        Boolean swap = false;
+        public static int weaponPositionOffsetX { get; set; } = 0;
+        public static int weaponPositionOffsetY { get; set; } = 0;
         Random r = new Random();
 
         //constructor
@@ -334,8 +332,8 @@ namespace FOGocalypse
 
                 angle /= (float)(180 / Math.PI);
 
-                float rotationX = (float)(Math.Cos(angle) * Game.tileSize);
-                float rotationY = (float)(Math.Sin(angle) * Game.tileSize);
+                float rotationX = (float)(Math.Cos(angle) * Game.tileSize) - weaponPositionOffsetX;
+                float rotationY = (float)(Math.Sin(angle) * Game.tileSize) - weaponPositionOffsetY;
 
                 float angleOfItem = (float)((Math.Atan2((double)MouseHandler.mouseY - positionY + rotationX + 5, (double)MouseHandler.mouseX - positionX + rotationY + 5)) * (180 / Math.PI));
 
@@ -365,6 +363,15 @@ namespace FOGocalypse
                     case EnumHandler.Items.Peanutbutter:
                         g.DrawImage(RotateImage(peanutButter, angleOfItem + 90), positionX + rotationX + 5, positionY + rotationY + 5, 15, 15);
                         break;
+                }
+
+                if (weaponPositionOffsetX > 0)
+                {
+                    weaponPositionOffsetX--;
+                }
+                if (weaponPositionOffsetY > 0)
+                {
+                    weaponPositionOffsetY--;
                 }
                 #endregion
 

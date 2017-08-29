@@ -61,6 +61,8 @@ namespace FOGocalypse
                 }
 
                 Game.attackSpeedLimit = 450;
+                RenderingEngine.weaponPositionOffsetX = 5;
+                RenderingEngine.weaponPositionOffsetY = 2;
                 canAttack = false;
             }
         }
@@ -96,6 +98,7 @@ namespace FOGocalypse
                 }
 
                 Game.attackSpeedLimit = 400;
+                RenderingEngine.weaponPositionOffsetY = 5;
                 canAttack = false;
             }
         }
