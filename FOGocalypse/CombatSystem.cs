@@ -60,7 +60,7 @@ namespace FOGocalypse
                     }
                 }
 
-                Game.attackSpeedLimit = 700;
+                Game.attackSpeedLimit = 450;
                 canAttack = false;
             }
         }
@@ -70,12 +70,19 @@ namespace FOGocalypse
         {
             if (canAttack)
             {
+                int playerPositionX = Game.canvasWidth / 2 - Game.tileSize / 2;
+                int playerPositionY = Game.canvasHeight / 2 - Game.tileSize / 2;
+
+                float angle = (float)((Math.Atan2((double)MouseHandler.mouseY - playerPositionX, (double)MouseHandler.mouseX - playerPositionY)) * (180 / Math.PI));
+                angle /= (float)(180 / Math.PI);
+
+                int rotationX = (int)(Math.Cos(angle) * Game.tileSize);
+                int rotationY = (int)(Math.Sin(angle) * Game.tileSize);
+
                 for (int index = 0; index < Game.zombies.Count; index++)
                 {
                     int zombieX = Game.zombies[index].x - Game.player.playerX;
                     int zombieY = Game.zombies[index].y - Game.player.playerY;
-                    int playerPositionX = Game.canvasWidth / 2 - Game.tileSize / 2;
-                    int playerPositionY = Game.canvasHeight / 2 - Game.tileSize / 2;
 
                     if (zombieX >= playerPositionX - 60 && zombieX <= playerPositionX + 60 + Game.tileSize)
                     {
@@ -83,11 +90,12 @@ namespace FOGocalypse
                         {
                             Game.zombies[index].health -= damage;
                             Game.particleGenerator.CreateBloodEffect(Game.zombies[index].x, Game.zombies[index].y, 10, Color.Red, 8);
+                            break;
                         }
                     }
                 }
 
-                Game.attackSpeedLimit = 600;
+                Game.attackSpeedLimit = 400;
                 canAttack = false;
             }
         }
