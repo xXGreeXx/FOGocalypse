@@ -48,11 +48,21 @@ namespace FOGocalypse
                         {
                             houses.Add(new int[] { x, y });
 
+                            int index = 0;
                             foreach (Tile t in generateHouse(x, y))
                             {
-                                Tile tileToRemove = new Tile(t.x, t.y, type);
+                                for (int index2 = 0; index2 < tilesForWorld.Count; index2++)
+                                {
+                                    Tile newTile = tilesForWorld[index2];
+
+                                    if (t.x == newTile.x && t.y == newTile.y && index != index2)
+                                    {
+                                        tilesForWorld.RemoveAt(index2);
+                                    }
+                                }
 
                                 tilesForWorld.Add(t);
+                                index++;
                             }
 
                             //add items
