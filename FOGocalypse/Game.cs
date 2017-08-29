@@ -58,6 +58,7 @@ namespace FOGocalypse
         public static int FPS { get; set; } = 1;
         private int lastFPS = 0;
         private int physicsCycle = 0;
+        public static int attackSpeedLimit { get; set; } = 0;
 
         //contrsuctor
         public Game()
@@ -133,11 +134,17 @@ namespace FOGocalypse
             {
                 physicsCycle++;
 
-                if (physicsCycle >= Math.Floor(FPS / 20F))
+                if (physicsCycle >= Math.Ceiling(FPS / 20F))
                 {
                     physicsEngine.SimulatePhysics();
                     physicsCycle = 0;
                 }
+            }
+
+            if (!CombatSystem.canAttack && attackSpeedLimit != -1)
+            {
+                StartAttackLimitTimer(attackSpeedLimit);
+                attackSpeedLimit = -1;
             }
         }
 
@@ -204,6 +211,20 @@ namespace FOGocalypse
         {
             FPS = lastFPS;
             lastFPS = 0;
+        }
+
+        //attack speed limit timer
+        private void attackSpeedTimer_Tick(object sender, EventArgs e)
+        {
+            CombatSystem.canAttack = true;
+            attackSpeedTimer.Stop();
+        }
+
+        //start attack speed limit
+        public void StartAttackLimitTimer(int duration)
+        {
+            attackSpeedTimer.Interval = duration;
+            attackSpeedTimer.Start();
         }
     }
 }

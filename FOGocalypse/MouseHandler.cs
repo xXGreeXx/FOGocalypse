@@ -286,7 +286,6 @@ namespace FOGocalypse
                                 if (Game.itemsInHotbar[Game.selectedHotbar - 1].ammo > 0)
                                 {
                                     Game.combatSystem.FireItem(50, new Point(MouseHandler.mouseX, MouseHandler.mouseY));
-                                    Game.itemsInHotbar[Game.selectedHotbar - 1].ammo--;
                                 }
                             }
                             if (button.Equals(MouseButtons.Right))
