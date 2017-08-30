@@ -41,6 +41,7 @@ namespace FOGocalypse
         Bitmap fogBackground = FOGocalypse.Properties.Resources.fogBackground;
         Bitmap upArrow = FOGocalypse.Properties.Resources.upArrow;
         Bitmap downArrow = FOGocalypse.Properties.Resources.downArrow;
+        Bitmap hotbarSlot = FOGocalypse.Properties.Resources.hotbarSlot;
         Bitmap couch = FOGocalypse.Properties.Resources.couch;
         Bitmap table = FOGocalypse.Properties.Resources.table;
         Bitmap chair = FOGocalypse.Properties.Resources.chair;
@@ -50,6 +51,7 @@ namespace FOGocalypse
         Bitmap gameSettingsBackground = FOGocalypse.Properties.Resources.gameSettingsBackground;
         Bitmap optionBackground = FOGocalypse.Properties.Resources.optionBackground;
         Bitmap optionBackgroundDown = FOGocalypse.Properties.Resources.optionBackgroundDown;
+        Bitmap inventoryBackground = FOGocalypse.Properties.Resources.iventoryBackground;
 
         int screenFade = 255;
         public static int weaponPositionOffsetX { get; set; } = 0;
@@ -543,6 +545,7 @@ namespace FOGocalypse
 
                     if (Game.selectedHotbar - 1 == i) c = Color.White;
 
+                    g.DrawImage(hotbarSlot, x, y, 50, 50);
                     g.DrawRectangle(new Pen(c, 4), x, y, 50, 50);
                 }
 
@@ -608,22 +611,13 @@ namespace FOGocalypse
                 if (Game.inInventory)
                 {
                     //draw slots
-                    g.FillRectangle(Brushes.DarkGray, width / 2 - 150, height / 2 - 150, 300, 300);
-                    g.FillRectangle(Brushes.LightGray, width / 2 + 150, height / 2 - 150, 178, 178);
+                    g.DrawImage(inventoryBackground, width / 2 - 150, height / 2 - 150, 300, 300);
 
                     for (int x = width / 2 - 150; x <width / 2 + 150; x += 60)
                     {
                         for (int y = height / 2 - 150; y < height / 2 + 150; y += 60)
                         {
-                            g.DrawRectangle(new Pen(Color.Brown, 4), x + 4, y + 4, 50, 50);
-                        }
-                    }
-
-                    for (int x = width / 2 + 150; x < width / 2 + 300; x += 60)
-                    {
-                        for (int y = height / 2 - 150; y < height / 2 + 10; y += 60)
-                        {
-                            g.DrawRectangle(new Pen(Color.Orange, 4), x + 4, y + 4, 50, 50);
+                            g.DrawImage(hotbarSlot, x + 4, y + 4, 50, 50);
                         }
                     }
 
@@ -847,7 +841,11 @@ namespace FOGocalypse
             PointF offset = new PointF((float)image.Width / 2, (float)image.Height / 2);
             Bitmap rotatedBmp = new Bitmap(image.Width, image.Height);
             rotatedBmp.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
             Graphics g = Graphics.FromImage(rotatedBmp);
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
             g.TranslateTransform(offset.X, offset.Y);
             g.RotateTransform(angle);
             g.TranslateTransform(-offset.X, -offset.Y);
