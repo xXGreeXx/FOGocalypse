@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using System.IO;
 
@@ -75,6 +76,15 @@ namespace FOGocalypse
             float currentHeight = Game.canvasHeight;
 
             scale = Math.Abs((currentWidth - currentHeight) / (baseWidth - baseHeight));
+
+            if (Game.antialias)
+            {
+                g.SmoothingMode = SmoothingMode.HighQuality;
+            }
+            else
+            {
+                g.SmoothingMode = SmoothingMode.Default;
+            }
 
             #region MainMenu
             if (Game.state.Equals(EnumHandler.GameStates.MainMenu))
@@ -194,11 +204,33 @@ namespace FOGocalypse
                 g.DrawString("Medium", fSmall, Brushes.Black, width / 2 - 140 + g.MeasureString("Shadows: ", f).Width, height / 2 - 47);
                 g.DrawString("High", fSmall, Brushes.Black, width / 2 - 30 + g.MeasureString("Shadows: ", f).Width, height / 2 - 47);
 
+                //antialias
+                g.DrawString("Antialias: ", f, Brushes.Black, width / 2 - 250, height / 2);
+                g.DrawImage(optionBackground, width / 2 - 200 + g.MeasureString("Antialias: ", f).Width, height / 2, 110, 30);
+                g.DrawImage(optionBackground, width / 2 - 190 + g.MeasureString("Antialias: ", f).Width + 110, height / 2, 110, 30);
+
+                if (Game.antialias) g.DrawImage(optionBackgroundDown, width / 2 - 200 + g.MeasureString("Antialias: ", f).Width, height / 2, 110, 30);
+                else g.DrawImage(optionBackgroundDown, width / 2 - 190 + g.MeasureString("Antialias: ", f).Width + 110, height / 2, 110, 30);
+
+                g.DrawString("On", fSmall, Brushes.Black, width / 2 - 200 + g.MeasureString("Antialias: ", f).Width, height / 2 + 3);
+                g.DrawString("Off", fSmall, Brushes.Black, width / 2 - 80 + g.MeasureString("Antialias: ", f).Width, height / 2 + 3);
+
+                //antialias
+                g.DrawString("Blood: ", f, Brushes.Black, width / 2 - 250, height / 2 + 50);
+                g.DrawImage(optionBackground, width / 2 - 200 + g.MeasureString("Blood: ", f).Width, height / 2 + 50, 110, 30);
+                g.DrawImage(optionBackground, width / 2 - 190 + g.MeasureString("Blood: ", f).Width + 110, height / 2 + 50, 110, 30);
+
+                if (Game.blood) g.DrawImage(optionBackgroundDown, width / 2 - 200 + g.MeasureString("Blood: ", f).Width, height / 2 + 50, 110, 30);
+                else g.DrawImage(optionBackgroundDown, width / 2 - 190 + g.MeasureString("Blood: ", f).Width + 110, height / 2 + 50, 110, 30);
+
+                g.DrawString("On", fSmall, Brushes.Black, width / 2 - 200 + g.MeasureString("Blood: ", f).Width, height / 2 + 53);
+                g.DrawString("Off", fSmall, Brushes.Black, width / 2 - 80 + g.MeasureString("Blood: ", f).Width, height / 2 + 53);
+
                 //sound volume
-                g.DrawString("Sound Volume: ", f, Brushes.Black, width / 2 - 250, height / 2);
+                g.DrawString("Sound Volume: ", f, Brushes.Black, width / 2 - 250, height / 2 + 100);
 
                 //music volume
-                g.DrawString("Music Volume: ", f, Brushes.Black, width / 2 - 250, height / 2 + 50);
+                g.DrawString("Music Volume: ", f, Brushes.Black, width / 2 - 250, height / 2 + 150);
 
                 animateMenuBackground();
             }

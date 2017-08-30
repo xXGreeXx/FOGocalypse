@@ -151,6 +151,32 @@ namespace FOGocalypse
                         Game.shadowQuality = "high";
                     }
                 }
+
+                widthOffset = 40 + g.MeasureString("Antialias: ", f).Width;
+                if (y >= Game.canvasHeight / 2  && y <= Game.canvasHeight / 2 + 30)
+                {
+                    if (x >= Game.canvasWidth / 2 - 230 + widthOffset && x <= Game.canvasWidth / 2 - 110 + widthOffset)
+                    {
+                        Game.antialias = true;
+                    }
+                    if (x >= Game.canvasWidth / 2 - 100 + widthOffset && x <= Game.canvasWidth / 2 - 90 + widthOffset + 110)
+                    {
+                        Game.antialias = false;
+                    }
+                }
+
+                widthOffset = 40 + g.MeasureString("Bllod: ", f).Width;
+                if (y >= Game.canvasHeight / 2 + 50 && y <= Game.canvasHeight / 2 + 80)
+                {
+                    if (x >= Game.canvasWidth / 2 - 230 + widthOffset && x <= Game.canvasWidth / 2 - 110 + widthOffset)
+                    {
+                        Game.blood = true;
+                    }
+                    if (x >= Game.canvasWidth / 2 - 100 + widthOffset && x <= Game.canvasWidth / 2 - 90 + widthOffset + 110)
+                    {
+                        Game.blood = false;
+                    }
+                }
             }
             #endregion
 

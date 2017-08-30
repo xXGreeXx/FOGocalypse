@@ -58,6 +58,8 @@ namespace FOGocalypse
         public static Boolean fogOn { get; set; } = true;
         public static String shadowQuality { get; set; } = "high";
         public static Boolean rainOn { get; set; } = true;
+        public static Boolean antialias { get; set; } = true;
+        public static Boolean blood { get; set; } = true;
         public static int soundVolume { get; set; } = 100;
         public static int musicVolume { get; set; } = 100;
 
