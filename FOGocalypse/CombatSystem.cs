@@ -152,6 +152,7 @@ namespace FOGocalypse
                 Game.attackSpeedLimit = 1300;
 
                 Game.itemsInHotbar[Game.selectedHotbar - 1].ammo--;
+                RenderingEngine.weaponPositionOffsetY = 5;
             }
         }
     }
