@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.IO;
 
 namespace FOGocalypse
 {
@@ -111,13 +112,43 @@ namespace FOGocalypse
                 widthOffset = 40 + g.MeasureString("Fog: ", f).Width;
                 if (y >= Game.canvasHeight / 2 - 150 && y <= Game.canvasHeight / 2 - 120)
                 {
-                    if (x >= Game.canvasWidth / 2 - 200 + widthOffset && x <= Game.canvasWidth / 2 - 90 + widthOffset)
+                    if (x >= Game.canvasWidth / 2 - 230 + widthOffset && x <= Game.canvasWidth / 2 - 110 + widthOffset)
                     {
                         Game.fogOn = true;
                     }
-                    if (x >= Game.canvasWidth / 2 - 190 + widthOffset + 110 && x <= Game.canvasWidth / 2 - 80 + widthOffset + 110)
+                    if (x >= Game.canvasWidth / 2 - 100 + widthOffset && x <= Game.canvasWidth / 2 - 90 + widthOffset + 110)
                     {
                         Game.fogOn = false;
+                    }
+                }
+
+                widthOffset = 40 + g.MeasureString("Rain: ", f).Width;
+                if (y >= Game.canvasHeight / 2 - 100 && y <= Game.canvasHeight / 2 - 70)
+                {
+                    if (x >= Game.canvasWidth / 2 - 230 + widthOffset && x <= Game.canvasWidth / 2 - 110 + widthOffset)
+                    {
+                        Game.rainOn = true;
+                    }
+                    if (x >= Game.canvasWidth / 2 - 100 + widthOffset && x <= Game.canvasWidth / 2 - 90 + widthOffset + 110)
+                    {
+                        Game.rainOn = false;
+                    }
+                }
+
+                widthOffset = 40 + g.MeasureString("Shadows: ", f).Width;
+                if (y >= Game.canvasHeight / 2 - 50 && y <= Game.canvasHeight / 2 - 20)
+                {
+                    if (x >= Game.canvasWidth / 2 - 250 + widthOffset && x <= Game.canvasWidth / 2 - 140 + widthOffset)
+                    {
+                        Game.shadowQuality = "low";
+                    }
+                    if (x >= Game.canvasWidth / 2 - 140 + widthOffset && x <= Game.canvasWidth / 2 - 30 + widthOffset)
+                    {
+                        Game.shadowQuality = "medium";
+                    }
+                    if (x >= Game.canvasWidth / 2 - 30 + widthOffset && x <= Game.canvasWidth / 2 + 80 + widthOffset)
+                    {
+                        Game.shadowQuality = "high";
                     }
                 }
             }

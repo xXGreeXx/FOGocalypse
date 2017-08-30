@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.IO;
 
 namespace FOGocalypse
 {
@@ -46,6 +47,8 @@ namespace FOGocalypse
         Bitmap smallTable = FOGocalypse.Properties.Resources.smallTable;
 
         Bitmap gameSettingsBackground = FOGocalypse.Properties.Resources.gameSettingsBackground;
+        Bitmap optionBackground = FOGocalypse.Properties.Resources.optionBackground;
+        Bitmap optionBackgroundDown = FOGocalypse.Properties.Resources.optionBackgroundDown;
 
         int screenFade = 255;
         public static int weaponPositionOffsetX { get; set; } = 0;
@@ -119,7 +122,7 @@ namespace FOGocalypse
             if (Game.state.Equals(EnumHandler.GameStates.OptionsMenu))
             {
                 Font f = new Font(FontFamily.GenericSansSerif, 20, FontStyle.Bold);
-                Font fSmall = new Font(FontFamily.GenericSansSerif, 15, FontStyle.Bold);
+                Font fSmall = new Font(FontFamily.GenericSansSerif, 14, FontStyle.Bold);
 
                 g.DrawImage(fogBackground, 0, 0, width, height);
                 g.DrawImage(title1, width / 2 - title1.Width / 2, 0, title1.Width, title1.Height);
@@ -129,13 +132,13 @@ namespace FOGocalypse
 
                 //resolution
                 g.DrawString("Resolution: ", f, Brushes.Black, width / 2 - 250, height / 2 - 250);
-                g.FillRectangle(Brushes.Gray, width / 2 - 250 + g.MeasureString("Resolution: ", f).Width, height / 2 - 250, 110, 30);
-                g.FillRectangle(Brushes.Gray, width / 2 - 250 + g.MeasureString("Resolution: ", f).Width + 110, height / 2 - 250, 110, 30);
-                g.FillRectangle(Brushes.Gray, width / 2 - 250 + g.MeasureString("Resolution: ", f).Width + 220, height / 2 - 250, 110, 30);
+                g.DrawImage(optionBackground, width / 2 - 250 + g.MeasureString("Resolution: ", f).Width, height / 2 - 250, 110, 30);
+                g.DrawImage(optionBackground, width / 2 - 250 + g.MeasureString("Resolution: ", f).Width + 110, height / 2 - 250, 110, 30);
+                g.DrawImage(optionBackground, width / 2 - 250 + g.MeasureString("Resolution: ", f).Width + 220, height / 2 - 250, 110, 30);
 
-                if (Game.resolution.Equals("1240x1440")) g.FillRectangle(Brushes.LightGray, width / 2 - 250 + g.MeasureString("Resolution: ", f).Width, height / 2 - 250, 110, 30);
-                if (Game.resolution.Equals("1920x1080")) g.FillRectangle(Brushes.LightGray, width / 2 - 250 + g.MeasureString("Resolution: ", f).Width + 110, height / 2 - 250, 110, 30);
-                if (Game.resolution.Equals("fullscreen")) g.FillRectangle(Brushes.LightGray, width / 2 - 250 + g.MeasureString("Resolution: ", f).Width + 220, height / 2 - 250, 110, 30);
+                if (Game.resolution.Equals("1240x1440")) g.DrawImage(optionBackgroundDown, width / 2 - 250 + g.MeasureString("Resolution: ", f).Width, height / 2 - 250, 110, 30);
+                if (Game.resolution.Equals("1920x1080")) g.DrawImage(optionBackgroundDown, width / 2 - 250 + g.MeasureString("Resolution: ", f).Width + 110, height / 2 - 250, 110, 30);
+                if (Game.resolution.Equals("fullscreen")) g.DrawImage(optionBackgroundDown, width / 2 - 250 + g.MeasureString("Resolution: ", f).Width + 220, height / 2 - 250, 110, 30);
 
                 g.DrawString("1240x1440", fSmall, Brushes.Black, width / 2 - 250 + g.MeasureString("Resolution: ", f).Width, height / 2 - 247);
                 g.DrawString("1920x1080", fSmall, Brushes.Black, width / 2 - 140 + g.MeasureString("Resolution: ", f).Width, height / 2 - 247);
@@ -143,13 +146,13 @@ namespace FOGocalypse
 
                 //framerate
                 g.DrawString("Framerate: ", f, Brushes.Black, width / 2 - 250, height / 2 - 200);
-                g.FillRectangle(Brushes.Gray, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width, height / 2 - 200, 110, 30);
-                g.FillRectangle(Brushes.Gray, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width + 110, height / 2 - 200, 110, 30);
-                g.FillRectangle(Brushes.Gray, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width + 220, height / 2 - 200, 110, 30);
+                g.DrawImage(optionBackground, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width, height / 2 - 200, 110, 30);
+                g.DrawImage(optionBackground, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width + 110, height / 2 - 200, 110, 30);
+                g.DrawImage(optionBackground, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width + 220, height / 2 - 200, 110, 30);
 
-                if (Game.frameRate == 30) g.FillRectangle(Brushes.LightGray, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width, height / 2 - 200, 110, 30);
-                if (Game.frameRate == 60) g.FillRectangle(Brushes.LightGray, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width + 110, height / 2 - 200, 110, 30);
-                if (Game.frameRate == 120) g.FillRectangle(Brushes.LightGray, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width + 220, height / 2 - 200, 110, 30);
+                if (Game.frameRate == 30) g.DrawImage(optionBackgroundDown, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width, height / 2 - 200, 110, 30);
+                if (Game.frameRate == 60) g.DrawImage(optionBackgroundDown, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width + 110, height / 2 - 200, 110, 30);
+                if (Game.frameRate == 120) g.DrawImage(optionBackgroundDown, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width + 220, height / 2 - 200, 110, 30);
 
                 g.DrawString("30/FPS", fSmall, Brushes.Black, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width, height / 2 - 197);
                 g.DrawString("60/FPS", fSmall, Brushes.Black, width / 2 - 140 + g.MeasureString("Framerate: ", f).Width, height / 2 - 197);
@@ -157,14 +160,45 @@ namespace FOGocalypse
 
                 //fog
                 g.DrawString("Fog: ", f, Brushes.Black, width / 2 - 250, height / 2 - 150);
-                g.FillRectangle(Brushes.Gray, width / 2 - 200 + g.MeasureString("Fog: ", f).Width, height / 2 - 150, 110, 30);
-                g.FillRectangle(Brushes.Gray, width / 2 - 190 + g.MeasureString("Fog: ", f).Width + 110, height / 2 - 150, 110, 30);
+                g.DrawImage(optionBackground, width / 2 - 200 + g.MeasureString("Fog: ", f).Width, height / 2 - 150, 110, 30);
+                g.DrawImage(optionBackground, width / 2 - 190 + g.MeasureString("Fog: ", f).Width + 110, height / 2 - 150, 110, 30);
 
-                if (Game.fogOn) g.FillRectangle(Brushes.LightGray, width / 2 - 200 + g.MeasureString("Fog: ", f).Width, height / 2 - 150, 110, 30);
-                else g.FillRectangle(Brushes.LightGray, width / 2 - 190 + g.MeasureString("Fog: ", f).Width + 110, height / 2 - 150, 110, 30);
+                if (Game.fogOn) g.DrawImage(optionBackgroundDown, width / 2 - 200 + g.MeasureString("Fog: ", f).Width, height / 2 - 150, 110, 30);
+                else g.DrawImage(optionBackgroundDown, width / 2 - 80 + g.MeasureString("Fog: ", f).Width, height / 2 - 150, 110, 30);
 
-                g.DrawString("On", fSmall, Brushes.Black, width / 2 - 250 + g.MeasureString("Framerate: ", f).Width, height / 2 - 147);
-                g.DrawString("Off", fSmall, Brushes.Black, width / 2 - 140 + g.MeasureString("Framerate: ", f).Width, height / 2 - 147);
+                g.DrawString("On", fSmall, Brushes.Black, width / 2 - 200 + g.MeasureString("Fog: ", f).Width, height / 2 - 147);
+                g.DrawString("Off", fSmall, Brushes.Black, width / 2 - 80 + g.MeasureString("Fog: ", f).Width, height / 2 - 147);
+
+                //rain
+                g.DrawString("Rain: ", f, Brushes.Black, width / 2 - 250, height / 2 - 100);
+                g.DrawImage(optionBackground, width / 2 - 200 + g.MeasureString("Rain: ", f).Width, height / 2 - 100, 110, 30);
+                g.DrawImage(optionBackground, width / 2 - 190 + g.MeasureString("Rain: ", f).Width + 110, height / 2 - 100, 110, 30);
+
+                if (Game.rainOn) g.DrawImage(optionBackgroundDown, width / 2 - 200 + g.MeasureString("Rain: ", f).Width, height / 2 - 100, 110, 30);
+                else g.DrawImage(optionBackgroundDown, width / 2 - 190 + g.MeasureString("Rain: ", f).Width + 110, height / 2 - 100, 110, 30);
+
+                g.DrawString("On", fSmall, Brushes.Black, width / 2 - 200 + g.MeasureString("Rain: ", f).Width, height / 2 - 97);
+                g.DrawString("Off", fSmall, Brushes.Black, width / 2 - 80 + g.MeasureString("Rain: ", f).Width, height / 2 - 97);
+
+                //shadow quality
+                g.DrawString("Shadows: ", f, Brushes.Black, width / 2 - 250, height / 2 - 50);
+                g.DrawImage(optionBackground, width / 2 - 250 + g.MeasureString("Shadows: ", f).Width, height / 2 - 50, 110, 30);
+                g.DrawImage(optionBackground, width / 2 - 250 + g.MeasureString("Shadows: ", f).Width + 110, height / 2 - 50, 110, 30);
+                g.DrawImage(optionBackground, width / 2 - 250 + g.MeasureString("Shadows: ", f).Width + 220, height / 2 - 50, 110, 30);
+
+                if (Game.shadowQuality.Equals("low")) g.DrawImage(optionBackgroundDown, width / 2 - 250 + g.MeasureString("Shadows: ", f).Width, height / 2 - 50, 110, 30);
+                if (Game.shadowQuality.Equals("medium")) g.DrawImage(optionBackgroundDown, width / 2 - 250 + g.MeasureString("Shadows: ", f).Width + 110, height / 2 - 50, 110, 30);
+                if (Game.shadowQuality.Equals("high")) g.DrawImage(optionBackgroundDown, width / 2 - 250 + g.MeasureString("Shadows: ", f).Width + 220, height / 2 - 50, 110, 30);
+
+                g.DrawString("Low", fSmall, Brushes.Black, width / 2 - 250 + g.MeasureString("Shadows: ", f).Width, height / 2 - 47);
+                g.DrawString("Medium", fSmall, Brushes.Black, width / 2 - 140 + g.MeasureString("Shadows: ", f).Width, height / 2 - 47);
+                g.DrawString("High", fSmall, Brushes.Black, width / 2 - 30 + g.MeasureString("Shadows: ", f).Width, height / 2 - 47);
+
+                //sound volume
+                g.DrawString("Sound Volume: ", f, Brushes.Black, width / 2 - 250, height / 2);
+
+                //music volume
+                g.DrawString("Music Volume: ", f, Brushes.Black, width / 2 - 250, height / 2 + 50);
 
                 animateMenuBackground();
             }

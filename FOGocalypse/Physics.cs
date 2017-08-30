@@ -205,7 +205,7 @@ namespace FOGocalypse
             int width = Game.canvasWidth;
             int height = Game.canvasHeight;
 
-            if (Game.weather.Equals(EnumHandler.WeatherType.Rainy))
+            if (Game.weather.Equals(EnumHandler.WeatherType.Rainy) && Game.rainOn)
             {
                 if (rainCycle >= 3)
                 {

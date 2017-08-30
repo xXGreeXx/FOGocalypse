@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.IO;
 
 namespace FOGocalypse
 {
@@ -51,10 +52,14 @@ namespace FOGocalypse
 
         public static int canvasWidth { get; set; }
         public static int canvasHeight { get; set; }
-        public static int frameRate { get; set; } = 60;
+
         public static String resolution { get; set; } = "1240x1440";
+        public static int frameRate { get; set; } = 60;
         public static Boolean fogOn { get; set; } = true;
         public static String shadowQuality { get; set; } = "high";
+        public static Boolean rainOn { get; set; } = true;
+        public static int soundVolume { get; set; } = 100;
+        public static int musicVolume { get; set; } = 100;
 
         public static int FPS { get; set; } = 1;
         private int lastFPS = 0;
@@ -62,11 +67,16 @@ namespace FOGocalypse
         public static int attackSpeedLimit { get; set; } = 0;
         Random r = new Random();
 
+        private String gameSavePath = "WorldSave.txt";
+        private String optionsSavePath = "GameOptions.txt";
+
         //contrsuctor
         public Game()
         {
+            //init
             InitializeComponent();
 
+            //game stuff
             player = new Player(worldSize / 2 * tileSize, worldSize / 2 * tileSize, EnumHandler.Directions.Left);
 
             itemsInHotbar = new Item[numberOfhotBarSlots];
@@ -86,6 +96,7 @@ namespace FOGocalypse
             month = DateTime.Now.Month;
             year = DateTime.Now.Year;
 
+            //component stuff
             timer.Interval = 1;
             timer.Start();
             timer2.Interval = 60000;
@@ -100,12 +111,37 @@ namespace FOGocalypse
             this.MaximizeBox = false;
 
             Application.ApplicationExit += GameExitHandler;
+
+            //load options save
+            FileStream f = File.OpenRead(optionsSavePath);
+            StreamReader r = new StreamReader(f);
+
+            resolution = r.ReadLine();
+            frameRate = int.Parse(r.ReadLine());
+            fogOn = Boolean.Parse(r.ReadLine());
+            shadowQuality = r.ReadLine();
+            rainOn = Boolean.Parse(r.ReadLine());
+
+            r.Close();
+            f.Close();
         }
 
         //game exiting handler
         private void GameExitHandler(object sender, EventArgs e)
         {
-            
+            //write save options to file
+            FileStream f = File.Create(optionsSavePath);
+            StreamWriter s = new StreamWriter(f);
+
+            s.WriteLine(resolution);
+            s.WriteLine(frameRate);
+            s.WriteLine(fogOn);
+            s.WriteLine(shadowQuality);
+            s.WriteLine(rainOn);
+
+            s.Close();
+            f.Close();
+
         }
 
         //update handler
