@@ -40,8 +40,8 @@ namespace FOGocalypse
             #region MainMenu
             if (Game.state.Equals(EnumHandler.GameStates.MainMenu))
             {
-                Font f = new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold);
-                int baseOfText = 200;
+                Font f = new Font(FontFamily.GenericSansSerif, 30 * RenderingEngine.scale, FontStyle.Bold);
+                float baseOfText = 200 * RenderingEngine.scale + (20 * RenderingEngine.scale);
 
                 if (mouseX >= Game.canvasWidth / 2 - g.MeasureString("Play", f).Width / 2 && mouseX <= Game.canvasWidth / 2 + g.MeasureString("Play", f).Width / 2)
                 {

@@ -96,7 +96,7 @@ namespace FOGocalypse
 
             this.KeyPreview = true;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MinimizeBox = false;
+            //this.MinimizeBox = false;
             this.MaximizeBox = false;
 
             Application.ApplicationExit += GameExitHandler;

@@ -52,6 +52,8 @@ namespace FOGocalypse
         public static int weaponPositionOffsetY { get; set; } = 0;
         Random r = new Random();
 
+        public static float scale { get; set; } = 1;
+
         //constructor
         public RenderingEngine()
         {
@@ -62,15 +64,24 @@ namespace FOGocalypse
         //draw screen
         public void DrawScreen(int width, int height, Graphics g)
         {
+            //adjust scale based on width/height
+            float baseWidth = 1075;
+            float baseHeight = 737;
+
+            float currentWidth = Game.canvasWidth;
+            float currentHeight = Game.canvasHeight;
+
+            scale = Math.Abs((currentWidth - currentHeight) / (baseWidth - baseHeight));
+
             #region MainMenu
             if (Game.state.Equals(EnumHandler.GameStates.MainMenu))
             {
-                Font f = new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold);
-                int baseOfText = 200;
+                Font f = new Font(FontFamily.GenericSansSerif, 30 * scale, FontStyle.Bold);
+                float baseOfText = 200 * scale + (20 * scale);
 
                 g.DrawImage(fogBackground, 0, 0, width, height);
-                g.DrawImage(title1, width / 2 - title1.Width / 2, 0, title1.Width, title1.Height);
-                g.DrawImage(title2, width / 2 - title2.Width / 2, title1.Height, title2.Width, title2.Height);
+                g.DrawImage(title1, width / 2 - title1.Width * scale / 2, 0, title1.Width * scale, title1.Height * scale);
+                g.DrawImage(title2, width / 2 - title2.Width * scale / 2, title1.Height * scale, title2.Width * scale, title2.Height * scale);
 
                 g.DrawString("Play", f, Brushes.Black, width / 2 - g.MeasureString("Play", f).Width / 2, baseOfText);
                 g.DrawString("Options", f, Brushes.Black, width / 2 - g.MeasureString("Options", f).Width / 2, baseOfText + 75);
@@ -654,7 +665,7 @@ namespace FOGocalypse
             }
             #endregion
 
-            g.DrawString(Game.FPS.ToString() + "fps", new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold), Brushes.Black, width - 150, 0);
+            g.DrawString(Game.FPS.ToString() + "fps", new Font(FontFamily.GenericSansSerif, 30 * scale, FontStyle.Bold), Brushes.Black, width - 150, 0);
 
         }
 
