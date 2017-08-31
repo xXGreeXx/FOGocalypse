@@ -58,6 +58,14 @@
             Rainy
         }
 
+        public enum SeasonType
+        {
+            Winter,
+            Spring,
+            Summer,
+            Fall
+        }
+
         public enum PlantTypes
         {
             Tree,

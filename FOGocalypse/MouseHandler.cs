@@ -271,6 +271,8 @@ namespace FOGocalypse
                         Game.zombies = new List<Zombie>();
                         Game.itemsInWorld = new List<Item>();
                         Game.furnitureInWorld = new List<Furniture>();
+                        Game.plantsInWorld = new List<Plant>();
+
                         Game.selectedHotbar = 1;
                         Game.inPauseMenu = false;
                         Game.inInventory = false;
@@ -281,6 +283,22 @@ namespace FOGocalypse
                         Game.day = DateTime.Now.Day;
                         Game.month = DateTime.Now.Month;
                         Game.year = DateTime.Now.Year;
+                        if (Game.month <= 3)
+                        {
+                            Game.season = EnumHandler.SeasonType.Spring;
+                        }
+                        else if (Game.month <= 6)
+                        {
+                            Game.season = EnumHandler.SeasonType.Summer;
+                        }
+                        else if (Game.month <= 9)
+                        {
+                            Game.season = EnumHandler.SeasonType.Fall;
+                        }
+                        else if (Game.month <= 12)
+                        {
+                            Game.season = EnumHandler.SeasonType.Winter;
+                        }
 
                         Game.worldTiles = new WorldGenerator().GenerateWorld(Game.tileSize, Game.worldSize);
                         Game.state = EnumHandler.GameStates.Game;
@@ -384,6 +402,14 @@ namespace FOGocalypse
                             if (button.Equals(MouseButtons.Right))
                             {
                                 Game.combatSystem.SwingItem(25);
+                            }
+                            break;
+                        case EnumHandler.Items.Berry:
+                            if (button.Equals(MouseButtons.Left))
+                            {
+                                Game.player.playerFoodNeed -= 10;
+                                Game.player.playerWaterNeed -= 5;
+                                Game.itemsInHotbar[Game.selectedHotbar - 1] = new Item(0, 0, EnumHandler.Items.None);
                             }
                             break;
                     }

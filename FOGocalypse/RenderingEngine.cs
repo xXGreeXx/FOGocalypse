@@ -579,6 +579,7 @@ namespace FOGocalypse
                 g.DrawString(add + Game.time.ToString() + ": " + Game.month + "/"  + Game.day + "/" + Game.year, timeFont, Brushes.Black, 0, 130);
 
                 g.DrawString("Weather: " + Game.weather, new Font(FontFamily.GenericSansSerif, 15, FontStyle.Bold), Brushes.Black, 0, 160);
+                g.DrawString("Season: " + Game.season, new Font(FontFamily.GenericSansSerif, 15, FontStyle.Bold), Brushes.Black, 0, 180);
                 #endregion
 
 

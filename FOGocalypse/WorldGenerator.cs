@@ -26,18 +26,20 @@ namespace FOGocalypse
                 {
                     EnumHandler.TileTypes type = EnumHandler.TileTypes.Grass;
                     int spawnHouse = generator.Next(1, 1800);
-                    int spawnForest = generator.Next(1, 600);
-                    int spawnBush = generator.Next(1, 400);
-                    int spawnField = generator.Next(1, 600);
+                    int spawnForest = generator.Next(1, 1000);
+                    int spawnBush = generator.Next(1, 800);
+                    int spawnField = generator.Next(1, 1200);
 
+                    //forest
                     if (spawnForest == 10)
                     {
                         Boolean pass = true;
+                        int size = generator.Next(10, 15);
 
                         foreach (int[] house in houses)
                         {
-                            Rectangle house1 = new Rectangle(x, y, 2, 2);
-                            Rectangle house2 = new Rectangle(house[0], house[1], 15, 15);
+                            Rectangle house1 = new Rectangle(x - size, y - size, size, size);
+                            Rectangle house2 = new Rectangle(house[0] - 15, house[1] - 15, 15, 15);
 
                             if (house1.IntersectsWith(house2))
                             {
@@ -48,10 +50,12 @@ namespace FOGocalypse
 
                         if (pass)
                         {
-                            Game.plantsInWorld.Add(new Plant((x) * Game.tileSize, (y) * Game.tileSize, EnumHandler.PlantTypes.Tree, 0));
+                            houses.Add(new int[] { x, y });
+                            generateForest(x, y , size);
                         }
                     }
 
+                    //bush
                     else if (spawnBush == 10)
                     {
                         Boolean pass = true;
@@ -59,7 +63,7 @@ namespace FOGocalypse
                         foreach (int[] house in houses)
                         {
                             Rectangle house1 = new Rectangle(x, y, 1, 1);
-                            Rectangle house2 = new Rectangle(house[0], house[1], 15, 15);
+                            Rectangle house2 = new Rectangle(house[0] - 15, house[1] - 15, 15, 15);
 
                             if (house1.IntersectsWith(house2))
                             {
@@ -74,12 +78,30 @@ namespace FOGocalypse
                         }
                     }
 
+                    //field
                     if (spawnField == 10)
                     {
                         int size = generator.Next(5, 20);
-                        foreach (Tile t in generateField(x, y, size))
+                        Boolean pass = true;
+
+                        foreach (int[] house in houses)
                         {
-                            //tilesForWorld.Add(t);
+                            Rectangle house1 = new Rectangle(x - size, y - size, size, size);
+                            Rectangle house2 = new Rectangle(house[0] - 15, house[1] - 15, 15, 15);
+
+                            if (house1.IntersectsWith(house2))
+                            {
+                                pass = false;
+                                break;
+                            }
+                        }
+
+                        if (pass)
+                        {
+                            foreach (Tile t in generateField(x, y, size))
+                            {
+                                tilesForWorld.Add(t);
+                            }
                         }
                     }
 
@@ -311,7 +333,7 @@ namespace FOGocalypse
             {
                 for (int newY = 0; newY < size; newY++)
                 {
-                    Game.plantsInWorld.Add(new Plant((x + newX) * Game.tileSize, (y + newY) * Game.tileSize, EnumHandler.PlantTypes.Tree, 0));
+                    Game.plantsInWorld.Add(new Plant((x + newX) * Game.tileSize * 3 + generator.Next(10, 25), (y + newY) * Game.tileSize * 3 + generator.Next(10, 25), EnumHandler.PlantTypes.Tree, 0));
                 }
             }
         }

@@ -49,6 +49,7 @@ namespace FOGocalypse
         public static int month = 0;
         public static int year = 0;
         public static EnumHandler.WeatherType weather = EnumHandler.WeatherType.Sunny;
+        public static EnumHandler.SeasonType season = EnumHandler.SeasonType.Winter;
         public static List<Particle> bloodParticles { get; set; } = new List<Particle>();
 
         public static int canvasWidth { get; set; }
@@ -59,7 +60,7 @@ namespace FOGocalypse
         public static Boolean fogOn { get; set; } = true;
         public static String shadowQuality { get; set; } = "high";
         public static Boolean rainOn { get; set; } = true;
-        public static Boolean antialias { get; set; } = true;
+        public static Boolean antialias { get; set; } = false;
         public static Boolean blood { get; set; } = true;
         public static int soundVolume { get; set; } = 100;
         public static int musicVolume { get; set; } = 100;
@@ -247,6 +248,24 @@ namespace FOGocalypse
                     day++;
 
                     weather = typesOfWeather[r.Next(0, 3)];
+                }
+
+
+                if (month <= 3)
+                {
+                    season = EnumHandler.SeasonType.Spring;
+                }
+                else if (month <= 6)
+                {
+                    season = EnumHandler.SeasonType.Summer;
+                }
+                else if (month <= 9)
+                {
+                    season = EnumHandler.SeasonType.Fall;
+                }
+                else if (month <= 12)
+                {
+                    season = EnumHandler.SeasonType.Winter;
                 }
             }
         }
