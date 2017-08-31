@@ -111,6 +111,9 @@ namespace FOGocalypse
                             int numberForWorldGenerator = generator.Next(10, 14);
 
                             houses.Add(new int[] { x, y });
+                            houses.Add(new int[] { x, y - 15 });
+                            houses.Add(new int[] { x - 15, y });
+                            houses.Add(new int[] { x - 15, y - 15 });
 
                             #region House1
                             int index = 0;

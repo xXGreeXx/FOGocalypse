@@ -18,6 +18,9 @@ namespace FOGocalypse
         //read key input
         public void ReadKey(Keys key, Boolean down)
         {
+            int width = Game.canvasWidth;
+            int height = Game.canvasHeight;
+
             #region Game
             if (Game.state.Equals(EnumHandler.GameStates.Game) && !Game.inLossScreen)
             {
@@ -111,6 +114,7 @@ namespace FOGocalypse
                     case Keys.F:
                         if (down)
                         {
+                            //interact with items
                             for (int index = 0; index < Game.itemsInWorld.Count; index++)
                             {
                                 Item i = Game.itemsInWorld[index];
@@ -136,6 +140,43 @@ namespace FOGocalypse
                                         }
                                     }
                                 }
+                            }
+
+                            //interact with plants
+                            int indexOfPlant = 0;
+                            foreach (Plant p in Game.plantsInWorld)
+                            {
+                                int newX = p.x - Game.player.playerX;
+                                int newY = p.y - Game.player.playerY;
+
+                                switch (p.type)
+                                {
+                                    case EnumHandler.PlantTypes.Bush:
+                                        if (newX >= width / 2 - Game.tileSize * 2 && newX < width / 2 + Game.tileSize / 2)
+                                        {
+                                            if (newY >= height / 2 - Game.tileSize * 2 && newY < height / 2 + Game.tileSize / 2)
+                                            {
+                                                int indexOfHotbarSlot = 0;
+                                                foreach (Item itemInHotbar in Game.itemsInHotbar)
+                                                {
+                                                    if (itemInHotbar.type.Equals(EnumHandler.Items.None))
+                                                    {
+                                                        if (Game.plantsInWorld[indexOfPlant].berries >= 5)
+                                                        {
+                                                            Game.itemsInHotbar[indexOfHotbarSlot] = new Item(0, 0, EnumHandler.Items.Berry);
+                                                            Game.plantsInWorld[indexOfPlant].berries -= 5;
+                                                        }
+                                                        return;
+                                                    }
+
+                                                    indexOfHotbarSlot++;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                }
+
+                                indexOfPlant++;
                             }
                         }
                         break;

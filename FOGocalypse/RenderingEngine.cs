@@ -384,8 +384,6 @@ namespace FOGocalypse
                 #endregion
 
                 #region Draw Plants
-                Boolean plantTooltipDrawn = false;
-
                 foreach (Plant p in Game.plantsInWorld)
                 {
                     int newX = p.x - Game.player.playerX;
@@ -414,7 +412,6 @@ namespace FOGocalypse
                                         {
                                             g.FillRectangle(Brushes.Gray, newX, newY - 15, 100, 20);
                                             g.DrawString(p.type.ToString() + "\n Press <f> to gather berries", f, Brushes.Black, newX, newY - 15);
-                                            plantTooltipDrawn = true;
                                         }
                                     }
                                     break;
@@ -500,6 +497,9 @@ namespace FOGocalypse
                         break;
                     case EnumHandler.Items.Peanutbutter:
                         g.DrawImage(RotateImage(peanutButter, angleOfItem + 90), positionX + rotationX + 5, positionY + rotationY + 5, 15, 15);
+                        break;
+                    case EnumHandler.Items.Berry:
+                        g.DrawImage(RotateImage(berry, angleOfItem + 90), positionX + rotationX + 5, positionY + rotationY + 5, 15, 15);
                         break;
                 }
 
@@ -648,6 +648,10 @@ namespace FOGocalypse
                         break;
                     case EnumHandler.Items.PistolAmmo:
                         g.DrawString("Ammo left: " + Game.itemsInHotbar[Game.selectedHotbar - 1].ammo.ToString(), f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 115);
+                        break;
+                    case EnumHandler.Items.Berry:
+                        g.DrawString("Left click, eat(5 water, 10 food)", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 115);
+                        g.DrawString("Right click, ranged throw", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 100);
                         break;
                 }
 
