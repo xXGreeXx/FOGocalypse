@@ -44,10 +44,15 @@ namespace FOGocalypse
                             }
                         }
 
+                        if (x < 45 || y < 45)
+                        {
+                            pass = false;
+                        }
+
                         if (pass)
                         {
-                            int doorLocation = generator.Next(2, 8);
-                            int numberForWorldGenerator = generator.Next(10, 16);
+                            int doorLocation = generator.Next(2, 6);
+                            int numberForWorldGenerator = generator.Next(10, 14);
 
                             houses.Add(new int[] { x, y });
 
@@ -93,7 +98,48 @@ namespace FOGocalypse
                             generateItems(x - 15, y, numberForWorldGenerator);
                             #endregion
 
-                            for (int yOfPath = 0; yOfPath < 20; yOfPath++)
+                            #region House3
+                            foreach (Tile t in generateHouse(x, y - 15, true, doorLocation, numberForWorldGenerator))
+                            {
+                                for (int index2 = 0; index2 < tilesForWorld.Count; index2++)
+                                {
+                                    Tile newTile = tilesForWorld[index2];
+
+                                    if (t.x == newTile.x && t.y == newTile.y && index != index2)
+                                    {
+                                        tilesForWorld.RemoveAt(index2);
+                                    }
+                                }
+
+                                tilesForWorld.Add(t);
+                                index++;
+                            }
+
+                            generateItems(x, y - 15, numberForWorldGenerator);
+                            #endregion
+
+                            #region House4
+                            foreach (Tile t in generateHouse(x - 15, y - 15, false, doorLocation, numberForWorldGenerator))
+                            {
+                                for (int index2 = 0; index2 < tilesForWorld.Count; index2++)
+                                {
+                                    Tile newTile = tilesForWorld[index2];
+
+                                    if (t.x == newTile.x && t.y == newTile.y && index != index2)
+                                    {
+                                        tilesForWorld.RemoveAt(index2);
+                                    }
+                                }
+
+                                tilesForWorld.Add(t);
+                                index++;
+                            }
+
+                            generateItems(x - 15, y - 15, numberForWorldGenerator);
+                            #endregion
+
+
+                            for (int yOfPath = 0; yOfPath < 30; yOfPath++)
                             {
                                 tilesForWorld.Add(new Tile((x - 12) * Game.tileSize, (y - yOfPath) * Game.tileSize, EnumHandler.TileTypes.Stone));
                                 tilesForWorld.Add(new Tile((x - 13) * Game.tileSize, (y - yOfPath) * Game.tileSize, EnumHandler.TileTypes.Stone));

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Game));
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.canvas = new System.Windows.Forms.PictureBox();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
@@ -77,6 +78,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1074, 732);
             this.Controls.Add(this.canvas);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Game";
             this.Text = "FOGocalypse";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Game_KeyDown);
