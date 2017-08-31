@@ -230,6 +230,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fogIcon.ico" />
+    <None Include="Resources\berryIcon.png" />
+    <None Include="Resources\berry.png" />
     <None Include="Resources\tilledDirt.png" />
     <None Include="Resources\bush.png" />
     <None Include="Resources\tree.png" />

@@ -37,6 +37,8 @@ namespace FOGocalypse
         Bitmap pistol = FOGocalypse.Properties.Resources.pistol;
         Bitmap pistolAmmo = FOGocalypse.Properties.Resources.pistolAmmo;
         Bitmap pistolAmmoIcon = FOGocalypse.Properties.Resources.pistolAmmoIcon;
+        Bitmap berry = FOGocalypse.Properties.Resources.berry;
+        Bitmap berryIcon = FOGocalypse.Properties.Resources.berryIcon;
         Bitmap title1 = FOGocalypse.Properties.Resources.title1;
         Bitmap title2 = FOGocalypse.Properties.Resources.title2;
         Bitmap fogBackground = FOGocalypse.Properties.Resources.fogBackground;
@@ -382,6 +384,8 @@ namespace FOGocalypse
                 #endregion
 
                 #region Draw Plants
+                Boolean plantTooltipDrawn = false;
+
                 foreach (Plant p in Game.plantsInWorld)
                 {
                     int newX = p.x - Game.player.playerX;
@@ -402,6 +406,16 @@ namespace FOGocalypse
                                     for (int i = 0; i < p.berries * 2; i++)
                                     {
                                         g.FillRectangle(Brushes.Red, newX + (i * 2), newY + (i), 1, 1);
+                                    }
+
+                                    if (newX >= width / 2 - Game.tileSize * 2 && newX < width / 2 + Game.tileSize / 2)
+                                    {
+                                        if (newY >= height / 2 - Game.tileSize * 2 && newY < height / 2 + Game.tileSize / 2)
+                                        {
+                                            g.FillRectangle(Brushes.Gray, newX, newY - 15, 100, 20);
+                                            g.DrawString(p.type.ToString() + "\n Press <f> to gather berries", f, Brushes.Black, newX, newY - 15);
+                                            plantTooltipDrawn = true;
+                                        }
                                     }
                                     break;
                             }
@@ -800,7 +814,6 @@ namespace FOGocalypse
         //draw item in Hotbar
         private void drawItemInHotbar(int x, int y, EnumHandler.Items itemType, Graphics g)
         {
-
             switch (itemType)
             {
                 case EnumHandler.Items.Flashlight:
@@ -826,6 +839,9 @@ namespace FOGocalypse
                     break;
                 case EnumHandler.Items.PistolAmmo:
                     g.DrawImage(pistolAmmoIcon, x, y, 50, 50);
+                    break;
+                case EnumHandler.Items.Berry:
+                    g.DrawImage(berryIcon, x, y, 50, 50);
                     break;
             }
         }
@@ -856,8 +872,8 @@ namespace FOGocalypse
                 case EnumHandler.Items.Pistol:
                     g.DrawImage(pistol, x, y, 15, 15);
                     break;
-                case EnumHandler.Items.PistolAmmo:
-                    g.DrawImage(pistolAmmo, x, y, 15, 15);
+                case EnumHandler.Items.Berry:
+                    g.DrawImage(berry, x, y, 15, 15);
                     break;
             }
         }

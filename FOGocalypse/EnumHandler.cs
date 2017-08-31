@@ -38,7 +38,8 @@
             Peanutbutter,
             Bread,
             Pistol,
-            PistolAmmo
+            PistolAmmo,
+            Berry
         }
 
         public enum FurnitureTypes
