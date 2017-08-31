@@ -25,9 +25,15 @@ namespace FOGocalypse
                 for (int y = 0; y < sizeOfWorld; y++)
                 {
                     EnumHandler.TileTypes type = EnumHandler.TileTypes.Grass;
-                    int number = generator.Next(1, 1800);
+                    int spawnHouse = generator.Next(1, 1800);
+                    int spawnForest = generator.Next(1, 600);
 
-                    if (number == 10)
+                    if (spawnForest == 10)
+                    {
+                        Game.plantsInWorld.Add(new Plant((x) * Game.tileSize, (y) * Game.tileSize, EnumHandler.PlantTypes.Tree));
+                    }
+
+                    if (spawnHouse == 10)
                     {
                         Boolean pass = true;
 
@@ -243,6 +249,18 @@ namespace FOGocalypse
             Game.furnitureInWorld.Add(new Furniture((x - 9) * Game.tileSize, (y - 2) * Game.tileSize, EnumHandler.FurnitureTypes.Bed, 0));
             Game.furnitureInWorld.Add(new Furniture((x - 8) * Game.tileSize, (y - 1) * Game.tileSize, EnumHandler.FurnitureTypes.SmallTable, 0));
 
+        }
+
+        //generate forest
+        private void generateForest(int x, int y, int size)
+        {
+            for (int newX = 0; newX < size; newX++)
+            {
+                for (int newY = 0; newY < size; newY++)
+                {
+                    Game.plantsInWorld.Add(new Plant((x + newX) * Game.tileSize, (y + newY) * Game.tileSize, EnumHandler.PlantTypes.Tree));
+                }
+            }
         }
     }
 }

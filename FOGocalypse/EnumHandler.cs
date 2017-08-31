@@ -55,5 +55,10 @@
             Cloudy,
             Rainy
         }
+
+        public enum PlantTypes
+        {
+            Tree
+        }
     }
 }

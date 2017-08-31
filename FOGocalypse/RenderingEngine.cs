@@ -47,6 +47,7 @@ namespace FOGocalypse
         Bitmap chair = FOGocalypse.Properties.Resources.chair;
         Bitmap bed = FOGocalypse.Properties.Resources.bed;
         Bitmap smallTable = FOGocalypse.Properties.Resources.smallTable;
+        Bitmap tree = FOGocalypse.Properties.Resources.tree;
 
         Bitmap gameSettingsBackground = FOGocalypse.Properties.Resources.gameSettingsBackground;
         Bitmap optionBackground = FOGocalypse.Properties.Resources.optionBackground;
@@ -370,6 +371,28 @@ namespace FOGocalypse
                                     break;
                                 case EnumHandler.FurnitureTypes.SmallTable:
                                     g.DrawImage(smallTable, newX, newY, smallTable.Width / 2, smallTable.Height / 2);
+                                    break;
+                            }
+                        }
+                    }
+                }
+                #endregion
+
+                #region Draw Plants
+                foreach (Plant p in Game.plantsInWorld)
+                {
+                    int newX = p.x - Game.player.playerX;
+                    int newY = p.y - Game.player.playerY;
+                    int distance = Game.playerViewDistance * Game.tileSize;
+
+                    if (newX > width / 2 - player.Width / 2 - distance - 75 && newX < width / 2 - player.Width / 2 + distance)
+                    {
+                        if (newY > height / 2 - player.Height / 2 - distance - 50 && newY < height / 2 - player.Height / 2 + distance)
+                        {
+                            switch (p.type)
+                            {
+                                case EnumHandler.PlantTypes.Tree:
+                                    g.DrawImage(tree, newX, newY, Game.tileSize, Game.tileSize);
                                     break;
                             }
                         }

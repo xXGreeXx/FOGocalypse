@@ -21,6 +21,7 @@ namespace FOGocalypse
         public static List<Item> itemsInWorld { get; set; } = new List<Item>();
         public static List<Zombie> zombies { get; set; } = new List<Zombie>();
         public static List<Furniture> furnitureInWorld { get; set; } = new List<Furniture>();
+        public static List<Plant> plantsInWorld { get; set; } = new List<Plant>();
 
         public static Item[] itemsInHotbar { get; set; }
         public static Item[] itemsInInventory { get; set; }
