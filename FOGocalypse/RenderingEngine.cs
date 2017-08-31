@@ -15,6 +15,7 @@ namespace FOGocalypse
         Bitmap dirt = FOGocalypse.Properties.Resources.dirt;
         Bitmap wood = FOGocalypse.Properties.Resources.wood;
         Bitmap carpet = FOGocalypse.Properties.Resources.carpet;
+        Bitmap tilledDirt = FOGocalypse.Properties.Resources.tilledDirt;
         Bitmap stone = FOGocalypse.Properties.Resources.stone;
         Bitmap waterDrop = FOGocalypse.Properties.Resources.waterDrop;
         Bitmap heart = FOGocalypse.Properties.Resources.heart;
@@ -48,6 +49,7 @@ namespace FOGocalypse
         Bitmap bed = FOGocalypse.Properties.Resources.bed;
         Bitmap smallTable = FOGocalypse.Properties.Resources.smallTable;
         Bitmap tree = FOGocalypse.Properties.Resources.tree;
+        Bitmap bush = FOGocalypse.Properties.Resources.bush;
 
         Bitmap gameSettingsBackground = FOGocalypse.Properties.Resources.gameSettingsBackground;
         Bitmap optionBackground = FOGocalypse.Properties.Resources.optionBackground;
@@ -310,6 +312,7 @@ namespace FOGocalypse
                             else if (t.type.Equals(EnumHandler.TileTypes.Wood)) g.DrawImage(wood, x, y, Game.tileSize, Game.tileSize);
                             else if (t.type.Equals(EnumHandler.TileTypes.Carpet)) g.DrawImage(carpet, x, y, Game.tileSize, Game.tileSize);
                             else if (t.type.Equals(EnumHandler.TileTypes.Stone)) g.DrawImage(stone, x, y, Game.tileSize, Game.tileSize);
+                            else if (t.type.Equals(EnumHandler.TileTypes.TilledDirt)) g.DrawImage(tilledDirt, x, y, Game.tileSize, Game.tileSize);
 
                             //tile shading
                             if (!t.roofed)
@@ -392,7 +395,14 @@ namespace FOGocalypse
                             switch (p.type)
                             {
                                 case EnumHandler.PlantTypes.Tree:
-                                    g.DrawImage(tree, newX, newY, Game.tileSize, Game.tileSize);
+                                    g.DrawImage(tree, newX, newY, Game.tileSize * 2, Game.tileSize * 2);
+                                    break;
+                                case EnumHandler.PlantTypes.Bush:
+                                    g.DrawImage(bush, newX, newY, Game.tileSize, Game.tileSize);
+                                    for (int i = 0; i < p.berries * 2; i++)
+                                    {
+                                        g.FillRectangle(Brushes.Red, newX + (i * 2), newY + (i), 1, 1);
+                                    }
                                     break;
                             }
                         }

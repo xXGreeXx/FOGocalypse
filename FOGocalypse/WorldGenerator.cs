@@ -27,10 +27,60 @@ namespace FOGocalypse
                     EnumHandler.TileTypes type = EnumHandler.TileTypes.Grass;
                     int spawnHouse = generator.Next(1, 1800);
                     int spawnForest = generator.Next(1, 600);
+                    int spawnBush = generator.Next(1, 400);
+                    int spawnField = generator.Next(1, 600);
 
                     if (spawnForest == 10)
                     {
-                        Game.plantsInWorld.Add(new Plant((x) * Game.tileSize, (y) * Game.tileSize, EnumHandler.PlantTypes.Tree));
+                        Boolean pass = true;
+
+                        foreach (int[] house in houses)
+                        {
+                            Rectangle house1 = new Rectangle(x, y, 2, 2);
+                            Rectangle house2 = new Rectangle(house[0], house[1], 15, 15);
+
+                            if (house1.IntersectsWith(house2))
+                            {
+                                pass = false;
+                                break;
+                            }
+                        }
+
+                        if (pass)
+                        {
+                            Game.plantsInWorld.Add(new Plant((x) * Game.tileSize, (y) * Game.tileSize, EnumHandler.PlantTypes.Tree, 0));
+                        }
+                    }
+
+                    else if (spawnBush == 10)
+                    {
+                        Boolean pass = true;
+
+                        foreach (int[] house in houses)
+                        {
+                            Rectangle house1 = new Rectangle(x, y, 1, 1);
+                            Rectangle house2 = new Rectangle(house[0], house[1], 15, 15);
+
+                            if (house1.IntersectsWith(house2))
+                            {
+                                pass = false;
+                                break;
+                            }
+                        }
+
+                        if (pass)
+                        {
+                            Game.plantsInWorld.Add(new Plant((x) * Game.tileSize, (y) * Game.tileSize, EnumHandler.PlantTypes.Bush, generator.Next(5, 10)));
+                        }
+                    }
+
+                    if (spawnField == 10)
+                    {
+                        int size = generator.Next(5, 20);
+                        foreach (Tile t in generateField(x, y, size))
+                        {
+                            //tilesForWorld.Add(t);
+                        }
                     }
 
                     if (spawnHouse == 10)
@@ -258,9 +308,25 @@ namespace FOGocalypse
             {
                 for (int newY = 0; newY < size; newY++)
                 {
-                    Game.plantsInWorld.Add(new Plant((x + newX) * Game.tileSize, (y + newY) * Game.tileSize, EnumHandler.PlantTypes.Tree));
+                    Game.plantsInWorld.Add(new Plant((x + newX) * Game.tileSize, (y + newY) * Game.tileSize, EnumHandler.PlantTypes.Tree, 0));
                 }
             }
+        }
+
+        //generate crop field
+        private List<Tile> generateField(int x, int y, int size)
+        {
+            List<Tile> tilesForWorld = new List<Tile>();
+
+            for (int newX = 0; newX < size; newX++)
+            {
+                for (int newY = 0; newY < size; newY++)
+                {
+                    tilesForWorld.Add(new Tile((x - newX) * Game.tileSize, (y - newY) * Game.tileSize, EnumHandler.TileTypes.TilledDirt));
+                }
+            }
+
+            return tilesForWorld;
         }
     }
 }

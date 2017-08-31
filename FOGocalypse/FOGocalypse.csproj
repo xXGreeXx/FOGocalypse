@@ -230,6 +230,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fogIcon.ico" />
+    <None Include="Resources\tilledDirt.png" />
+    <None Include="Resources\bush.png" />
     <None Include="Resources\tree.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

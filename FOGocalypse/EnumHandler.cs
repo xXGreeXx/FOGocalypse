@@ -8,7 +8,8 @@
             Dirt,
             Stone,
             Wood,
-            Carpet
+            Carpet,
+            TilledDirt
         }
 
         public enum Directions
@@ -58,7 +59,8 @@
 
         public enum PlantTypes
         {
-            Tree
+            Tree,
+            Bush
         }
     }
 }
