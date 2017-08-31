@@ -58,7 +58,7 @@ namespace FOGocalypse
         Bitmap optionBackgroundDown = FOGocalypse.Properties.Resources.optionBackgroundDown;
         Bitmap inventoryBackground = FOGocalypse.Properties.Resources.iventoryBackground;
 
-        int screenFade = 255;
+        public static int screenFade { get; set; } = 255;
         public static int weaponPositionOffsetX { get; set; } = 0;
         public static int weaponPositionOffsetY { get; set; } = 0;
         Random r = new Random();

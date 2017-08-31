@@ -302,7 +302,8 @@ namespace FOGocalypse
 
                         Game.worldTiles = new WorldGenerator().GenerateWorld(Game.tileSize, Game.worldSize);
                         Game.state = EnumHandler.GameStates.Game;
-                        Game.inStartScreen = true;   
+                        Game.inStartScreen = true;
+                        RenderingEngine.screenFade = 255;   
                     }
                 }
             }
