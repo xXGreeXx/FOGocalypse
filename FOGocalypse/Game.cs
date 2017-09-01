@@ -134,18 +134,130 @@ namespace FOGocalypse
         private void GameExitHandler(object sender, EventArgs e)
         {
             //write save options to file
-            FileStream f = File.Create(optionsSavePath);
-            StreamWriter s = new StreamWriter(f);
+            FileStream optionsStream = File.Create(optionsSavePath);
+            StreamWriter optionsWriter = new StreamWriter(optionsStream);
 
-            s.WriteLine(resolution);
-            s.WriteLine(frameRate);
-            s.WriteLine(fogOn);
-            s.WriteLine(shadowQuality);
-            s.WriteLine(rainOn);
+            optionsWriter.WriteLine(resolution);
+            optionsWriter.WriteLine(frameRate);
+            optionsWriter.WriteLine(fogOn);
+            optionsWriter.WriteLine(shadowQuality);
+            optionsWriter.WriteLine(rainOn);
 
-            s.Close();
-            f.Close();
+            optionsWriter.Close();
+            optionsStream.Close();
 
+            //write world save
+            FileStream f = File.Create(gameSavePath);
+            StreamWriter w = new StreamWriter(f);
+
+            w.WriteLine("BEGIN-SAVE-FILE");
+
+            //world data
+            w.WriteLine("<world-dat>");
+            w.WriteLine(zombieViewDistance);
+            w.WriteLine(zombieHearDistance);
+            w.WriteLine(zombieMoveSpeed);
+            w.WriteLine(zombieSpawnChance);
+            w.WriteLine(itemRarity);
+            w.WriteLine(time);
+            w.WriteLine(day);
+            w.WriteLine(month);
+            w.WriteLine(year);
+            w.WriteLine(weather);
+            w.WriteLine(season);
+            w.WriteLine("<end>");
+
+            //player data
+            w.WriteLine("<player>");
+            w.WriteLine(player.playerX);
+            w.WriteLine(player.playerY);
+            w.WriteLine(player.playerWaterNeed);
+            w.WriteLine(player.playerHealth);
+            w.WriteLine(player.playerFoodNeed);
+            w.WriteLine("<end>");
+
+            //tile data
+            w.WriteLine("<tiles>");
+            foreach (Tile t in worldTiles)
+            {
+                w.WriteLine(t.x);
+                w.WriteLine(t.y);
+                w.WriteLine(t.type);
+                w.WriteLine(t.roofed);
+                w.WriteLine(t.open);
+                w.WriteLine(t.fogValue);
+                w.WriteLine(t.swapFog);
+
+            }
+            w.WriteLine("<end>");
+
+            //zombie data
+            w.WriteLine("<zombies>");
+            foreach (Zombie z in zombies)
+            {
+                w.WriteLine(z.x);
+                w.WriteLine(z.y);
+                w.WriteLine(z.health);
+                w.WriteLine(z.lookingToward.X + ", " + z.lookingToward.Y);
+            }
+            w.WriteLine("<end>");
+
+            //plant data
+            w.WriteLine("<plants>");
+            foreach (Plant p in plantsInWorld)
+            {
+                w.WriteLine(p.x);
+                w.WriteLine(p.y);
+                w.WriteLine(p.type);
+                w.WriteLine(p.berries);
+            }
+            w.WriteLine("<end>");
+
+            //furniture data
+            w.WriteLine("<furniture>");
+            foreach (Furniture furniture in furnitureInWorld)
+            {
+                w.WriteLine(furniture.x);
+                w.WriteLine(furniture.y);
+                w.WriteLine(furniture.type);
+                w.WriteLine(furniture.rotation);
+            }
+            w.WriteLine("<end>");
+
+            //item data
+            w.WriteLine("<items>");
+            foreach (Item item in itemsInWorld)
+            {
+                w.WriteLine(item.x);
+                w.WriteLine(item.y);
+                w.WriteLine(item.type);
+                w.WriteLine(item.ammo);
+            }
+            w.WriteLine("<end>");
+
+            //items in hotbar
+            w.WriteLine("hotbar");
+            foreach (Item item in itemsInHotbar)
+            {
+                w.WriteLine(item.x);
+                w.WriteLine(item.y);
+                w.WriteLine(item.type);
+                w.WriteLine(item.ammo);
+            }
+            w.WriteLine("<end>");
+
+            //items in inventory
+            w.WriteLine("inventory");
+            foreach (Item item in itemsInInventory)
+            {
+                w.WriteLine(item.x);
+                w.WriteLine(item.y);
+                w.WriteLine(item.type);
+                w.WriteLine(item.ammo);
+            }
+            w.WriteLine("<end>");
+
+            w.WriteLine("END-SAVE-FILE");
         }
 
         //update handler
