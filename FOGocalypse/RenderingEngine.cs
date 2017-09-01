@@ -385,6 +385,8 @@ namespace FOGocalypse
                 #endregion
 
                 #region Draw Plants
+                Boolean plantTooltipDrawn = false;
+
                 foreach (Plant p in Game.plantsInWorld)
                 {
                     int newX = p.x - Game.player.playerX;
@@ -402,17 +404,28 @@ namespace FOGocalypse
                                     break;
                                 case EnumHandler.PlantTypes.Bush:
                                     g.DrawImage(bush, newX, newY, Game.tileSize, Game.tileSize);
+
+                                    int xOffset = 0;
+                                    int yOffset = 0;
                                     for (int i = 0; i < p.berries * 2; i++)
                                     {
-                                        g.FillRectangle(Brushes.Red, newX + (i * 2), newY + (i), 1, 1);
+                                        g.FillRectangle(Brushes.Red, newX + xOffset, newY + yOffset, 1, 1);
+
+                                        xOffset += 4;
+                                        if (xOffset >= 19)
+                                        {
+                                            xOffset = 3;
+                                            yOffset += 5;
+                                        }
                                     }
 
-                                    if (newX >= width / 2 - Game.tileSize * 2 && newX < width / 2 + Game.tileSize / 2)
+                                    if (newX >= width / 2 - Game.tileSize * 2 && newX < width / 2 + Game.tileSize / 2 && !plantTooltipDrawn)
                                     {
                                         if (newY >= height / 2 - Game.tileSize * 2 && newY < height / 2 + Game.tileSize / 2)
                                         {
                                             g.FillRectangle(Brushes.Gray, newX, newY - 15, 100, 20);
                                             g.DrawString(p.type.ToString() + "\n Press <f> to gather berries", f, Brushes.Black, newX, newY - 15);
+                                            plantTooltipDrawn = true;
                                         }
                                     }
                                     break;

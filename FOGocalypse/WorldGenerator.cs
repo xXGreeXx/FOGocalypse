@@ -76,6 +76,26 @@ namespace FOGocalypse
                 }
             }
 
+            //generate fields
+            int xOfField = 0;
+            int yOfField = sizeOfWorld - 15;
+            int sizeOfField = generator.Next(10, 15);
+
+            foreach(Tile t in generateField(xOfField, yOfField, sizeOfField))
+            {
+                int index = 0;
+                foreach (Tile t2 in tilesForWorld)
+                {
+                    if (t.x == t2.x && t.y == t2.y)
+                    {
+                        tilesForWorld[index].type = t.type;
+                        break;
+                    }
+
+                    index++;
+                }
+            }
+
             return tilesForWorld;
         }
 
@@ -166,10 +186,40 @@ namespace FOGocalypse
             return tilesForHouse;
         }
 
+        //generate forest
+        private void generateForest(int x, int y, int size)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int i2 = 0; i2 < size; i2++)
+                {
+                    Game.plantsInWorld.Add(new Plant((x + i) * Game.tileSize * 3 + generator.Next(10, 20), (y + i2) * Game.tileSize * 3 + generator.Next(10, 20), EnumHandler.PlantTypes.Tree, 0));
+                }
+            }
+        }
+
         //generate field
         private List<Tile> generateField(int x, int y, int size)
         {
             List<Tile> tilesForField = new List<Tile>();
+
+            Boolean skip = false;
+            for (int i = 0; i < size; i++)
+            {
+                for (int i2 = 0; i2 < size; i2++)
+                {
+                    tilesForField.Add(new Tile((x + i) * Game.tileSize, (y + i2) * Game.tileSize, EnumHandler.TileTypes.TilledDirt));
+                    if (skip)
+                    {
+                        skip = false;
+                    }
+                    else
+                    {
+                        Game.plantsInWorld.Add(new Plant((x + i) * Game.tileSize, (y + i2) * Game.tileSize, EnumHandler.PlantTypes.Bush, generator.Next(10, 15)));
+                        skip = true;
+                    }
+                }
+            }
 
             return tilesForField;
         }
