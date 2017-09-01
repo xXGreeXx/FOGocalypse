@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Threading;
 using System.IO;
 
 namespace FOGocalypse
@@ -250,7 +251,7 @@ namespace FOGocalypse
 
 
                 //begin game
-                if (MouseHandler.mouseX >= Game.canvasWidth / 2 + 75 - g.MeasureString("Begin!", f).Width && MouseHandler.mouseX <= Game.canvasWidth / 2 - 75 + g.MeasureString("Begin!", f).Width)
+                if (MouseHandler.mouseX >= Game.canvasWidth / 2 + 75 - g.MeasureString("Begin!", f).Width && MouseHandler.mouseX <= Game.canvasWidth / 2 - 75 + g.MeasureString("Begin!", f).Width && !RenderingEngine.creatingWorld)
                 {
                     if (MouseHandler.mouseY >= Game.canvasHeight / 2 + 200 && MouseHandler.mouseY <= Game.canvasHeight / 2 + 200 + g.MeasureString("Begin!", f).Height)
                     {
@@ -300,12 +301,19 @@ namespace FOGocalypse
                             Game.season = EnumHandler.SeasonType.Winter;
                         }
 
-                        Game.worldTiles = new WorldGenerator().GenerateWorld(Game.worldSize);
-                        Game.allocatedTiles = new WorldGenerator().AllocateTiles(Game.worldTiles, 10);
+                        Thread t = new Thread(() =>
+                        {
+                            Game.worldTiles = new WorldGenerator().GenerateWorld(Game.worldSize);
+                            Game.allocatedTiles = new WorldGenerator().AllocateTiles(Game.worldTiles, 10);
 
-                        Game.state = EnumHandler.GameStates.Game;
-                        Game.inStartScreen = true;
-                        RenderingEngine.screenFade = 255;   
+                            RenderingEngine.creatingWorld = false;
+                            Game.state = EnumHandler.GameStates.Game;
+                            Game.inStartScreen = true;
+                            RenderingEngine.screenFade = 255;
+                        });
+
+                        RenderingEngine.creatingWorld = true;
+                        t.Start();
                     }
                 }
             }

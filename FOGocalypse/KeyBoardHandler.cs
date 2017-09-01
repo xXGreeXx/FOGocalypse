@@ -237,7 +237,7 @@ namespace FOGocalypse
             #endregion
 
             #region GameSettingsMenu
-            if (Game.state.Equals(EnumHandler.GameStates.GameSettingsMenu))
+            if (Game.state.Equals(EnumHandler.GameStates.GameSettingsMenu) && !RenderingEngine.creatingWorld)
             {
                 switch (key)
                 {

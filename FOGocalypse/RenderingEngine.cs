@@ -66,6 +66,9 @@ namespace FOGocalypse
         public static int screenFade { get; set; } = 255;
         public static int weaponPositionOffsetX { get; set; } = 0;
         public static int weaponPositionOffsetY { get; set; } = 0;
+        public static Boolean creatingWorld { get; set; } = false;
+        int sweepAngle = 0;
+        Boolean swapAngle = false;
         Random r = new Random();
 
         public static float scale { get; set; } = 1;
@@ -262,11 +265,30 @@ namespace FOGocalypse
                 g.DrawImage(gameSettingsBackground, width / 2 - 200, height / 2 - 250, 400, 500);
 
                 g.DrawString("Begin!", f, Brushes.Black, width / 2 + 75 - g.MeasureString("Begin!", f).Width, height / 2 + 200);
-                if (MouseHandler.mouseX >= width / 2 + 75 - g.MeasureString("Begin!", f).Width && MouseHandler.mouseX <= width / 2 - 75 + g.MeasureString("Begin!", f).Width)
+                if (MouseHandler.mouseX >= width / 2 + 75 - g.MeasureString("Begin!", f).Width && MouseHandler.mouseX <= width / 2 - 75 + g.MeasureString("Begin!", f).Width && !creatingWorld)
                 {
                     if (MouseHandler.mouseY >= height / 2 + 200 && MouseHandler.mouseY <= height / 2 + 200 + g.MeasureString("Begin!", f).Height)
                     {
                         g.DrawString("Begin!", f, Brushes.White, width / 2 + 75 - g.MeasureString("Begin!", f).Width, height / 2 + 200);
+                    }
+                }
+
+                if (creatingWorld)
+                {
+                    String message = "Please wait.... generating world(" + Game.worldSize + "x" + Game.worldSize + ")";
+
+                    g.DrawString(message, new Font(fSmall.FontFamily, 10, FontStyle.Bold), Brushes.Black, width / 2 - 200, height / 2 + 180);
+                    g.FillPie(Brushes.White, width / 2 + 150, height / 2 + 200, 40, 40, 10, sweepAngle);
+                    if (swapAngle) { sweepAngle -= 10; }
+                    else { sweepAngle += 10; }
+
+                    if (sweepAngle >= 360)
+                    {
+                        swapAngle = true;
+                    }
+                    if (sweepAngle <= -360)
+                    {
+                        swapAngle = false;
                     }
                 }
 
