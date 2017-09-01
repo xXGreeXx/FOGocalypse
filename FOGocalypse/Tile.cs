@@ -11,6 +11,7 @@ namespace FOGocalypse
         public EnumHandler.TileTypes type { get; set; }
         public Rectangle hitbox { get; set; }
         public Boolean roofed { get; set; }
+        public Boolean open { get; set; }
 
         //constructor
         public Tile(int x, int y, EnumHandler.TileTypes type)
@@ -20,6 +21,7 @@ namespace FOGocalypse
             this.type = type;
             this.hitbox = new Rectangle(x, y, Game.tileSize, Game.tileSize);
             this.roofed = false;
+            this.open = false;
         }
     }
 }

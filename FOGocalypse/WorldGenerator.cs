@@ -96,6 +96,12 @@ namespace FOGocalypse
                 }
             }
 
+            //generate random trees
+            for (int i = 0; i < generator.Next(50, 100); i++)
+            {
+                Game.plantsInWorld.Add(new Plant(generator.Next(0, sizeOfWorld / 2) * Game.tileSize, generator.Next(0, sizeOfWorld) * Game.tileSize, EnumHandler.PlantTypes.Tree, 0));
+            }
+
             return tilesForWorld;
         }
 

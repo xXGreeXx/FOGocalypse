@@ -16,6 +16,7 @@ namespace FOGocalypse
         Bitmap wood = FOGocalypse.Properties.Resources.wood;
         Bitmap carpet = FOGocalypse.Properties.Resources.carpet;
         Bitmap tilledDirt = FOGocalypse.Properties.Resources.tilledDirt;
+        Bitmap door = FOGocalypse.Properties.Resources.door;
         Bitmap stone = FOGocalypse.Properties.Resources.stone;
         Bitmap waterDrop = FOGocalypse.Properties.Resources.waterDrop;
         Bitmap heart = FOGocalypse.Properties.Resources.heart;
@@ -319,6 +320,20 @@ namespace FOGocalypse
                             else if (t.type.Equals(EnumHandler.TileTypes.Carpet)) g.DrawImage(carpet, x, y, Game.tileSize, Game.tileSize);
                             else if (t.type.Equals(EnumHandler.TileTypes.Stone)) g.DrawImage(stone, x, y, Game.tileSize, Game.tileSize);
                             else if (t.type.Equals(EnumHandler.TileTypes.TilledDirt)) g.DrawImage(tilledDirt, x, y, Game.tileSize, Game.tileSize);
+
+                            else if (t.type.Equals(EnumHandler.TileTypes.Door))
+                            {
+                                if (t.open)
+                                {
+                                    door.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                                    g.DrawImage(door, x, y, 10, 100);
+                                    door.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                                }
+                                else
+                                {
+                                    g.DrawImage(door, x, y, 10, 100);
+                                }
+                            }
 
                             //tile shading
                             if (!t.roofed)

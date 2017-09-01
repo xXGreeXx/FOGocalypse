@@ -9,7 +9,8 @@
             Stone,
             Wood,
             Carpet,
-            TilledDirt
+            TilledDirt,
+            Door
         }
 
         public enum Directions
