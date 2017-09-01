@@ -57,6 +57,7 @@ namespace FOGocalypse
         Bitmap optionBackground = FOGocalypse.Properties.Resources.optionBackground;
         Bitmap optionBackgroundDown = FOGocalypse.Properties.Resources.optionBackgroundDown;
         Bitmap inventoryBackground = FOGocalypse.Properties.Resources.iventoryBackground;
+        Bitmap hotbarTooltipBackground = FOGocalypse.Properties.Resources.hotbarTooltipBackground;
 
         public static int screenFade { get; set; } = 255;
         public static int weaponPositionOffsetX { get; set; } = 0;
@@ -613,7 +614,7 @@ namespace FOGocalypse
 
                 if (!selectedItemInHotbar.Equals(EnumHandler.Items.None))
                 {
-                    g.FillRectangle(Brushes.White, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 115, 300, 50);
+                    g.DrawImage(hotbarTooltipBackground, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 115, 300, 50);
                     g.DrawString("Press <q> to drop", f2, Brushes.Black, width / 2 - (60 * Game.numberOfhotBarSlots / 2) - 5, height - 85);
                 }
 

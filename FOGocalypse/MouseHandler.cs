@@ -300,7 +300,7 @@ namespace FOGocalypse
                             Game.season = EnumHandler.SeasonType.Winter;
                         }
 
-                        Game.worldTiles = new WorldGenerator().GenerateWorld(Game.tileSize, Game.worldSize);
+                        Game.worldTiles = new WorldGenerator().GenerateWorld(Game.worldSize);
                         Game.state = EnumHandler.GameStates.Game;
                         Game.inStartScreen = true;
                         RenderingEngine.screenFade = 255;   

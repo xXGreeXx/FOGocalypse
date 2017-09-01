@@ -283,6 +283,16 @@ namespace FOGocalypse.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap hotbarTooltipBackground {
+            get {
+                object obj = ResourceManager.GetObject("hotbarTooltipBackground", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iventoryBackground {
             get {
                 object obj = ResourceManager.GetObject("iventoryBackground", resourceCulture);
