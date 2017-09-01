@@ -309,6 +309,7 @@ namespace FOGocalypse
                     int x = t.x - Game.player.playerX;
                     int y = t.y - Game.player.playerY;
                     int distance = Game.playerViewDistance * Game.tileSize;
+                    Boolean inView = false;
 
                     if (x > width / 2 - player.Width / 2 - distance && x < width / 2 - player.Width / 2 + distance)
                     {
@@ -357,6 +358,32 @@ namespace FOGocalypse
                                 }
 
                                 g.FillRectangle(new SolidBrush(Color.FromArgb(alphaForShadow, Color.Black)), x, y, Game.tileSize, Game.tileSize);
+                            }
+
+                            inView = true;
+                        }
+                    }
+
+                    if (!inView && Game.fogOn)
+                    {
+                        if (x > 0 - Game.tileSize && x < width)
+                        {
+                            if (y > 0 - Game.tileSize && y < height)
+                            {
+                                int fogValue = t.fogValue;
+                                g.FillRectangle(new SolidBrush(Color.FromArgb(fogValue, Color.DarkGray)), x, y, Game.tileSize, Game.tileSize);
+
+                                if (t.fogValue >= 250)
+                                {
+                                    t.swapFog = true;
+                                }
+                                if (t.fogValue <= 180)
+                                {
+                                    t.swapFog = false;
+                                }
+
+                                if (t.swapFog) t.fogValue -= 5;
+                                else t.fogValue += 5;
                             }
                         }
                     }
@@ -577,11 +604,6 @@ namespace FOGocalypse
                 }
                 #endregion
 
-                //draw fog
-                if (Game.fogOn)
-                {
-                    fogGenerator(width, height, g);
-                }
 
                 #region Particles
                 //blood particles
@@ -825,41 +847,6 @@ namespace FOGocalypse
 
             g.DrawString(Game.FPS.ToString() + "fps", new Font(FontFamily.GenericSansSerif, 30 * scale, FontStyle.Bold), Brushes.Black, width - 150, 0);
 
-        }
-
-        //fog generator
-        private void fogGenerator(int width, int height, Graphics g)
-        {
-            int maxCycle = 4;
-            int cycle = maxCycle;
-            int distance = Game.playerViewDistance;
-
-            foreach (Tile t in Game.worldTiles)
-            {
-                int newX = t.x - Game.player.playerX;
-                int newY = t.y - Game.player.playerY;
-                if (newX > 0 - Game.tileSize && newX < width)
-                {
-                    if (newY > 0 - Game.tileSize && newY < height)
-                    {
-                        Boolean pass = true;
-                        int newDistance = distance * Game.tileSize;
-
-                        if (newX >= width / 2 - player.Width / 2 - newDistance && newX <= width / 2 - player.Width / 2 + newDistance)
-                        {
-                            if (newY >= height / 2 - player.Height / 2 - newDistance && newY <= height / 2 - player.Height / 2 + newDistance)
-                            {
-                                pass = false;
-                            }
-                        }
-
-                        if (pass)
-                        {
-                            g.FillRectangle(new SolidBrush(Color.FromArgb(r.Next(220, 255), Color.Gray)), newX, newY, 25, 25);
-                        }
-                    }
-                }
-            }
         }
 
         //draw item in Hotbar

@@ -69,7 +69,7 @@ namespace FOGocalypse
         private int lastFPS = 0;
         private int physicsCycle = 0;
         public static int attackSpeedLimit { get; set; } = 0;
-        Random r = new Random();
+        public static Random r { get; } = new Random();
 
         private String gameSavePath = "WorldSave.txt";
         private String optionsSavePath = "GameOptions.txt";
