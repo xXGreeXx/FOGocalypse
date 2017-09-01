@@ -240,9 +240,11 @@ namespace FOGocalypse
 
                 //sound volume
                 g.DrawString("Sound Volume: ", f, Brushes.Black, width / 2 - 250, height / 2 + 100);
+                g.DrawString(Game.soundVolume.ToString(), f, Brushes.Black, width / 2 - 45, height / 2 + 100);
 
                 //music volume
                 g.DrawString("Music Volume: ", f, Brushes.Black, width / 2 - 250, height / 2 + 150);
+                g.DrawString(Game.musicVolume.ToString(), f, Brushes.Black, width / 2 - 45, height / 2 + 150);
 
                 animateMenuBackground();
             }
@@ -301,6 +303,9 @@ namespace FOGocalypse
             {
                 Font f = new Font(FontFamily.GenericSansSerif, 6, FontStyle.Bold);
                 Font f2 = new Font(FontFamily.GenericSansSerif, 9, FontStyle.Bold);
+                int positionX = width / 2 - player.Width / 2;
+                int positionY = height / 2 - player.Height / 2;
+                float angle = (float)((Math.Atan2((double)MouseHandler.mouseY - positionY, (double)MouseHandler.mouseX - positionX)) * (180 / Math.PI));
 
                 #region DrawTiles
                 //draw tiles
@@ -528,11 +533,67 @@ namespace FOGocalypse
                 }
                 #endregion
 
+                //TODO\\
+                #region RayCasting
+                //for (float i = 0; i < 12; i++)
+                //{
+                //    float angleX = (float)(Math.Cos(i + angle) * Game.tileSize * Game.playerViewDistance);
+                //    float angleY = (float)(Math.Sin(i + angle) * Game.tileSize * Game.playerViewDistance);
+
+                //    float baseOfRayX = positionX + Game.tileSize / 2;
+                //    float baseOfRayY = positionY + Game.tileSize / 2;
+                //    float positionOfRayX2 = positionX + angleX;
+                //    float positionOfRayY2 = positionY + angleY;
+
+                //    int yOfDot = (int)baseOfRayY;
+                //    int xOfDot = (int)baseOfRayX;
+
+                //    while (xOfDot != Math.Floor(positionOfRayX2) || yOfDot != Math.Floor(positionOfRayY2))
+                //    {
+                //        if (yOfDot < Math.Floor(positionOfRayY2))
+                //        {
+                //            yOfDot++;
+                //        }
+                //        else if (yOfDot > Math.Floor(positionOfRayY2))
+                //        {
+                //            yOfDot--;
+                //        }
+
+                //        if (xOfDot < Math.Floor(positionOfRayX2))
+                //        {
+                //            xOfDot++;
+                //        }
+                //        else if (xOfDot > Math.Floor(positionOfRayX2))
+                //        {
+                //            xOfDot--;
+                //        }
+
+                //        g.FillRectangle(Brushes.Black, xOfDot, yOfDot, 1, 1);
+
+                //        foreach (Tile t in Game.worldTiles)
+                //        {
+                //            if (t.x > 0 && t.x < width)
+                //            {
+                //                if (t.y > 0 && t.y < height)
+                //                {
+                //                    if (t.type.Equals(EnumHandler.TileTypes.Wood))
+                //                    {
+                //                        if (xOfDot > t.x && xOfDot < t.x + Game.tileSize)
+                //                        {
+                //                            if (yOfDot > t.y && yOfDot  < t.y + Game.tileSize)
+                //                            {
+                //                                break;
+                //                            }
+                //                        }
+                //                    }
+                //                }
+                //            }
+                //        }
+                //    }
+                //}
+                #endregion
+
                 //draw player
-                int positionX = width / 2 - player.Width / 2;
-                int positionY = height / 2 - player.Height / 2;
-                float angle = (float)((Math.Atan2((double)MouseHandler.mouseY - positionY, (double)MouseHandler.mouseX - positionX)) * (180 / Math.PI));
-                
                 g.DrawImage(RotateImage(player, angle), width / 2 - player.Width / 2, height / 2 - player.Height / 2, Game.tileSize, Game.tileSize);
 
                 #region ItemHeld
@@ -585,6 +646,7 @@ namespace FOGocalypse
                     weaponPositionOffsetY--;
                 }
                 #endregion
+
 
                 #region DrawZombies
                 foreach (Zombie z in Game.zombies)

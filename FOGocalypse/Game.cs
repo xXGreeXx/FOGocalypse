@@ -125,6 +125,10 @@ namespace FOGocalypse
             fogOn = Boolean.Parse(r.ReadLine());
             shadowQuality = r.ReadLine();
             rainOn = Boolean.Parse(r.ReadLine());
+            antialias = Boolean.Parse(r.ReadLine());
+            blood = Boolean.Parse(r.ReadLine());
+            soundVolume = int.Parse(r.ReadLine());
+            musicVolume = int.Parse(r.ReadLine());
 
             r.Close();
             f.Close();
@@ -142,6 +146,10 @@ namespace FOGocalypse
             optionsWriter.WriteLine(fogOn);
             optionsWriter.WriteLine(shadowQuality);
             optionsWriter.WriteLine(rainOn);
+            optionsWriter.WriteLine(antialias);
+            optionsWriter.WriteLine(blood);
+            optionsWriter.WriteLine(soundVolume);
+            optionsWriter.WriteLine(musicVolume);
 
             optionsWriter.Close();
             optionsStream.Close();
