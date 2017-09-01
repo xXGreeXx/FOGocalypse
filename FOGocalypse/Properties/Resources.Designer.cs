@@ -153,6 +153,16 @@ namespace FOGocalypse.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap counter {
+            get {
+                object obj = ResourceManager.GetObject("counter", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cursor {
             get {
                 object obj = ResourceManager.GetObject("cursor", resourceCulture);
@@ -343,6 +353,16 @@ namespace FOGocalypse.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap oven {
+            get {
+                object obj = ResourceManager.GetObject("oven", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap peanutButter {
             get {
                 object obj = ResourceManager.GetObject("peanutButter", resourceCulture);
@@ -406,6 +426,16 @@ namespace FOGocalypse.Properties {
         internal static System.Drawing.Bitmap player {
             get {
                 object obj = ResourceManager.GetObject("player", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sink {
+            get {
+                object obj = ResourceManager.GetObject("sink", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

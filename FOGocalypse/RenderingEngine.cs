@@ -50,6 +50,9 @@ namespace FOGocalypse
         Bitmap chair = FOGocalypse.Properties.Resources.chair;
         Bitmap bed = FOGocalypse.Properties.Resources.bed;
         Bitmap smallTable = FOGocalypse.Properties.Resources.smallTable;
+        Bitmap counter = FOGocalypse.Properties.Resources.counter;
+        Bitmap sink = FOGocalypse.Properties.Resources.sink;
+        Bitmap oven = FOGocalypse.Properties.Resources.oven;
         Bitmap tree = FOGocalypse.Properties.Resources.tree;
         Bitmap bush = FOGocalypse.Properties.Resources.bush;
 
@@ -377,6 +380,20 @@ namespace FOGocalypse
                                     break;
                                 case EnumHandler.FurnitureTypes.SmallTable:
                                     g.DrawImage(smallTable, newX, newY, smallTable.Width / 2, smallTable.Height / 2);
+                                    break;
+                                case EnumHandler.FurnitureTypes.Counter:
+                                    g.DrawImage(counter, newX, newY, 25, 25);
+                                    break;
+                                case EnumHandler.FurnitureTypes.Sink:
+                                    g.DrawImage(sink, newX, newY, 25, 25);
+                                    break;
+                                case EnumHandler.FurnitureTypes.Oven:
+                                    if (furniture.rotation == 90)
+                                    {
+                                        oven.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                                        g.DrawImage(oven, newX, newY, 25, 25);
+                                        oven.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                                    }
                                     break;
                             }
                         }

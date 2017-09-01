@@ -127,6 +127,9 @@
   <data name="bed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="sink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="player" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\player.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -148,11 +151,17 @@
   <data name="warningIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\warningIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="table" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\table.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="pistol" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pistol.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="iventoryBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\iventoryBackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="counter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\counter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="smallTable" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\smallTable.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -160,20 +169,20 @@
   <data name="title1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\title1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="flashlight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\flashlight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="upArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\upArrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="table" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\table.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="berryIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\berryIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="title2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\title2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="grass" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\grass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="dirt" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dirt.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="peanutButterIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\peanutButterIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -184,11 +193,8 @@
   <data name="waterDrop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\waterDrop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="flashlight" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\flashlight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="berryIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\berryIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="couch" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\couch.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tree" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tree.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -199,8 +205,8 @@
   <data name="cursor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cursor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="peanutButter" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\peanutButter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="dirt" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dirt.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="downArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\downArrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -208,8 +214,11 @@
   <data name="knifeIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\knifeIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="couch" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\couch.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="peanutButter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\peanutButter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hotbarSlot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hotbarSlot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bread" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bread.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -259,10 +268,10 @@
   <data name="breadIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\breadIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="hotbarSlot" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\hotbarSlot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="hotbarTooltipBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\hotbarTooltipBackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="oven" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\oven.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

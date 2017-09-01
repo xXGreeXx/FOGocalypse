@@ -48,7 +48,10 @@
             Table,
             Chair,
             Bed,
-            SmallTable
+            SmallTable,
+            Counter,
+            Sink,
+            Oven
         }
 
         public enum WeatherType

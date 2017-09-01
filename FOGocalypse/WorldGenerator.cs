@@ -147,6 +147,11 @@ namespace FOGocalypse
             Game.furnitureInWorld.Add(new Furniture((x + 8) * Game.tileSize, (y + 1) * Game.tileSize, EnumHandler.FurnitureTypes.Couch, 90));
             Game.furnitureInWorld.Add(new Furniture((x + 9) * Game.tileSize, (y + size - 2) * Game.tileSize, EnumHandler.FurnitureTypes.Bed, 0));
             Game.furnitureInWorld.Add(new Furniture((x + 8) * Game.tileSize, (y + size - 1) * Game.tileSize, EnumHandler.FurnitureTypes.SmallTable, 0));
+            Game.furnitureInWorld.Add(new Furniture((x + 1) * Game.tileSize, (y + size - 1) * Game.tileSize, EnumHandler.FurnitureTypes.Counter, 0));
+            Game.furnitureInWorld.Add(new Furniture((x + 2) * Game.tileSize, (y + size - 1) * Game.tileSize, EnumHandler.FurnitureTypes.Sink, 0));
+            Game.furnitureInWorld.Add(new Furniture((x + 3) * Game.tileSize, (y + size - 1) * Game.tileSize, EnumHandler.FurnitureTypes.Counter, 0));
+            Game.furnitureInWorld.Add(new Furniture((x + 1) * Game.tileSize, (y + size - 2) * Game.tileSize, EnumHandler.FurnitureTypes.Counter, 0));
+            Game.furnitureInWorld.Add(new Furniture((x + 1) * Game.tileSize, (y + size - 3) * Game.tileSize, EnumHandler.FurnitureTypes.Oven, 90));
 
             //items
             int water = generator.Next(0, 4);
