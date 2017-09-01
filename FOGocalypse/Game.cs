@@ -18,6 +18,7 @@ namespace FOGocalypse
         public static ParticleGenerator particleGenerator { get; } = new ParticleGenerator();
 
         public static List<Tile> worldTiles { get; set; } = new List<Tile>();
+        public static List<Tile> allocatedTiles { get; set; } = new List<Tile>();
         public static List<Item> itemsInWorld { get; set; } = new List<Item>();
         public static List<Zombie> zombies { get; set; } = new List<Zombie>();
         public static List<Furniture> furnitureInWorld { get; set; } = new List<Furniture>();

@@ -309,7 +309,7 @@ namespace FOGocalypse
 
                 #region DrawTiles
                 //draw tiles
-                foreach (Tile t in Game.worldTiles)
+                foreach (Tile t in Game.allocatedTiles)
                 {
                     int x = t.x - Game.player.playerX;
                     int y = t.y - Game.player.playerY;

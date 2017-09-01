@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace FOGocalypse
 {
@@ -32,6 +33,7 @@ namespace FOGocalypse
                 simulateZombies();
                 spawnZombie();
                 simulateRain();
+                simulateWorldChunks();
             }
         }
 
@@ -78,7 +80,7 @@ namespace FOGocalypse
             //handle block collsions
             Game.player.hitbox = new Rectangle(playerPosition.X, playerPosition.Y, Game.tileSize, Game.tileSize);
 
-            foreach (Tile t in Game.worldTiles)
+            foreach (Tile t in Game.allocatedTiles)
             {
                 if (t.type.Equals(EnumHandler.TileTypes.Wood))
                 {
@@ -217,6 +219,33 @@ namespace FOGocalypse
                     rainCycle = 0;
                 }
                 rainCycle++;
+            }
+        }
+
+        //allocate world chunks
+        private void simulateWorldChunks()
+        {
+            Tile tBaseTopLeft = Game.allocatedTiles[0];
+            Tile tBaseBottomRight = Game.allocatedTiles[Game.allocatedTiles.Count - 1];
+
+            if (tBaseTopLeft.x - Game.player.playerX >= Game.canvasWidth / 2 || tBaseTopLeft.y - Game.player.playerY >= Game.canvasHeight / 2)
+            {
+                Thread t = new Thread(() =>
+                {
+                    Game.allocatedTiles = new WorldGenerator().AllocateTiles(Game.worldTiles, 20);
+                });
+
+                t.Start();
+            }
+
+            if (tBaseBottomRight.x - Game.player.playerX <= Game.canvasWidth / 2 || tBaseBottomRight.y - Game.player.playerY <= Game.canvasHeight / 2)
+            {
+                Thread t = new Thread(() =>
+                {
+                    Game.allocatedTiles = new WorldGenerator().AllocateTiles(Game.worldTiles, 20);
+                });
+
+                t.Start();
             }
         }
 

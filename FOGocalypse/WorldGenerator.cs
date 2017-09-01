@@ -105,6 +105,28 @@ namespace FOGocalypse
             return tilesForWorld;
         }
 
+        //allocate tiles in world
+        public List<Tile> AllocateTiles(List<Tile> originalTiles, int extraRange)
+        {
+            List<Tile> tilesToReturn = new List<Tile>();
+
+            foreach (Tile t in originalTiles)
+            {
+                int newX = t.x - Game.player.playerX;
+                int newY = t.y - Game.player.playerY;
+
+                if (newX > 0 - (extraRange * Game.tileSize) && newX < Game.canvasWidth + (extraRange * Game.tileSize))
+                {
+                    if (newY > 0 - (extraRange * Game.tileSize) && newY < Game.canvasHeight + (extraRange * Game.tileSize))
+                    {
+                        tilesToReturn.Add(t);
+                    }
+                }
+            }
+
+            return tilesToReturn;
+        }
+
         //generate house
         private List<Tile> generateHouse(int x, int y, int size, int doorPosition, Boolean doorOnLeft)
         {
