@@ -187,65 +187,68 @@ namespace FOGocalypse
                 Font f = new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold);
                 Font fSmall = new Font(FontFamily.GenericSansSerif, 20, FontStyle.Bold);
 
-                //world size arrows
-                if (x >= width / 2 - 100 && x <= width / 2 - 80)
+                if (!RenderingEngine.creatingWorld)
                 {
-                    if (y >= height / 2- 220 && y <= height / 2 - 200)
+                    //world size arrows
+                    if (x >= width / 2 - 100 && x <= width / 2 - 80)
                     {
-                        if (Game.worldSize < 4096)
+                        if (y >= height / 2 - 220 && y <= height / 2 - 200)
                         {
-                            Game.worldSize *= 2;
+                            if (Game.worldSize < 4096)
+                            {
+                                Game.worldSize *= 2;
+                            }
+                        }
+
+                        if (y >= height / 2 - 195 && y <= height / 2 - 175)
+                        {
+                            if (Game.worldSize > 1)
+                            {
+                                Game.worldSize /= 2;
+                            }
                         }
                     }
 
-                    if (y >= height / 2 - 195 && y <= height / 2 - 175)
+                    //zombie sight arrows
+                    if (x >= width / 2 + 100 && x <= width / 2 + 120)
                     {
-                        if (Game.worldSize > 1)
+                        if (y >= height / 2 - 220 && y <= height / 2 - 200)
                         {
-                            Game.worldSize /= 2;
+                            if (Game.zombieViewDistance < 9) Game.zombieViewDistance++;
+                        }
+
+                        if (y >= height / 2 - 195 && y <= height / 2 - 175)
+                        {
+                            if (Game.zombieViewDistance > 1) Game.zombieViewDistance--;
                         }
                     }
-                }
 
-                //zombie sight arrows
-                if (x >= width / 2 + 100 && x <= width / 2 + 120)
-                {
-                    if (y >= height / 2 - 220 && y <= height / 2 - 200)
+                    //item rarity
+                    if (x >= width / 2 - 100 && x <= width / 2 - 80)
                     {
-                        if(Game.zombieViewDistance < 9) Game.zombieViewDistance++;
+                        if (y >= height / 2 - 140 && y <= height / 2 - 120)
+                        {
+                            if (Game.itemRarity < 100) Game.itemRarity += 10;
+                        }
+
+                        if (y >= height / 2 - 115 && y <= height / 2 - 95)
+                        {
+                            if (Game.itemRarity > 10) Game.itemRarity -= 10;
+                        }
                     }
 
-                    if (y >= height / 2 - 195 && y <= height / 2 - 175)
+                    //zombie rarity
+                    if (x >= width / 2 + 100 && x <= width / 2 + 120)
                     {
-                        if(Game.zombieViewDistance > 1) Game.zombieViewDistance--;
-                    }
-                }
+                        if (y >= height / 2 - 140 && y <= height / 2 - 120)
+                        {
+                            if (Game.zombieSpawnChance < 100) Game.zombieSpawnChance += 10;
+                        }
 
-                //item rarity
-                if (x >= width / 2 - 100 && x <= width / 2 - 80)
-                {
-                    if (y >= height / 2 - 140 && y <= height / 2 - 120)
-                    {
-                        if (Game.itemRarity < 100) Game.itemRarity += 10;
-                    }
-
-                    if (y >= height / 2 - 115 && y <= height / 2 - 95)
-                    {
-                        if (Game.itemRarity > 10) Game.itemRarity -= 10;
-                    }
-                }
-
-                //zombie rarity
-                if (x >= width / 2 + 100 && x <= width / 2 + 120)
-                {
-                    if (y >= height / 2 - 140 && y <= height / 2 - 120)
-                    {
-                        if (Game.zombieSpawnChance < 100) Game.zombieSpawnChance += 10;
-                    }
-
-                    if (y >= height / 2 - 115 && y <= height / 2 - 95)
-                    {
-                        if (Game.zombieSpawnChance > 10) Game.zombieSpawnChance -= 10;
+                        if (y >= height / 2 - 115 && y <= height / 2 - 95)
+                        {
+                            if (Game.zombieSpawnChance > 10) Game.zombieSpawnChance -= 10;
+                        }
                     }
                 }
 

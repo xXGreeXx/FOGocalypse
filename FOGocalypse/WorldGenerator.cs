@@ -169,6 +169,21 @@ namespace FOGocalypse
 
             tilesForHouse.Add(new Tile((x + 10) * Game.tileSize, (y + size) * Game.tileSize, EnumHandler.TileTypes.Wood));
 
+            //door
+            Furniture doorObject;
+
+            if (doorOnLeft)
+            {
+                doorObject = new Furniture((x + 1) * Game.tileSize - 10, (y + doorPosition) * Game.tileSize, EnumHandler.FurnitureTypes.Door, 0);
+            }
+            else
+            {
+                doorObject = new Furniture((x + 10) * Game.tileSize, (y + doorPosition) * Game.tileSize, EnumHandler.FurnitureTypes.Door, 0);
+            }
+            doorObject.open = true;
+
+            Game.furnitureInWorld.Add(doorObject);
+
             //furniture
             Game.furnitureInWorld.Add(new Furniture((x + 1) * Game.tileSize, (y + 1) * Game.tileSize, EnumHandler.FurnitureTypes.Table, 0));
             Game.furnitureInWorld.Add(new Furniture((x + 2) * Game.tileSize, (y + 3) * Game.tileSize, EnumHandler.FurnitureTypes.Chair, 0));

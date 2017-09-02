@@ -10,6 +10,7 @@ namespace FOGocalypse
         public int y { get; set; }
         public EnumHandler.FurnitureTypes type { get; set; }
         public int rotation { get; set; }
+        public Boolean open { get; set; }
 
         //constructor
         public Furniture(int x, int y, EnumHandler.FurnitureTypes type, int rotation)
@@ -18,6 +19,7 @@ namespace FOGocalypse
             this.y = y;
             this.type = type;
             this.rotation = rotation;
+            this.open = false;
         }
     }
 }

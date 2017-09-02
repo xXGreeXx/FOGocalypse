@@ -11,7 +11,6 @@ namespace FOGocalypse
         public EnumHandler.TileTypes type { get; set; }
         public Rectangle hitbox { get; set; }
         public Boolean roofed { get; set; }
-        public Boolean open { get; set; }
         public int fogValue { get; set; }
         public Boolean swapFog { get; set; } = false;
 
@@ -23,7 +22,6 @@ namespace FOGocalypse
             this.type = type;
             this.hitbox = new Rectangle(x, y, Game.tileSize, Game.tileSize);
             this.roofed = false;
-            this.open = false;
 
             fogValue = Game.r.Next(200, 255);
         }

@@ -278,11 +278,12 @@ namespace FOGocalypse
                     String message = "Please wait.... generating world(" + Game.worldSize + "x" + Game.worldSize + ")";
 
                     g.DrawString(message, new Font(fSmall.FontFamily, 10, FontStyle.Bold), Brushes.Black, width / 2 - 200, height / 2 + 180);
-                    g.FillPie(Brushes.White, width / 2 + 150, height / 2 + 200, 40, 40, 10, sweepAngle);
+                    int colorShift = Math.Abs(sweepAngle) / 2;
+                    g.FillPie(new SolidBrush(Color.FromArgb(255, 255 - colorShift, 255 - colorShift, 255 - colorShift)), width / 2 + 150, height / 2 + 200, 40, 40, 10, sweepAngle);
                     if (swapAngle) { sweepAngle -= 10; }
                     else { sweepAngle += 10; }
 
-                    if (sweepAngle >= 360)
+                    if (sweepAngle >= 370)
                     {
                         swapAngle = true;
                     }
@@ -348,20 +349,6 @@ namespace FOGocalypse
                             else if (t.type.Equals(EnumHandler.TileTypes.Carpet)) g.DrawImage(carpet, x, y, Game.tileSize, Game.tileSize);
                             else if (t.type.Equals(EnumHandler.TileTypes.Stone)) g.DrawImage(stone, x, y, Game.tileSize, Game.tileSize);
                             else if (t.type.Equals(EnumHandler.TileTypes.TilledDirt)) g.DrawImage(tilledDirt, x, y, Game.tileSize, Game.tileSize);
-
-                            else if (t.type.Equals(EnumHandler.TileTypes.Door))
-                            {
-                                if (t.open)
-                                {
-                                    door.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                                    g.DrawImage(door, x, y, 10, 100);
-                                    door.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                                }
-                                else
-                                {
-                                    g.DrawImage(door, x, y, 10, 100);
-                                }
-                            }
 
                             //tile shading
                             if (!t.roofed)
@@ -462,6 +449,18 @@ namespace FOGocalypse
                                         oven.RotateFlip(RotateFlipType.Rotate90FlipNone);
                                         g.DrawImage(oven, newX, newY, 25, 25);
                                         oven.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                                    }
+                                    break;
+                                case EnumHandler.FurnitureTypes.Door:
+                                    if (furniture.open)
+                                    {
+                                        door.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                                        g.DrawImage(door, newX, newY, 50, 10);
+                                        door.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                                    }
+                                    else
+                                    {
+                                        g.DrawImage(door, newX, newY, 50, 10);
                                     }
                                     break;
                             }

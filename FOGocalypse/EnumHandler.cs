@@ -10,7 +10,6 @@
             Wood,
             Carpet,
             TilledDirt,
-            Door
         }
 
         public enum Directions
@@ -52,7 +51,8 @@
             SmallTable,
             Counter,
             Sink,
-            Oven
+            Oven,
+            Door
         }
 
         public enum WeatherType

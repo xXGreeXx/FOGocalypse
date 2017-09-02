@@ -193,7 +193,6 @@ namespace FOGocalypse
                 w.WriteLine(t.y);
                 w.WriteLine(t.type);
                 w.WriteLine(t.roofed);
-                w.WriteLine(t.open);
                 w.WriteLine(t.fogValue);
                 w.WriteLine(t.swapFog);
 
@@ -230,6 +229,7 @@ namespace FOGocalypse
                 w.WriteLine(furniture.y);
                 w.WriteLine(furniture.type);
                 w.WriteLine(furniture.rotation);
+                w.WriteLine(furniture.open);
             }
             w.WriteLine("<end>");
 
