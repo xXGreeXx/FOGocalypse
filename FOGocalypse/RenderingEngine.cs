@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Windows.Forms;
-using System.IO;
+using System.Collections.Generic;
 
 namespace FOGocalypse
 {
@@ -329,6 +328,40 @@ namespace FOGocalypse
                 int positionX = width / 2 - player.Width / 2;
                 int positionY = height / 2 - player.Height / 2;
                 float angle = (float)((Math.Atan2((double)MouseHandler.mouseY - positionY, (double)MouseHandler.mouseX - positionX)) * (180 / Math.PI));
+                List<Point> pointsVisible = new List<Point>();
+
+                #region RayCasting
+                for (float i = 0; i < 6; i++)
+                {
+                    float angleX = (float)(Math.Cos(i) * Game.tileSize * Game.playerViewDistance);
+                    float angleY = (float)(Math.Sin(i) * Game.tileSize * Game.playerViewDistance);
+
+                    float baseOfRayX = positionX + Game.tileSize / 2;
+                    float baseOfRayY = positionY + Game.tileSize / 2;
+                    float endOfRayX = positionX + angleX;
+                    float endOfRayY = positionY + angleY;
+
+                    foreach (Tile t in Game.allocatedTiles)
+                    {
+                        int newX = t.x - Game.player.playerX;
+                        int newY = t.y - Game.player.playerY;
+                        Rectangle r = new Rectangle(newX, newY, Game.tileSize, Game.tileSize);
+
+                        if (t.type.Equals(EnumHandler.TileTypes.Wood))
+                        {
+                            if (LineIntersectsRect(new Point((int)baseOfRayX, (int)baseOfRayY), new Point((int)endOfRayX, (int)endOfRayY), r))
+                            {
+                                break;
+                            }
+                        }
+
+                        else if (LineIntersectsRect(new Point((int)baseOfRayX, (int)baseOfRayY), new Point((int)endOfRayX, (int)endOfRayY), r))
+                        {
+                            pointsVisible.Add(new Point(newX, newY));
+                        }
+                    }
+                }
+                #endregion
 
                 #region DrawTiles
                 //draw tiles
@@ -339,42 +372,45 @@ namespace FOGocalypse
                     int distance = Game.playerViewDistance * Game.tileSize;
                     Boolean inView = false;
 
-                    if (x > width / 2 - player.Width / 2 - distance && x < width / 2 - player.Width / 2 + distance)
+                    foreach (Point p in pointsVisible)
                     {
-                        if (y > height / 2 - player.Height / 2 - distance && y < height / 2 - player.Height / 2 + distance)
+                        if (p.X >= x && p.X <= x + Game.tileSize)
                         {
-                            if (t.type.Equals(EnumHandler.TileTypes.Grass)) g.DrawImage(grass, x, y, Game.tileSize, Game.tileSize);
-                            else if (t.type.Equals(EnumHandler.TileTypes.Dirt)) g.DrawImage(dirt, x, y, Game.tileSize, Game.tileSize);
-                            else if (t.type.Equals(EnumHandler.TileTypes.Wood)) g.DrawImage(wood, x, y, Game.tileSize, Game.tileSize);
-                            else if (t.type.Equals(EnumHandler.TileTypes.Carpet)) g.DrawImage(carpet, x, y, Game.tileSize, Game.tileSize);
-                            else if (t.type.Equals(EnumHandler.TileTypes.Stone)) g.DrawImage(stone, x, y, Game.tileSize, Game.tileSize);
-                            else if (t.type.Equals(EnumHandler.TileTypes.TilledDirt)) g.DrawImage(tilledDirt, x, y, Game.tileSize, Game.tileSize);
-
-                            //tile shading
-                            if (!t.roofed)
+                            if (p.Y >= y && p.Y <= y + Game.tileSize)
                             {
-                                int timeFromNormal = Game.time;
-                                if (Game.time > 1200)
+                                if (t.type.Equals(EnumHandler.TileTypes.Grass)) g.DrawImage(grass, x, y, Game.tileSize, Game.tileSize);
+                                else if (t.type.Equals(EnumHandler.TileTypes.Dirt)) g.DrawImage(dirt, x, y, Game.tileSize, Game.tileSize);
+                                else if (t.type.Equals(EnumHandler.TileTypes.Wood)) g.DrawImage(wood, x, y, Game.tileSize, Game.tileSize);
+                                else if (t.type.Equals(EnumHandler.TileTypes.Carpet)) g.DrawImage(carpet, x, y, Game.tileSize, Game.tileSize);
+                                else if (t.type.Equals(EnumHandler.TileTypes.Stone)) g.DrawImage(stone, x, y, Game.tileSize, Game.tileSize);
+                                else if (t.type.Equals(EnumHandler.TileTypes.TilledDirt)) g.DrawImage(tilledDirt, x, y, Game.tileSize, Game.tileSize);
+
+                                //tile shading
+                                if (!t.roofed)
                                 {
-                                    timeFromNormal = 1200 - (Game.time - 1200);
+                                    int timeFromNormal = Game.time;
+                                    if (Game.time > 1200)
+                                    {
+                                        timeFromNormal = 1200 - (Game.time - 1200);
+                                    }
+
+                                    int alphaForShadow = 200 - (timeFromNormal / 10);
+
+                                    if (Game.weather.Equals(EnumHandler.WeatherType.Cloudy))
+                                    {
+                                        alphaForShadow = 180 - (timeFromNormal / 10);
+                                    }
+
+                                    else if (Game.weather.Equals(EnumHandler.WeatherType.Rainy))
+                                    {
+                                        alphaForShadow = 160;
+                                    }
+
+                                    g.FillRectangle(new SolidBrush(Color.FromArgb(alphaForShadow, Color.Black)), x, y, Game.tileSize, Game.tileSize);
                                 }
 
-                                int alphaForShadow = 200 - (timeFromNormal / 10);
-
-                                if (Game.weather.Equals(EnumHandler.WeatherType.Cloudy))
-                                {
-                                    alphaForShadow = 180 - (timeFromNormal / 10);
-                                }
-
-                                else if (Game.weather.Equals(EnumHandler.WeatherType.Rainy))
-                                {
-                                    alphaForShadow = 160;
-                                }
-
-                                g.FillRectangle(new SolidBrush(Color.FromArgb(alphaForShadow, Color.Black)), x, y, Game.tileSize, Game.tileSize);
+                                inView = true;
                             }
-
-                            inView = true;
                         }
                     }
 
@@ -411,58 +447,61 @@ namespace FOGocalypse
                     int newY = furniture.y - Game.player.playerY;
                     int distance = Game.playerViewDistance * Game.tileSize;
 
-                    if (newX > width / 2 - player.Width / 2 - distance - 75 && newX < width / 2 - player.Width / 2 + distance)
+                    foreach (Point p in pointsVisible)
                     {
-                        if (newY > height / 2 - player.Height / 2 - distance - 50 && newY < height / 2 - player.Height / 2 + distance)
+                        if (p.X >= newX && p.X <= newX + Game.tileSize)
                         {
-                            switch (furniture.type)
+                            if (p.Y >= newY && p.Y <= newY + Game.tileSize)
                             {
-                                case EnumHandler.FurnitureTypes.Couch:
-                                    if (furniture.rotation == 90)
-                                    {
-                                        couch.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                                        g.DrawImage(couch, newX, newY, couch.Width, couch.Height);
-                                        couch.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                                    }
-                                    break;
-                                case EnumHandler.FurnitureTypes.Table:
-                                    g.DrawImage(table, newX, newY, table.Width, table.Height);
-                                    break;
-                                case EnumHandler.FurnitureTypes.Chair:
-                                    g.DrawImage(chair, newX, newY, chair.Width, chair.Height);
-                                    break;
-                                case EnumHandler.FurnitureTypes.Bed:
-                                    g.DrawImage(bed, newX, newY, bed.Width / 2, bed.Height / 2);
-                                    break;
-                                case EnumHandler.FurnitureTypes.SmallTable:
-                                    g.DrawImage(smallTable, newX, newY, smallTable.Width / 2, smallTable.Height / 2);
-                                    break;
-                                case EnumHandler.FurnitureTypes.Counter:
-                                    g.DrawImage(counter, newX, newY, 25, 25);
-                                    break;
-                                case EnumHandler.FurnitureTypes.Sink:
-                                    g.DrawImage(sink, newX, newY, 25, 25);
-                                    break;
-                                case EnumHandler.FurnitureTypes.Oven:
-                                    if (furniture.rotation == 90)
-                                    {
-                                        oven.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                                        g.DrawImage(oven, newX, newY, 25, 25);
-                                        oven.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                                    }
-                                    break;
-                                case EnumHandler.FurnitureTypes.Door:
-                                    if (furniture.open)
-                                    {
-                                        door.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                                        g.DrawImage(door, newX, newY, 50, 10);
-                                        door.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                                    }
-                                    else
-                                    {
-                                        g.DrawImage(door, newX, newY, 50, 10);
-                                    }
-                                    break;
+                                switch (furniture.type)
+                                {
+                                    case EnumHandler.FurnitureTypes.Couch:
+                                        if (furniture.rotation == 90)
+                                        {
+                                            couch.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                                            g.DrawImage(couch, newX, newY, couch.Width, couch.Height);
+                                            couch.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                                        }
+                                        break;
+                                    case EnumHandler.FurnitureTypes.Table:
+                                        g.DrawImage(table, newX, newY, table.Width, table.Height);
+                                        break;
+                                    case EnumHandler.FurnitureTypes.Chair:
+                                        g.DrawImage(chair, newX, newY, chair.Width, chair.Height);
+                                        break;
+                                    case EnumHandler.FurnitureTypes.Bed:
+                                        g.DrawImage(bed, newX, newY, bed.Width / 2, bed.Height / 2);
+                                        break;
+                                    case EnumHandler.FurnitureTypes.SmallTable:
+                                        g.DrawImage(smallTable, newX, newY, smallTable.Width / 2, smallTable.Height / 2);
+                                        break;
+                                    case EnumHandler.FurnitureTypes.Counter:
+                                        g.DrawImage(counter, newX, newY, 25, 25);
+                                        break;
+                                    case EnumHandler.FurnitureTypes.Sink:
+                                        g.DrawImage(sink, newX, newY, 25, 25);
+                                        break;
+                                    case EnumHandler.FurnitureTypes.Oven:
+                                        if (furniture.rotation == 90)
+                                        {
+                                            oven.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                                            g.DrawImage(oven, newX, newY, 25, 25);
+                                            oven.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                                        }
+                                        break;
+                                    case EnumHandler.FurnitureTypes.Door:
+                                        if (furniture.open)
+                                        {
+                                            door.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                                            g.DrawImage(door, newX, newY, 50, 10);
+                                            door.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                                        }
+                                        else
+                                        {
+                                            g.DrawImage(door, newX, newY, 50, 10);
+                                        }
+                                        break;
+                                }
                             }
                         }
                     }
@@ -478,42 +517,51 @@ namespace FOGocalypse
                     int newY = p.y - Game.player.playerY;
                     int distance = Game.playerViewDistance * Game.tileSize;
 
-                    if (newX > width / 2 - player.Width / 2 - distance - 75 && newX < width / 2 - player.Width / 2 + distance)
+                    foreach (Point point in pointsVisible)
                     {
-                        if (newY > height / 2 - player.Height / 2 - distance - 50 && newY < height / 2 - player.Height / 2 + distance)
+                        if (point.X >= newX && point.X <= newX + Game.tileSize)
                         {
-                            switch (p.type)
+                            if (point.Y >= newY && point.Y <= newY + Game.tileSize)
                             {
-                                case EnumHandler.PlantTypes.Tree:
-                                    g.DrawImage(tree, newX, newY, Game.tileSize * 2, Game.tileSize * 2);
-                                    break;
-                                case EnumHandler.PlantTypes.Bush:
-                                    g.DrawImage(bush, newX, newY, Game.tileSize, Game.tileSize);
-
-                                    int xOffset = 0;
-                                    int yOffset = 0;
-                                    for (int i = 0; i < p.berries * 2; i++)
+                                if (newX > width / 2 - player.Width / 2 - distance - 75 && newX < width / 2 - player.Width / 2 + distance)
+                                {
+                                    if (newY > height / 2 - player.Height / 2 - distance - 50 && newY < height / 2 - player.Height / 2 + distance)
                                     {
-                                        g.FillRectangle(Brushes.Red, newX + xOffset, newY + yOffset, 1, 1);
-
-                                        xOffset += 4;
-                                        if (xOffset >= 19)
+                                        switch (p.type)
                                         {
-                                            xOffset = 3;
-                                            yOffset += 5;
+                                            case EnumHandler.PlantTypes.Tree:
+                                                g.DrawImage(tree, newX, newY, Game.tileSize * 2, Game.tileSize * 2);
+                                                break;
+                                            case EnumHandler.PlantTypes.Bush:
+                                                g.DrawImage(bush, newX, newY, Game.tileSize, Game.tileSize);
+
+                                                int xOffset = 0;
+                                                int yOffset = 0;
+                                                for (int i = 0; i < p.berries * 2; i++)
+                                                {
+                                                    g.FillRectangle(Brushes.Red, newX + xOffset, newY + yOffset, 1, 1);
+
+                                                    xOffset += 4;
+                                                    if (xOffset >= 19)
+                                                    {
+                                                        xOffset = 3;
+                                                        yOffset += 5;
+                                                    }
+                                                }
+
+                                                if (newX >= width / 2 - Game.tileSize * 2 && newX < width / 2 + Game.tileSize / 2 && !plantTooltipDrawn)
+                                                {
+                                                    if (newY >= height / 2 - Game.tileSize * 2 && newY < height / 2 + Game.tileSize / 2)
+                                                    {
+                                                        g.FillRectangle(Brushes.Gray, newX, newY - 15, 100, 20);
+                                                        g.DrawString(p.type.ToString() + "\n Press <f> to gather berries", f, Brushes.Black, newX, newY - 15);
+                                                        plantTooltipDrawn = true;
+                                                    }
+                                                }
+                                                break;
                                         }
                                     }
-
-                                    if (newX >= width / 2 - Game.tileSize * 2 && newX < width / 2 + Game.tileSize / 2 && !plantTooltipDrawn)
-                                    {
-                                        if (newY >= height / 2 - Game.tileSize * 2 && newY < height / 2 + Game.tileSize / 2)
-                                        {
-                                            g.FillRectangle(Brushes.Gray, newX, newY - 15, 100, 20);
-                                            g.DrawString(p.type.ToString() + "\n Press <f> to gather berries", f, Brushes.Black, newX, newY - 15);
-                                            plantTooltipDrawn = true;
-                                        }
-                                    }
-                                    break;
+                                }
                             }
                         }
                     }
@@ -531,87 +579,37 @@ namespace FOGocalypse
                     int newY = i.y - Game.player.playerY;
                     int distance = Game.playerViewDistance * Game.tileSize;
 
-                    if (newX > width / 2 - player.Width / 2 - distance && newX < width / 2 - player.Width / 2 + distance)
+                    foreach (Point point in pointsVisible)
                     {
-                        if (newY > height / 2 - player.Height / 2 - distance && newY < height / 2 - player.Height / 2 + distance)
+                        if (point.X >= newX && point.X <= newX + Game.tileSize)
                         {
-                            if (newX >= width / 2 - player.Width / 2 - 80 && newX <= width / 2 - player.Width / 2 + 80 && !tooltipDrawn)
+                            if (point.Y >= newY && point.Y <= newY + Game.tileSize)
                             {
-                                if (newY >= height / 2 - player.Height / 2 - 80 && newY <= height / 2 - player.Height / 2 + 80)
+
+                                if (newX > width / 2 - player.Width / 2 - distance && newX < width / 2 - player.Width / 2 + distance)
                                 {
-                                    g.FillRectangle(Brushes.Gray, newX, newY - 15, 70, 20);
-                                    g.DrawString(i.type.ToString() + "\n Press <f> to equip", f, Brushes.Black, newX, newY - 15);
-                                    tooltipDrawn = true;
+                                    if (newY > height / 2 - player.Height / 2 - distance && newY < height / 2 - player.Height / 2 + distance)
+                                    {
+                                        if (newX >= width / 2 - player.Width / 2 - 80 && newX <= width / 2 - player.Width / 2 + 80 && !tooltipDrawn)
+                                        {
+                                            if (newY >= height / 2 - player.Height / 2 - 80 && newY <= height / 2 - player.Height / 2 + 80)
+                                            {
+                                                g.FillRectangle(Brushes.Gray, newX, newY - 15, 70, 20);
+                                                g.DrawString(i.type.ToString() + "\n Press <f> to equip", f, Brushes.Black, newX, newY - 15);
+                                                tooltipDrawn = true;
+                                            }
+                                        }
+
+                                        int xOfItem = newX + Game.tileSize / 2;
+                                        int yOfItem = newY + Game.tileSize / 2;
+
+                                        drawItemInWorld(xOfItem, yOfItem, i.type, g);
+                                    }
                                 }
                             }
-
-                            int xOfItem = newX + Game.tileSize / 2;
-                            int yOfItem = newY + Game.tileSize / 2;
-
-                            drawItemInWorld(xOfItem, yOfItem, i.type, g);
                         }
                     }
                 }
-                #endregion
-
-                //TODO\\
-                #region RayCasting
-                //for (float i = 0; i < 12; i++)
-                //{
-                //    float angleX = (float)(Math.Cos(i + angle) * Game.tileSize * Game.playerViewDistance);
-                //    float angleY = (float)(Math.Sin(i + angle) * Game.tileSize * Game.playerViewDistance);
-
-                //    float baseOfRayX = positionX + Game.tileSize / 2;
-                //    float baseOfRayY = positionY + Game.tileSize / 2;
-                //    float positionOfRayX2 = positionX + angleX;
-                //    float positionOfRayY2 = positionY + angleY;
-
-                //    int yOfDot = (int)baseOfRayY;
-                //    int xOfDot = (int)baseOfRayX;
-
-                //    while (xOfDot != Math.Floor(positionOfRayX2) || yOfDot != Math.Floor(positionOfRayY2))
-                //    {
-                //        if (yOfDot < Math.Floor(positionOfRayY2))
-                //        {
-                //            yOfDot++;
-                //        }
-                //        else if (yOfDot > Math.Floor(positionOfRayY2))
-                //        {
-                //            yOfDot--;
-                //        }
-
-                //        if (xOfDot < Math.Floor(positionOfRayX2))
-                //        {
-                //            xOfDot++;
-                //        }
-                //        else if (xOfDot > Math.Floor(positionOfRayX2))
-                //        {
-                //            xOfDot--;
-                //        }
-
-                //        g.FillRectangle(Brushes.Black, xOfDot, yOfDot, 1, 1);
-
-                //        foreach (Tile t in Game.worldTiles)
-                //        {
-                //            if (t.x > 0 && t.x < width)
-                //            {
-                //                if (t.y > 0 && t.y < height)
-                //                {
-                //                    if (t.type.Equals(EnumHandler.TileTypes.Wood))
-                //                    {
-                //                        if (xOfDot > t.x && xOfDot < t.x + Game.tileSize)
-                //                        {
-                //                            if (yOfDot > t.y && yOfDot  < t.y + Game.tileSize)
-                //                            {
-                //                                break;
-                //                            }
-                //                        }
-                //                    }
-                //                }
-                //            }
-                //        }
-                //    }
-                //}
                 #endregion
 
                 //draw player
@@ -1022,6 +1020,39 @@ namespace FOGocalypse
             g.DrawImage(image, new PointF(0, 0));
 
             return rotatedBmp;
+        }
+
+        //temp functions
+        public static bool LineIntersectsRect(Point p1, Point p2, Rectangle r)
+        {
+            return LineIntersectsLine(p1, p2, new Point(r.X, r.Y), new Point(r.X + r.Width, r.Y)) ||
+                   LineIntersectsLine(p1, p2, new Point(r.X + r.Width, r.Y), new Point(r.X + r.Width, r.Y + r.Height)) ||
+                   LineIntersectsLine(p1, p2, new Point(r.X + r.Width, r.Y + r.Height), new Point(r.X, r.Y + r.Height)) ||
+                   LineIntersectsLine(p1, p2, new Point(r.X, r.Y + r.Height), new Point(r.X, r.Y)) ||
+                   (r.Contains(p1) && r.Contains(p2));
+        }
+
+        private static bool LineIntersectsLine(Point l1p1, Point l1p2, Point l2p1, Point l2p2)
+        {
+            float q = (l1p1.Y - l2p1.Y) * (l2p2.X - l2p1.X) - (l1p1.X - l2p1.X) * (l2p2.Y - l2p1.Y);
+            float d = (l1p2.X - l1p1.X) * (l2p2.Y - l2p1.Y) - (l1p2.Y - l1p1.Y) * (l2p2.X - l2p1.X);
+
+            if (d == 0)
+            {
+                return false;
+            }
+
+            float r = q / d;
+
+            q = (l1p1.Y - l2p1.Y) * (l1p2.X - l1p1.X) - (l1p1.X - l2p1.X) * (l1p2.Y - l1p1.Y);
+            float s = q / d;
+
+            if (r < 0 || r > 1 || s < 0 || s > 1)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
