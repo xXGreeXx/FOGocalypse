@@ -347,17 +347,23 @@ namespace FOGocalypse
                         int newY = t.y - Game.player.playerY;
                         Rectangle r = new Rectangle(newX, newY, Game.tileSize, Game.tileSize);
 
-                        if (t.type.Equals(EnumHandler.TileTypes.Wood))
+                        if (newX > 0 && newX < Game.canvasWidth)
                         {
-                            if (LineIntersectsRect(new Point((int)baseOfRayX, (int)baseOfRayY), new Point((int)endOfRayX, (int)endOfRayY), r))
+                            if (newY > 0 && newY < Game.canvasHeight)
                             {
-                                break;
-                            }
-                        }
+                                if (t.type.Equals(EnumHandler.TileTypes.Wood))
+                                {
+                                    if (LineIntersectsRect(new Point((int)baseOfRayX, (int)baseOfRayY), new Point((int)endOfRayX, (int)endOfRayY), r))
+                                    {
+                                        break;
+                                    }
+                                }
 
-                        else if (LineIntersectsRect(new Point((int)baseOfRayX, (int)baseOfRayY), new Point((int)endOfRayX, (int)endOfRayY), r))
-                        {
-                            pointsVisible.Add(new Point(newX, newY));
+                                else if (LineIntersectsRect(new Point((int)baseOfRayX, (int)baseOfRayY), new Point((int)endOfRayX, (int)endOfRayY), r))
+                                {
+                                    pointsVisible.Add(new Point(newX, newY));
+                                }
+                            }
                         }
                     }
                 }
@@ -490,7 +496,7 @@ namespace FOGocalypse
                                         }
                                         break;
                                     case EnumHandler.FurnitureTypes.Door:
-                                        if (furniture.open)
+                                        if (!furniture.open)
                                         {
                                             door.RotateFlip(RotateFlipType.Rotate90FlipNone);
                                             g.DrawImage(door, newX, newY, 10, 50);
@@ -675,11 +681,14 @@ namespace FOGocalypse
                     float zombieAngle = (float)((Math.Atan2((double)z.lookingToward.Y - newY, (double)z.lookingToward.X - newX)) * (180 / Math.PI));
                     int distance = Game.playerViewDistance * Game.tileSize;
 
-                    if (newX > width / 2 - player.Width / 2 - distance && newX < width / 2 - player.Width / 2 + distance)
+                    foreach (Point p in pointsVisible)
                     {
-                        if (newY > height / 2 - player.Height / 2 - distance && newY < height / 2 - player.Height / 2 + distance)
+                        if (p.X >= newX && p.X <= newX + Game.tileSize)
                         {
-                            g.DrawImage(RotateImage(zombie, zombieAngle), newX, newY, Game.tileSize, Game.tileSize);
+                            if (p.Y >= newY && p.Y <= newY + Game.tileSize)
+                            {
+                                g.DrawImage(RotateImage(zombie, zombieAngle), newX, newY, Game.tileSize, Game.tileSize);
+                            }
                         }
                     }
                 }

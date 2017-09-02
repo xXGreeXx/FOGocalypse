@@ -135,16 +135,16 @@ namespace FOGocalypse
                 if (f.type.Equals(EnumHandler.FurnitureTypes.Door))
                 {
                     Rectangle topHitbox = new Rectangle(newX, newY, 50, 2);
-                    Rectangle bottomHitbox = new Rectangle(newX, newY + 5, 50, 5);
-                    Rectangle leftHitbox = new Rectangle(newX + 5, newY, 10, 10);
-                    Rectangle rightHitbox = new Rectangle(newX + 50 - 5, newY, 10, 10);
+                    Rectangle bottomHitbox = new Rectangle(newX, newY + 8, 50, 2);
+                    Rectangle leftHitbox = new Rectangle(newX + 2, newY, 2, 10);
+                    Rectangle rightHitbox = new Rectangle(newX + 48, newY, 10, 2);
 
                     if (!f.open)
                     {
-                        topHitbox = new Rectangle(newX, newY + 5, 10, 50);
-                        bottomHitbox = new Rectangle(newX, newY + 20 - 5, 10, 50);
-                        leftHitbox = Rectangle.Empty;
-                        rightHitbox = Rectangle.Empty;
+                        topHitbox = new Rectangle(newX, newY + 5, 10, 10);
+                        bottomHitbox = new Rectangle(newX, newY + 45, 10, 10);
+                        leftHitbox = new Rectangle(newX - 5, newY, 10, 50);
+                        rightHitbox = new Rectangle(newX + 5, newY, 10, 50);
                     }
 
                     if (Game.player.hitbox.IntersectsWith(topHitbox) || Game.player.hitbox.IntersectsWith(bottomHitbox)) Game.player.playerY = oldPosition.Y;
@@ -247,7 +247,7 @@ namespace FOGocalypse
             Tile tBaseTopLeft = Game.allocatedTiles[0];
             Tile tBaseBottomRight = Game.allocatedTiles[Game.allocatedTiles.Count - 1];
 
-            if (tBaseTopLeft.x - Game.player.playerX >= Game.canvasWidth / 2 - 50 || tBaseTopLeft.y - Game.player.playerY >= Game.canvasHeight / 2 - 50)
+            if (tBaseTopLeft.x - Game.player.playerX >= Game.tileSize * 4 || tBaseTopLeft.y - Game.player.playerY >= Game.tileSize * 4)
             {
                 Thread t = new Thread(() =>
                 {
@@ -257,7 +257,7 @@ namespace FOGocalypse
                 t.Start();
             }
 
-            if (tBaseBottomRight.x - Game.player.playerX <= Game.canvasWidth / 2 || tBaseBottomRight.y - Game.player.playerY <= Game.canvasHeight / 2)
+            if (tBaseBottomRight.x - Game.player.playerX <= Game.canvasWidth - Game.tileSize * 4 || tBaseBottomRight.y - Game.player.playerY <= Game.canvasHeight - Game.tileSize * 4)
             {
                 Thread t = new Thread(() =>
                 {

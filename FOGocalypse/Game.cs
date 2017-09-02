@@ -68,7 +68,7 @@ namespace FOGocalypse
 
         public static int FPS { get; set; } = 1;
         private int lastFPS = 0;
-        private int physicsCycle = 0;
+        private float physicsCycle = 0;
         public static int attackSpeedLimit { get; set; } = 0;
         public static Random r { get; } = new Random();
 
@@ -295,12 +295,12 @@ namespace FOGocalypse
 
             if (!inPauseMenu && !inLossScreen)
             {
-                physicsCycle++;
+                physicsCycle += 0.1F;
 
-                if (physicsCycle >= Math.Ceiling(FPS / 20F))
+                if (physicsCycle >= (FPS / 20F) / 10F)
                 {
                     physicsEngine.SimulatePhysics();
-                    physicsCycle = 0;
+                    physicsCycle = 0.0F;
                 }
             }
 
