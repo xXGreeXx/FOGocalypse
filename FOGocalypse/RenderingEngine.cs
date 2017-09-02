@@ -493,7 +493,7 @@ namespace FOGocalypse
                                         if (furniture.open)
                                         {
                                             door.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                                            g.DrawImage(door, newX, newY, 50, 10);
+                                            g.DrawImage(door, newX, newY, 10, 50);
                                             door.RotateFlip(RotateFlipType.Rotate270FlipNone);
                                         }
                                         else

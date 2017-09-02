@@ -131,6 +131,25 @@ namespace FOGocalypse
                     if (Game.player.hitbox.IntersectsWith(topHitbox) || Game.player.hitbox.IntersectsWith(bottomHitbox)) Game.player.playerY = oldPosition.Y;
                     if (Game.player.hitbox.IntersectsWith(leftHitbox) || Game.player.hitbox.IntersectsWith(rightHitbox)) Game.player.playerX = oldPosition.X;
                 }
+
+                if (f.type.Equals(EnumHandler.FurnitureTypes.Door))
+                {
+                    Rectangle topHitbox = new Rectangle(newX, newY, 50, 2);
+                    Rectangle bottomHitbox = new Rectangle(newX, newY + 5, 50, 5);
+                    Rectangle leftHitbox = new Rectangle(newX + 5, newY, 10, 10);
+                    Rectangle rightHitbox = new Rectangle(newX + 50 - 5, newY, 10, 10);
+
+                    if (!f.open)
+                    {
+                        topHitbox = new Rectangle(newX, newY + 5, 10, 50);
+                        bottomHitbox = new Rectangle(newX, newY + 20 - 5, 10, 50);
+                        leftHitbox = Rectangle.Empty;
+                        rightHitbox = Rectangle.Empty;
+                    }
+
+                    if (Game.player.hitbox.IntersectsWith(topHitbox) || Game.player.hitbox.IntersectsWith(bottomHitbox)) Game.player.playerY = oldPosition.Y;
+                    if (Game.player.hitbox.IntersectsWith(leftHitbox) || Game.player.hitbox.IntersectsWith(rightHitbox)) Game.player.playerX = oldPosition.X;
+                }
             }
         }
 

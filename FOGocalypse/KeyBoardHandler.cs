@@ -178,6 +178,38 @@ namespace FOGocalypse
 
                                 indexOfPlant++;
                             }
+
+
+                            //interact with furniture
+                            int indexOfFurniture = 0;
+                            foreach (Furniture f in Game.furnitureInWorld)
+                            {
+                                int newX = f.x - Game.player.playerX;
+                                int newY = f.y - Game.player.playerY;
+
+                                switch (f.type)
+                                {
+                                    case EnumHandler.FurnitureTypes.Door:
+                                        if (newX >= width / 2 - Game.tileSize * 2 && newX < width / 2 + Game.tileSize / 2)
+                                        {
+                                            if (newY >= height / 2 - Game.tileSize * 2 && newY < height / 2 + Game.tileSize / 2)
+                                            {
+                                                if (f.open)
+                                                {
+                                                    Game.furnitureInWorld[indexOfFurniture].open = false;
+                                                }
+                                                else
+                                                {
+                                                    Game.furnitureInWorld[indexOfFurniture].open = true;
+                                                }
+                                                break;
+                                            }
+                                        }
+                                        break;
+                                }
+
+                                indexOfFurniture++;
+                            }
                         }
                         break;
 
