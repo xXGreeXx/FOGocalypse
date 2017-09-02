@@ -549,6 +549,11 @@ namespace FOGocalypse
                                 Game.player.playerWaterNeed += 15;
                                 Game.itemsInHotbar[Game.selectedHotbar - 1] = new Item(0, 0, EnumHandler.Items.None);
                             }
+                            if (button.Equals(MouseButtons.Right))
+                            {
+                                Game.combatSystem.ThrowItem(5, new Point(mouseX + Game.player.playerX, mouseY + Game.player.playerY), Game.itemsInHotbar[Game.selectedHotbar - 1]);
+                                Game.itemsInHotbar[Game.selectedHotbar - 1] = new Item(0, 0, EnumHandler.Items.None);
+                            }
                             break;
                         case EnumHandler.Items.Bread:
                             if (button.Equals(MouseButtons.Left))

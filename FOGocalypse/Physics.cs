@@ -28,12 +28,60 @@ namespace FOGocalypse
                 {
                     simulatePlayerPhysics();
                 }
+                simulateThrownItemPhysics();
                 simulatePlayerNeeds();
                 simulateParticles();
                 simulateZombies();
                 spawnZombie();
                 simulateRain();
                 simulateWorldChunks();
+            }
+        }
+
+        //thrown item physics
+        private void simulateThrownItemPhysics()
+        {
+            int indexOfThrownItem = 0;
+            foreach (Item thrownItem in RenderingEngine.itemsBeingThrown)
+            {
+                int[] directions = RenderingEngine.destinationsOfItemsBeingThrown[indexOfThrownItem];
+                int moveSpeed = 5;
+                int velocityX = 0;
+                int velocityY = 0;
+                float angle = (float)((Math.Atan2((double)directions[1] - thrownItem.y, (double)directions[0] - thrownItem.x)));
+                float directionX = (float)Math.Cos(angle);
+                float directionY = (float)Math.Sin(angle);
+
+                if (thrownItem.x < directions[0])
+                {
+                    velocityX = moveSpeed;
+                }
+                if (thrownItem.x > directions[0])
+                {
+                    velocityX = -moveSpeed;
+                }
+
+                if (thrownItem.y < directions[1])
+                {
+                    velocityY = moveSpeed;
+                }
+                if (thrownItem.y > directions[1])
+                {
+                    velocityY = -moveSpeed;
+                }
+
+                thrownItem.x += (int)(velocityX * directionX);
+                thrownItem.y += (int)(velocityY * directionY);
+
+                if (thrownItem.x == directions[0] && thrownItem.y == directions[1])
+                {
+                    Game.itemsInWorld.Add(thrownItem);
+                    RenderingEngine.itemsBeingThrown.RemoveAt(indexOfThrownItem);
+                    RenderingEngine.destinationsOfItemsBeingThrown.RemoveAt(indexOfThrownItem);
+                    break;
+                }
+
+                indexOfThrownItem++;
             }
         }
 

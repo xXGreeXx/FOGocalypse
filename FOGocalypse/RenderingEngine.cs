@@ -71,6 +71,9 @@ namespace FOGocalypse
         Boolean swapAngle = false;
         Random r = new Random();
 
+        public static List<Item> itemsBeingThrown { get; set; } = new List<Item>();
+        public static List<int[]> destinationsOfItemsBeingThrown { get; set; } = new List<int[]>();
+
         public static float scale { get; set; } = 1;
 
         //constructor
@@ -348,37 +351,40 @@ namespace FOGocalypse
                 List<Point> pointsVisible = new List<Point>();
 
                 #region RayCasting
-                for (float i = 0; i < 7; i++)
+                if (!Game.inInventory)
                 {
-                    float angleX = (float)(Math.Cos((i / 2 + (angle) / (180 / Math.PI)) - 8) * Game.tileSize * Game.playerViewDistance);
-                    float angleY = (float)(Math.Sin((i / 2 + (angle) / (180 / Math.PI)) - 8) * Game.tileSize * Game.playerViewDistance);
-
-                    float baseOfRayX = positionX + Game.tileSize / 2;
-                    float baseOfRayY = positionY + Game.tileSize / 2;
-                    float endOfRayX = positionX + angleX;
-                    float endOfRayY = positionY + angleY;
-
-                    foreach (Tile t in Game.allocatedTiles)
+                    for (float i = 0; i < 7; i++)
                     {
-                        int newX = t.x - Game.player.playerX;
-                        int newY = t.y - Game.player.playerY;
-                        Rectangle r = new Rectangle(newX, newY, Game.tileSize, Game.tileSize);
+                        float angleX = (float)(Math.Cos((i / 2 + (angle) / (180 / Math.PI)) - 8) * Game.tileSize * Game.playerViewDistance);
+                        float angleY = (float)(Math.Sin((i / 2 + (angle) / (180 / Math.PI)) - 8) * Game.tileSize * Game.playerViewDistance);
 
-                        if (newX > 0 && newX < Game.canvasWidth)
+                        float baseOfRayX = positionX + Game.tileSize / 2;
+                        float baseOfRayY = positionY + Game.tileSize / 2;
+                        float endOfRayX = positionX + angleX;
+                        float endOfRayY = positionY + angleY;
+
+                        foreach (Tile t in Game.allocatedTiles)
                         {
-                            if (newY > 0 && newY < Game.canvasHeight)
-                            {
-                                if (t.type.Equals(EnumHandler.TileTypes.Wood))
-                                {
-                                    if (LineIntersectsRect(new Point((int)baseOfRayX, (int)baseOfRayY), new Point((int)endOfRayX, (int)endOfRayY), r))
-                                    {
-                                        break;
-                                    }
-                                }
+                            int newX = t.x - Game.player.playerX;
+                            int newY = t.y - Game.player.playerY;
+                            Rectangle r = new Rectangle(newX, newY, Game.tileSize, Game.tileSize);
 
-                                else if (LineIntersectsRect(new Point((int)baseOfRayX, (int)baseOfRayY), new Point((int)endOfRayX, (int)endOfRayY), r))
+                            if (newX > 0 && newX < Game.canvasWidth)
+                            {
+                                if (newY > 0 && newY < Game.canvasHeight)
                                 {
-                                    pointsVisible.Add(new Point(newX, newY));
+                                    if (t.type.Equals(EnumHandler.TileTypes.Wood))
+                                    {
+                                        if (LineIntersectsRect(new Point((int)baseOfRayX, (int)baseOfRayY), new Point((int)endOfRayX, (int)endOfRayY), r))
+                                        {
+                                            break;
+                                        }
+                                    }
+
+                                    else if (LineIntersectsRect(new Point((int)baseOfRayX, (int)baseOfRayY), new Point((int)endOfRayX, (int)endOfRayY), r))
+                                    {
+                                        pointsVisible.Add(new Point(newX, newY));
+                                    }
                                 }
                             }
                         }
@@ -686,6 +692,20 @@ namespace FOGocalypse
                 if (weaponPositionOffsetY > 0)
                 {
                     weaponPositionOffsetY--;
+                }
+                #endregion
+
+
+                #region Draw ThrownItems
+                int indexOfThrownItem = 0;
+                foreach (Item thrownItem in itemsBeingThrown)
+                {
+                    int newX = thrownItem.x - Game.player.playerX;
+                    int newY = thrownItem.y - Game.player.playerY;
+
+                    drawItemInWorld(newX, newY, thrownItem.type, g);
+
+                    indexOfThrownItem++;
                 }
                 #endregion
 

@@ -104,9 +104,13 @@ namespace FOGocalypse
         }
 
         //throw item
-        public void ThrowItem(int damage, Point destination)
+        public void ThrowItem(int damage, Point destination, Item thrownItem)
         {
+            Item i = new Item(Game.canvasWidth / 2 - Game.tileSize / 2 + Game.player.playerX, Game.canvasHeight / 2 - Game.tileSize / 2 + Game.player.playerY, thrownItem.type);
+            i.ammo = thrownItem.ammo;
 
+            RenderingEngine.itemsBeingThrown.Add(i);
+            RenderingEngine.destinationsOfItemsBeingThrown.Add(new int[] { destination.X, destination.Y, damage } );
         }
 
         //fire item
