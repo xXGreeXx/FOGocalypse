@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
+using System.Threading;
 
 namespace FOGocalypse
 {
@@ -72,7 +73,7 @@ namespace FOGocalypse
         public static int attackSpeedLimit { get; set; } = 0;
         public static Random r { get; } = new Random();
 
-        private String gameSavePath = "WorldSave.txt";
+        public static String gameSavePath { get; } = "WorldSave.txt";
         private String optionsSavePath = "GameOptions.txt";
 
         //contrsuctor
@@ -267,6 +268,9 @@ namespace FOGocalypse
             w.WriteLine("<end>");
 
             w.WriteLine("END-SAVE-FILE");
+
+            w.Close();
+            f.Close();
         }
 
         //update handler

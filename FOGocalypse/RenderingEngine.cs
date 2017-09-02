@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Collections.Generic;
+using System.IO;
 
 namespace FOGocalypse
 {
@@ -271,6 +272,22 @@ namespace FOGocalypse
                         g.DrawString("Begin!", f, Brushes.White, width / 2 + 75 - g.MeasureString("Begin!", f).Width, height / 2 + 200);
                     }
                 }
+
+                Brush b = Brushes.Gray;
+                if (File.Exists(Game.gameSavePath))
+                {
+                    b = Brushes.Black;
+
+                    if (MouseHandler.mouseX >= width / 2 - 205 && MouseHandler.mouseX <= width / 2 - 205 + g.MeasureString("Load world", fSmall).Width && !creatingWorld)
+                    {
+                        if (MouseHandler.mouseY >= height / 2 + 205 && MouseHandler.mouseY <= height / 2 + 205 + g.MeasureString("Load world", fSmall).Height)
+                        {
+                            b = Brushes.White;
+                        }
+                    }
+                }
+
+                g.DrawString("Load world", fSmall, b, width / 2 - 205, height / 2 + 205);
 
                 if (creatingWorld)
                 {

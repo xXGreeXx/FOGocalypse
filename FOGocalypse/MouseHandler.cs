@@ -319,6 +319,199 @@ namespace FOGocalypse
                         t.Start();
                     }
                 }
+
+                if (File.Exists(Game.gameSavePath))
+                {
+                    if (mouseX >= width / 2 - 205 && mouseX <= width / 2 - 205 + g.MeasureString("Load world", fSmall).Width && !RenderingEngine.creatingWorld)
+                    {
+                        if (mouseY >= height / 2 + 205 && mouseY <= height / 2 + 205 + g.MeasureString("Load world", fSmall).Height)
+                        {
+                            //clear old value
+                            Game.worldTiles = new List<Tile>();
+                            Game.zombies = new List<Zombie>();
+                            Game.plantsInWorld = new List<Plant>();
+                            Game.furnitureInWorld = new List<Furniture>();
+                            Game.itemsInWorld = new List<Item>();
+
+                            //read file
+                            FileStream stream = File.Open(Game.gameSavePath, FileMode.Open);
+                            StreamReader reader = new StreamReader(stream);
+
+                            reader.ReadLine();
+
+                            //read world data
+                            reader.ReadLine();
+
+                            Game.zombieViewDistance = int.Parse(reader.ReadLine());
+                            Game.zombieHearDistance = int.Parse(reader.ReadLine());
+                            Game.zombieMoveSpeed = int.Parse(reader.ReadLine());
+                            Game.zombieSpawnChance = int.Parse(reader.ReadLine());
+                            Game.itemRarity = int.Parse(reader.ReadLine());
+                            Game.time = int.Parse(reader.ReadLine());
+                            Game.day = int.Parse(reader.ReadLine());
+                            Game.month = int.Parse(reader.ReadLine());
+                            Game.year = int.Parse(reader.ReadLine());
+                            Game.weather = (EnumHandler.WeatherType)Enum.Parse(typeof(EnumHandler.WeatherType), reader.ReadLine());
+                            Game.season = (EnumHandler.SeasonType)Enum.Parse(typeof(EnumHandler.SeasonType), reader.ReadLine());
+
+                            reader.ReadLine();
+
+                            //read player data
+                            reader.ReadLine();
+
+                            Game.player.playerX = int.Parse(reader.ReadLine());
+                            Game.player.playerY = int.Parse(reader.ReadLine());
+                            Game.player.playerWaterNeed = int.Parse(reader.ReadLine());
+                            Game.player.playerHealth = int.Parse(reader.ReadLine());
+                            Game.player.playerFoodNeed = int.Parse(reader.ReadLine());
+
+                            reader.ReadLine();
+
+
+                            //read tile data
+                            String line = reader.ReadLine();
+                            while ((line = reader.ReadLine()) != "<end>")
+                            {
+                                int xOfTile = int.Parse(line);
+                                int yOfTile = int.Parse(reader.ReadLine());
+                                EnumHandler.TileTypes typeOfTile = (EnumHandler.TileTypes)Enum.Parse(typeof(EnumHandler.TileTypes), reader.ReadLine());
+                                Boolean tileRoofed = Boolean.Parse(reader.ReadLine());
+                                int fogValueOftile = int.Parse(reader.ReadLine());
+                                Boolean fogSwapOfTile = Boolean.Parse(reader.ReadLine());
+
+                                Tile loadedTile = new Tile(xOfTile, yOfTile, typeOfTile);
+                                loadedTile.roofed = tileRoofed;
+                                loadedTile.fogValue = fogValueOftile;
+                                loadedTile.swapFog = fogSwapOfTile;
+                                Game.worldTiles.Add(loadedTile);
+                            }
+
+
+                            //read zombie data
+                            line = reader.ReadLine();
+                            while ((line = reader.ReadLine()) != "<end>")
+                            {
+                                int xOfZombie = int.Parse(line);
+                                int yOfZombie = int.Parse(reader.ReadLine());
+                                int healthOfZombie = int.Parse(reader.ReadLine());
+                                String data = reader.ReadLine();
+                                String facingX = "";
+                                String facingY = "";
+
+                                int index = 0;
+                                foreach (char c in data)
+                                {
+                                    String ch = c.ToString();
+
+                                    if (ch == ",")
+                                    {
+                                        facingY = data.Substring(index + 1, data.Length - 1 - index);
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        facingX += ch;
+                                    }
+
+
+                                    index++;
+                                }
+
+                                Zombie z = new Zombie(xOfZombie, yOfZombie);
+                                z.health = healthOfZombie;
+                                z.lookingToward = new Point(int.Parse(facingX), int.Parse(facingY));
+
+                                Game.zombies.Add(z);
+                            }
+
+                            //read plant data
+                            line = reader.ReadLine();
+                            while ((line = reader.ReadLine()) != "<end>")
+                            {
+                                int plantX = int.Parse(line);
+                                int plantY = int.Parse(reader.ReadLine());
+                                EnumHandler.PlantTypes plantType = (EnumHandler.PlantTypes)Enum.Parse(typeof(EnumHandler.PlantTypes), reader.ReadLine());
+                                int plantBerries = int.Parse(reader.ReadLine());
+
+                                Plant p = new Plant(plantX, plantY, plantType, plantBerries);
+
+                                Game.plantsInWorld.Add(p);
+                            }
+
+                            //read furniture data
+                            line = reader.ReadLine();
+                            while((line = reader.ReadLine()) != "<end>")
+                            {
+                                int furnitureX = int.Parse(line);
+                                int furnitureY = int.Parse(reader.ReadLine());
+                                EnumHandler.FurnitureTypes furnitureType = (EnumHandler.FurnitureTypes)Enum.Parse(typeof(EnumHandler.FurnitureTypes), reader.ReadLine());
+                                int furnitureRotation = int.Parse(reader.ReadLine());
+                                Boolean furnitureOpen = Boolean.Parse(reader.ReadLine());
+
+                                Furniture furniture = new Furniture(furnitureX, furnitureY, furnitureType, furnitureRotation);
+                                Game.furnitureInWorld.Add(furniture);
+                            }
+
+
+                            //read item data
+                            line = reader.ReadLine();
+                            while ((line = reader.ReadLine()) != "<end>")
+                            {
+                                int itemX = int.Parse(line);
+                                int itemY= int.Parse(reader.ReadLine());
+                                EnumHandler.Items itemType = (EnumHandler.Items)Enum.Parse(typeof(EnumHandler.Items), reader.ReadLine());
+                                int itemAmmo = int.Parse(reader.ReadLine());
+
+                                Item i = new Item(itemX, itemY, itemType);
+                                i.ammo = itemAmmo;
+
+                                Game.itemsInWorld.Add(i);
+                            }
+
+                            //read items in hotbar
+                            reader.ReadLine();
+                            for (int i = 0; i < Game.numberOfhotBarSlots; i++)
+                            {
+                                int itemX = int.Parse(reader.ReadLine());
+                                int itemY = int.Parse(reader.ReadLine());
+                                EnumHandler.Items itemType = (EnumHandler.Items)Enum.Parse(typeof(EnumHandler.Items), reader.ReadLine());
+                                int itemAmmo = int.Parse(reader.ReadLine());
+
+                                Item itemInBar = new Item(itemX, itemY, itemType);
+                                itemInBar.ammo = itemAmmo;
+
+                                Game.itemsInHotbar[i] = itemInBar;
+                            }
+                            reader.ReadLine();
+
+                            //read items in inventory
+                            reader.ReadLine();
+                            for (int i = 0; i < 25; i++)
+                            {
+                                int itemX = int.Parse(reader.ReadLine());
+                                int itemY = int.Parse(reader.ReadLine());
+                                EnumHandler.Items itemType = (EnumHandler.Items)Enum.Parse(typeof(EnumHandler.Items), reader.ReadLine());
+                                int itemAmmo = int.Parse(reader.ReadLine());
+
+                                Item itemInInventory = new Item(itemX, itemY, itemType);
+                                itemInInventory.ammo = itemAmmo;
+
+                                Game.itemsInInventory[i] = itemInInventory;
+                            }
+                            reader.ReadLine();
+
+                            //dispose file readers
+                            reader.Close();
+                            stream.Close();
+
+                            //switch state to game
+                            Game.allocatedTiles = new WorldGenerator().AllocateTiles(Game.worldTiles, 20);
+                            Game.state = EnumHandler.GameStates.Game;
+                            Game.inStartScreen = true;
+                            RenderingEngine.screenFade = 255;
+                        }
+                    }
+                }
             }
             #endregion
 
