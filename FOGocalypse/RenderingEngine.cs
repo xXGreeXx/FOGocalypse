@@ -333,8 +333,8 @@ namespace FOGocalypse
                 #region RayCasting
                 for (float i = 0; i < 6; i++)
                 {
-                    float angleX = (float)(Math.Cos(i) * Game.tileSize * Game.playerViewDistance);
-                    float angleY = (float)(Math.Sin(i) * Game.tileSize * Game.playerViewDistance);
+                    float angleX = (float)(Math.Cos((i + angle / (180 / Math.PI))) * Game.tileSize * Game.playerViewDistance);
+                    float angleY = (float)(Math.Sin((i + angle / (180 / Math.PI))) * Game.tileSize * Game.playerViewDistance);
 
                     float baseOfRayX = positionX + Game.tileSize / 2;
                     float baseOfRayY = positionY + Game.tileSize / 2;
