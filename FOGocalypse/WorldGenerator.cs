@@ -31,10 +31,12 @@ namespace FOGocalypse
             }
 
             //generate houses
-            for (int i = 0; i < generator.Next(2, 4); i++)
+            int amountOfHouses = (int)Math.Ceiling((2 / 128F) * sizeOfWorld);
+
+            for (int i = 0; i < generator.Next(amountOfHouses - 2, amountOfHouses); i++)
             {
                 int sizeOfHouse = generator.Next(11, 15);
-                int position = (sizeOfWorld / 4) * i;
+                int position = (sizeOfWorld / amountOfHouses) * i;
                 int doorPosition = sizeOfHouse / 2 + 1;
 
                 int xOffset = 0;
@@ -97,7 +99,9 @@ namespace FOGocalypse
             }
 
             //generate random trees
-            for (int i = 0; i < generator.Next(50, 100); i++)
+            int numberOfTree = (int)Math.Ceiling((50 / 128F) * sizeOfWorld);
+
+            for (int i = 0; i < generator.Next(numberOfTree / 2, numberOfTree); i++)
             {
                 Game.plantsInWorld.Add(new Plant(generator.Next(0, sizeOfWorld / 2) * Game.tileSize, generator.Next(0, sizeOfWorld) * Game.tileSize, EnumHandler.PlantTypes.Tree, 0));
             }
