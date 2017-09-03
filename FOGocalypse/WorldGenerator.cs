@@ -30,53 +30,79 @@ namespace FOGocalypse
                 }
             }
 
-            //generate houses
+            //generate towns
+            #region
             int amountOfHouses = (int)Math.Ceiling((2 / 128F) * sizeOfWorld);
 
-            for (int i = 0; i < generator.Next(amountOfHouses - 2, amountOfHouses); i++)
+            for (int i = 0; i < amountOfHouses; i++)
             {
                 int sizeOfHouse = generator.Next(11, 15);
                 int position = (sizeOfWorld / amountOfHouses) * i;
                 int doorPosition = sizeOfHouse / 2 + 1;
 
-                int xOffset = 0;
-                int yOffset = 0;
-                for (int houseIndex = 0; houseIndex < 4; houseIndex++)
+                if (position - 15 > 0)
                 {
-                    List<Tile> tilesReturned;
+                    int xOffset = 0;
+                    int yOffset = 0;
+                    for (int houseIndex = 0; houseIndex < 4; houseIndex++)
+                    {
+                        List<Tile> tilesReturned;
 
-                    if (houseIndex == 0)
-                    {
-                        tilesReturned = generateHouse(position - xOffset, position - yOffset, sizeOfHouse, doorPosition, true);
-                    }
-                    else
-                    {
-                        tilesReturned = generateHouse(position - xOffset, position - yOffset, sizeOfHouse, doorPosition, false);
-                    }
-
-                    foreach (Tile t in tilesReturned)
-                    {
-                        int index = 0;
-                        foreach (Tile t2 in tilesForWorld)
+                        if (houseIndex == 0)
                         {
-                            if (t.x == t2.x && t.y == t2.y)
-                            {
-                                tilesForWorld[index].type = t.type;
-                                break;
-                            }
+                            tilesReturned = generateHouse(position - xOffset, position - yOffset, sizeOfHouse, doorPosition, true);
+                        }
+                        else
+                        {
+                            tilesReturned = generateHouse(position - xOffset, position - yOffset, sizeOfHouse, doorPosition, false);
+                        }
 
-                            index++;
+                        foreach (Tile t in tilesReturned)
+                        {
+                            int index = 0;
+                            foreach (Tile t2 in tilesForWorld)
+                            {
+                                if (t.x == t2.x && t.y == t2.y)
+                                {
+                                    tilesForWorld[index].type = t.type;
+                                    break;
+                                }
+
+                                index++;
+                            }
+                        }
+
+                        if (xOffset == 15)
+                        {
+                            xOffset = 0;
+                            yOffset += 15;
+                        }
+                        xOffset += 15;
+
+                        if (houseIndex == 3)
+                        {
+                            tilesReturned = generateStore(position + 20, position - 15, 20, 0);
+
+                            foreach (Tile t in tilesReturned)
+                            {
+                                int index = 0;
+                                foreach (Tile t2 in tilesForWorld)
+                                {
+                                    if (t.x == t2.x && t.y == t2.y)
+                                    {
+                                        tilesForWorld[index].type = t.type;
+                                        break;
+                                    }
+
+                                    index++;
+                                }
+                            }
                         }
                     }
-
-                    if (xOffset == 15)
-                    {
-                        xOffset = 0;
-                        yOffset += 15;
-                    }
-                    xOffset += 15;
                 }
             }
+
+            #endregion
 
             //generate fields
             int xOfField = 0;
@@ -236,6 +262,63 @@ namespace FOGocalypse
             }
 
             return tilesForHouse;
+        }
+
+        //generate store
+        private List<Tile> generateStore(int x, int y, int size, int type)
+        {
+            //tiles
+            List<Tile> tilesToReturn = new List<Tile>();
+            int doorPosition = 3;
+
+            for (int i = 0; i < size; i++)
+            {
+                if (i == doorPosition || i == doorPosition + 1)
+                {
+                    tilesToReturn.Add(new Tile((x + 10) * Game.tileSize, (y + i) * Game.tileSize, EnumHandler.TileTypes.Wood));
+                }
+                else
+                {
+                    tilesToReturn.Add(new Tile(x * Game.tileSize, (y + i) * Game.tileSize, EnumHandler.TileTypes.Wood));
+                    tilesToReturn.Add(new Tile((x + 10) * Game.tileSize, (y + i) * Game.tileSize, EnumHandler.TileTypes.Wood));
+                }
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                tilesToReturn.Add(new Tile((x + i) * Game.tileSize, (y) * Game.tileSize, EnumHandler.TileTypes.Wood));
+                tilesToReturn.Add(new Tile((x + i) * Game.tileSize, (y + size) * Game.tileSize, EnumHandler.TileTypes.Wood));
+            }
+
+            for (int i = 1; i < 10; i++)
+            {
+                for (int i2 = 1; i2 < size; i2++)
+                {
+                    tilesToReturn.Add(new Tile((x + i) * Game.tileSize, (y + i2) * Game.tileSize, EnumHandler.TileTypes.Stone));
+                }
+            }
+
+            tilesToReturn.Add(new Tile((x + 10) * Game.tileSize, (y + size) * Game.tileSize, EnumHandler.TileTypes.Wood));
+
+            //shelves/items
+            if (type == 0)
+            {
+                int xOfShelf = 1;
+                int yOfShelf = 6;
+                for (int i = 0; i < ((size / 3) * 8) - 13; i++)
+                {
+                    Game.furnitureInWorld.Add(new Furniture((x + xOfShelf) * Game.tileSize, (y + yOfShelf) * Game.tileSize, EnumHandler.FurnitureTypes.Shelf, 0));
+
+                    xOfShelf++;
+                    if (xOfShelf == 8)
+                    {
+                        xOfShelf = 1;
+                        yOfShelf += 3;
+                    }
+                }
+            }
+
+            return tilesToReturn;
         }
 
         //generate forest

@@ -52,7 +52,8 @@
             Counter,
             Sink,
             Oven,
-            Door
+            Door,
+            Shelf
         }
 
         public enum WeatherType

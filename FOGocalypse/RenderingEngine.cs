@@ -54,6 +54,7 @@ namespace FOGocalypse
         Bitmap counter = FOGocalypse.Properties.Resources.counter;
         Bitmap sink = FOGocalypse.Properties.Resources.sink;
         Bitmap oven = FOGocalypse.Properties.Resources.oven;
+        Bitmap shelf = FOGocalypse.Properties.Resources.shelf;
         Bitmap tree = FOGocalypse.Properties.Resources.tree;
         Bitmap bush = FOGocalypse.Properties.Resources.bush;
 
@@ -529,6 +530,9 @@ namespace FOGocalypse
                                         {
                                             g.DrawImage(door, newX, newY, 50, 10);
                                         }
+                                        break;
+                                    case EnumHandler.FurnitureTypes.Shelf:
+                                        g.DrawImage(shelf, newX, newY, 25, 25);
                                         break;
                                 }
                             }

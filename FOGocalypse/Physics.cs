@@ -180,6 +180,17 @@ namespace FOGocalypse
                     if (Game.player.hitbox.IntersectsWith(leftHitbox) || Game.player.hitbox.IntersectsWith(rightHitbox)) Game.player.playerX = oldPosition.X;
                 }
 
+                if (f.type.Equals(EnumHandler.FurnitureTypes.Shelf))
+                {
+                    Rectangle topHitbox = new Rectangle(newX, newY + 2, 25, 2);
+                    Rectangle bottomHitbox = new Rectangle(newX, newY + 23, 25,2);
+                    Rectangle leftHitbox = new Rectangle(newX + 2, newY, 2, 25);
+                    Rectangle rightHitbox = new Rectangle(newX + 23, newY, 2, 25);
+
+                    if (Game.player.hitbox.IntersectsWith(topHitbox) || Game.player.hitbox.IntersectsWith(bottomHitbox)) Game.player.playerY = oldPosition.Y;
+                    if (Game.player.hitbox.IntersectsWith(leftHitbox) || Game.player.hitbox.IntersectsWith(rightHitbox)) Game.player.playerX = oldPosition.X;
+                }
+
                 if (f.type.Equals(EnumHandler.FurnitureTypes.Door))
                 {
                     Rectangle topHitbox = new Rectangle(newX, newY, 50, 2);

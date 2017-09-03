@@ -230,6 +230,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fogIcon.ico" />
+    <None Include="Resources\shelf.png" />
     <None Include="Resources\door.png" />
     <None Include="Resources\oven.png" />
     <None Include="Resources\sink.png" />
