@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace FOGocalypse
 {
@@ -354,17 +355,19 @@ namespace FOGocalypse
                 #region RayCasting
                 if (!Game.inInventory)
                 {
-                    for (float i = 0; i < 8; i++)
+                    List<Tile> tilesToIterate = sortTilesNearestPoint(Game.allocatedTiles, new Point(Game.canvasWidth / 2 - Game.tileSize / 2, Game.canvasHeight / 2 - Game.tileSize / 2));
+
+                    for (float i = 0; i < 12; i++)
                     {
-                        float angleX = (float)(Math.Cos((i / 2 + (angle) / (180 / Math.PI)) - 8) * Game.tileSize * Game.playerViewDistance);
-                        float angleY = (float)(Math.Sin((i / 2 + (angle) / (180 / Math.PI)) - 8) * Game.tileSize * Game.playerViewDistance);
+                        float angleX = (float)(Math.Cos((i / 3 + (angle) / (180 / Math.PI)) - 8) * Game.tileSize * Game.playerViewDistance);
+                        float angleY = (float)(Math.Sin((i / 3 + (angle) / (180 / Math.PI)) - 8) * Game.tileSize * Game.playerViewDistance);
 
                         float baseOfRayX = positionX + Game.tileSize / 2;
                         float baseOfRayY = positionY + Game.tileSize / 2;
                         float endOfRayX = positionX + angleX;
                         float endOfRayY = positionY + angleY;
 
-                        foreach (Tile t in Game.allocatedTiles)
+                        foreach (Tile t in tilesToIterate)
                         {
                             int newX = t.x - Game.player.playerX;
                             int newY = t.y - Game.player.playerY;
@@ -376,13 +379,10 @@ namespace FOGocalypse
                                 {
                                     if (LineIntersectsRect(new Point((int)baseOfRayX, (int)baseOfRayY), new Point((int)endOfRayX, (int)endOfRayY), r))
                                     {
+                                        pointsVisible.Add(new Point(newX, newY));
                                         if (t.type.Equals(EnumHandler.TileTypes.Wood))
                                         {
                                             break;
-                                        }
-                                        else
-                                        {
-                                            pointsVisible.Add(new Point(newX, newY));
                                         }
                                     }
                                 }
@@ -1071,7 +1071,13 @@ namespace FOGocalypse
             return rotatedBmp;
         }
 
-        //temp functions
+        //sort list of tiles by nearest to a point
+        private List<Tile> sortTilesNearestPoint(List<Tile> baseTiles, Point baseObject)
+        {
+            return baseTiles.OrderBy(x => Math.Abs((x.x - Game.player.playerX) - baseObject.X)).ThenBy(y => Math.Abs((y.y - Game.player.playerY) - baseObject.Y)).ToList();
+        }
+
+        //check if line intersects rectangke
         public static bool LineIntersectsRect(Point p1, Point p2, Rectangle r)
         {
             return LineIntersectsLine(p1, p2, new Point(r.X, r.Y), new Point(r.X + r.Width, r.Y)) ||
@@ -1081,6 +1087,7 @@ namespace FOGocalypse
                    (r.Contains(p1) && r.Contains(p2));
         }
 
+        //check if line intersects line
         private static bool LineIntersectsLine(Point l1p1, Point l1p2, Point l2p1, Point l2p2)
         {
             float q = (l1p1.Y - l2p1.Y) * (l2p2.X - l2p1.X) - (l1p1.X - l2p1.X) * (l2p2.Y - l2p1.Y);
