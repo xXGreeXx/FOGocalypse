@@ -354,7 +354,7 @@ namespace FOGocalypse
                 #region RayCasting
                 if (!Game.inInventory)
                 {
-                    for (float i = 0; i < 7; i++)
+                    for (float i = 0; i < 8; i++)
                     {
                         float angleX = (float)(Math.Cos((i / 2 + (angle) / (180 / Math.PI)) - 8) * Game.tileSize * Game.playerViewDistance);
                         float angleY = (float)(Math.Sin((i / 2 + (angle) / (180 / Math.PI)) - 8) * Game.tileSize * Game.playerViewDistance);
@@ -374,17 +374,16 @@ namespace FOGocalypse
                             {
                                 if (newY > 0 && newY < Game.canvasHeight)
                                 {
-                                    if (t.type.Equals(EnumHandler.TileTypes.Wood))
+                                    if (LineIntersectsRect(new Point((int)baseOfRayX, (int)baseOfRayY), new Point((int)endOfRayX, (int)endOfRayY), r))
                                     {
-                                        if (LineIntersectsRect(new Point((int)baseOfRayX, (int)baseOfRayY), new Point((int)endOfRayX, (int)endOfRayY), r))
+                                        if (t.type.Equals(EnumHandler.TileTypes.Wood))
                                         {
                                             break;
                                         }
-                                    }
-
-                                    else if (LineIntersectsRect(new Point((int)baseOfRayX, (int)baseOfRayY), new Point((int)endOfRayX, (int)endOfRayY), r))
-                                    {
-                                        pointsVisible.Add(new Point(newX, newY));
+                                        else
+                                        {
+                                            pointsVisible.Add(new Point(newX, newY));
+                                        }
                                     }
                                 }
                             }
