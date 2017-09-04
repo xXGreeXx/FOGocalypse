@@ -313,7 +313,7 @@ namespace FOGocalypse
             Tile tBaseTopLeft = Game.allocatedTiles[0];
             Tile tBaseBottomRight = Game.allocatedTiles[Game.allocatedTiles.Count - 1];
 
-            if (tBaseTopLeft.x - Game.player.playerX >= Game.tileSize * 4 || tBaseTopLeft.y - Game.player.playerY >= Game.tileSize * 4)
+            if (tBaseTopLeft.x - Game.player.playerX >= Game.tileSize || tBaseTopLeft.y - Game.player.playerY >= Game.tileSize)
             {
                 Thread t = new Thread(() =>
                 {
@@ -323,7 +323,7 @@ namespace FOGocalypse
                 t.Start();
             }
 
-            if (tBaseBottomRight.x - Game.player.playerX <= Game.canvasWidth - Game.tileSize * 4 || tBaseBottomRight.y - Game.player.playerY <= Game.canvasHeight - Game.tileSize * 4)
+            if (tBaseBottomRight.x - Game.player.playerX <= Game.canvasWidth - Game.tileSize || tBaseBottomRight.y - Game.player.playerY <= Game.canvasHeight - Game.tileSize)
             {
                 Thread t = new Thread(() =>
                 {

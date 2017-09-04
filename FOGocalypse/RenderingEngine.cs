@@ -397,6 +397,7 @@ namespace FOGocalypse
 
                 #region DrawTiles
                 //draw tiles
+                int indexOfTile = 0;
                 foreach (Tile t in Game.allocatedTiles)
                 {
                     int x = t.x - Game.player.playerX;
@@ -446,6 +447,7 @@ namespace FOGocalypse
                         }
                     }
 
+                    //draw fog
                     if (!inView && Game.fogOn)
                     {
                         if (x > 0 - Game.tileSize && x < width)
@@ -453,7 +455,21 @@ namespace FOGocalypse
                             if (y > 0 - Game.tileSize && y < height)
                             {
                                 int fogValue = t.fogValue;
-                                g.FillRectangle(new SolidBrush(Color.FromArgb(fogValue, Color.DarkGray)), x, y, Game.tileSize, Game.tileSize);
+                                int fogValue2 = 0;
+                                int fogValue3 = 0;
+
+                                if (indexOfTile > 1)
+                                {
+                                    fogValue2 = Game.allocatedTiles[indexOfTile - 1].fogValue;
+                                    fogValue3 = Game.allocatedTiles[indexOfTile - 2].fogValue;
+                                }
+                                else
+                                {
+                                    fogValue2 = Game.allocatedTiles[indexOfTile + 1].fogValue;
+                                    fogValue3 = Game.allocatedTiles[indexOfTile + 2].fogValue;
+                                }
+
+                                g.FillRectangle(new SolidBrush(Color.FromArgb((fogValue + fogValue2 + fogValue3) / 3, Color.DarkGray)), x, y, Game.tileSize, Game.tileSize);
 
                                 if (t.fogValue >= 250)
                                 {
@@ -469,6 +485,8 @@ namespace FOGocalypse
                             }
                         }
                     }
+
+                    indexOfTile++;
                 }
                 #endregion
 
