@@ -276,6 +276,8 @@ namespace FOGocalypse
         //update handler
         private void timer_Tick(object sender, EventArgs e)
         {
+            timer.Interval = 550 / frameRate;
+
             if (lastFPS < frameRate)
             {
                 lastFPS++;
@@ -299,9 +301,9 @@ namespace FOGocalypse
 
             if (!inPauseMenu && !inLossScreen)
             {
-                physicsCycle += 0.1F;
+                physicsCycle += 0.01F;
 
-                if (physicsCycle >= (FPS / 20F) / 10F)
+                if (physicsCycle >= (FPS / 20F) / 100)
                 {
                     physicsEngine.SimulatePhysics();
                     physicsCycle = 0.0F;
