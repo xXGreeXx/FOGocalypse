@@ -379,10 +379,13 @@ namespace FOGocalypse
                                 {
                                     if (LineIntersectsRect(new Point((int)baseOfRayX, (int)baseOfRayY), new Point((int)endOfRayX, (int)endOfRayY), r))
                                     {
-                                        pointsVisible.Add(new Point(newX, newY));
                                         if (t.type.Equals(EnumHandler.TileTypes.Wood))
                                         {
                                             break;
+                                        }
+                                        else
+                                        {
+                                            pointsVisible.Add(new Point(newX, newY));
                                         }
                                     }
                                 }
@@ -719,7 +722,6 @@ namespace FOGocalypse
                     int newX = z.x - Game.player.playerX;
                     int newY = z.y - Game.player.playerY;
                     float zombieAngle = (float)((Math.Atan2((double)z.lookingToward.Y - newY, (double)z.lookingToward.X - newX)) * (180 / Math.PI));
-                    int distance = Game.playerViewDistance * Game.tileSize;
 
                     foreach (Point p in pointsVisible)
                     {

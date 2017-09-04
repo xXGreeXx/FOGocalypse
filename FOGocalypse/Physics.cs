@@ -268,6 +268,13 @@ namespace FOGocalypse
                     particlesToRemove.Add(index);
                 }
                 Game.bloodParticles[index].size--;
+
+                int decreaseAlphaValue = 25;
+
+                if (Game.bloodParticles[index].color.A >= decreaseAlphaValue)
+                {
+                    Game.bloodParticles[index].color = Color.FromArgb(Game.bloodParticles[index].color.A - decreaseAlphaValue, Game.bloodParticles[index].color);
+                }
             }
 
             particlesToRemove.Sort();

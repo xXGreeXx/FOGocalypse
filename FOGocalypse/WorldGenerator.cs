@@ -64,7 +64,7 @@ namespace FOGocalypse
                             {
                                 if (t.x == t2.x && t.y == t2.y)
                                 {
-                                    tilesForWorld[index].type = t.type;
+                                    tilesForWorld[index] = t;
                                     break;
                                 }
 
@@ -90,7 +90,7 @@ namespace FOGocalypse
                                 {
                                     if (t.x == t2.x && t.y == t2.y)
                                     {
-                                        tilesForWorld[index].type = t.type;
+                                        tilesForWorld[index] = t;
                                         break;
                                     }
 
@@ -193,7 +193,10 @@ namespace FOGocalypse
             {
                 for (int i2 = 1; i2 < size; i2++)
                 {
-                    tilesForHouse.Add(new Tile((x + i) * Game.tileSize, (y + i2) * Game.tileSize, EnumHandler.TileTypes.Carpet));
+                    Tile tile = new Tile((x + i) * Game.tileSize, (y + i2) * Game.tileSize, EnumHandler.TileTypes.Carpet);
+                    tile.roofed = true;
+
+                    tilesForHouse.Add(tile);
                 }
             }
 
@@ -294,7 +297,10 @@ namespace FOGocalypse
             {
                 for (int i2 = 1; i2 < size; i2++)
                 {
-                    tilesToReturn.Add(new Tile((x + i) * Game.tileSize, (y + i2) * Game.tileSize, EnumHandler.TileTypes.Stone));
+                    Tile tile = new Tile((x + i) * Game.tileSize, (y + i2) * Game.tileSize, EnumHandler.TileTypes.Stone);
+                    tile.roofed = true;
+
+                    tilesToReturn.Add(tile);
                 }
             }
 
