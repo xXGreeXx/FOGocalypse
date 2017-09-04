@@ -522,6 +522,11 @@ namespace FOGocalypse
                 if (!Game.inInventory && !Game.inPauseMenu)
                 {
                     EnumHandler.Items selectedItem = Game.itemsInHotbar[Game.selectedHotbar - 1].type;
+                    int positionX = width / 2 - Game.tileSize / 2;
+                    int positionY = height / 2 - Game.tileSize / 2;
+                    float angle = (float)((Math.Atan2((double)mouseY - positionY, (double)mouseX - positionX)));
+                    int rotationX = (int)(Math.Cos(angle) * Game.tileSize);
+                    int rotationY = (int)(Math.Sin(angle) * Game.tileSize);
 
                     switch (selectedItem)
                     {
@@ -540,6 +545,7 @@ namespace FOGocalypse
                             if (button.Equals(MouseButtons.Right))
                             {
                                 Game.itemsInHotbar[Game.selectedHotbar - 1] = new Item(0, 0, EnumHandler.Items.Emptybottle);
+                                Game.particleGenerator.CreateBloodEffect(positionX + rotationX + Game.player.playerX, positionY + rotationY + Game.player.playerY, 5, Color.Blue, 3);
                             }
                             break;
                         case EnumHandler.Items.Peanutbutter:
@@ -548,6 +554,7 @@ namespace FOGocalypse
                                 Game.player.playerFoodNeed -= 10;
                                 Game.player.playerWaterNeed += 15;
                                 Game.itemsInHotbar[Game.selectedHotbar - 1] = new Item(0, 0, EnumHandler.Items.None);
+                                Game.particleGenerator.CreateBloodEffect(positionX + Game.player.playerX, positionY + Game.player.playerY, 2, Color.DarkOrange, 4);
                             }
                             if (button.Equals(MouseButtons.Right))
                             {
@@ -561,6 +568,7 @@ namespace FOGocalypse
                                 Game.player.playerFoodNeed -= 10;
                                 Game.player.playerWaterNeed += 25;
                                 Game.itemsInHotbar[Game.selectedHotbar - 1] = new Item(0, 0, EnumHandler.Items.None);
+                                Game.particleGenerator.CreateBloodEffect(positionX + Game.player.playerX, positionY + Game.player.playerY, 2, Color.DarkOrange, 4);
                             }
                             if (button.Equals(MouseButtons.Right))
                             {
@@ -622,6 +630,7 @@ namespace FOGocalypse
                                 Game.player.playerFoodNeed -= 10;
                                 Game.player.playerWaterNeed -= 5;
                                 Game.itemsInHotbar[Game.selectedHotbar - 1] = new Item(0, 0, EnumHandler.Items.None);
+                                Game.particleGenerator.CreateBloodEffect(positionX + Game.player.playerX, positionY + Game.player.playerY, 5, Color.Red, 2);
                             }
                             break;
                     }
