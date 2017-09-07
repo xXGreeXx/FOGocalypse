@@ -76,7 +76,7 @@ namespace FOGocalypse
         public static List<Item> itemsBeingThrown { get; set; } = new List<Item>();
         public static List<int[]> destinationsOfItemsBeingThrown { get; set; } = new List<int[]>();
 
-        public static float scale { get; set; } = 1;
+        public static List<Particle> fogParticlesForBackground { get; set; } = new List<Particle>();
 
         //constructor
         public RenderingEngine()
@@ -88,15 +88,6 @@ namespace FOGocalypse
         //draw screen
         public void DrawScreen(int width, int height, Graphics g)
         {
-            //adjust scale based on width/height
-            float baseWidth = 1075;
-            float baseHeight = 737;
-
-            float currentWidth = Game.canvasWidth;
-            float currentHeight = Game.canvasHeight;
-
-            scale = Math.Abs((currentWidth - currentHeight) / (baseWidth - baseHeight));
-
             if (Game.antialias)
             {
                 g.SmoothingMode = SmoothingMode.HighQuality;
@@ -109,12 +100,13 @@ namespace FOGocalypse
             #region MainMenu
             if (Game.state.Equals(EnumHandler.GameStates.MainMenu))
             {
-                Font f = new Font(FontFamily.GenericSansSerif, 30 * scale, FontStyle.Bold);
-                float baseOfText = 200 * scale + (20 * scale);
+                Font f = new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold);
+                float baseOfText = 200;
 
-                g.DrawImage(fogBackground, 0, 0, width, height);
-                g.DrawImage(title1, width / 2 - title1.Width * scale / 2, 0, title1.Width * scale, title1.Height * scale);
-                g.DrawImage(title2, width / 2 - title2.Width * scale / 2, title1.Height * scale, title2.Width * scale, title2.Height * scale);
+                animateMenuBackground(g);
+
+                g.DrawImage(title1, width / 2 - title1.Width / 2, 0, title1.Width, title1.Height);
+                g.DrawImage(title2, width / 2 - title2.Width / 2, title1.Height, title2.Width, title2.Height);
 
                 g.DrawString("Play", f, Brushes.Black, width / 2 - g.MeasureString("Play", f).Width / 2, baseOfText);
                 g.DrawString("Options", f, Brushes.Black, width / 2 - g.MeasureString("Options", f).Width / 2, baseOfText + 75);
@@ -143,8 +135,6 @@ namespace FOGocalypse
                         g.DrawString("Quit", f, Brushes.White, width / 2 - g.MeasureString("Quit", f).Width / 2, baseOfText + 225);
                     }
                 }
-
-                animateMenuBackground();
             }
             #endregion
 
@@ -154,7 +144,8 @@ namespace FOGocalypse
                 Font f = new Font(FontFamily.GenericSansSerif, 20, FontStyle.Bold);
                 Font fSmall = new Font(FontFamily.GenericSansSerif, 14, FontStyle.Bold);
 
-                g.DrawImage(fogBackground, 0, 0, width, height);
+                animateMenuBackground(g);
+
                 g.DrawImage(title1, width / 2 - title1.Width / 2, 0, title1.Width, title1.Height);
                 g.DrawImage(title2, width / 2 - title2.Width / 2, title1.Height, title2.Width, title2.Height);
 
@@ -253,8 +244,6 @@ namespace FOGocalypse
                 //music volume
                 g.DrawString("Music Volume: ", f, Brushes.Black, width / 2 - 250, height / 2 + 150);
                 g.DrawString(Game.musicVolume.ToString(), f, Brushes.Black, width / 2 - 45, height / 2 + 150);
-
-                animateMenuBackground();
             }
             #endregion
 
@@ -264,7 +253,8 @@ namespace FOGocalypse
                 Font f = new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold);
                 Font fSmall = new Font(FontFamily.GenericSansSerif, 20, FontStyle.Bold);
 
-                g.DrawImage(fogBackground, 0, 0, width, height);
+                animateMenuBackground(g);
+
                 g.DrawImage(title1, width / 2 - title1.Width / 2, 0, title1.Width, title1.Height);
                 g.DrawImage(title2, width / 2 - title2.Width / 2, title1.Height, title2.Width, title2.Height);
                 g.DrawImage(gameSettingsBackground, width / 2 - 200, height / 2 - 250, 400, 500);
@@ -337,8 +327,6 @@ namespace FOGocalypse
                 g.DrawString(Game.zombieSpawnChance.ToString() + "%", fSmall, Brushes.Black, width / 2, height / 2 - 133);
                 g.DrawImage(upArrow, width / 2 + 100, height / 2 - 140, 20, 20);
                 g.DrawImage(downArrow, width / 2 + 100, height / 2 - 115, 20, 20);
-
-                animateMenuBackground();
             }
             #endregion
 
@@ -357,7 +345,7 @@ namespace FOGocalypse
                 {
                     List<Tile> tilesToIterate = sortTilesNearestPoint(Game.allocatedTiles, new Point(Game.canvasWidth / 2 - Game.tileSize / 2, Game.canvasHeight / 2 - Game.tileSize / 2));
 
-                    for (float i = 0; i < 12; i++)
+                    for (float i = 0; i < 10; i++)
                     {
                         float angleX = (float)(Math.Cos((i / 3 + (angle) / (180 / Math.PI)) - 8) * Game.tileSize * Game.playerViewDistance);
                         float angleY = (float)(Math.Sin((i / 3 + (angle) / (180 / Math.PI)) - 8) * Game.tileSize * Game.playerViewDistance);
@@ -995,8 +983,7 @@ namespace FOGocalypse
             }
             #endregion
 
-            g.DrawString(Game.FPS.ToString() + "fps", new Font(FontFamily.GenericSansSerif, 30 * scale, FontStyle.Bold), Brushes.Black, width - 150, 0);
-
+            g.DrawString(Game.FPS.ToString() + "fps", new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold), Brushes.Black, width - 150, 0);
         }
 
         //draw item in Hotbar
@@ -1067,9 +1054,45 @@ namespace FOGocalypse
         }
 
         //background animation
-        private void animateMenuBackground()
+        private void animateMenuBackground(Graphics g)
         {
-            
+            int width = Game.canvasWidth;
+            int height = Game.canvasHeight;
+
+            for (int i = 0; i < width; i += 50)
+            {
+                fogParticlesForBackground.Add(new Particle(i, height, Color.Black, 150));
+            }
+
+            for (int index = 0; index < fogParticlesForBackground.Count; index++)
+            {
+                g.FillRectangle(new SolidBrush(fogParticlesForBackground[index].color), fogParticlesForBackground[index].x, fogParticlesForBackground[index].y, 5, 5);
+
+                fogParticlesForBackground[index].y -= 6;
+                fogParticlesForBackground[index].x -= r.Next(-3, 4);
+
+                fogParticlesForBackground[index].size--;
+
+                int alphaShift = 4;
+                if (fogParticlesForBackground[index].color.A >= alphaShift)
+                {
+                    fogParticlesForBackground[index].color = Color.FromArgb(fogParticlesForBackground[index].color.A - alphaShift, fogParticlesForBackground[index].color);
+                }
+
+                int colorShift = 5;
+                if (fogParticlesForBackground[index].color.B >= colorShift)
+                {
+                    fogParticlesForBackground[index].color = Color.FromArgb(fogParticlesForBackground[index].color.A, 
+                        fogParticlesForBackground[index].color.R - colorShift, 
+                        fogParticlesForBackground[index].color.G - colorShift, 
+                        fogParticlesForBackground[index].color.B - colorShift);
+                }
+
+                if (fogParticlesForBackground[index].color.A <= 10 || fogParticlesForBackground[index].size < 1)
+                {
+                    fogParticlesForBackground.RemoveAt(index);
+                }
+            }
         }
 
         //rotate image

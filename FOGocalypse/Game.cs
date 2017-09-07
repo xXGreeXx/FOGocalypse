@@ -112,9 +112,6 @@ namespace FOGocalypse
             fpsTracker.Start();
 
             this.KeyPreview = true;
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            //this.MinimizeBox = false;
-            this.MaximizeBox = false;
 
             Application.ApplicationExit += GameExitHandler;
 
@@ -416,6 +413,12 @@ namespace FOGocalypse
         {
             attackSpeedTimer.Interval = duration;
             attackSpeedTimer.Start();
+        }
+
+        //form size changed
+        private void Game_SizeChanged(object sender, EventArgs e)
+        {
+            RenderingEngine.fogParticlesForBackground = new List<Particle>();
         }
     }
 }
